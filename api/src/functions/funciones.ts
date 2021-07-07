@@ -12,7 +12,7 @@ function paginated(model: Array<typeof beers>, page: number) {
   const limit: number = 10;
   const start: number = (page - 1) * limit; // start = 1
   const end = page * limit;
-  const pages = Math.round(model.length / 8);
+  const pages = Math.round(model.length / limit);
   const result: any = { pages: pages };
 
   if (end < model.length) {
