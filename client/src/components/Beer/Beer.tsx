@@ -2,12 +2,13 @@ import React from 'react'
 import {Link} from 'react-router-dom';
 import './Beer.scss'
 
-const Beer = ({Name,id,description,alcohol,price,ibu,review}) => {
+const Beer = ({Name,id,description,alcohol,price,ibu,review, img}) => {
+
     return (
         // <Link className="recipe" to={`/+++++++/${id}`}>
         <Link className="beer" to={`/beers/${id}`}>
             <div key={id}>
-                <img alt="birrita"></img>
+                <img alt="birrita" src={img}></img>
                 <div className="beer-text">
                     <h1>{Name}</h1>
                     <div className="numbers">

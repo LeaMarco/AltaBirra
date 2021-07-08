@@ -5,16 +5,11 @@ import beers from "./Birrasjson";
 import "./Home.scss";
 
 const Home = () => {
-//   const dispatch = useDispatch();
-  //   const beers = useSelector((state) => state.beers);
 
-//   useEffect(() => {
-//     // dispatch(getAllBeers());
-//   }, [dispatch]);
-
+  /* beers={"beers"} */
   return (
     <div className="Beers-container">
-    <Beers beers={beers}/>
+    <Beers />
     </div>
   )
 
