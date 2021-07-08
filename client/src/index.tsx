@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';//Sirve para proveer el estado global de redux a los componentes de React
 import store from './store'//importa la store creada en otro lado
@@ -17,4 +16,3 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
-

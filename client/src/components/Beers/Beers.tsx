@@ -11,27 +11,24 @@ const Beers = () => {
   }, [dispatch]);
 
   const beers = useSelector((state) => state["users"]);
-//aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-let a='2asd'
   return (
     <>
-      {typeof beers === "object" ? (
-        beers.map((beer) => (
+      {
+        typeof beers === "object" 
+        ? beers.map((beer) => (
           <Beer
             key={beer.id}
-          Name={beer.Name} 
+            Name={beer.Name} 
             id={beer.id}
             description={beer.description}
             alcohol={beer.alcohol}
             price={beer.price}
-             ibu={beer.ibu}
+            ibu={beer.ibu}
             review={beer.review}
             img={beer.image}
-          />
-        ))
-      ) : (
-        <h1>Cargando...</h1>
-      )}
+          /> ))
+        : <h1>Cargando...</h1>
+      }
     </>
   );
 };

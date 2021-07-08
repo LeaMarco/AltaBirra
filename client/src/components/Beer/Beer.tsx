@@ -1,5 +1,5 @@
 import React from 'react'
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './Beer.scss'
 
 const Beer = ({Name,id,description,alcohol,price,ibu,review, img}) => {
