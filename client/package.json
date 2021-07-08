@@ -14,10 +14,7 @@
     "@types/react-router-dom": "^5.1.7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-<<<<<<< HEAD
-=======
     "react-redux": "^7.2.4",
->>>>>>> d110c8d14f98d75f2bbc37f6d05b19024926e462
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "sass": "^1.35.1",
