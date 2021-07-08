@@ -11,7 +11,8 @@ const Beers = () => {
   }, [dispatch]);
 
   const beers = useSelector((state) => state["users"]);
-
+//aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+let a='2asd'
   return (
     <>
       {typeof beers === "object" ? (
@@ -23,7 +24,7 @@ const Beers = () => {
             description={beer.description}
             alcohol={beer.alcohol}
             price={beer.price}
-            ibu={beer.ibu}
+             ibu={beer.ibu}
             review={beer.review}
             img={beer.image}
           />
