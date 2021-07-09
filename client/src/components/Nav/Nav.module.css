@@ -1,0 +1,100 @@
+.NavBar {
+  background-image: repeating-linear-gradient(
+      45deg,
+      rgba(97, 97, 97, 0.1) 0px,
+      rgba(97, 97, 97, 0.1) 2px,
+      transparent 2px,
+      transparent 4px
+    ),
+    linear-gradient(90deg, rgb(43, 43, 43), rgb(43, 43, 43));
+  width: 100vw;
+  height: 15vh;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+}
+
+.searchBar {
+  width: 80%;
+  height: 3vh;
+  background-color: rgb(122, 122, 122);
+  font-size: 16px;
+  border-radius: 2px;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 6px 6px 35px;
+  margin-top: 3vh;
+}
+
+.searchInput {
+  width: 100%;
+  height: 1.5rem;
+  margin: 1vh;
+  border: none;
+  background-color: rgb(122, 122, 122);
+  color: black;
+}
+
+.searchInput::placeholder {
+  font-size: 15px;
+  color: black;
+}
+
+.searchInput:focus {
+  width: 100%;
+  height: 1.5rem;
+  margin: 1vh;
+  border: none;
+  filter: brightness(130%);
+  outline: none;
+  transition: 400ms;
+}
+
+.logo {
+  height: 7vh;
+  margin-left: 5vw;
+  margin-top: 3vh;
+  filter: invert(100%);
+}
+
+.button {
+  color: rgb(231, 231, 231);
+  text-decoration: none;
+  padding: 5px 20px 0px 10px;
+  font-size: 2vh;
+}
+
+.button:hover {
+  text-shadow: 0px 0px 2px #ffffff;
+  color: white;
+  transition: 500ms;
+}
+
+.buttonEnter {
+  margin-left: 2vw;
+  background-color:tomato;
+  border-radius: 2px;
+  color: white;
+  text-decoration: none;
+  padding: 3px 15px 3px 15px;
+  font-size: 2vh;
+}
+
+.buttonEnter:hover {
+  filter: brightness(130%);
+  transition: 400ms;
+}
+.lupa {
+  margin-left: -25px;
+}
+
+.buttonsRight {
+    margin-top: 3.5vh;
+    margin-right: 5vw;
+    display: flex;
+    justify-content: flex-end;
+
+}
