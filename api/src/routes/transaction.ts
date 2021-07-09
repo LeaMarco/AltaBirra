@@ -13,6 +13,10 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
 	const buyer = await prisma.user.findUnique({where: {username: username}});
 	const post = await prisma.post.findUnique({where: {id: postId}});
 	const countable = await prisma.countable.findFirst({where: {postId: post}});
+<<<<<<< HEAD
+=======
+
+>>>>>>> ezeElChoosenOne
 	await prisma.transaction.create({
 		data: {
 			price: countable?.price || 0,
