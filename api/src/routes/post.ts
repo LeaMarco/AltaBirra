@@ -57,12 +57,12 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
 
   const { price, discount }: Countable = req.body.countable;
 
-  const user = await prisma.user.findUnique({ where: { username: username }});
+  const user = await prisma.user.findUnique({ where: { username: username } });
   const beerGenericType = await prisma.genericType.findUnique({
-    where: {type: genericType}
+    where: { type: genericType }
   });
   const beerSpecificType = await prisma.specificType.findUnique({
-    where: {type: specificType}
+    where: { type: specificType }
   });
 
   await prisma.post.create({
@@ -75,7 +75,7 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
       shipping,
       visibility,
       user: {
-        connect: {id: user?.id},
+        connect: { id: user?.id },
       },
       beer: {
         create: {
@@ -87,15 +87,15 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
           dryHop,
           volume,
           genericType: {
-            connect: {id: beerGenericType?.id},
+            connect: { id: beerGenericType?.id },
           },
           specificType: {
-            connect: {id: beerSpecificType?.id},
+            connect: { id: beerSpecificType?.id },
           },
         },
       },
       countable: {
-        create:{
+        create: {
           price,
           discount,
           expireDate: new Date()

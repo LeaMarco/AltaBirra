@@ -8,13 +8,10 @@ const prisma = new PrismaClient();
 // A `main` function so that we can use async/await
 async function main() {
 
-<<<<<<< HEAD
-=======
 
   ///////////////COSAS PERMANENTES//////////////////
 
   //ROLES
->>>>>>> ezeElChoosenOne
   await prisma.role.createMany({
     data: [
       {
@@ -25,30 +22,6 @@ async function main() {
       },
     ],
   });
-<<<<<<< HEAD
-  
-  const rubia = await prisma.genericType.create({
-    data: {
-      type: "rubia"
-    },
-  });
-  await prisma.genericType.create({
-    data: {
-      type: "roja"
-    },
-  });
-  await prisma.genericType.create({
-    data: {
-      type: "negra"
-    },
-  });
-  await prisma.specificType.create({
-    data: {
-      type: "ipa",
-      genericType: { connect: { id: rubia.id } }
-    },
-  });
-=======
 
   //TIPOS GENERICOS
   const rubia = await prisma.genericType.create({
@@ -70,11 +43,8 @@ async function main() {
     },
   });
 
-  //TIPOS ESPECIFICOS
-
-
-
   //////ALE O FERMENTACION RAPIDA///////////////////////////////////////////////////////////////
+
   await prisma.specificType.create({
     data: {
       type: "Amber",
@@ -238,6 +208,7 @@ términos cerveza blanca (Weissbier) y cerveza de trigo (Weizenbier).`,
       genericType: { connect: { id: rubia.id } }
     },
   });
+
   //////FIN DE ALE O FERMENTACION RAPIDA///////////////////////////////////////////////////////////////
 
 
@@ -259,7 +230,6 @@ términos cerveza blanca (Weissbier) y cerveza de trigo (Weizenbier).`,
 
   //NO HACE FALTA ADD BEER, SE CREA SIEMPRE DESDE POST
 
->>>>>>> ezeElChoosenOne
 }
 
 
@@ -272,6 +242,3 @@ main()
     // Disconnect Prisma Client
     await prisma.$disconnect();
   });
-
-
-

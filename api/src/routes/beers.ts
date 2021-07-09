@@ -26,10 +26,10 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
     volume,
     genericType,
     specificType,
-  }:Body = req.body;
+  }: Body = req.body;
 
-  const beerGenericType = await prisma.genericType.findUnique({ where: { type: genericType }});
-  const beerSpecificType = await prisma.specificType.findUnique({ where: { type: specificType }});
+  const beerGenericType = await prisma.genericType.findUnique({ where: { type: genericType } });
+  const beerSpecificType = await prisma.specificType.findUnique({ where: { type: specificType } });
 
   await prisma.beer.create({
     data: {
@@ -47,7 +47,7 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
         connect: { id: beerSpecificType?.id },
       },
     },
-  }).catch(error=>(console.log(error)))
+  }).catch(error => (console.log(error)))
   res.send("creado");
 });
 

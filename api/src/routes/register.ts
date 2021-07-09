@@ -5,20 +5,20 @@ const prisma = new PrismaClient();
 
 router.post("/", async (req: Request, res: Response, next: NextFunction) => {
   const { username, email, name, password } = req.body;
-  const userRol = await prisma.role.findUnique({where: {name: "USER" }})
+  const userRol = await prisma.role.findUnique({ where: { name: "USER" } })
   await prisma.user.create({
     data: {
-        username,
-        email,
-        name,
-        password,
-        role: {
-          connect: {id: userRol?.id}
-        },
-        cart: {
-          create: {}
-        }
+      username,
+      email,
+      name,
+      password,
+      role: {
+        connect: { id: userRol?.id }
+      },
+      cart: {
+        create: {}
       }
+    }
   })
   res.send("creado");
 });
