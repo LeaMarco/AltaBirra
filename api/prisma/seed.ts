@@ -1,26 +1,44 @@
 import { PrismaClient } from "@prisma/client";
-import { connect } from "http2";
-// import { add } from "date-fns";
-import { data } from "./data";
 
 const prisma = new PrismaClient();
 
 // A `main` function so that we can use async/await
 async function main() {
 
-
   ///////////////COSAS PERMANENTES//////////////////
 
   //ROLES
-  await prisma.role.createMany({
-    data: [
-      {
-        name: "USER",
+  const user = await prisma.role.create({ data: { name: "USER" } });
+  const admin = await prisma.role.create({ data: { name: "ADMIN" } });
+
+  //USER-ADMIN
+  await prisma.user.create({
+    data: {
+      username: "TestUser",
+      email: "TestUser@email.com",
+      name: "Test User",
+      password: "TestUserPassword",
+      role: {
+        connect: { id: user.id }
       },
-      {
-        name: "ADMIN",
+      cart: {
+        create: {}
+      }
+    },
+  });
+  await prisma.user.create({
+    data: {
+      username: "TestAdmin",
+      email: "TestAdmin@email.com",
+      name: "Test Admin",
+      password: "TestAdminPassword",
+      role: {
+        connect: { id: admin.id }
       },
-    ],
+      cart: {
+        create: {}
+      }
+    },
   });
 
   //TIPOS GENERICOS
