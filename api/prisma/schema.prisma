@@ -18,14 +18,19 @@ model Post {
     visibility  Boolean
     createdAt   DateTime @default(now())
 
-    beerId        Int
-    beer          Beer         @relation(fields: [beerId], references: [id])
-    carts         PostsOnCart[]
-    transactionId Transaction?
-    userId        Int
-    user          User         @relation(fields: [userId], references: [id])
-    countableId  Int
+    beerId Int
+    beer   Beer @relation(fields: [beerId], references: [id])
+
+    userId Int
+    user   User @relation(fields: [userId], references: [id])
+
+    countableId Int
     countable   Countable @relation(fields: [countableId], references: [id])
+
+    carts PostsOnCart[]
+
+    transactionId Transaction[]
+
 }
 
 model Role {
@@ -44,11 +49,11 @@ model User {
     premium  Boolean @default(false)
 
     ///relacion de muchos a uno con TABLA ROLE
-    roleId Int
-    role   Role @relation(fields: [roleId], references: [id])
+    roleId        Int
+    role          Role         @relation(fields: [roleId], references: [id])
     cartId        Int
-    cart          Cart @relation(fields: [cartId], references: [id])
-    postId        Post[]  
+    cart          Cart         @relation(fields: [cartId], references: [id])
+    postId        Post[]
     transactionId Transaction?
 }
 
@@ -60,12 +65,13 @@ model Transaction {
     /////relacion de muchos (transacciones) a uno (usuario)
     buyerId Int
     buyer   User @relation(fields: [buyerId], references: [id])
-    postId  Int
-    post    Post @relation(fields: [postId], references: [id])
+
+    postId Int
+    post   Post @relation(fields: [postId], references: [id])
 }
 
 model Cart {
-    id     Int @id @default(autoincrement())
+    id Int @id @default(autoincrement())
 
     //relacion uno a uno con usuario (fk)
     userId User?
@@ -74,9 +80,9 @@ model Cart {
 
 model PostsOnCart {
     postId Int
-    post Post @relation(fields: [postId], references: [id])
+    post   Post @relation(fields: [postId], references: [id])
     cartId Int
-    cart Cart @relation(fields: [cartId], references: [id])
+    cart   Cart @relation(fields: [cartId], references: [id])
 
     @@id([cartId, postId])
 }
@@ -99,27 +105,37 @@ model Beer {
 }
 
 model GenericType {
-    id   Int    @id @default(autoincrement())
-    type String @unique
-
+    id             Int            @id @default(autoincrement())
+    type           String         @unique
+    description    String
     beerId         Beer[]
     specificTypeId SpecificType[]
 }
 
 model SpecificType {
-    id   Int    @id @default(autoincrement())
-    type String @unique
+    id          Int    @id @default(autoincrement())
+    type        String @unique
+    description String
+    group       Group
+
 
     beerId        Beer[]
     genericTypeId Int
     genericType   GenericType @relation(fields: [genericTypeId], references: [id])
 }
 
+enum Group {
+    ALE
+    LAGER
+    LAMBIC
+    OTRA
+}
+
 model Countable {
-    id         Int @id @default(autoincrement())
+    id         Int      @id @default(autoincrement())
     price      Int
     discount   Int
     expireDate DateTime
 
-    postId Post?    
+    postId Post?
 }

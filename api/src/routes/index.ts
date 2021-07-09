@@ -3,7 +3,7 @@ import beers from "./beers";
 import register from "./register";
 import post from "./post";
 import transaction from "./transaction";
-import cart from "./cart";
+import cart from "./addToCart";
 
 const router = Router();
 

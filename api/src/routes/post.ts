@@ -94,7 +94,7 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
           },
         },
       },
-      countableId: {
+      countable: {
         create:{
           price,
           discount,
