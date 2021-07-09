@@ -9,115 +9,106 @@ generator client {
 
 model Post {
     id          Int      @id @default(autoincrement())
-    Title       String
-    Description String
-    img         String
-    Stock       Int
-    Rating      Int
-    Shipping    Boolean
-    Visibility  Boolean
-    CreatedAt   DateTime @default(now())
+    title       String
+    description String
+    image       String
+    stock       Int
+    rating      Int
+    shipping    Boolean
+    visibility  Boolean
+    createdAt   DateTime @default(now())
 
     beerId        Int
     beer          Beer         @relation(fields: [beerId], references: [id])
-    cartId        Cart?
+    carts         PostsOnCart[]
     transactionId Transaction?
-    userId        User?
-    countableId    Countable?
-
+    userId        Int
+    user          User         @relation(fields: [userId], references: [id])
+    countableId  Int
+    countable   Countable @relation(fields: [countableId], references: [id])
 }
 
-model Rol {
-    id  Int    @id @default(autoincrement())
-    Rol String @unique
+model Role {
+    id   Int    @id @default(autoincrement())
+    name String @unique
 
     userId User[]
 }
 
 model User {
     id       Int     @id @default(autoincrement())
-    UserName String  @unique
-    Email    String  @unique
-    Name     String
-    Password String
-    Premium  Boolean @default(false)
+    username String  @unique
+    email    String  @unique
+    name     String
+    password String
+    premium  Boolean @default(false)
 
-    ///relacion de muchos a uno con TABLA ROL
-    rolId Int
-    rol   Rol @relation(fields: [rolId], references: [id])
-
-    //relacion de uno a muchos con tablas TRANSACCIONES, CARRITO Y POSTS
-
-    //relacion uno a uno con el carrito  (el ? es por que un usuario puede o no tener carrito pero un carrito SIEMPRE va a tener un usuario asignado)
-    cartId        Cart?
-    PostId        Int
-    Post          Post         @relation(fields: [PostId], references: [id])
+    ///relacion de muchos a uno con TABLA ROLE
+    roleId Int
+    role   Role @relation(fields: [roleId], references: [id])
+    cartId        Int
+    cart          Cart @relation(fields: [cartId], references: [id])
+    postId        Post[]  
     transactionId Transaction?
-
 }
 
 model Transaction {
     id        Int      @id @default(autoincrement())
-    Price     Int
-    CreatedAt DateTime @default(now())
+    price     Int
+    createdAt DateTime @default(now())
 
     /////relacion de muchos (transacciones) a uno (usuario)
-    CompradorId Int
-    Comprador   User @relation(fields: [CompradorId], references: [id])
-
-
-    //FALTA RELACION DE MUCHO A UNO CON LOS POST
-    PostId Int
-    Post   Post @relation(fields: [PostId], references: [id])
+    buyerId Int
+    buyer   User @relation(fields: [buyerId], references: [id])
+    postId  Int
+    post    Post @relation(fields: [postId], references: [id])
 }
 
 model Cart {
-    id Int @id @default(autoincrement())
-    /////falta linkear con el usuario y post
-
+    id     Int @id @default(autoincrement())
 
     //relacion uno a uno con usuario (fk)
-    UserId Int
-    user   User @relation(fields: [UserId], references: [id])
+    userId User?
+    posts  PostsOnCart[]
+}
 
-    PostId Int
-    post   Post @relation(fields: [PostId], references: [id])
+model PostsOnCart {
+    postId Int
+    post Post @relation(fields: [postId], references: [id])
+    cartId Int
+    cart Cart @relation(fields: [cartId], references: [id])
 
-
-
+    @@id([cartId, postId])
 }
 
 model Beer {
     id       Int      @id @default(autoincrement())
-    Name     String
-    Abv      Int
-    Og       Int?
-    Ibu      Int
-    Calories Int?
-    DryHop   Boolean?
-    Volume   Int
+    name     String
+    abv      Int
+    og       Int?
+    ibu      Int
+    calories Int?
+    dryHop   Boolean?
+    volume   Int
 
-    /////falta linkear con el tipo de cerveza
     genericTypeId  Int
     genericType    GenericType  @relation(fields: [genericTypeId], references: [id])
     specificTypeId Int
     specificType   SpecificType @relation(fields: [specificTypeId], references: [id])
-
-    postId Post?
+    postId         Post?
 }
 
 model GenericType {
-    id          Int    @id @default(autoincrement())
-    GenericType String @unique
+    id   Int    @id @default(autoincrement())
+    type String @unique
 
     beerId         Beer[]
-    SpecificTypeId SpecificType[]
+    specificTypeId SpecificType[]
 }
 
 model SpecificType {
-    id           Int    @id @default(autoincrement())
-    SpecificType String @unique
-
+    id   Int    @id @default(autoincrement())
+    type String @unique
 
     beerId        Beer[]
     genericTypeId Int
@@ -125,13 +116,10 @@ model SpecificType {
 }
 
 model Countable {
-    id       Int @id @default(autoincrement())
-    Price    Int
-    Discount Int
-
+    id         Int @id @default(autoincrement())
+    price      Int
+    discount   Int
     expireDate DateTime
 
-    PostId Int
-    Post   Post @relation(fields: [PostId], references: [id])
-
+    postId Post?    
 }
