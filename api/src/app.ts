@@ -1,16 +1,13 @@
-import express, {Request, Response, NextFunction, Application} from 'express';
+import express, { Request, Response, NextFunction, Application } from 'express';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 import cors from 'cors';
-
 import routes from './routes';
-
 import config from './lib/config';
 
 const app: Application = express();
 
 app.use(cors())
-
 app.use(express.urlencoded({extended: true, limit: '50mb'})); //middleware
 app.use(express.json({limit: '50mb'}));
 app.use(cookieParser());
@@ -25,7 +22,7 @@ app.use(morgan('dev'));
 // 	})
 // );
 
-app.use("/",routes);
+app.use("/", routes);
 
 interface error {
 	status: number;
