@@ -7,13 +7,131 @@ generator client {
     provider = "prisma-client-js"
 }
 
-model Products {
+model Post {
+    id          Int      @id @default(autoincrement())
+    Title       String
+    Description String
+    img         String
+    Stock       Int
+    Rating      Int
+    Shipping    Boolean
+    Visibility  Boolean
+    CreatedAt   DateTime @default(now())
+
+    beerId        Int
+    beer          Beer         @relation(fields: [beerId], references: [id])
+    cartId        Cart?
+    transactionId Transaction?
+    userId        User?
+    countableId    Countable?
+
+}
+
+model Rol {
+    id  Int    @id @default(autoincrement())
+    Rol String @unique
+
+    userId User[]
+}
+
+model User {
+    id       Int     @id @default(autoincrement())
+    UserName String  @unique
+    Email    String  @unique
+    Name     String
+    Password String
+    Premium  Boolean @default(false)
+
+    ///relacion de muchos a uno con TABLA ROL
+    rolId Int
+    rol   Rol @relation(fields: [rolId], references: [id])
+
+    //relacion de uno a muchos con tablas TRANSACCIONES, CARRITO Y POSTS
+
+    //relacion uno a uno con el carrito  (el ? es por que un usuario puede o no tener carrito pero un carrito SIEMPRE va a tener un usuario asignado)
+    cartId        Cart?
+    PostId        Int
+    Post          Post         @relation(fields: [PostId], references: [id])
+    transactionId Transaction?
+
+}
+
+model Transaction {
+    id        Int      @id @default(autoincrement())
+    Price     Int
+    CreatedAt DateTime @default(now())
+
+    /////relacion de muchos (transacciones) a uno (usuario)
+    CompradorId Int
+    Comprador   User @relation(fields: [CompradorId], references: [id])
+
+
+    //FALTA RELACION DE MUCHO A UNO CON LOS POST
+    PostId Int
+    Post   Post @relation(fields: [PostId], references: [id])
+}
+
+model Cart {
+    id Int @id @default(autoincrement())
+    /////falta linkear con el usuario y post
+
+
+    //relacion uno a uno con usuario (fk)
+    UserId Int
+    user   User @relation(fields: [UserId], references: [id])
+
+    PostId Int
+    post   Post @relation(fields: [PostId], references: [id])
+
+
+
+}
+
+model Beer {
+    id       Int      @id @default(autoincrement())
+    Name     String
+    Abv      Int
+    Og       Int?
+    Ibu      Int
+    Calories Int?
+    DryHop   Boolean?
+    Volume   Int
+
+    /////falta linkear con el tipo de cerveza
+    genericTypeId  Int
+    genericType    GenericType  @relation(fields: [genericTypeId], references: [id])
+    specificTypeId Int
+    specificType   SpecificType @relation(fields: [specificTypeId], references: [id])
+
+    postId Post?
+}
+
+model GenericType {
     id          Int    @id @default(autoincrement())
-    Name        String  
-    description String
-    alcohol     Float     
-    price       Float
-    ibu         Int
-    review      Int
-    image       String 
+    GenericType String @unique
+
+    beerId         Beer[]
+    SpecificTypeId SpecificType[]
+}
+
+model SpecificType {
+    id           Int    @id @default(autoincrement())
+    SpecificType String @unique
+
+
+    beerId        Beer[]
+    genericTypeId Int
+    genericType   GenericType @relation(fields: [genericTypeId], references: [id])
+}
+
+model Countable {
+    id       Int @id @default(autoincrement())
+    Price    Int
+    Discount Int
+
+    expireDate DateTime
+
+    PostId Int
+    Post   Post @relation(fields: [PostId], references: [id])
+
 }
