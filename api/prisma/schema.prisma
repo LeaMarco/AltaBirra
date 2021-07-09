@@ -21,11 +21,11 @@ model Post {
     beerId        Int
     beer          Beer         @relation(fields: [beerId], references: [id])
     carts         PostsOnCart[]
-    transactionId Transaction?
+    transactionId Transaction[]
     userId        Int
     user          User         @relation(fields: [userId], references: [id])
     countableId  Int
-    countable   Countable @relation(fields: [countableId], references: [id])
+    countable    Countable @relation(fields: [countableId], references: [id])
 }
 
 model Role {

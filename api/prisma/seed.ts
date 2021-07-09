@@ -8,38 +8,38 @@ const prisma = new PrismaClient();
 // A `main` function so that we can use async/await
 async function main() {
 
-  // await prisma.role.createMany({
-  //   data: [
-  //     {
-  //       name: "USER",
-  //     },
-  //     {
-  //       name: "ADMIN",
-  //     },
-  //   ],
-  // });
+  await prisma.role.createMany({
+    data: [
+      {
+        name: "USER",
+      },
+      {
+        name: "ADMIN",
+      },
+    ],
+  });
   
-  // const rubia = await prisma.genericType.create({
-  //   data: {
-  //     type: "rubia"
-  //   },
-  // });
-  // await prisma.genericType.create({
-  //   data: {
-  //     type: "roja"
-  //   },
-  // });
-  // await prisma.genericType.create({
-  //   data: {
-  //     type: "negra"
-  //   },
-  // });
-  // await prisma.specificType.create({
-  //   data: {
-  //     type: "ipa",
-  //     genericType: { connect: { id: rubia.id } }
-  //   },
-  // });
+  const rubia = await prisma.genericType.create({
+    data: {
+      type: "rubia"
+    },
+  });
+  await prisma.genericType.create({
+    data: {
+      type: "roja"
+    },
+  });
+  await prisma.genericType.create({
+    data: {
+      type: "negra"
+    },
+  });
+  await prisma.specificType.create({
+    data: {
+      type: "ipa",
+      genericType: { connect: { id: rubia.id } }
+    },
+  });
 }
 
 
