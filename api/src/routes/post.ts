@@ -33,6 +33,7 @@ interface InfoPost {
 interface Countable {
   Price: number;
   Discount: number;
+  ExpireDate: Date
 }
 
 router.post("/", async (req: Request, res: Response, next: NextFunction) => {
