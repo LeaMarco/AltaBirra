@@ -1,7 +1,8 @@
 import { Router } from 'express';
 import beers from "./beers";
 import register from "./register";
-import post from "./post";
+import createPost from "./createPost";
+import getSearchedPost from "./getSearchedPost";
 import transaction from "./transaction";
 import cart from "./addToCart";
 
@@ -9,7 +10,8 @@ const router = Router();
 
 router.use("/register", register);
 router.use("/beer", beers);
-router.use("/post", post);
+router.use("/post", createPost);
+router.use("/post", getSearchedPost);
 router.use("/transaction", transaction);
 router.use("/cart", cart);
 
