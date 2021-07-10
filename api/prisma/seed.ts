@@ -239,7 +239,7 @@ amargor de lúpulo y ligeramente malteada. Su porcentaje de alcohol oscila
 entre 4,5% y un 5,5%. Al igual que muchas otras cervezas de su clase,
 originalmente era una bebida de mucho cuerpo, siendo en l actualidad una
 cerveza clara y neutra.`,
-        group: "ALE",
+        group: "LAGER",
         genericType: { connect: { id: rubia.id } }
       },
     });
@@ -252,7 +252,7 @@ menor contenido de lúpulo y un sabor más suave y pleno. En Dortmund,
 Alemania, donde tiene su origen, se denomina “export”. En Holanda utilizan la
 abreviatura Dort, pero en este caso se trata de un tipo de cerveza más dulce y
 con mayor contenido de alcohol.`,
-        group: "ALE",
+        group: "LAGER",
         genericType: { connect: { id: rubia.id } }
       },
     });
@@ -261,7 +261,7 @@ con mayor contenido de alcohol.`,
       data: {
         type: "Viena",
         description: `Cerveza Märzen, Oktoberfest.`,
-        group: "ALE",
+        group: "LAGER",
         genericType: { connect: { id: rubia.id } }
       },
     });
@@ -272,7 +272,7 @@ con mayor contenido de alcohol.`,
         description: `Esta es la variante bávara de la lager, tanto en versión clara como oscura. En
 Alemania, la versión oscura se reconoce por el nombre de dukel (oscura). La
 Munich es una cerveza malteada con un sabor razonablemente neutro.`,
-        group: "ALE",
+        group: "LAGER",
         genericType: { connect: { id: rubia.id } }
       },
     });
@@ -285,7 +285,7 @@ así como las Doppelbock, son de fermentación inferior, tienen un mayor
 contenido de alcohol y se caracterizan normalmente por un dulzor de malta. Se
 venden generalmente como cervezas de temporada, aunque no en todas
 partes.`,
-        group: "ALE",
+        group: "LAGER",
         genericType: { connect: { id: rubia.id } }
       },
     });
@@ -298,7 +298,7 @@ Las Rauchbiers son cervezas en las que el secado de la malta tiene lugar
 sobre el humo procedente de madera. Pueden ser de fermentación superior o
 inferior. Se caracteriza por su sabor ahumado. Este tipo predomina en
 Bamberg, Alemania, aunque también se elaboran en Escocia, Francia y Alaska.`,
-        group: "ALE",
+        group: "LAGER",
         genericType: { connect: { id: rubia.id } }
       },
     });
@@ -307,7 +307,7 @@ Bamberg, Alemania, aunque también se elaboran en Escocia, Francia y Alaska.`,
       data: {
         type: "Schwarzbier",
         description: `(cerveza negra)`,
-        group: "ALE",
+        group: "LAGER",
         genericType: { connect: { id: rubia.id } }
       },
     });
@@ -317,20 +317,6 @@ Bamberg, Alemania, aunque también se elaboran en Escocia, Francia y Alaska.`,
 
 
   {// LAMBIC O FERMENTACION ESPONTANEA /////////////////////////////////////////////////////////
-    await prisma.specificType.create({
-      data: {
-        type: "Lambic",
-        description: `Es una cerveza especial, de fermentación espontánea, es en realidad la
-precursora de todas las cervezas. La levadura para la elaboración de esta
-bebida se encuentra en el Valle Senne, al sur de Bruselas. La Lambic, en cuya
-elaboración se añade un 30% de trigo, es una cerveza amarga, que
-experimenta un largo proceso de maduración en roble. Su contenido alcohólico
-es pequeño y su versión “sencilla” cuenta con muchos adeptos. Se puede
-adquirir endulzada, mezclada o preparada con fruta.`,
-        group: "ALE",
-        genericType: { connect: { id: rubia.id } }
-      },
-    });
 
     await prisma.specificType.create({
       data: {
@@ -338,7 +324,7 @@ adquirir endulzada, mezclada o preparada con fruta.`,
         description: `La mezcla y embotellado de una Lambic madura con una Lambic joven da
 lugar a una cerveza agridulce más enérgica que la Lambic propiamente dicha.
 Esta mezcla se denomina Gueuze.`,
-        group: "ALE",
+        group: "LAMBIC",
         genericType: { connect: { id: rubia.id } }
       },
     });
@@ -349,7 +335,7 @@ Esta mezcla se denomina Gueuze.`,
         description: `Es simplemente una Lambic (cerveza de fermentación espontánea) a la que se
 ha añadido azúcar para endulzarla. Son asimismo Faro, las mezclas de Lambic
 con cervezas de fermentación superior.`,
-        group: "ALE",
+        group: "LAMBIC",
         genericType: { connect: { id: rubia.id } }
       },
     });
@@ -363,7 +349,7 @@ pero normalmente es una Gueuze u otra de fermentación superior normal. La
 denominación Gueuze o Lambic puede verse en la etiqueta. Las frutas más
 frecuentes son cervezas y frambuesas, aunque el abanico de posibilidades es
 enorme, como manzanas, plátanos y moras. Los sabores son muy variados. `,
-        group: "ALE",
+        group: "LAMBIC",
         genericType: { connect: { id: rubia.id } }
       },
     });
