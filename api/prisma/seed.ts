@@ -61,7 +61,9 @@ async function main() {
     },
   });
 
-  //☢ Si les sacas las llaves sos boleta ☢
+
+  //☢ Si les sacas las llaves a lo de abajo sos boleta ☢
+  //FALTA PONER CUAL ES RUBIA Y TAL
   {// ALE O FERMENTACION RAPIDA ///////////////////////////////////////////////////////////////
     await prisma.specificType.create({
       data: {
@@ -316,7 +318,7 @@ Bamberg, Alemania, aunque también se elaboran en Escocia, Francia y Alaska.`,
   }////////////////////////////////////////////////////////////////////////////////////////////
 
 
-  {// LAMBIC O FERMENTACION ESPONTANEA /////////////////////////////////////////////////////////
+  {// LAMBIC O FERMENTACION ESPONTANEA ////////////////////////////////////////////////////////
 
     await prisma.specificType.create({
       data: {
@@ -356,6 +358,7 @@ enorme, como manzanas, plátanos y moras. Los sabores son muy variados. `,
 
 
   }////////////////////////////////////////////////////////////////////////////////////////////
+
 
 
 }
