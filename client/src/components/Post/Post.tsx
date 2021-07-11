@@ -1,5 +1,5 @@
 import React from "react";
-// import { useForm, SubmitHandler, UseFormRegister } from "react-hook-form";
+import { useForm, SubmitHandler, UseFormRegister } from "react-hook-form";
 import { CreatePostAction, PostValues } from "../../actions";
 import { useDispatch } from "react-redux";
 import { Dispatch } from "redux";
@@ -9,10 +9,8 @@ export default function Post() {
 //   const dispatch = useDispatch();
   const dispatch = useDispatch<Dispatch<any>>();
 
-  const { register, handleSubmit } = useForm({
-  });
-  const onSubmit: SubmitHandler<PostValues> = (data) => dispatch(createPost(data));
-  //CreatePostAction diferencia de tipos con register
+  const { register, handleSubmit } = useForm<PostValues>();
+  const onSubmit: SubmitHandler<PostValues> = (data) => { let value = transformer(data); dispatch(createPost(value))
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -20,7 +18,6 @@ export default function Post() {
       <div className="Post--form--beer">
         <input {...register("beer.name")} placeholder="Beer Name" />
         <input {...register("beer.abv")}  type="number"  placeholder="Beer Abv" />
-        <input type="number" {...register} onChange={(e) => { register.onChange(parseInt(e.target.value, 10));}}/>
         <input {...register("beer.og")} type="number" placeholder="Beer Og" />
         <input {...register("beer.ibu")} type="number" placeholder="Beer Ibu" />
         <input {...register("beer.calories")} type="number" placeholder="Beer Calories" />
@@ -50,3 +47,23 @@ export default function Post() {
     </form>
   );
 }
+
+
+function transformer(data){
+  let datacopy=data;
+  //beer
+  datacopy.beer.abv = parseInt(datacopy.beer.abv,10)
+  datacopy.beer.og = parseInt(datacopy.beer.og,10)
+  datacopy.beer.ibu = parseInt(datacopy.beer.ibu,10)
+  datacopy.beer.calories = parseInt(datacopy.beer.calories,10)
+  datacopy.beer.volume = parseInt(datacopy.beer.volume,10)
+  datacopy.beer.dryHop = "true" ? true : false;
+  //infopost
+  datacopy.infoPost.shipping = "true" ? true : false;
+  datacopy.infoPost.visibility = "true" ? true : false;
+  datacopy.infoPost.rating = parseInt(datacopy.infoPost.rating,10)
+  datacopy.infoPost.stock = parseInt(datacopy.infoPost.stock,10)
+  //countables
+  datacopy.countable.price = parseInt(datacopy.countable.price,10)
+  datacopy.countable.discount = parseInt(datacopy.countable.discount,10)
+};
