@@ -25,7 +25,7 @@ export default function transformer(Info){
 
   export function transformEdit(Info) {
     let firstStep = transformer(Info)
-    firstStep.editId= 1
+    firstStep.postId= 1
     return firstStep
     
   }

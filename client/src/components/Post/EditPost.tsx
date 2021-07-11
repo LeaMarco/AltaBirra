@@ -10,33 +10,6 @@ export default function EditPost() {
 //   const dispatch = useDispatch();
   const dispatch = useDispatch<Dispatch<any>>();
 
-  let cervezadeprueba={
-    "beer": {
-    "name": "asd",
-    "abv": 1,
-    "og": 1,
-    "ibu": 1,
-    "calories": 1,
-    "dryHop": false,
-    "volume": 1,
-    "genericType": "Rubia",
-    "specificType": "Duvel"
-    },
-    "infoPost": {
-    "title": "asd",
-    "description": "asd",
-    "image": "asd",
-    "rating": 1,
-    "stock": 1,
-    "shipping": false,
-    "visibility": true,
-    "username": "TestUser"
-    },
-    "countable": {
-    "price": 1, 
-    "discount": 1
-    }
-}
   const { register, handleSubmit } = useForm<PostValues>();
   
   const onSubmit: SubmitHandler<PostValues> = (data) => dispatch(editPost(transformEdit(data)))

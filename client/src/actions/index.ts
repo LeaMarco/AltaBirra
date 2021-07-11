@@ -94,6 +94,11 @@ export interface EditPostAction {
 	payload: EditValues;
 }
 
+export interface Action {
+	type: any;
+	payload: any;
+}
+
 
 
 const url = 'http://localhost:3001/beers';
@@ -117,7 +122,7 @@ export const createPost = (data) => {
 	return async (dispatch: Dispatch) => {
 		const response = await axios.post<PostValues>(urlpost,{params:data});
 		console.log(ActionTypes)
-		dispatch<CreatePostAction>({
+		dispatch<Action>({
 			type: ActionTypes.createPost,
 			payload: response.data,
 		});
@@ -128,9 +133,9 @@ export const createPost = (data) => {
 export const editPost = (data) => {
 	console.log(data,"data create post action")
 	return async (dispatch: Dispatch) => {
-		const response = await axios.put<PostValues>(urledit,{params:data});
-		dispatch<CreatePostAction>({
-			type: ActionTypes.createPost,
+		const response = await axios.put<EditValues>(urledit,{params:data});
+		dispatch<Action>({
+			type: ActionTypes.editPost,
 			payload: response.data,
 		});
 	};
@@ -138,6 +143,6 @@ export const editPost = (data) => {
 
 export type PostAction = CreatePostAction;
 export type UserAction = FetchUsersAction;
-export type EditAction = EditPostAction;
+export type ActionAll = Action;
 
 

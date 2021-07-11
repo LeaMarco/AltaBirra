@@ -61,8 +61,8 @@ router.put("/", async (req: Request, res: Response, next: NextFunction) => {
 
   const { price, discount }: Countable = req.body.params.countable;
 
-  const postId:number = req.body
-
+  const postId:number = req.body.params.postId
+  console.log(postId, "HOLA FRANCOOOO")
   const user = await prisma.user.findUnique({ where: { username: username } });
   const beerGenericType = await prisma.genericType.findUnique({
     where: { type: genericType }
