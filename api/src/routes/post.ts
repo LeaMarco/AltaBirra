@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { NextFunction, Request, Response, Router } from "express";
+import { LabeledStatement } from "typescript";
 
 const router = Router();
 const prisma = new PrismaClient();
@@ -33,6 +34,7 @@ interface Countable {
 }
 
 router.post("/", async (req: Request, res: Response, next: NextFunction) => {
+  // console.log(req.body,"req body ruta express 443223")
   const {
     name,
     abv,
@@ -43,7 +45,7 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
     volume,
     genericType,
     specificType,
-  }: Beer = req.body.beer;
+  }: Beer = req.body.params.beer;
 
   const {
     title,
@@ -54,9 +56,9 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
     shipping,
     visibility,
     username,
-  }: InfoPost = req.body.infoPost;
+  }: InfoPost = req.body.params.infoPost;
 
-  const { price, discount }: Countable = req.body.countable;
+  const { price, discount }: Countable = req.body.params.countable;
 
   const user = await prisma.user.findUnique({ where: { username: username } });
   const beerGenericType = await prisma.genericType.findUnique({
