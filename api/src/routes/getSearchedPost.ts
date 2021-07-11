@@ -5,23 +5,36 @@ const router = Router();
 const prisma = new PrismaClient();
 
 interface PostQuery {
-	title: string;
-	genericType: string;
-	specificType: string;
-	minIbu: number;
-	maxIbu: number;
-	minPrice: number;
-	maxPrice: number;
-	minAbv: number;
-	maxAbv: number;
-	minOg: number;
-	maxOg: number;
-	minCalories: number;
-	maxCalories: number;
-	rating: number;
-	hasShipping: boolean;
-	hasDiscount: boolean;
-	hasDryHop: boolean;
+	title?: string;
+	genericType?: string;
+	specificType?: string;
+	minIbu?: number;
+	maxIbu?: number;
+	minPrice?: number;
+	maxPrice?: number;
+	minAbv?: number;
+	maxAbv?: number;
+	minOg?: number;
+	maxOg?: number;
+	minCalories?: number;
+	maxCalories?: number;
+	rating?: number;
+	hasShipping?: boolean;
+	hasDiscount?: boolean;
+	hasDryHop?: boolean;
+	orderBy?: string;
+}
+
+interface orderBeers {
+	price?: string;
+	ibu?: string;
+	abv?: string;
+}
+
+interface orderPosts {
+	beer?: orderBeers;
+	countable?: orderBeers;
+	rating?: string;
 }
 
 router.get('/', async (req: Request, res: Response, next: NextFunction) => {
@@ -42,8 +55,41 @@ router.get('/', async (req: Request, res: Response, next: NextFunction) => {
 		rating,
 		hasShipping,
 		hasDiscount,
-		hasDryHop
-	}: PostQuery = req.body
+		hasDryHop,
+		orderBy
+	}: PostQuery = req.query;
+
+	let orderTemp: orderPosts | undefined;
+	switch (orderBy) {
+		case "Menor precio": {
+			orderTemp = { countable: { price: 'asc' } };
+			break;
+		}
+		case "Mayor precio": {
+			orderTemp = { countable: { price: 'desc' } };
+			break;
+		}
+		case "Menor IBU": {
+			orderTemp = { beer: { ibu: "asc" } };
+			break;
+		}
+		case "Mayor IBU": {
+			orderTemp = { beer: { ibu: "desc" } };
+			break;
+		}
+		case "Menor ABV": {
+			orderTemp = { beer: { abv: "asc" } };
+			break;
+		}
+		case "Mayor ABV": {
+			orderTemp = { beer: { abv: "desc" } };
+			break;
+		}
+		case "Mejor rating": {
+			orderTemp = { rating: "desc" };
+			break;
+		}
+	}
 
 	const posts = await prisma.post.findMany({
 		where: {
@@ -76,7 +122,8 @@ router.get('/', async (req: Request, res: Response, next: NextFunction) => {
 		include: {
 			countable: true,
 			beer: true
-		}
+		},
+		//orderBy: orderTemp
 	})
 	res.json(posts);
 })

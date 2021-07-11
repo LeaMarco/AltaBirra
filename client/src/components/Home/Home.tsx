@@ -1,13 +1,10 @@
 import React from "react";
-import Beers from "../Beers/Beers";
-import beers from "./Birrasjson";
+import Posts from "../Posts/Posts";
 import "./Home.scss";
 
 const Home = () => {
-  /* beers={"beers"} */
   return (
     <div className="Beers-container">
-    <Beers />
     </div>
   )
 }

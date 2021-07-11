@@ -1,41 +1,57 @@
 import axios from 'axios';
-import {Dispatch} from 'redux';
-import { GET_BEERS } from './typesName';
+import { Dispatch } from 'redux';
 //traermne mis actionsTypes
 
-export interface User {
+export interface Post {
 	id: number;
+	title: string;
+	description: string;
+	image: string;
+	stock: number;
+	rating: number;
+	shipping: boolean;
+	visibility: boolean;
+	username: string;
 	name: string;
-	lastname: string;
+	abv: number;
+	og: number;
+	ibu: number;
+	calories: number;
+	dryHop: boolean;
+	volume: number;
+	genericType: string;
+	specificType: string;
+	price: number;
+	discount: number;
 }
 
-export enum ActionTypes {
-	fetchUsers,
-	deleteUser,
+export interface SearchedPostAction {
+	type: string;
+	payload: Post[];
 }
 
-
-export interface FetchUsersAction {
-	type: ActionTypes.fetchUsers;
-	payload: User[];
+export interface OrderPostsByAction {
+	type: string;
+	payload: string;
 }
 
-export interface DeleteUserAction {
-	type: ActionTypes.deleteUser;
-	payload: number;
-}
+const URL = 'http://localhost:3001';
 
-const url = 'http://localhost:3001/beers';
-
-export const fetchUsers = () => {
-
-	return async (dispatch: Dispatch) => {
-		const response = await axios.get<User[]>(url);
-console.log(ActionTypes)
-		dispatch<FetchUsersAction>({
-			type: ActionTypes.fetchUsers,
-			payload: response.data,
+export function searchedPosts(query) {
+	return async function (dispatch: Dispatch) {
+		const response = await axios.get<Post[]>(`${URL}/post`, { params: query })
+		dispatch<SearchedPostAction>({
+			type: "GET_SEARCHED_POST",
+			payload: response.data
 		});
-	};
-};
-export type Action = FetchUsersAction;
+	}
+}
+
+export function orderPostsBy<OrderPostsByAction>(orderBy) {
+	return {
+		type: "SET_ORDER_POSTS_BY",
+		payload: orderBy
+	}
+}
+
+export type Action = SearchedPostAction | OrderPostsByAction;

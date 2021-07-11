@@ -1,0 +1,42 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	width: fit-content;
+	margin-left: 1rem;
+}
+
+.subcontainer {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	margin: 1vh 1vw;
+}
+
+.subcontainer > div {
+	margin: 1vh;
+	/* width: 18vw */
+}
+
+.inputDiv {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+}
+
+.inputDiv > div {
+	display: flex;
+	align-items: flex-start;
+	margin: 0.5vh 1vw;
+}
+
+.smallInput {
+	width: 3vw;
+}
+
+label + .smallInput{
+	margin: 0 1vw;
+}
+
