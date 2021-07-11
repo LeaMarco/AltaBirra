@@ -4,13 +4,42 @@ import { CreatePostAction, PostValues } from "../../actions";
 import { useDispatch } from "react-redux";
 import { Dispatch } from "redux";
 import { createPost } from "../../actions";
+import transformer from "./FormatData";
 
 export default function Post() {
 //   const dispatch = useDispatch();
   const dispatch = useDispatch<Dispatch<any>>();
 
+  let cervezadeprueba={
+    "beer": {
+    "name": "asd",
+    "abv": 1,
+    "og": 1,
+    "ibu": 1,
+    "calories": 1,
+    "dryHop": false,
+    "volume": 1,
+    "genericType": "Rubia",
+    "specificType": "Duvel"
+    },
+    "infoPost": {
+    "title": "asd",
+    "description": "asd",
+    "image": "asd",
+    "rating": 1,
+    "stock": 1,
+    "shipping": false,
+    "visibility": true,
+    "username": "TestUser"
+    },
+    "countable": {
+    "price": 1, 
+    "discount": 1
+    }
+}
   const { register, handleSubmit } = useForm<PostValues>();
-  const onSubmit: SubmitHandler<PostValues> = (data) => { let value = transformer(data); dispatch(createPost(value))
+  
+  const onSubmit: SubmitHandler<PostValues> = (data) => {console.log(transformer(data),"DATAAAA");dispatch(createPost(transformer(data)))}
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -37,7 +66,7 @@ export default function Post() {
         <input {...register("infoPost.rating")} type="number" placeholder="InfoPost Rating" />
         <input {...register("infoPost.shipping")} type="number" placeholder="InfoPost Shipping"/>
         <input {...register("infoPost.visibility")} type="boolean" placeholder="InfoPost Visibility"/>
-        <input {...register("infoPost.username")} placeholder="InfoPost Username"/>
+        {/* <input {...register("infoPost.username")} placeholder="InfoPost Username"/> */}
       </div>
       <div className="Post--form--countable">
         <input {...register("countable.price")} type="number" placeholder="Countable Price" />
@@ -48,22 +77,3 @@ export default function Post() {
   );
 }
 
-
-function transformer(data){
-  let datacopy=data;
-  //beer
-  datacopy.beer.abv = parseInt(datacopy.beer.abv,10)
-  datacopy.beer.og = parseInt(datacopy.beer.og,10)
-  datacopy.beer.ibu = parseInt(datacopy.beer.ibu,10)
-  datacopy.beer.calories = parseInt(datacopy.beer.calories,10)
-  datacopy.beer.volume = parseInt(datacopy.beer.volume,10)
-  datacopy.beer.dryHop = "true" ? true : false;
-  //infopost
-  datacopy.infoPost.shipping = "true" ? true : false;
-  datacopy.infoPost.visibility = "true" ? true : false;
-  datacopy.infoPost.rating = parseInt(datacopy.infoPost.rating,10)
-  datacopy.infoPost.stock = parseInt(datacopy.infoPost.stock,10)
-  //countables
-  datacopy.countable.price = parseInt(datacopy.countable.price,10)
-  datacopy.countable.discount = parseInt(datacopy.countable.discount,10)
-};
