@@ -1,11 +1,9 @@
 import {User} from '../actions';
-import {ActionTypes, Action} from '../actions/index';
+import {ActionTypes, PostAction,UserAction} from '../actions/index';
 
 
 
-
-export const usersReducer = (state: User[] = [], action: Action) => {
-
+export const usersReducer = (state: User[] = [], action: UserAction) => {
 
 	switch (action.type) {
 		case ActionTypes.fetchUsers:
@@ -14,16 +12,12 @@ export const usersReducer = (state: User[] = [], action: Action) => {
 			return state;
 	}
 };
-
-
-
-
-
-
-export const asd = (state: User[] = [], action: Action) => {
+//SACAR ESTO DE USERS CREAR ARCHIVO POST
+export const postReducer = (state: User[] = [], action: PostAction) => {
 	switch (action.type) {
-		case ActionTypes.fetchUsers:
-			return action.payload;
+		case ActionTypes.createPost:
+				return action.payload;
+			//Mostrarle esto al user
 		default:
 			return state;
 	}
