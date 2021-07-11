@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import Home from './components/Home/Home';
 import './App.css';
 import Post from './components/Post/Post';
+import EditPost from './components/Post/EditPost';
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
       <div className="App">
         <Nav/>
         <Home />
-        <Post/>
+        <EditPost/>
       </div>
     </BrowserRouter>
   );

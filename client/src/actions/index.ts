@@ -13,6 +13,7 @@ export enum ActionTypes {
 	fetchUsers,
 	deleteUser,
 	createPost,
+	editPost
 }
 
 export interface PostValues {
@@ -43,6 +44,35 @@ export interface PostValues {
 	};
   };
 
+  export interface EditValues {
+	beer: {
+	  name: string;
+	  abv: number;
+	  og: number;
+	  ibu: number;
+	  calories: number;
+	  dryHop: boolean;
+	  volume: number;
+	  genericType: string;
+	  specificType: string;
+	};
+	infoPost: {
+	  title: string;
+	  description: string;
+	  image: string;
+	  stock: number;
+	  rating: number;
+	  shipping: boolean;
+	  visibility: boolean;
+	  username: string;
+	};
+	countable: {
+	  price: number;
+	  discount: number;
+	};
+	postId:number;
+  };
+
 
 export interface FetchUsersAction {
 	type: ActionTypes.fetchUsers;
@@ -59,9 +89,18 @@ export interface CreatePostAction {
 	payload: PostValues;
 }
 
+export interface EditPostAction {
+	type: ActionTypes.editPost;
+	payload: EditValues;
+}
+
+
 
 const url = 'http://localhost:3001/beers';
 const urlpost = 'http://localhost:3001/post';
+const urledit = 'http://localhost:3001/edit';
+
+
 
 export const fetchUsers = () => {
 	return async (dispatch: Dispatch) => {
@@ -75,7 +114,6 @@ export const fetchUsers = () => {
 
 
 export const createPost = (data) => {
-	console.log(data,"data create post action")
 	return async (dispatch: Dispatch) => {
 		const response = await axios.post<PostValues>(urlpost,{params:data});
 		console.log(ActionTypes)
@@ -85,6 +123,21 @@ export const createPost = (data) => {
 		});
 	};
 };
+
+
+export const editPost = (data) => {
+	console.log(data,"data create post action")
+	return async (dispatch: Dispatch) => {
+		const response = await axios.put<PostValues>(urledit,{params:data});
+		dispatch<CreatePostAction>({
+			type: ActionTypes.createPost,
+			payload: response.data,
+		});
+	};
+};
+
 export type PostAction = CreatePostAction;
 export type UserAction = FetchUsersAction;
+export type EditAction = EditPostAction;
+
 

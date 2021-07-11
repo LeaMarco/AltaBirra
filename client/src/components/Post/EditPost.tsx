@@ -3,10 +3,10 @@ import { useForm, SubmitHandler, UseFormRegister } from "react-hook-form";
 import { CreatePostAction, PostValues } from "../../actions";
 import { useDispatch } from "react-redux";
 import { Dispatch } from "redux";
-import { createPost } from "../../actions";
-import transformer from "./FormatData";
+import { editPost } from "../../actions";
+import {transformEdit} from "./FormatData";
 
-export default function Post() {
+export default function EditPost() {
 //   const dispatch = useDispatch();
   const dispatch = useDispatch<Dispatch<any>>();
 
@@ -39,11 +39,12 @@ export default function Post() {
 }
   const { register, handleSubmit } = useForm<PostValues>();
   
-  const onSubmit: SubmitHandler<PostValues> = (data) => dispatch(createPost(transformer(data)))
+  const onSubmit: SubmitHandler<PostValues> = (data) => dispatch(editPost(transformEdit(data)))
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       {console.log(register,"register Post")}
+      <h1>EDIT POST</h1>
       <div className="Post--form--beer">
         Name:
         <input {...register("beer.name")} placeholder="Beer Name" />
