@@ -1,0 +1,52 @@
+#register {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  margin: auto;
+  border: 2px solid rgb(130, 152, 247);
+  border-radius: 10px;
+  box-shadow: 0px 0px 1rem;
+  padding: 0px 10px;
+  margin-top: 10px;
+}
+
+#btnRegister {
+  border-radius: 100px;
+  font-size: 14px;
+  padding: 5px 0;
+  width: 100%;
+  margin-bottom: 5px;
+  border: 1px solid grey;
+  box-shadow: 0px 0px 0.2rem rgba(0, 0, 0, 0.548);
+}
+
+.require {
+  background-color: rgb(247, 247, 247);
+  border: 0.1px solid rgb(34, 49, 180);
+}
+
+.RegisterInputs {
+  border: 0.1px solid rgb(221, 220, 221);
+  border-radius: 10px;
+  outline: none;
+  text-shadow: 1px 1px 1px rgb(224, 217, 217);
+  color: black;
+  margin: auto;
+  width: 99%;
+  font-size: large;
+  margin-top: 15px;
+  padding: 3px 0px;
+}
+
+.labels {
+  font-size: small;
+}
+
+.inputContainer {
+}
+
+.imgSm {
+  border-radius: 10px;
+  margin-bottom: 5px;
+  box-shadow: 0px 0px 0.2rem rgba(0, 0, 0, 0.548);
+}

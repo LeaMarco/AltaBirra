@@ -29,8 +29,16 @@ export default function Nav() {
           <Link to="/">
             <img src={lupa} className={style.lupa} />
           </Link>
-          <form onSubmit={event => handleSubmit(event)} className={style.searchInput}>
-            <input placeholder="Buscar" className={style.searchInput} value={searchInput} onChange={event => setSearchInput(event.target.value)} />
+          <form
+            onSubmit={(event) => handleSubmit(event)}
+            className={style.searchInput}
+          >
+            <input
+              placeholder="Buscar"
+              className={style.searchInput}
+              value={searchInput}
+              onChange={(event) => setSearchInput(event.target.value)}
+            />
           </form>
         </div>
         <div className={style.buttons}>
@@ -73,11 +81,18 @@ export default function Nav() {
         ) : (
           <div className={style.buttonsRight}>
             <Link
-              to="/"
+              to="/login"
               className={style.buttonEnter}
               onClick={() => setRegister(!register)}
             >
               Entrar
+            </Link>
+            <Link
+              to="/register"
+              className={style.buttonEnter}
+              // onClick={() => setRegister(!register)}
+            >
+              Registrarse
             </Link>
           </div>
         )}
