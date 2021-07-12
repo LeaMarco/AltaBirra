@@ -13,7 +13,7 @@ function App() {
       <div className="App">
         <Nav/>
         <Home />
-        <EditPost/>
+        <Post/>
       </div>
     </BrowserRouter>
   );

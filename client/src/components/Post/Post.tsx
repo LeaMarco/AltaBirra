@@ -5,93 +5,116 @@ import { useDispatch } from "react-redux";
 import { Dispatch } from "redux";
 import { createPost } from "../../actions";
 import transformer from "./FormatData";
+import styles from './Post.module.css'
 
 export default function Post() {
 //   const dispatch = useDispatch();
   const dispatch = useDispatch<Dispatch<any>>();
 
-  let cervezadeprueba={
-    "beer": {
-    "name": "asd",
-    "abv": 1,
-    "og": 1,
-    "ibu": 1,
-    "calories": 1,
-    "dryHop": false,
-    "volume": 1,
-    "genericType": "Rubia",
-    "specificType": "Duvel"
-    },
-    "infoPost": {
-    "title": "asd",
-    "description": "asd",
-    "image": "asd",
-    "rating": 1,
-    "stock": 1,
-    "shipping": false,
-    "visibility": true,
-    "username": "TestUser"
-    },
-    "countable": {
-    "price": 1, 
-    "discount": 1
-    }
-}
   const { register, handleSubmit } = useForm<PostValues>();
-  
   const onSubmit: SubmitHandler<PostValues> = (data) => dispatch(createPost(transformer(data)))
-
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      {console.log(register,"register Post")}
-      <div className="Post--form--beer">
-        Name:
-        <input {...register("beer.name")} placeholder="Beer Name" />
-        Abv:
-        <input {...register("beer.abv")}  type="number"  placeholder="Beer Abv" />
-        Og:
-        <input {...register("beer.og")} type="number" placeholder="Beer Og" />
-        Ibu:
-        <input {...register("beer.ibu")} type="number" placeholder="Beer Ibu" />
-        Calories:
-        <input {...register("beer.calories")} type="number" placeholder="Beer Calories" />
-        DryHop:
-        <input {...register("beer.dryHop")} type="boolean" placeholder="Beer DryHop" />
-        Volume:
-        <input {...register("beer.volume")} type="number" placeholder="Beer Volume" />
-        Colour:
-        <input {...register("beer.genericType")} placeholder="Beer Generic Type"/>
-        Type:
-        <input {...register("beer.specificType")} placeholder="Beer Specific Type"/>
+    <form className={styles.postForm} onSubmit={handleSubmit(onSubmit)}>
+        <section className={styles.postFormBeer}>
+          <h3 id={styles["beerh2"]}> Beer</h3>
+            <div className={styles.row1}>
+              <div className={styles.container} id={styles["name"]}>
+                <input {...register("beer.name")}  autoComplete="off" className={styles.input} required/>
+                <label>Beer Name</label>
+                <span className={styles.focusBorder}></span>
+              </div>
+              <div className={styles.container}>
+                <input {...register("beer.abv")}  type="number"  autoComplete="off" className={styles.input} required/>
+                <label>Abv</label>
+                <span className={styles.focusBorder}></span>
+              </div>
+            </div>
+            <div className={styles.row2}>
+              <div className={styles.container}>
+                <input {...register("beer.og")} type="number"  autoComplete="off" className={styles.input} required/>
+                <label>OG</label>
+                <span className={styles.focusBorder}></span>
+              </div>
+              <div className={styles.container}>
+                <input {...register("beer.ibu")} type="number"  autoComplete="off" className={styles.input} required/>
+                <label>IBU</label>
+                <span className={styles.focusBorder}></span>
+              </div>
+            </div>
+            <div className={styles.row3}>
+              <div className={styles.container}>
+                <input {...register("beer.calories")} type="number"  autoComplete="off" className={styles.input} required/>
+                <label>Calories</label>
+                <span className={styles.focusBorder}></span>
+              </div>
+              <div className={styles.container}>
+                <input {...register("beer.volume")} type="number"  autoComplete="off" className={styles.input} required/>
+                <label>Volume</label>
+                <span className={styles.focusBorder}></span>
+              </div>
+            </div>
+            <div className={styles.row4}>
+            <div className={styles.container}>
+              <input {...register("beer.genericType")} autoComplete="off" className={styles.input} required/>
+              <label>Generic Type</label>
+              <span className={styles.focusBorder}></span>
+            </div>
+            <div className={styles.container}>
+              <input {...register("beer.specificType")} autoComplete="off" className={styles.input} required/>
+              <label>Specific Type</label>
+              <span className={styles.focusBorder}></span>
+            </div>
+            </div>
+            <div className={styles.beerCheckbox}>
+                <label>DryHop</label>
+                <input {...register("beer.dryHop")} type="checkbox"required/>
+            </div>
+        </section>
+      <section className={styles.postFormInfoPost}>
+        <h3>Post Info</h3>
+        <div className={styles.container}>
+          <input {...register("infoPost.title")}  autoComplete="off" className={styles.input} required/>
+            <label>Post Title</label>
+            <span className={styles.focusBorder}></span>
+        </div>
+        <div className={styles.postrow1}>
+          <div className={styles.container}>
+              <input type="number" {...register("infoPost.stock")} autoComplete="off"  className={styles.input} required/>
+              <label>Stock</label>
+              <span className={styles.focusBorder}></span>
+          </div>
+          <div className={styles.InfoPostCheckboxes}>
+              <label>Shipping</label>
+              <input {...register("infoPost.shipping")} type="checkbox"required/>
+              <label>Visibility</label>
+              <input {...register("infoPost.visibility")} type="checkbox"required/>
+          </div>
+        </div>
+          <div className={styles.container}>
+              <textarea {...register("infoPost.description")}  autoComplete="off" className={styles.input} required/>
+              <label>Description</label>
+              <span className={styles.focusBorder}></span>
+          </div>
+      </section>
+      <section className={styles.postFormCountable}>
+        <h3>Countables</h3>
+        <div className={styles.countablerow}>
+          <div className={styles.container}>
+            <input {...register("countable.price")} type="number"  autoComplete="off" className={styles.input} required/>
+              <label>Price</label>
+              <span className={styles.focusBorder}></span>
+          </div>
+          <div className={styles.container}>
+            <input {...register("countable.discount")} type="number" autoComplete="off" className={styles.input} required/>
+              <label>Discount</label>
+              <span className={styles.focusBorder}></span>
+          </div>
+        </div>
+      </section>
+      <div className={styles.submitButton}>
+        <input className={styles.postFormSubmitButton} type="submit" />
       </div>
-      <br/>
-      <br/>
-      <div className="Post--form--infoPost">
-        Post title:
-        <input {...register("infoPost.title")} placeholder="InfoPost Title" />
-        Decription:
-        <input
-          {...register("infoPost.description")}
-          placeholder="InfoPost Description"
-        />
-        
-        Stock:
-        <input type="number" {...register("infoPost.stock")} placeholder="InfoPost Stock" />
-        Shipping?:
-        <input {...register("infoPost.shipping")} type="number" placeholder="InfoPost Shipping"/>
-        Visibility?:
-        <input {...register("infoPost.visibility")} type="boolean" placeholder="InfoPost Visibility"/>
-        {/* <input {...register("infoPost.username")} placeholder="InfoPost Username"/> */}
-      </div>
-      <br/>
-      <br/>
-      <div className="Post--form--countable">
-        Price:
-        <input {...register("countable.price")} type="number" placeholder="Countable Price" />
-        Discount:
-        <input {...register("countable.discount")} type="number" placeholder="Countable Discount"/>
-      </div>
-      <input type="submit" />
+          {/* <button type="submit" className={styles.btn} >holii</button> */}
     </form>
   );
 }
