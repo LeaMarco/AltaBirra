@@ -7,6 +7,7 @@ import transaction from "./transaction";
 import cart from "./addToCart";
 import editPost from "./editPost";
 
+import detail from "./detail"
 
 const router = Router();
 
@@ -18,5 +19,6 @@ router.use("/transaction", transaction);
 router.use("/cart", cart);
 router.use("/edit", editPost);
 
+router.use("/detailBeer", detail);
 
 export default router;

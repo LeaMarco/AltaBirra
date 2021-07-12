@@ -6,8 +6,7 @@ import "./App.css";
 import Post from "./components/Post/Post";
 import EditPost from "./components/Post/EditPost";
 import { Route } from "react-router-dom";
-import Login from "./components/Login/Login";
-import Register from "./components/Register/Register";
+import DetailBeer from './components/DetailBeer/DetailBeer';
 
 function App() {
   return (
@@ -16,8 +15,9 @@ function App() {
       <Route exact path="/" component={Home} />
       <Route exact path="/algo/:title" component={Search} />
       <Route exact path="/post" component={Post} />
+      <Route exact path="/detailBeer/:id" component={DetailBeer} />
     </div>
-  );
+  )
 }
 
 export default App;

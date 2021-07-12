@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import style from "./Nav.module.css";
 import logo from "./AltaBirra.svg";
 import lupa from "./Vector.svg";
@@ -8,11 +8,12 @@ import { searchedPosts } from "../../actions";
 import { Modal } from "../Login/Modal/Modal.component";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
+
 export default function Nav() {
-  const [isEnterOpen, setEnterOpen] = React.useState(false);
+  const [isEnterOpen, setEnterOpen] = useState(false);
   const toogleEnter = () => setEnterOpen(!isEnterOpen);
 
-  const [isRegisterOpen, setRegisterOpen] = React.useState(false);
+  const [isRegisterOpen, setRegisterOpen] =useState(false);
   const toogleRegister = () => setRegisterOpen(!isRegisterOpen);
 
   const [register, setRegister] = useState<boolean>(false);

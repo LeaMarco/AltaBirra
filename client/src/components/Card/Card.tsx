@@ -1,11 +1,21 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
+import { getDetail } from '../../actions';
 import Style from "./Card.module.css";
 
 
 const Post = ({ title, id, price, image, rating, discount, ibu, abv }) => {
+
+	const dispatch = useDispatch()
+	const histoy= useHistory()
+	const fetchDetail= async()=>{
+		await dispatch(getDetail(id))
+		histoy.push(`/detailBeer/${id}`)
+	}
+
 	return (
-		<Link className={Style.container} to={`/post/${id}`}>
+		<button className={Style.container} onClick={fetchDetail}>
 			<div key={id}>
 				<img className={Style.image} alt="" src={image}></img>
 				<div>
@@ -20,7 +30,7 @@ const Post = ({ title, id, price, image, rating, discount, ibu, abv }) => {
 					</div>
 				</div>
 			</div>
-		</Link>
+		</button>
 	)
 }
 

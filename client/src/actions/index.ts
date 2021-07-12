@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { Dispatch } from 'redux';
+// import { GET_BEERS } from './typesName';
 //traermne mis actionsTypes
 
 export interface Beer {
@@ -36,65 +37,66 @@ export enum ActionTypes {
 	deleteUser,
 	createPost,
 	editPost,
-	loadUserPremium
+	loadUserPremium,
+	getDetail
 }
 
 export interface PostValues {
 	beer: {
-	  name: string;
-	  abv: number;
-	  og: number;
-	  ibu: number;
-	  calories: number;
-	  dryHop: boolean;
-	  volume: number;
-	  genericType: string;
-	  specificType: string;
+		name: string;
+		abv: number;
+		og: number;
+		ibu: number;
+		calories: number;
+		dryHop: boolean;
+		volume: number;
+		genericType: string;
+		specificType: string;
 	};
 	infoPost: {
-	  title: string;
-	  description: string;
-	  image: string;
-	  stock: number;
-	  rating: number;
-	  shipping: boolean;
-	  visibility: boolean;
-	  username: string;
+		title: string;
+		description: string;
+		image: string;
+		stock: number;
+		rating: number;
+		shipping: boolean;
+		visibility: boolean;
+		username: string;
 	};
 	countable: {
-	  price: number;
-	  discount: number;
+		price: number;
+		discount: number;
 	};
-  };
+};
 
-  export interface EditValues {
+export interface EditValues {
 	beer: {
-	  name: string;
-	  abv: number;
-	  og: number;
-	  ibu: number;
-	  calories: number;
-	  dryHop: boolean;
-	  volume: number;
-	  genericType: string;
-	  specificType: string;
+		name: string;
+		abv: number;
+		og: number;
+		ibu: number;
+		calories: number;
+		dryHop: boolean;
+		volume: number;
+		genericType: string;
+		specificType: string;
 	};
 	infoPost: {
-	  title: string;
-	  description: string;
-	  image: string;
-	  stock: number;
-	  rating: number;
-	  shipping: boolean;
-	  visibility: boolean;
-	  username: string;
+		title: string;
+		description: string;
+		image: string;
+		stock: number;
+		rating: number;
+		shipping: boolean;
+		visibility: boolean;
+		username: string;
 	};
 	countable: {
-	  price: number;
-	  discount: number;
+		price: number;
+		discount: number;
 	};
-	postId:number;
-  };
+	postId: number;
+};
 
 
 // export interface FetchUsersAction {
@@ -105,6 +107,53 @@ export interface PostValues {
 export interface SearchedPostAction {
 	type: string;
 	payload: Post[];
+}
+export interface specificType {
+	id: number,
+	"type": "Amber",
+	description: string,
+	"group": "ALE",
+	"genericTypeId": number
+}
+
+export interface genericType {
+	id: number,
+	"type": "Rubia",
+	description: string
+}
+
+export interface beer {
+	id: number,
+	name: string,
+	abv: number,
+	og: number,
+	ibu: number,
+	calories: number,
+	dryHop: false,
+	volume: number,
+	genericTypeId: number,
+	specificTypeId: number
+}
+
+export interface countable {
+	id: number,
+	price: number,
+	discount: number,
+}
+
+
+export interface post {
+	id: number,
+	title: string,
+	description: string,
+	image: string,
+	stock: number,
+	rating: number,
+	shipping: false,
+	visibility: true,
+	beerId: number,
+	userId: number,
+	countableId: number
 }
 
 export interface OrderPostsByAction {
@@ -123,16 +172,20 @@ export function searchedPosts(query) {
 		});
 	}
 }
+export interface getDetailAction {
+	type: ActionTypes.getDetail;
+	payload: post;
+}
 
 export function orderPostsBy<OrderPostsByAction>(orderBy) {
 	return {
 		type: "SET_ORDER_POSTS_BY",
 		payload: orderBy
 	}
-	
+
 }
 
-export type Action = SearchedPostAction | OrderPostsByAction;
+export type Action = SearchedPostAction | OrderPostsByAction | getDetailAction;
 
 export interface CreatePostAction {
 	type: ActionTypes.createPost;
@@ -170,7 +223,7 @@ const urledit = 'http://localhost:3001/edit';
 
 export const createPost = (data) => {
 	return async (dispatch: Dispatch) => {
-		const response = await axios.post<PostValues>(urlpost,{params:data});
+		const response = await axios.post<PostValues>(urlpost, { params: data });
 		console.log(ActionTypes)
 		dispatch<Actionrara>({
 			type: ActionTypes.createPost,
@@ -181,15 +234,15 @@ export const createPost = (data) => {
 
 
 export const editPost = (data) => {
-	console.log(data,"data create post action")
+	console.log(data, "data create post action")
 	return async (dispatch: Dispatch) => {
-		const response = await axios.put<EditValues>(urledit,{params:data});
+		const response = await axios.put<EditValues>(urledit, { params: data });
 		dispatch<Actionrara>({
 			type: ActionTypes.editPost,
-			payload: response.data,
-		});
-	};
-};
+			payload: response.data
+		})
+	}
+}
 
 export type PostAction = CreatePostAction;
 // export type UserAction = FetchUsersAction;
@@ -216,18 +269,28 @@ export interface UsersPremiumAction {
 export const loadUsersPremium = () => {
 	return (dispatch: Dispatch) => {
 		return axios.get<UserPremium[]>('http://localhost:3001/beer/premium')
-		.then(response => {
-			
-			dispatch<UsersPremiumAction>({
-				type: ActionTypes.loadUserPremium,
-				payload: response.data,
-			});
-		})
-		.catch(error => console.error('No se pudieron obtener las cervezas premium'))
-		
+			.then(response => {
+				dispatch<UsersPremiumAction>({
+					type: ActionTypes.loadUserPremium,
+					payload: response.data,
+				});
+			})
+			.catch(error => console.error('No se pudieron obtener las cervezas premium'))
 	}
 }
 
 // export type Action = FetchUsersAction;
 export type ActionUsersPremium = UsersPremiumAction;
 
+
+const urlDetail = 'http://localhost:3001/detailBeer'
+
+export const getDetail = (id) => {
+	return async (dispatch: Dispatch) => {
+		const response = await axios.get<post>(`${urlDetail}/${id}`)
+		dispatch<getDetailAction>({
+			type: ActionTypes.getDetail,
+			payload: response.data,
+		})
+	}
+}
