@@ -1,6 +1,4 @@
 import { PrismaClient } from "@prisma/client";
-import { networkInterfaces } from "os";
-import { add } from 'date-fns'
 
 const prisma = new PrismaClient();
 
@@ -70,7 +68,7 @@ async function main() {
     },
   });
 
-  
+
   await prisma.user.create({
     data: {
       username: "Probando3",
@@ -87,7 +85,7 @@ async function main() {
     },
   });
 
-  
+
   await prisma.user.create({
     data: {
       username: "Probando6",
@@ -104,7 +102,7 @@ async function main() {
     },
   });
 
-  
+
   await prisma.user.create({
     data: {
       username: "Probando14",
@@ -120,7 +118,7 @@ async function main() {
       premium: true
     },
   });
-  
+
 
   //TIPOS GENERICOS
   const rubia = await prisma.genericType.create({
@@ -308,7 +306,7 @@ términos cerveza blanca (Weissbier) y cerveza de trigo (Weizenbier).`,
     },
   });
 
-//   //////FIN DE ALE O FERMENTACION RAPIDA///////////////////////////////////////////////////////////////
+  //   //////FIN DE ALE O FERMENTACION RAPIDA///////////////////////////////////////////////////////////////
 
 
 
@@ -318,16 +316,16 @@ términos cerveza blanca (Weissbier) y cerveza de trigo (Weizenbier).`,
 
 
 
-//   /////////////COSAS DE PRODUCCION////////////////////
-//   //POSTS
+  //   /////////////COSAS DE PRODUCCION////////////////////
+  //   //POSTS
 
-//   //ADD TO CART
+  //   //ADD TO CART
 
-//   //SIGN-UP OF USER
+  //   //SIGN-UP OF USER
 
-//   //TRANSACTION
+  //   //TRANSACTION
 
-//   //NO HACE FALTA ADD BEER, SE CREA SIEMPRE DESDE POST
+  //   //NO HACE FALTA ADD BEER, SE CREA SIEMPRE DESDE POST
 
 }
 
