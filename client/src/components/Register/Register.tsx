@@ -133,7 +133,7 @@ const Register: React.FunctionComponent<{}> = (props) => {
 
   return (
     <div id={Style.register}>
-      <div style={{ fontWeight: 600, fontSize: "1.5em" }}>REGISTRO🍻</div>
+      <div style={{ fontWeight: 600, fontSize: "1.5em" }}>REGISTRARME🍻</div>
       <form id={Style.form} onSubmit={handleOnSubmit}>
         <input
           className={` ${Style.RegisterInputs} ${
@@ -245,7 +245,7 @@ const Register: React.FunctionComponent<{}> = (props) => {
                 ? "☢Campo requerido!"
                 : data.password.length < 5
                 ? " Contraseña muy corta (minimo 5 caracteres)"
-                : "Buenisimo! 🔐";
+                : "Buenisimo!  🔐";
             } else return " ";
           })()}
         </label>

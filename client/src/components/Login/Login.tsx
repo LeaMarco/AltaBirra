@@ -85,7 +85,7 @@ const Login: React.FunctionComponent<{}> = (props) => {
 
   return (
     <div id={Style.login}>
-      <div style={{ fontWeight: 600, fontSize: "1.5em" }}>LOGIN🍺</div>
+      <div style={{ fontWeight: 600, fontSize: "1.5em" }}>ENTRAR🍺</div>
       <form id={Style.form} onSubmit={handleOnSubmit}>
         <input
           onChange={handleOnChange}
