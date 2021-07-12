@@ -2,6 +2,14 @@
   text-align: center;
 }
 
+#title{
+ background-color: #ccc;
+ margin: 0px;
+ padding-top: 20px;
+ padding-bottom: 20px;
+ text-shadow: 3px 3px gray;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

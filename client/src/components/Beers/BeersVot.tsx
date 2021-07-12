@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import { fetchUsers, loadUsersPremium } from "../../actions";
 import './beers.css';
 
-const Beers = () => {
+const BeersVot = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -34,7 +34,7 @@ const Beers = () => {
   return (
     <div className="containerBeersPremium">
 
-      <h1 id="titulo">Las recomendadas de Alta Birra</h1>
+      <h1 id="titulo">Las mas votadas</h1>
       <div className="beers">
       {
         typeof usersPremium === "object" 
@@ -56,4 +56,4 @@ const Beers = () => {
   );
 };
 
-export default Beers;
+export default BeersVot;
