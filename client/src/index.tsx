@@ -8,11 +8,11 @@ import store from './store'//importa la store creada en otro lado
 
 ReactDOM.render(
   <React.StrictMode>
-  <Provider store={store}>{/*Le paso store a todo para que tenga acceso a las variables globales */}
-    <BrowserRouter>
-    <App />
-    </BrowserRouter>
-      </Provider>,
+    <Provider store={store}>{/*Le paso store a todo para que tenga acceso a las variables globales */}
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

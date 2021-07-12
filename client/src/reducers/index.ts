@@ -1,14 +1,14 @@
-import {combineReducers} from 'redux';
-import {usersReducer} from './users';
-import {asd} from './users';
-import {User} from '../actions/index';
+import { combineReducers } from 'redux';
+import { Post } from '../actions/index';
+import { postsOrderReducer, postsSearchReducer } from './posts';
 
-export interface StoreState {
-	users: User[];
-	users2: User[];
-}
+// export interface StoreState {
+// 	searchedPosts: Post[];
+// }
 
-export const reducers = combineReducers<StoreState>({
-	users: usersReducer,
-	users2: asd,
+export const rootReducer = combineReducers({
+	searchedPosts: postsSearchReducer,
+	orderPostsBy: postsOrderReducer
 });
+
+export type RootState = ReturnType<typeof rootReducer>;
