@@ -8,15 +8,16 @@ const Post = ({ title, id, price, image, rating, discount, ibu, abv }) => {
 	return (
 		<Link className={Style.container} to={`/post/${id}`}>
 			<div key={id}>
-				<img alt="" src={image}></img>
+				<img className={Style.image} alt="" src="https://lh3.googleusercontent.com/proxy/w0q4_7S1icHtj-CyjD1uDftGyYN1SoG-_zPaP6-drRvOAFGNFV8vY9_be_GdydPslqeBKaOhAKW90o5rGDWq54VrHWU8xXmCBZgiRvafRAZSshuDW_w4"></img>
 				<div>
-					<h1>{title}</h1>
-					<div>
-						<h4>{rating}</h4>
-						<h5>{price}</h5>
-						<h6>{discount}</h6>
-						<h6>{ibu}</h6>
-						<h6>{abv}</h6>
+					<h2>{title}</h2>
+					<div className={Style.props}>
+						<p> {"⭐".repeat(rating)} </p>
+						<div>
+							<p> $ {price} </p>
+							<p> Ibu: {ibu} </p>
+							<p> Abv: {abv} % </p>
+						</div>
 					</div>
 				</div>
 			</div>

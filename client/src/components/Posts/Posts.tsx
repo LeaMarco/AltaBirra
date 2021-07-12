@@ -18,10 +18,10 @@ const Posts = () => {
               title={post.title}
               image={post.image}
               rating={post.rating}
-              price={post.price}
-              discount={post.discount}
-              ibu={post.ibu}
-              abv={post.abv}
+              price={post.countable.price}
+              discount={post.countable.discount}
+              ibu={post.beer.ibu}
+              abv={post.beer.abv}
             />))
           : <img src="https://i.stack.imgur.com/MnyxU.gif" alt="loading" width="3%" height="3%" />
       }

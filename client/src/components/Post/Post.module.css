@@ -1,7 +1,26 @@
 .container {
 	background-color: grey;
 	border: 1px solid black;
-	width: 15vw;
-	height: 25vh;
-	margin: 2vh 3vw;
+	width: 13vw;
+	min-height: fit-content;
+	margin: 2vw;
+	padding: 2vh 2vw;
+	font-weight: bold;
+	text-decoration: none;
+	color: black;
+}
+
+.image {
+	height: 11vh;
+}
+
+.props {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.props > div {
+	display: flex;
+	justify-content: space-evenly;
 }

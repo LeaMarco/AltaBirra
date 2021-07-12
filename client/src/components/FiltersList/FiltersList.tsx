@@ -6,23 +6,24 @@ import { RootState } from "../../reducers";
 import Style from "./FiltersList.module.css";
 
 interface filters {
-	title: string | undefined;
-	genericType: string | undefined;
-	specificType: string | undefined;
-	minPrice: number | undefined;
-	maxPrice: number | undefined;
-	minIbu: number | undefined;
-	maxIbu: number | undefined;
-	minAbv: number | undefined;
-	maxAbv: number | undefined;
-	minOg: number | undefined;
-	maxOg: number | undefined;
-	minCalories: number | undefined;
-	maxCalories: number | undefined;
-	hasDryHop: boolean | undefined;
-	hasShipping: boolean | undefined;
-	hasDiscount: boolean | undefined;
-	orderBy: string | undefined;
+	title?: string;
+	genericType?: string;
+	specificType?: string;
+	rating?: number;
+	minPrice?: number;
+	maxPrice?: number;
+	minIbu?: number;
+	maxIbu?: number;
+	minAbv?: number;
+	maxAbv?: number;
+	minOg?: number;
+	maxOg?: number;
+	minCalories?: number;
+	maxCalories?: number;
+	hasDryHop?: boolean;
+	hasShipping?: boolean;
+	hasDiscount?: boolean;
+	orderBy?: string;
 }
 
 interface params {
@@ -37,6 +38,7 @@ export default function FiltersList() {
 		title,
 		genericType: undefined,
 		specificType: undefined,
+		rating: undefined,
 		minPrice: undefined,
 		maxPrice: undefined,
 		minIbu: undefined,
@@ -53,9 +55,9 @@ export default function FiltersList() {
 		orderBy
 	});
 
-	function handleChange(event) {
-		let temp = event.target.value === "-" || event.target.value === "" ? undefined : event.target.value;
-		setFilterValues({ ...filterValues, [event.target.name]: temp });
+	function handleChange({ target }) {
+		let temp = target.value === "" ? undefined : target.name === "rating" ? target.value.length : target.value;
+		setFilterValues({ ...filterValues, [target.name]: temp });
 	}
 
 	function handleSubmit(event) {
@@ -63,13 +65,9 @@ export default function FiltersList() {
 		dispatch(searchedPosts(filterValues));
 	}
 
-	useEffect(() => {
-		setFilterValues({ ...filterValues, orderBy });
-	}, [dispatch]);
-
-	useEffect(() => {
-		dispatch(searchedPosts(filterValues))
-	}, [orderBy]);
+	// useEffect(() => {
+	// 	setFilterValues({ ...filterValues, orderBy });
+	// }, [dispatch]);
 
 	return (
 		<div className={Style.container}>
@@ -77,8 +75,8 @@ export default function FiltersList() {
 			<form className={Style.subcontainer}>
 				<div>
 					<label> Tipo generico </label>
-					<select name="genericType" defaultValue="" onChange={event => handleChange(event)} >
-						<option> - </option>
+					<select name="genericType" value={filterValues.genericType} onChange={event => handleChange(event)} >
+						<option> </option>
 						<option> Rubia </option>
 						<option> Roja </option>
 						<option> Negra </option>
@@ -91,8 +89,8 @@ export default function FiltersList() {
 				</div>
 				<div>
 					<label> Tipo especifico </label>
-					<select name="specificType" defaultValue="" onChange={event => handleChange(event)} >
-						<option> - </option>
+					<select name="specificType" value={filterValues.specificType} onChange={event => handleChange(event)} >
+						<option> </option>
 						<option> Amber </option>
 						<option> Vino de cebada </option>
 						<option> Ale belga </option>
@@ -124,14 +122,26 @@ export default function FiltersList() {
 					}
 				</div>
 				<div>
-					{/* material UI / Rating ? */}
-					<p> Rating </p>
+					<label> Rating </label>
+					<select name="rating" value={"⭐".repeat(filterValues.rating || 0)} onChange={event => handleChange(event)}>
+						<option> </option>
+						<option> ⭐ </option>
+						<option> ⭐⭐ </option>
+						<option> ⭐⭐⭐ </option>
+						<option> ⭐⭐⭐⭐ </option>
+						<option> ⭐⭐⭐⭐⭐ </option>
+					</select>
+					{
+						filterValues.rating
+							? <button onClick={event => handleSubmit(event)}> + </button>
+							: null
+					}
 				</div>
 				<div className={Style.inputDiv}>
 					<label> Precio </label>
 					<div>
-						<label> Min: </label><input className={Style.smallInput} name="minPrice" defaultValue="" onChange={event => handleChange(event)} />
-						<label> Max: </label><input className={Style.smallInput} name="maxPrice" defaultValue="" onChange={event => handleChange(event)} />
+						<label> Min: </label><input className={Style.smallInput} name="minPrice" value={filterValues.minPrice} onChange={event => handleChange(event)} />
+						<label> Max: </label><input className={Style.smallInput} name="maxPrice" value={filterValues.maxPrice} onChange={event => handleChange(event)} />
 					</div>
 					{
 						filterValues.minPrice || filterValues.maxPrice
@@ -142,8 +152,8 @@ export default function FiltersList() {
 				<div className={Style.inputDiv}>
 					<label> IBU </label>
 					<div>
-						<label> Min: </label><input className={Style.smallInput} name="minIbu" defaultValue="" onChange={event => handleChange(event)} />
-						<label> Max: </label><input className={Style.smallInput} name="maxIbu" defaultValue="" onChange={event => handleChange(event)} />
+						<label> Min: </label><input className={Style.smallInput} name="minIbu" value={filterValues.minIbu} onChange={event => handleChange(event)} />
+						<label> Max: </label><input className={Style.smallInput} name="maxIbu" value={filterValues.maxIbu} onChange={event => handleChange(event)} />
 					</div>
 					{
 						filterValues.minIbu || filterValues.maxIbu
@@ -154,8 +164,8 @@ export default function FiltersList() {
 				<div className={Style.inputDiv}>
 					<label> ABV </label>
 					<div>
-						<label> Min: </label><input className={Style.smallInput} name="minAbv" defaultValue="" onChange={event => handleChange(event)} />
-						<label> Max: </label><input className={Style.smallInput} name="maxAbv" defaultValue="" onChange={event => handleChange(event)} />
+						<label> Min: </label><input className={Style.smallInput} name="minAbv" value={filterValues.minAbv} onChange={event => handleChange(event)} />
+						<label> Max: </label><input className={Style.smallInput} name="maxAbv" value={filterValues.maxAbv} onChange={event => handleChange(event)} />
 					</div>
 					{
 						filterValues.minAbv || filterValues.maxAbv
@@ -166,8 +176,8 @@ export default function FiltersList() {
 				<div className={Style.inputDiv}>
 					<label> OG </label>
 					<div>
-						<label> Min: </label><input className={Style.smallInput} name="minOg" defaultValue="" onChange={event => handleChange(event)} />
-						<label> Max: </label><input className={Style.smallInput} name="maxOg" defaultValue="" onChange={event => handleChange(event)} />
+						<label> Min: </label><input className={Style.smallInput} name="minOg" value={filterValues.minOg} onChange={event => handleChange(event)} />
+						<label> Max: </label><input className={Style.smallInput} name="maxOg" value={filterValues.maxOg} onChange={event => handleChange(event)} />
 					</div>
 					{
 						filterValues.minOg || filterValues.maxOg
@@ -178,8 +188,8 @@ export default function FiltersList() {
 				<div className={Style.inputDiv}>
 					<label> Calorias </label>
 					<div>
-						<label> Min: </label><input className={Style.smallInput} name="minCalories" defaultValue="" onChange={event => handleChange(event)} />
-						<label> Max: </label><input className={Style.smallInput} name="maxCalories" defaultValue="" onChange={event => handleChange(event)} />
+						<label> Min: </label><input className={Style.smallInput} name="minCalories" value={filterValues.minCalories} onChange={event => handleChange(event)} />
+						<label> Max: </label><input className={Style.smallInput} name="maxCalories" value={filterValues.maxCalories} onChange={event => handleChange(event)} />
 					</div>
 					{
 						filterValues.minCalories || filterValues.maxCalories
@@ -189,7 +199,7 @@ export default function FiltersList() {
 				</div>
 				<div>
 					<label> DRY HOP </label>
-					<input type="checkbox" name="hasDryHop" defaultValue="" onChange={event => setFilterValues({ ...filterValues, hasDryHop: event.target.checked ? true : undefined })} />
+					<input type="checkbox" name="hasDryHop" onChange={event => setFilterValues({ ...filterValues, hasDryHop: event.target.checked ? true : undefined })} />
 					{
 						filterValues.hasDryHop
 							? <button onClick={event => handleSubmit(event)}> + </button>
@@ -198,7 +208,7 @@ export default function FiltersList() {
 				</div>
 				<div>
 					<label> Con envio </label>
-					<input type="checkbox" name="hasShipping" defaultValue="" onChange={event => setFilterValues({ ...filterValues, hasShipping: event.target.checked ? true : undefined })} />
+					<input type="checkbox" name="hasShipping" onChange={event => setFilterValues({ ...filterValues, hasShipping: event.target.checked ? true : undefined })} />
 					{
 						filterValues.hasShipping
 							? <button onClick={event => handleSubmit(event)}> + </button>
@@ -207,12 +217,15 @@ export default function FiltersList() {
 				</div>
 				<div>
 					<label> Con descuento </label>
-					<input type="checkbox" name="hasDiscount" defaultValue="" onChange={event => setFilterValues({ ...filterValues, hasDiscount: event.target.checked ? true : undefined })} />
+					<input type="checkbox" name="hasDiscount" onChange={event => setFilterValues({ ...filterValues, hasDiscount: event.target.checked ? true : undefined })} />
 					{
 						filterValues.hasDiscount
 							? <button onClick={event => handleSubmit(event)}> + </button>
 							: null
 					}
+				</div>
+				<div className={Style.reset}>
+					<input type="reset" />
 				</div>
 			</form>
 		</div>

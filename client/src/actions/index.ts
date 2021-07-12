@@ -2,6 +2,22 @@ import axios from 'axios';
 import { Dispatch } from 'redux';
 //traermne mis actionsTypes
 
+export interface Beer {
+	name: string;
+	ibu: number;
+	abv: number;
+	calories: number;
+	dryHop: boolean;
+	og: number;
+	volume: number;
+}
+
+export interface Countable {
+	discount: number;
+	price: number;
+	expireDate: Date;
+}
+
 export interface Post {
 	id: number;
 	title: string;
@@ -12,17 +28,8 @@ export interface Post {
 	shipping: boolean;
 	visibility: boolean;
 	username: string;
-	name: string;
-	abv: number;
-	og: number;
-	ibu: number;
-	calories: number;
-	dryHop: boolean;
-	volume: number;
-	genericType: string;
-	specificType: string;
-	price: number;
-	discount: number;
+	beer: Beer;
+	countable: Countable;
 }
 
 export interface SearchedPostAction {
