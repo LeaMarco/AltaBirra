@@ -1,9 +1,9 @@
-import PostComponent from "../Post/Post";
+import PostComponent from "../Card/Card";
 import { useSelector } from "react-redux";
 import React from "react";
 import { RootState } from "../../reducers";
 import { Post } from "../../actions/index";
-import Style from "./Posts.module.css";
+import Style from "./Cards.module.css";
 
 const Posts = () => {
   const searchedPosts: Post[] = useSelector((state: RootState) => state.searchedPosts);

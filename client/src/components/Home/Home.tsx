@@ -1,5 +1,5 @@
 import React from "react";
-import Posts from "../Posts/Posts";
+import Posts from "../Cards/Cards";
 import "./Home.scss";
 
 const Home = () => {

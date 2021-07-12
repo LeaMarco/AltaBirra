@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import Style from "./Post.module.css";
+import Style from "./Card.module.css";
 
 
 const Post = ({ title, id, price, image, rating, discount, ibu, abv }) => {

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import FiltersList from "../FiltersList/FiltersList";
 import OrderBar from "../OrderBar/OrderBar";
-import Posts from "../Posts/Posts";
+import Posts from "../Cards/Cards";
 import Style from "./Search.module.css";
 
 export default function Search() {
