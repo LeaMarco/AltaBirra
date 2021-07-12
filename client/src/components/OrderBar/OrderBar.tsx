@@ -1,22 +1,27 @@
 import React from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { orderPostsBy } from "../../actions";
+import { QueryTypes, searchedPosts, setQuerySearch } from "../../actions";
 import { RootState } from "../../reducers";
 import Style from "./OrderBar.module.css";
 
 export default function OrderBar() {
-	const orderBy = useSelector((state: RootState) => state.orderPostsBy);
+	const searchQuery: QueryTypes = useSelector((state: RootState) => state.postsSearchQuery);
 	const dispatch = useDispatch();
 
 	function handleChange(event) {
-		return dispatch(orderPostsBy(event.target.value));
+		dispatch(setQuerySearch({ orderBy: event.target.value }));
 	}
+
+	useEffect(() => {
+		dispatch(searchedPosts(searchQuery));
+	}, [searchQuery.orderBy])
 
 	return (
 		<div className={Style.container}>
 			<form>
 				<label> Ordenar por </label>
-				<select onChange={event => handleChange(event)} value={orderBy}>
+				<select onChange={event => handleChange(event)} value={searchQuery.orderBy}>
 					<option> Mejor resultado </option>
 					<option> Menor precio </option>
 					<option> Mayor precio </option>

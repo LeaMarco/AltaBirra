@@ -1,8 +1,9 @@
-import { Post } from "../actions/index";
+import { Post, QueryTypes } from "../actions/index";
 import { Action } from '../actions/index';
 
 const searchInitialState: Post[] = [];
-const orderInitialState: string = "";
+
+const initialQuery: QueryTypes = {};
 
 export const postsSearchReducer = (state: Post[] = searchInitialState, action: Action) => {
 	switch (action.type) {
@@ -13,10 +14,12 @@ export const postsSearchReducer = (state: Post[] = searchInitialState, action: A
 	}
 };
 
-export const postsOrderReducer = (state: string = orderInitialState, action: Action) => {
+export const postsSearchQueryReducer = (state: QueryTypes = initialQuery, action: Action) => {
 	switch (action.type) {
-		case "SET_ORDER_POSTS_BY":
-			return action.payload;
+		case "SET_QUERY_SEARCH":
+			return { ...state, ...action.payload };
+		case "SET_TITLE_SEARCH":
+			return { title: action.payload };
 		default:
 			return state;
 	}

@@ -156,9 +156,30 @@ export interface post {
 	countableId: number
 }
 
-export interface OrderPostsByAction {
+export interface QueryTypes {
+	title?: string;
+	genericType?: string;
+	specificType?: string;
+	rating?: number;
+	minPrice?: number;
+	maxPrice?: number;
+	minIbu?: number;
+	maxIbu?: number;
+	minAbv?: number;
+	maxAbv?: number;
+	minOg?: number;
+	maxOg?: number;
+	minCalories?: number;
+	maxCalories?: number;
+	hasDryHop?: boolean;
+	hasShipping?: boolean;
+	hasDiscount?: boolean;
+	orderBy?: string;
+}
+
+export interface SetQuerySearchAction {
 	type: string;
-	payload: string;
+	payload: QueryTypes;
 }
 
 const URL = 'http://localhost:3001';
@@ -172,20 +193,27 @@ export function searchedPosts(query) {
 		});
 	}
 }
+
 export interface getDetailAction {
 	type: ActionTypes.getDetail;
 	payload: post;
 }
 
-export function orderPostsBy<OrderPostsByAction>(orderBy) {
+export function setTitleSearch<SetQuerySearchAction>(title: string) {
 	return {
-		type: "SET_ORDER_POSTS_BY",
-		payload: orderBy
+		type: "SET_TITLE_SEARCH",
+		payload: title
 	}
-
 }
 
-export type Action = SearchedPostAction | OrderPostsByAction | getDetailAction;
+export function setQuerySearch<SetQuerySearchAction>(query: QueryTypes) {
+	return {
+		type: "SET_QUERY_SEARCH",
+		payload: query
+	}
+}
+
+export type Action = SearchedPostAction | SetQuerySearchAction | getDetailAction;
 
 export interface CreatePostAction {
 	type: ActionTypes.createPost;

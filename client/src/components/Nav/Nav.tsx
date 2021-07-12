@@ -1,10 +1,10 @@
-import  { useState } from "react";
+import { useState } from "react";
 import style from "./Nav.module.css";
 import logo from "./AltaBirra.svg";
 import lupa from "./Vector.svg";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { searchedPosts } from "../../actions";
+import { searchedPosts, setTitleSearch } from "../../actions";
 import { Modal } from "../Login/Modal/Modal.component";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
@@ -13,7 +13,7 @@ export default function Nav() {
   const [isEnterOpen, setEnterOpen] = useState(false);
   const toogleEnter = () => setEnterOpen(!isEnterOpen);
 
-  const [isRegisterOpen, setRegisterOpen] =useState(false);
+  const [isRegisterOpen, setRegisterOpen] = useState(false);
   const toogleRegister = () => setRegisterOpen(!isRegisterOpen);
 
   const [register, setRegister] = useState<boolean>(false);
@@ -23,8 +23,9 @@ export default function Nav() {
 
   async function handleSubmit(event) {
     event.preventDefault();
+    dispatch(setTitleSearch(searchInput));
     await dispatch(searchedPosts({ title: searchInput }));
-    history.push(`/algo/${searchInput}`);
+    history.push(`/search/${searchInput}`);
     setSearchInput("");
   }
 

@@ -1,79 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import { searchedPosts } from "../../actions";
+import { QueryTypes, searchedPosts, setQuerySearch } from "../../actions";
 import { RootState } from "../../reducers";
 import Style from "./FiltersList.module.css";
 
-interface filters {
-  title?: string;
-  genericType?: string;
-  specificType?: string;
-  rating?: number;
-  minPrice?: number;
-  maxPrice?: number;
-  minIbu?: number;
-  maxIbu?: number;
-  minAbv?: number;
-  maxAbv?: number;
-  minOg?: number;
-  maxOg?: number;
-  minCalories?: number;
-  maxCalories?: number;
-  hasDryHop?: boolean;
-  hasShipping?: boolean;
-  hasDiscount?: boolean;
-  orderBy?: string;
-}
-
-interface params {
-  title?: string;
-}
-
 export default function FiltersList() {
-  const orderBy = useSelector((state: RootState) => state.orderPostsBy);
-  const { title } = useParams<params>();
   const dispatch = useDispatch();
-  const [filterValues, setFilterValues] = useState<filters>({
-    title,
-    genericType: undefined,
-    specificType: undefined,
-    rating: undefined,
-    minPrice: undefined,
-    maxPrice: undefined,
-    minIbu: undefined,
-    maxIbu: undefined,
-    minAbv: undefined,
-    maxAbv: undefined,
-    minOg: undefined,
-    maxOg: undefined,
-    minCalories: undefined,
-    maxCalories: undefined,
-    hasDryHop: undefined,
-    hasShipping: undefined,
-    hasDiscount: undefined,
-    orderBy,
-  });
+  const searchQuery: QueryTypes = useSelector((state: RootState) => state.postsSearchQuery);
+  console.log(searchQuery);
 
   function handleChange({ target }) {
-    let temp =
-      target.value === ""
-        ? undefined
-        : target.name === "rating"
-        ? target.value.length
-        : target.value;
-    setFilterValues({ ...filterValues, [target.name]: temp });
+    let temp = target.value === "" ? undefined : target.name === "rating" ? target.value.length : target.value;
+    dispatch(setQuerySearch({ [target.name]: temp }));
   }
 
   function handleSubmit(event) {
     event.preventDefault();
-    dispatch(searchedPosts(filterValues));
-    console.log(searchedPosts(filterValues), "FiltersList");
+    dispatch(searchedPosts(searchQuery));
   }
 
   // useEffect(() => {
-  // 	setFilterValues({ ...filterValues, orderBy });
-  // }, [dispatch]);
+
+  // }, [searchQuery.title])
 
   return (
     <div className={Style.container}>
@@ -83,7 +31,7 @@ export default function FiltersList() {
           <label> Tipo generico </label>
           <select
             name="genericType"
-            value={filterValues.genericType}
+            value={searchQuery.genericType}
             onChange={(event) => handleChange(event)}
           >
             <option> </option>
@@ -91,7 +39,7 @@ export default function FiltersList() {
             <option> Roja </option>
             <option> Negra </option>
           </select>
-          {filterValues.genericType ? (
+          {searchQuery.genericType ? (
             <button onClick={(event) => handleSubmit(event)}> + </button>
           ) : null}
         </div>
@@ -99,7 +47,7 @@ export default function FiltersList() {
           <label> Tipo especifico </label>
           <select
             name="specificType"
-            value={filterValues.specificType}
+            value={searchQuery.specificType}
             onChange={(event) => handleChange(event)}
           >
             <option> </option>
@@ -127,7 +75,7 @@ export default function FiltersList() {
             <option> Faro </option>
             <option> Cerveza de fruta </option>
           </select>
-          {filterValues.specificType ? (
+          {searchQuery.specificType ? (
             <button onClick={(event) => handleSubmit(event)}> + </button>
           ) : null}
         </div>
@@ -135,7 +83,7 @@ export default function FiltersList() {
           <label> Rating </label>
           <select
             name="rating"
-            value={"⭐".repeat(filterValues.rating || 0)}
+            value={"⭐".repeat(searchQuery.rating || 0)}
             onChange={(event) => handleChange(event)}
           >
             <option> </option>
@@ -145,7 +93,7 @@ export default function FiltersList() {
             <option> ⭐⭐⭐⭐ </option>
             <option> ⭐⭐⭐⭐⭐ </option>
           </select>
-          {filterValues.rating ? (
+          {searchQuery.rating ? (
             <button onClick={(event) => handleSubmit(event)}> + </button>
           ) : null}
         </div>
@@ -156,18 +104,18 @@ export default function FiltersList() {
             <input
               className={Style.smallInput}
               name="minPrice"
-              value={filterValues.minPrice}
+              value={searchQuery.minPrice}
               onChange={(event) => handleChange(event)}
             />
             <label> Max: </label>
             <input
               className={Style.smallInput}
               name="maxPrice"
-              value={filterValues.maxPrice}
+              value={searchQuery.maxPrice}
               onChange={(event) => handleChange(event)}
             />
           </div>
-          {filterValues.minPrice || filterValues.maxPrice ? (
+          {searchQuery.minPrice || searchQuery.maxPrice ? (
             <button onClick={(event) => handleSubmit(event)}> + </button>
           ) : null}
         </div>
@@ -178,18 +126,18 @@ export default function FiltersList() {
             <input
               className={Style.smallInput}
               name="minIbu"
-              value={filterValues.minIbu}
+              value={searchQuery.minIbu}
               onChange={(event) => handleChange(event)}
             />
             <label> Max: </label>
             <input
               className={Style.smallInput}
               name="maxIbu"
-              value={filterValues.maxIbu}
+              value={searchQuery.maxIbu}
               onChange={(event) => handleChange(event)}
             />
           </div>
-          {filterValues.minIbu || filterValues.maxIbu ? (
+          {searchQuery.minIbu || searchQuery.maxIbu ? (
             <button onClick={(event) => handleSubmit(event)}> + </button>
           ) : null}
         </div>
@@ -200,18 +148,18 @@ export default function FiltersList() {
             <input
               className={Style.smallInput}
               name="minAbv"
-              value={filterValues.minAbv}
+              value={searchQuery.minAbv}
               onChange={(event) => handleChange(event)}
             />
             <label> Max: </label>
             <input
               className={Style.smallInput}
               name="maxAbv"
-              value={filterValues.maxAbv}
+              value={searchQuery.maxAbv}
               onChange={(event) => handleChange(event)}
             />
           </div>
-          {filterValues.minAbv || filterValues.maxAbv ? (
+          {searchQuery.minAbv || searchQuery.maxAbv ? (
             <button onClick={(event) => handleSubmit(event)}> + </button>
           ) : null}
         </div>
@@ -222,18 +170,18 @@ export default function FiltersList() {
             <input
               className={Style.smallInput}
               name="minOg"
-              value={filterValues.minOg}
+              value={searchQuery.minOg}
               onChange={(event) => handleChange(event)}
             />
             <label> Max: </label>
             <input
               className={Style.smallInput}
               name="maxOg"
-              value={filterValues.maxOg}
+              value={searchQuery.maxOg}
               onChange={(event) => handleChange(event)}
             />
           </div>
-          {filterValues.minOg || filterValues.maxOg ? (
+          {searchQuery.minOg || searchQuery.maxOg ? (
             <button onClick={(event) => handleSubmit(event)}> + </button>
           ) : null}
         </div>
@@ -244,18 +192,18 @@ export default function FiltersList() {
             <input
               className={Style.smallInput}
               name="minCalories"
-              value={filterValues.minCalories}
+              value={searchQuery.minCalories}
               onChange={(event) => handleChange(event)}
             />
             <label> Max: </label>
             <input
               className={Style.smallInput}
               name="maxCalories"
-              value={filterValues.maxCalories}
+              value={searchQuery.maxCalories}
               onChange={(event) => handleChange(event)}
             />
           </div>
-          {filterValues.minCalories || filterValues.maxCalories ? (
+          {searchQuery.minCalories || searchQuery.maxCalories ? (
             <button onClick={(event) => handleSubmit(event)}> + </button>
           ) : null}
         </div>
@@ -264,14 +212,10 @@ export default function FiltersList() {
           <input
             type="checkbox"
             name="hasDryHop"
-            onChange={(event) =>
-              setFilterValues({
-                ...filterValues,
-                hasDryHop: event.target.checked ? true : undefined,
-              })
+            onChange={(event) => dispatch(setQuerySearch({ hasDryHop: event.target.checked ? true : undefined }))
             }
           />
-          {filterValues.hasDryHop ? (
+          {searchQuery.hasDryHop ? (
             <button onClick={(event) => handleSubmit(event)}> + </button>
           ) : null}
         </div>
@@ -280,35 +224,22 @@ export default function FiltersList() {
           <input
             type="checkbox"
             name="hasShipping"
-            onChange={(event) =>
-              setFilterValues({
-                ...filterValues,
-                hasShipping: event.target.checked ? true : undefined,
-              })
+            onChange={(event) => dispatch(setQuerySearch({ hasShipping: event.target.checked ? true : undefined }))
             }
           />
-          {filterValues.hasShipping ? (
+          {searchQuery.hasShipping ? (
             <button onClick={(event) => handleSubmit(event)}> + </button>
           ) : null}
         </div>
-        <div>
-          <label> Con descuento </label>
+        <div>          <label> Con descuento </label>
           <input
             type="checkbox"
             name="hasDiscount"
-            onChange={(event) =>
-              setFilterValues({
-                ...filterValues,
-                hasDiscount: event.target.checked ? true : undefined,
-              })
-            }
+            onChange={(event) => dispatch(setQuerySearch({ hasDiscount: event.target.checked ? true : undefined }))}
           />
-          {filterValues.hasDiscount ? (
+          {searchQuery.hasDiscount ? (
             <button onClick={(event) => handleSubmit(event)}> + </button>
           ) : null}
-        </div>
-        <div className={Style.reset}>
-          <input type="reset" />
         </div>
       </form>
     </div>

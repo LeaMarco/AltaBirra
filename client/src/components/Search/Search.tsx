@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import FiltersList from "../FiltersList/FiltersList";
 import OrderBar from "../OrderBar/OrderBar";
-import Posts from "../Cards/Cards";
+import Cards from "../Cards/Cards";
 import Style from "./Search.module.css";
 
 export default function Search() {
@@ -17,10 +17,10 @@ export default function Search() {
       </div>
 
       <div className={Style.subcontainer}>
-        {/* <div className={Style.orderBar}>
-					<OrderBar />
-				</div> */}
-        <Posts />
+        <div className={Style.orderBar}>
+          <OrderBar />
+        </div>
+        <Cards />
       </div>
     </div>
   );
