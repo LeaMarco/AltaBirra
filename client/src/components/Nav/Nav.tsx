@@ -94,6 +94,14 @@ export default function Nav() {
             >
               Registrarse
             </Link>
+
+            <Link
+              to="/post"
+              className={style.buttonEnter}
+              // onClick={() => setRegister(!register)}
+            >
+              Crear post
+            </Link>
           </div>
         )}
       </div>

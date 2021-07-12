@@ -31,7 +31,7 @@ function validate(dataState: iData, errors: iError, e): iError {
   //ONLY LETTERS
   if (errors[name].hasOwnProperty("onlyLetters")) {
     if (
-      /^[A-Za-zÁÉÍÓÚáéíóúñÑ][A-Za-zÁÉÍÓÚáéíóúñÑ ]+$/g.test(dataState[name]) ||
+      /^[A-Za-zÁÉÍÓÚáéíóúñÑ ]+$/g.test(dataState[name]) ||
       dataState[name] === ""
     ) {
       errors[name].onlyLetters = "";

@@ -5,23 +5,23 @@ import Posts from "../Cards/Cards";
 import Style from "./Search.module.css";
 
 export default function Search() {
-	const [showFilters, setShowFilters] = useState<boolean>(false);
-	return (
-		<div className={Style.container}>
-			<div className={Style.filtersTab}>
-				{
-					showFilters
-						? <FiltersList />
-						: null
-				}
-				<button onClick={() => setShowFilters(!showFilters)}> {showFilters ? "◀" : "▶"} </button>
-			</div>
-			<div className={Style.subcontainer}>
-				{/* <div className={Style.orderBar}>
+  const [showFilters, setShowFilters] = useState<boolean>(false);
+  return (
+    <div className={Style.container}>
+      <div className={Style.filtersTab}>
+        {showFilters ? <FiltersList /> : null}
+        <button onClick={() => setShowFilters(!showFilters)}>
+          {" "}
+          {showFilters ? "◀" : "▶"}{" "}
+        </button>
+      </div>
+
+      <div className={Style.subcontainer}>
+        {/* <div className={Style.orderBar}>
 					<OrderBar />
 				</div> */}
-				<Posts />
-			</div>
-		</div>
-	)
+        <Posts />
+      </div>
+    </div>
+  );
 }
