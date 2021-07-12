@@ -33,7 +33,8 @@ interface Countable {
   discount: number;
 }
 
-router.post("/", async (req: Request, res: Response, next: NextFunction) => {
+
+router.put("/", async (req: Request, res: Response, next: NextFunction) => {
   // console.log(req.body,"req body ruta express 443223")
   const {
     name,
@@ -60,11 +61,17 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
 
   const { price, discount }: Countable = req.body.params.countable;
 
+  const postId:number = req.body.params.postId
+  console.log(postId, "HOLA FRANCOOOO")
   const user = await prisma.user.findUnique({ where: { username: username } });
-  const beerGenericType = await prisma.genericType.findUnique({ where: { type: genericType } });
-  const beerSpecificType = await prisma.specificType.findUnique({ where: { type: specificType } });
+  const beerGenericType = await prisma.genericType.findUnique({
+    where: { type: genericType }
+  });
+  const beerSpecificType = await prisma.specificType.findUnique({
+    where: { type: specificType }
+  });
 
-  await prisma.post.create({
+  await prisma.post.update({where: { id: postId },
     data: {
       title,
       description,
@@ -102,7 +109,7 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
       }
     },
   }).catch((error) => console.log(error));
-  res.send("creado");
+  res.send("post actualizado");
 });
 
 export default router;

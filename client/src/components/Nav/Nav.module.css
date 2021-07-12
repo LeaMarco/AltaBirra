@@ -7,8 +7,8 @@
       transparent 4px
     ),
     linear-gradient(90deg, rgb(43, 43, 43), rgb(43, 43, 43));
-  width: 99.2vw;
-  height: 15vh;
+  width: 100vw;
+  height: 7em;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 10px;

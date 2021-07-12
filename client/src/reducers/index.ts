@@ -1,10 +1,7 @@
 import { combineReducers } from 'redux';
 import { Post } from '../actions/index';
 import { postsOrderReducer, postsSearchReducer } from './posts';
-
-// export interface StoreState {
-// 	searchedPosts: Post[];
-// }
+import {usersReducer} from './users';
 
 export const rootReducer = combineReducers({
 	searchedPosts: postsSearchReducer,
