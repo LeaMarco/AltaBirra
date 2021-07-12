@@ -126,7 +126,7 @@ const Login: React.FunctionComponent<{}> = (props) => {
                 ? "Campo requerido!"
                 : data.password.length < 5
                 ? " Contraseña muy corta (minimo 5 caracteres)"
-                : "Excelente 🔐";
+                : "Probemos 🔐";
             } else return " ";
           })()}
         </label>
