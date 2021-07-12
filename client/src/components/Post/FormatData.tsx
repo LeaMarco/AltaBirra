@@ -12,7 +12,7 @@ export default function transformer(Info){
     datacopy.infoPost.rating = 5
     datacopy.infoPost.stock = parseInt(datacopy.infoPost.stock,10)
     datacopy.infoPost.username= "TestUser"
-    datacopy.infoPost.img= "image url"
+    datacopy.infoPost.image= "imageUrl"
     //countables
     datacopy.countable.price = parseInt(datacopy.countable.price,10)
     datacopy.countable.discount = parseInt(datacopy.countable.discount,10)
