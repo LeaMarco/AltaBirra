@@ -52,5 +52,29 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
   res.send("creado");
 });
 
+
+// HECHO POR FACU: ruta creada para obtener las cervezas "Premium"
+
+router.get('/premium', async (req:Request, res:Response) => {
+  var premiumUsers = await prisma.post.findMany({
+    where: {
+      user: {
+        is: { premium: true }
+      }
+    },
+    include: {
+      countable: true,
+      beer: true
+    }
+
+  });
+  
+  if(premiumUsers.length === 0) return res.send('VACIO');
+  else return res.json(premiumUsers);
+
+}) // cerrar funcion
+
+
+
 export default router;
 

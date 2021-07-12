@@ -135,7 +135,7 @@ model Countable {
     id         Int      @id @default(autoincrement())
     price      Int
     discount   Int
-    expireDate DateTime
+    expireDate DateTime @default(now())
 
     postId Post?
 }

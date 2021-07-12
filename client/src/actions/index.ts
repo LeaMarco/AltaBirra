@@ -35,7 +35,8 @@ export enum ActionTypes {
 	fetchUsers,
 	deleteUser,
 	createPost,
-	editPost
+	editPost,
+	loadUserPremium
 }
 
 export interface PostValues {
@@ -128,6 +129,7 @@ export function orderPostsBy<OrderPostsByAction>(orderBy) {
 		type: "SET_ORDER_POSTS_BY",
 		payload: orderBy
 	}
+	
 }
 
 export type Action = SearchedPostAction | OrderPostsByAction;
@@ -193,4 +195,39 @@ export type PostAction = CreatePostAction;
 // export type UserAction = FetchUsersAction;
 export type ActionAll = Actionrara;
 
+// FACU: function "loadUsersPremium" e interface UserPremium
+
+export interface UserPremium {
+	id: number;
+	username: string;
+	email: string;
+	name: string;
+	password: string;
+	premium: boolean;
+	roleId: number;
+	cartId: number
+}
+
+export interface UsersPremiumAction {
+	type: ActionTypes.loadUserPremium;
+	payload: UserPremium[];
+}
+
+export const loadUsersPremium = () => {
+	return (dispatch: Dispatch) => {
+		return axios.get<UserPremium[]>('http://localhost:3001/beer/premium')
+		.then(response => {
+			
+			dispatch<UsersPremiumAction>({
+				type: ActionTypes.loadUserPremium,
+				payload: response.data,
+			});
+		})
+		.catch(error => console.error('No se pudieron obtener las cervezas premium'))
+		
+	}
+}
+
+// export type Action = FetchUsersAction;
+export type ActionUsersPremium = UsersPremiumAction;
 
