@@ -16,12 +16,6 @@ function App() {
       <Route exact path="/" component={Home} />
       <Route exact path="/algo/:title" component={Search} />
       <Route exact path="/post" component={Post} />
-      <Route path="/login">
-        <Login />
-      </Route>
-      <Route path="/register">
-        <Register />
-      </Route>
     </div>
   );
 }

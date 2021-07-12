@@ -5,8 +5,16 @@ import lupa from "./Vector.svg";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { searchedPosts } from "../../actions";
-
+import { Modal } from "../Login/Modal/Modal.component";
+import Login from "../Login/Login";
+import Register from "../Register/Register";
 export default function Nav() {
+  const [isEnterOpen, setEnterOpen] = React.useState(false);
+  const toogleEnter = () => setEnterOpen(!isEnterOpen);
+
+  const [isRegisterOpen, setRegisterOpen] = React.useState(false);
+  const toogleRegister = () => setRegisterOpen(!isRegisterOpen);
+
   const [register, setRegister] = useState<boolean>(false);
   const [searchInput, setSearchInput] = useState<string>("");
   const dispatch = useDispatch();
@@ -80,27 +88,30 @@ export default function Nav() {
           </div>
         ) : (
           <div className={style.buttonsRight}>
-            <Link
+            {/* <Link
               to="/login"
               className={style.buttonEnter}
               onClick={() => setRegister(!register)}
             >
               Entrar
-            </Link>
-            <Link
-              to="/register"
-              className={style.buttonEnter}
-              // onClick={() => setRegister(!register)}
-            >
-              Registrarse
-            </Link>
+            </Link> */}
 
-            <Link
-              to="/post"
-              className={style.buttonEnter}
-              // onClick={() => setRegister(!register)}
-            >
-              Crear post
+            <button className={style.buttonEnter} onClick={toogleEnter}>
+              Entrar
+            </button>
+            <Modal isOpen={isEnterOpen} handleClose={toogleEnter}>
+              <Login />
+            </Modal>
+
+            <button className={style.buttonEnter} onClick={toogleRegister}>
+              Registrarme
+            </button>
+            <Modal isOpen={isRegisterOpen} handleClose={toogleRegister}>
+              <Register />
+            </Modal>
+
+            <Link to="/post">
+              <button className={style.buttonEnter}>Crear post</button>
             </Link>
           </div>
         )}
