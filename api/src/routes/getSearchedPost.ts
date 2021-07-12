@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { Prisma, PrismaClient } from "@prisma/client";
 import { NextFunction, Request, Response, Router } from "express";
 
 const router = Router();
@@ -8,33 +8,23 @@ interface PostQuery {
 	title?: string;
 	genericType?: string;
 	specificType?: string;
-	minIbu?: number;
-	maxIbu?: number;
-	minPrice?: number;
-	maxPrice?: number;
-	minAbv?: number;
-	maxAbv?: number;
-	minOg?: number;
-	maxOg?: number;
-	minCalories?: number;
-	maxCalories?: number;
-	rating?: number;
-	hasShipping?: boolean;
-	hasDiscount?: boolean;
-	hasDryHop?: boolean;
 	orderBy?: string;
 }
 
-interface orderBeers {
-	price?: string;
-	ibu?: string;
-	abv?: string;
+interface OrderBeers {
+	price?: Prisma.SortOrder;
+	ibu?: Prisma.SortOrder;
+	abv?: Prisma.SortOrder;
 }
 
-interface orderPosts {
-	beer?: orderBeers;
-	countable?: orderBeers;
-	rating?: string;
+interface OrderPosts {
+	beer?: OrderBeers;
+	countable?: OrderBeers;
+	rating?: Prisma.SortOrder;
+}
+
+interface CheckDiscount {
+	gte?: number;
 }
 
 router.get('/', async (req: Request, res: Response, next: NextFunction) => {
@@ -42,31 +32,33 @@ router.get('/', async (req: Request, res: Response, next: NextFunction) => {
 		title,
 		genericType,
 		specificType,
-		minIbu,
-		maxIbu,
-		minPrice,
-		maxPrice,
-		minAbv,
-		maxAbv,
-		minOg,
-		maxOg,
-		maxCalories,
-		minCalories,
-		rating,
-		hasShipping,
-		hasDiscount,
-		hasDryHop,
 		orderBy
 	}: PostQuery = req.query;
 
-	let orderTemp: orderPosts | undefined;
+	const rating: number | undefined = !req.query.rating ? undefined : Number(req.query.rating);
+	const minIbu: number | undefined = !req.query.minIbu ? undefined : Number(req.query.minIbu);
+	const maxIbu: number | undefined = !req.query.maxIbu ? undefined : Number(req.query.maxIbu);
+	const minPrice: number | undefined = !req.query.minPrice ? undefined : Number(req.query.minPrice);
+	const maxPrice: number | undefined = !req.query.maxPrice ? undefined : Number(req.query.maxPrice);
+	const minAbv: number | undefined = !req.query.minAbv ? undefined : Number(req.query.minAbv);
+	const maxAbv: number | undefined = !req.query.maxAbv ? undefined : Number(req.query.maxAbv);
+	const minOg: number | undefined = !req.query.minOg ? undefined : Number(req.query.minOg);
+	const maxOg: number | undefined = !req.query.maxOg ? undefined : Number(req.query.maxOg);
+	const minCalories: number | undefined = !req.query.minCalories ? undefined : Number(req.query.minCalories);
+	const maxCalories: number | undefined = !req.query.maxCalories ? undefined : Number(req.query.maxCalories);
+	const hasShipping: boolean | undefined = !req.query.hasShipping ? undefined : Boolean(req.query.hasShipping);
+	const hasDiscount: boolean | undefined = !req.query.hasDiscount ? undefined : Boolean(req.query.hasDiscount);
+	const hasDryHop: boolean | undefined = !req.query.hasDryHop ? undefined : Boolean(req.query.hasDryHop);
+	const checkDiscount: CheckDiscount | undefined = hasDiscount ? { gte: 1 } : undefined;
+
+	let orderTemp: OrderPosts | undefined;
 	switch (orderBy) {
 		case "Menor precio": {
-			orderTemp = { countable: { price: 'asc' } };
+			orderTemp = { countable: { price: "asc" } };
 			break;
 		}
 		case "Mayor precio": {
-			orderTemp = { countable: { price: 'desc' } };
+			orderTemp = { countable: { price: "desc" } };
 			break;
 		}
 		case "Menor IBU": {
@@ -95,12 +87,12 @@ router.get('/', async (req: Request, res: Response, next: NextFunction) => {
 		where: {
 			title: title,
 			shipping: hasShipping,
-			rating: rating,
+			rating: { gte: rating },
 			countable: {
 				AND: [
 					{ price: { gte: minPrice } },
 					{ price: { lte: maxPrice } },
-					//discount?
+					{ discount: checkDiscount }
 				],
 			},
 			beer: {
@@ -123,7 +115,7 @@ router.get('/', async (req: Request, res: Response, next: NextFunction) => {
 			countable: true,
 			beer: true
 		},
-		//orderBy: orderTemp
+		orderBy: orderTemp
 	})
 	res.json(posts);
 })
