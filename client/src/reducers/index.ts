@@ -1,14 +1,9 @@
 import {combineReducers} from 'redux';
-import {usersReducer} from './users';
-import {asd} from './users';
-import {User} from '../actions/index';
+import {detailReducer} from './detail';
 
-export interface StoreState {
-	users: User[];
-	users2: User[];
-}
 
-export const reducers = combineReducers<StoreState>({
-	users: usersReducer,
-	users2: asd,
+export const rootReducer = combineReducers({
+    detailPosts: detailReducer
 });
+
+export type RootState = ReturnType<typeof rootReducer>;

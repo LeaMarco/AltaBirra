@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import style from "./Nav.module.css";
 import logo from "./AltaBirra.svg";
 import lupa from "./Vector.svg";

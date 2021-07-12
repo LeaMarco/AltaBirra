@@ -4,27 +4,27 @@ import {ActionTypes, Action} from '../actions/index';
 
 
 
-export const usersReducer = (state: User[] = [], action: Action) => {
+// export const usersReducer = (state: User[] = [], action: Action) => {
 
 
-	switch (action.type) {
-		case ActionTypes.fetchUsers:
-			return action.payload;
-		default:
-			return state;
-	}
-};
-
-
-
+// 	// switch (action.type) {
+// 	// 	case ActionTypes.fetchUsers:
+// 	// 		return action.payload;
+// 	// 	default:
+// 	// 		return state;
+// 	// }
+// // };
 
 
 
-export const asd = (state: User[] = [], action: Action) => {
-	switch (action.type) {
-		case ActionTypes.fetchUsers:
-			return action.payload;
-		default:
-			return state;
-	}
-};
+
+
+
+// export const asd = (state: User[] = [], action: Action) => {
+// 	switch (action.type) {
+// 		case ActionTypes.fetchUsers:
+// 			return action.payload;
+// 		default:
+// 			return state;
+// 	}
+// };
