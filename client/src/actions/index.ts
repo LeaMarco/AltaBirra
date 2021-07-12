@@ -130,7 +130,7 @@ export function orderPostsBy<OrderPostsByAction>(orderBy) {
 	}
 }
 
-// export type Action = SearchedPostAction | OrderPostsByAction;
+export type Action = SearchedPostAction | OrderPostsByAction;
 
 export interface CreatePostAction {
 	type: ActionTypes.createPost;
@@ -142,7 +142,7 @@ export interface EditPostAction {
 	payload: EditValues;
 }
 
-export interface Action {
+export interface Actionrara {
 	type: any;
 	payload: any;
 }
@@ -170,7 +170,7 @@ export const createPost = (data) => {
 	return async (dispatch: Dispatch) => {
 		const response = await axios.post<PostValues>(urlpost,{params:data});
 		console.log(ActionTypes)
-		dispatch<Action>({
+		dispatch<Actionrara>({
 			type: ActionTypes.createPost,
 			payload: response.data,
 		});
@@ -182,7 +182,7 @@ export const editPost = (data) => {
 	console.log(data,"data create post action")
 	return async (dispatch: Dispatch) => {
 		const response = await axios.put<EditValues>(urledit,{params:data});
-		dispatch<Action>({
+		dispatch<Actionrara>({
 			type: ActionTypes.editPost,
 			payload: response.data,
 		});
@@ -191,6 +191,6 @@ export const editPost = (data) => {
 
 export type PostAction = CreatePostAction;
 // export type UserAction = FetchUsersAction;
-export type ActionAll = Action;
+export type ActionAll = Actionrara;
 
 

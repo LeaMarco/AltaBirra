@@ -10,10 +10,10 @@ import { Route } from 'react-router-dom';
 function App() {
   return (
     <div className="App">
-      <Nav />
+      <Route path="/" component={Nav} />
       <Route exact path="/" component={Home} />
-      <Route path="/:title" component={Search} />
-      <Route path="/Post" component={Post} />
+      <Route exact path="/algo/:title" component={Search} />
+      <Route exact path="/post" component={Post} />
     </div>
   );
 }

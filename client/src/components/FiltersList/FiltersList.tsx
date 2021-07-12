@@ -63,6 +63,7 @@ export default function FiltersList() {
 	function handleSubmit(event) {
 		event.preventDefault();
 		dispatch(searchedPosts(filterValues));
+		console.log(searchedPosts(filterValues),"FiltersList");
 	}
 
 	// useEffect(() => {

@@ -15,7 +15,7 @@ export default function Nav() {
   async function handleSubmit(event) {
     event.preventDefault();
     await dispatch(searchedPosts({ title: searchInput }));
-    history.push(`/${searchInput}`);
+    history.push(`/algo/${searchInput}`);
     setSearchInput("");
   }
 

@@ -4,11 +4,10 @@ import Style from "./Card.module.css";
 
 
 const Post = ({ title, id, price, image, rating, discount, ibu, abv }) => {
-
 	return (
 		<Link className={Style.container} to={`/post/${id}`}>
 			<div key={id}>
-				<img className={Style.image} alt="" src="https://lh3.googleusercontent.com/proxy/w0q4_7S1icHtj-CyjD1uDftGyYN1SoG-_zPaP6-drRvOAFGNFV8vY9_be_GdydPslqeBKaOhAKW90o5rGDWq54VrHWU8xXmCBZgiRvafRAZSshuDW_w4"></img>
+				<img className={Style.image} alt="" src={image}></img>
 				<div>
 					<h2>{title}</h2>
 					<div className={Style.props}>
