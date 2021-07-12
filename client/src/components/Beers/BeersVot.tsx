@@ -1,7 +1,7 @@
 import Beer from "../Beer/Beer";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect } from "react";
-import { fetchUsers, loadUsersPremium } from "../../actions";
+import { loadUsersPremium } from "../../actions";
 import './beers.css';
 
 const BeersVot = () => {

@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import Style from "./Login.module.css";
 import { useImperativeHandle } from "react";
-import FacebookLogin from "react-facebook-login";
+// import FacebookLogin from "react-facebook-login";
 
 import { iError, iData } from "./LoginInterfaces";
 
