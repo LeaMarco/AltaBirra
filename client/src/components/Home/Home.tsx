@@ -12,9 +12,9 @@ const Home = () => {
     <div className="Beers-container">
       {/* <button onClick={() => CreateManyPost(10000)}> CREAR</button> */}
 
-     <Beers />
-     <BeersVot />
-     <BeersNew />
+      <Beers />
+      <BeersVot />
+      <BeersNew />
 
     </div>
   );
