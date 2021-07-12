@@ -133,32 +133,29 @@ const Register: React.FunctionComponent<{}> = (props) => {
 
   return (
     <div id={Style.register}>
-      <form onSubmit={handleOnSubmit}>
-        <div>
-          <div style={{ fontWeight: 600 }}>REGISTER🍻</div>
-
-          <input
-            className={` ${Style.RegisterInputs} ${
-              errors.names.error ? Style.require : Style.ok
-            }`}
-            onChange={handleOnChange}
-            name="names"
-            value={data.names}
-            placeholder=" Nombres"
-          />
-          <label className={Style.labels}>
-            {/*  {(() => console.log(errors))()} */}
-            {(() => {
-              if (errors.names.edit) {
-                return errors.names.require
-                  ? "☢Campo requerido!"
-                  : errors.names.onlyLetters
-                  ? "☢Caracter inválido!"
-                  : "Se ve bien 👌";
-              } else return " ";
-            })()}
-          </label>
-        </div>
+      <div style={{ fontWeight: 600 }}>REGISTER🍻</div>
+      <form id={Style.form} onSubmit={handleOnSubmit}>
+        <input
+          className={` ${Style.RegisterInputs} ${
+            errors.names.error ? Style.require : Style.ok
+          }`}
+          onChange={handleOnChange}
+          name="names"
+          value={data.names}
+          placeholder=" Nombres"
+        />
+        <label className={Style.labels}>
+          {/*  {(() => console.log(errors))()} */}
+          {(() => {
+            if (errors.names.edit) {
+              return errors.names.require
+                ? "☢Campo requerido!"
+                : errors.names.onlyLetters
+                ? "☢Caracter inválido!"
+                : "Se ve bien 👌";
+            } else return " ";
+          })()}
+        </label>
         <div>
           <input
             className={`${Style.RegisterInputs} ${

@@ -68,7 +68,7 @@ const Login: React.FunctionComponent<{}> = (props) => {
     },
   });
 
-  const handleOnChage = (e) => {};
+  const handleOnSubmit = (e) => {};
 
   const handleOnChange = (e) => {
     let newState: iData = {
@@ -86,57 +86,57 @@ const Login: React.FunctionComponent<{}> = (props) => {
   return (
     <div id={Style.login}>
       <div style={{ fontWeight: 600 }}>LOGIN</div>
-      <input
-        onChange={handleOnChange}
-        className={`${Style.RegisterInputs} ${
-          errors.password.error ? Style.require : Style.ok
-        }`}
-        name="nameMail"
-        placeholder=" Correo electronico o nombre de usuario"
-      />
-      <label className={Style.labels}>
-        {/*  {(() => console.log(errors))()} */}
-        {(() => {
-          if (errors.nameMail.edit) {
-            return errors.nameMail.require
-              ? "Campo requerido!"
-              : errors.nameMail.onlyLettersUsAndNumbersOrEmail
-              ? "☢Caracter inválido!"
-              : "Se ve bien 👌";
-          } else return " ";
-        })()}
-      </label>
+      <form id={Style.form} onSubmit={handleOnSubmit}>
+        <input
+          onChange={handleOnChange}
+          className={`${Style.RegisterInputs} ${
+            errors.password.error ? Style.require : Style.ok
+          }`}
+          name="nameMail"
+          placeholder=" Correo electronico o nombre de usuario"
+        />
+        <label className={Style.labels}>
+          {/*  {(() => console.log(errors))()} */}
+          {(() => {
+            if (errors.nameMail.edit) {
+              return errors.nameMail.require
+                ? "Campo requerido!"
+                : errors.nameMail.onlyLettersUsAndNumbersOrEmail
+                ? "☢Caracter inválido!"
+                : "Se ve bien 👌";
+            } else return " ";
+          })()}
+        </label>
 
-      <input
-        type="password"
-        className={`${Style.RegisterInputs} ${
-          errors.password.error ? Style.require : Style.ok
-        }`}
-        onChange={handleOnChange}
-        name="password"
-        value={data.password}
-        placeholder=" Password"
-      />
-      <label className={Style.labels}>
-        {/*  {(() => console.log(errors))()} */}
-        {(() => {
-          if (errors.password.edit) {
-            return errors.password.require
-              ? "Campo requerido!"
-              : data.password.length < 5
-              ? " Contraseña muy corta (minimo 5 caracteres)"
-              : "Excelente, no te la olvides 🔐";
-          } else return " ";
-        })()}
-      </label>
+        <input
+          type="password"
+          className={`${Style.RegisterInputs} ${
+            errors.password.error ? Style.require : Style.ok
+          }`}
+          onChange={handleOnChange}
+          name="password"
+          value={data.password}
+          placeholder=" Password"
+        />
+        <label className={Style.labels}>
+          {/*  {(() => console.log(errors))()} */}
+          {(() => {
+            if (errors.password.edit) {
+              return errors.password.require
+                ? "Campo requerido!"
+                : data.password.length < 5
+                ? " Contraseña muy corta (minimo 5 caracteres)"
+                : "Excelente, no te la olvides 🔐";
+            } else return " ";
+          })()}
+        </label>
 
-      <button id={Style.btnRegister}>Continuar</button>
-
+        <button id={Style.btnRegister}>Continuar</button>
+      </form>
       <img className={Style.imgSm} src="https://i.imgur.com/9cF89Xp.png" />
       <img className={Style.imgSm} src="https://i.imgur.com/Akk6z13.png" />
-
       <Link to="/register">
-        <span> Crear cuenta nueva </span>
+        <div> Crear cuenta nueva </div>
       </Link>
     </div>
   );

@@ -1,13 +1,16 @@
 #login {
   display: flex;
   flex-direction: column;
-  width: 30%;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
   margin: auto;
-  border: 2px solid rgb(130, 152, 247);
-  border-radius: 10px;
-  box-shadow: 0px 0px 1rem;
-  padding: 0px 10px;
+  padding: 0 10px;
   margin-top: 10px;
+}
+
+#form {
+  width: 100%;
 }
 
 .RegisterInputs {
@@ -20,7 +23,7 @@
   width: 100%;
   font-size: large;
   margin-top: 15px;
-  padding: 3px 0px;
+  padding: 0px 0px;
 }
 
 .labels {
