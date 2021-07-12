@@ -7,27 +7,21 @@ const prisma = new PrismaClient();
 router.get("/:id", async (req: Request, res: Response) => {
     let id = parseInt(req.params.id)
 
-    let inf_beer = await prisma.beer.findUnique({
+    let inf_beer = await prisma.post.findUnique({
         where: {
             id: id,
+        },
+        include:{
+            beer:{
+                include:{
+                    genericType:true,
+                    specificType:true
+                }
+            },
+            countable:true,
         }
     })
-    let inf_gen = await prisma.genericType.findFirst({
-        where: {
-            id: inf_beer?.genericTypeId
-        }
-    })
-    let inf_spe = await prisma.specificType.findFirst({
-        where: {
-            id: inf_beer?.specificTypeId
-        }
-    })
-
-    res.send({
-        inf_beer,
-        inf_gen,
-        inf_spe
-    })
+    res.send(inf_beer)
 })
 
 export default router;
