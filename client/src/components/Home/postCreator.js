@@ -31,7 +31,7 @@ export default async (amount) => {
             "stock": Math.floor(Math.random() * 50),
             "shipping": false,
             "visibility": true,
-            "username": "TestUser"
+            "username": "Probando"
         }
         let countable = {
             "price": prices[Math.floor(Math.random() * (prices.length))],
