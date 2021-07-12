@@ -5,12 +5,15 @@
   align-items: center;
   width: fit-content;
   margin: auto;
-  padding: 0 10px;
   margin-top: 10px;
+  padding: 0 10px;
 }
 
 #form {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .RegisterInputs {
@@ -20,14 +23,19 @@
   text-shadow: 1px 1px 1px rgb(224, 217, 217);
   color: black;
   margin: auto;
-  width: 100%;
   font-size: large;
   margin-top: 15px;
-  padding: 0px 0px;
+  width: 96%;
+  padding: 4px 10px;
+}
+
+.RegisterInputs::placeholder {
+  color: rgb(97, 96, 96);
+  font-size: 0.9em;
 }
 
 .labels {
-  font-size: small;
+  font-size: 1em;
 }
 
 .require {
@@ -49,4 +57,5 @@
   margin-bottom: 5px;
   border: 1px solid grey;
   box-shadow: 0px 0px 0.2rem rgba(0, 0, 0, 0.548);
+  margin: 20px 0px;
 }

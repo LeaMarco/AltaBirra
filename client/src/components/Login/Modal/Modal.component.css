@@ -7,7 +7,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  animation: spanColor 0.4s forwards;
+  animation: spanColor 0.5s forwards;
   position: fixed;
 }
 
@@ -15,8 +15,9 @@
   from {
     background-color: rgba(0, 0, 0, 0);
   }
+
   to {
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.7);
   }
 }
 
@@ -28,23 +29,27 @@
 .modal__content {
   display: flex;
   align-items: center;
-  min-width: 0%;
+  min-width: fit-content;
   max-width: 50%;
   max-height: fit-content;
   margin: 0 0;
-  padding: 0px;
+  padding: 0 0 10px 0;
   box-sizing: border-box;
   border-radius: 16px;
   background-color: white;
+  animation: spanScale 0.4s;
   box-shadow: 0px 0px 1em 0px;
-  animation: spanScale 0.3s;
+  /* border-collapse: collapse; */
+  border: 2px solid rgb(153, 153, 153);
 }
 
 @keyframes spanScale {
   from {
-    transform: scale(0.9);
+    transform: scale(0.95);
+    box-shadow: 0px 0px 0em 0px;
   }
   to {
     transform: scale(1);
+    box-shadow: 0px 0px 1em 0px;
   }
 }

@@ -133,7 +133,7 @@ const Register: React.FunctionComponent<{}> = (props) => {
 
   return (
     <div id={Style.register}>
-      <div style={{ fontWeight: 600 }}>REGISTER🍻</div>
+      <div style={{ fontWeight: 600, fontSize: "1.5em" }}>REGISTRO🍻</div>
       <form id={Style.form} onSubmit={handleOnSubmit}>
         <input
           className={` ${Style.RegisterInputs} ${
@@ -156,106 +156,99 @@ const Register: React.FunctionComponent<{}> = (props) => {
             } else return " ";
           })()}
         </label>
-        <div>
-          <input
-            className={`${Style.RegisterInputs} ${
-              errors.lastNames.error ? Style.require : Style.ok
-            }`}
-            onChange={handleOnChange}
-            name="lastNames"
-            value={data.lastNames}
-            placeholder=" Apellidos"
-          />
 
-          <label className={Style.labels}>
-            {/*  {(() => console.log(errors))()} */}
-            {(() => {
-              if (errors.lastNames.edit) {
-                return errors.lastNames.require
-                  ? "☢Campo requerido!"
-                  : errors.lastNames.onlyLetters
-                  ? " ☢Caracter inválido!"
-                  : "Genial✨";
-              } else return " ";
-            })()}
-          </label>
-        </div>
+        <input
+          className={`${Style.RegisterInputs} ${
+            errors.lastNames.error ? Style.require : Style.ok
+          }`}
+          onChange={handleOnChange}
+          name="lastNames"
+          value={data.lastNames}
+          placeholder=" Apellidos"
+        />
 
-        <div>
-          <input
-            className={`${Style.RegisterInputs} ${
-              errors.userName.error ? Style.require : Style.ok
-            }`}
-            onChange={handleOnChange}
-            name="userName"
-            value={data.userName}
-            placeholder=" Username"
-          />
+        <label className={Style.labels}>
+          {/*  {(() => console.log(errors))()} */}
+          {(() => {
+            if (errors.lastNames.edit) {
+              return errors.lastNames.require
+                ? "☢Campo requerido!"
+                : errors.lastNames.onlyLetters
+                ? " ☢Caracter inválido!"
+                : "Genial✨";
+            } else return " ";
+          })()}
+        </label>
 
-          <label className={Style.labels}>
-            {/*  {(() => console.log(errors))()} */}
-            {(() => {
-              if (errors.userName.edit) {
-                return errors.userName.require
-                  ? "☢Campo requerido!"
-                  : errors.userName.onlyLettersUsAndNumbers
-                  ? "☢Caracter inválido, solo letras, numeros y guiones abajo"
-                  : "Ok perfecto 😎";
-              } else return " ";
-            })()}
-          </label>
-        </div>
+        <input
+          className={`${Style.RegisterInputs} ${
+            errors.userName.error ? Style.require : Style.ok
+          }`}
+          onChange={handleOnChange}
+          name="userName"
+          value={data.userName}
+          placeholder=" Username"
+        />
 
-        <div>
-          <input
-            className={`${Style.RegisterInputs} ${
-              errors.email.error ? Style.require : Style.ok
-            }`}
-            onChange={handleOnChange}
-            name="email"
-            value={data.email}
-            placeholder=" Correo electronico"
-          />
+        <label className={Style.labels}>
+          {/*  {(() => console.log(errors))()} */}
+          {(() => {
+            if (errors.userName.edit) {
+              return errors.userName.require
+                ? "☢Campo requerido!"
+                : errors.userName.onlyLettersUsAndNumbers
+                ? "☢Caracter inválido, solo letras, numeros y guiones abajo"
+                : "Ok perfecto 😎";
+            } else return " ";
+          })()}
+        </label>
 
-          <label className={Style.labels}>
-            {/*  {(() => console.log(errors))()} */}
-            {(() => {
-              if (errors.email.edit) {
-                return errors.email.require
-                  ? "☢Campo requerido!"
-                  : errors.email.patternEmail
-                  ? "☢Formato de email invalido"
-                  : "Excelente ya casi entras al olimpo cervecero 🍻";
-              } else return " ";
-            })()}
-          </label>
-        </div>
+        <input
+          className={`${Style.RegisterInputs} ${
+            errors.email.error ? Style.require : Style.ok
+          }`}
+          onChange={handleOnChange}
+          name="email"
+          value={data.email}
+          placeholder=" Correo electronico"
+        />
 
-        <div>
-          <input
-            type="password"
-            className={`${Style.RegisterInputs} ${
-              errors.password.error ? Style.require : Style.ok
-            }`}
-            onChange={handleOnChange}
-            name="password"
-            value={data.password}
-            placeholder=" Password"
-          />
+        <label className={Style.labels}>
+          {/*  {(() => console.log(errors))()} */}
+          {(() => {
+            if (errors.email.edit) {
+              return errors.email.require
+                ? "☢Campo requerido!"
+                : errors.email.patternEmail
+                ? "☢Formato de email invalido"
+                : "Excelente ya casi entras al olimpo cervecero 🍻";
+            } else return " ";
+          })()}
+        </label>
 
-          <label className={Style.labels}>
-            {/*  {(() => console.log(errors))()} */}
-            {(() => {
-              if (errors.password.edit) {
-                return errors.password.require
-                  ? "☢Campo requerido!"
-                  : data.password.length < 5
-                  ? " Contraseña muy corta (minimo 5 caracteres)"
-                  : "Excelente, no te la olvides 🔐";
-              } else return " ";
-            })()}
-          </label>
-        </div>
+        <input
+          type="password"
+          className={`${Style.RegisterInputs} ${
+            errors.password.error ? Style.require : Style.ok
+          }`}
+          onChange={handleOnChange}
+          name="password"
+          value={data.password}
+          placeholder=" Password"
+        />
+
+        <label className={Style.labels}>
+          {/*  {(() => console.log(errors))()} */}
+          {(() => {
+            if (errors.password.edit) {
+              return errors.password.require
+                ? "☢Campo requerido!"
+                : data.password.length < 5
+                ? " Contraseña muy corta (minimo 5 caracteres)"
+                : "Buenisimo! 🔐";
+            } else return " ";
+          })()}
+        </label>
 
         <button id={Style.btnRegister}> Registarse </button>
       </form>

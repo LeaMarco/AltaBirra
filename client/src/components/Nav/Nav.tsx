@@ -96,26 +96,22 @@ export default function Nav() {
               Entrar
             </Link> */}
 
-            <div className={style.buttonEnter} onClick={toogleEnter}>
+            <button className={style.buttonEnter} onClick={toogleEnter}>
               Entrar
-            </div>
+            </button>
             <Modal isOpen={isEnterOpen} handleClose={toogleEnter}>
               <Login />
             </Modal>
 
-            <div className={style.buttonEnter} onClick={toogleRegister}>
-              Registrarse
-            </div>
+            <button className={style.buttonEnter} onClick={toogleRegister}>
+              Registrarme
+            </button>
             <Modal isOpen={isRegisterOpen} handleClose={toogleRegister}>
               <Register />
             </Modal>
 
-            <Link
-              to="/post"
-              className={style.buttonEnter}
-              // onClick={() => setRegister(!register)}
-            >
-              Crear post
+            <Link to="/post">
+              <button className={style.buttonEnter}>Crear post</button>
             </Link>
           </div>
         )}

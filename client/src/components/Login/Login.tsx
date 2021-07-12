@@ -85,7 +85,7 @@ const Login: React.FunctionComponent<{}> = (props) => {
 
   return (
     <div id={Style.login}>
-      <div style={{ fontWeight: 600 }}>LOGIN</div>
+      <div style={{ fontWeight: 600, fontSize: "1.5em" }}>LOGIN🍺</div>
       <form id={Style.form} onSubmit={handleOnSubmit}>
         <input
           onChange={handleOnChange}
@@ -126,7 +126,7 @@ const Login: React.FunctionComponent<{}> = (props) => {
                 ? "Campo requerido!"
                 : data.password.length < 5
                 ? " Contraseña muy corta (minimo 5 caracteres)"
-                : "Excelente, no te la olvides 🔐";
+                : "Excelente 🔐";
             } else return " ";
           })()}
         </label>
@@ -135,9 +135,6 @@ const Login: React.FunctionComponent<{}> = (props) => {
       </form>
       <img className={Style.imgSm} src="https://i.imgur.com/9cF89Xp.png" />
       <img className={Style.imgSm} src="https://i.imgur.com/Akk6z13.png" />
-      <Link to="/register">
-        <div> Crear cuenta nueva </div>
-      </Link>
     </div>
   );
 };
