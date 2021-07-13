@@ -101,8 +101,8 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
         }
       }
     },
-  }).catch((error) => console.log(error));
-  res.send("creado");
+  }).catch((error) => res.status(500).send(error));
+  res.status(200).send('Post creado con exito');
 });
 
 export default router;

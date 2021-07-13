@@ -10,7 +10,7 @@ const Beers = () => {
   useEffect(() => {
     dispatch(loadUsersPremium());
   }, [dispatch]);
-     
+
   const usersPremium = useSelector((state) => state["usersPremium"]);
   console.log(usersPremium,"usersPremium")
   // const data = {

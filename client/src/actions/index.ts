@@ -67,6 +67,7 @@ export interface PostValues {
 		price: number;
 		discount: number;
 	};
+	date: Date;
 };
 
 export interface EditValues {
@@ -235,19 +236,17 @@ export interface Actionrara {
 const url = 'http://localhost:3001/beers';
 const urlpost = 'http://localhost:3001/post';
 const urledit = 'http://localhost:3001/edit';
+const urlspecific = 'http://localhost:3001/specificTypes';
+const urlgeneric = 'http://localhost:3001/genericTypes';
 
 
-
-// export const fetchUsers = () => {
-// 	return async (dispatch: Dispatch) => {
-// 		const response = await axios.get<User[]>(url);
-// 		dispatch<FetchUsersAction>({
-// 			type: ActionTypes.fetchUsers,
-// 			payload: response.data,
-// 		});
-// 	};
-// };
-
+export const searchTypes = () => {
+	return async (dispatch: Dispatch) => {
+		const genericTypes = await axios.get<Array<string>>(urlgeneric);
+		const specificTypes = await axios.get<Array<string>>(urlspecific);
+		return [genericTypes.data, specificTypes.data]
+	};
+};
 
 export const createPost = (data) => {
 	return async (dispatch: Dispatch) => {
@@ -257,7 +256,7 @@ export const createPost = (data) => {
 		// 	type: ActionTypes.createPost,
 		// 	payload: response.data,
 		// });
-		//Hace falta dispatchar algo aca?, no creo rey
+		//Hace falta dispatchear algo aca?, no creo rey
 	};
 };
 
