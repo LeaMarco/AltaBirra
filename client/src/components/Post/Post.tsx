@@ -8,7 +8,6 @@ import transformer from "./FormatData";
 import styles from './Post.module.css';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
-import { RootState } from "../../reducers";
 
 export default function Post() {
   const [estado, setEstado] = useState({"checked":false});
@@ -29,16 +28,15 @@ export default function Post() {
   const MySwal = withReactContent(Swal)
   const dispatch = useDispatch<Dispatch<any>>();
 
-  async function despachadora2(){
+  async function getBeerTypes(){
     let respuesta = await dispatch(searchTypes())
     setGeneric(respuesta[0])
     setSpecific(respuesta[1])
   }
   useEffect(() => {
-    despachadora2();
+    getBeerTypes();
   },[dispatch])
 
-  //hacer destructuring de generic y specific
   async function despachadora(data){
     let save = await dispatch(createPost(transformer(data)))
     if (save["status"]===200){
@@ -61,8 +59,8 @@ export default function Post() {
   }
 
   const { register, handleSubmit,reset} = useForm<PostValues>();
-  // const onSubmit: SubmitHandler<PostValues>= (data) =>{despachadora(data); reset()}
-  const onSubmit: SubmitHandler<PostValues>= (data) =>{console.log(data); reset()}
+  const onSubmit: SubmitHandler<PostValues>= (data) =>{despachadora(data); reset()}
+  // const onSubmit: SubmitHandler<PostValues>= (data) =>{console.log(data); reset()}
 
   const selectOptions = [
     { value: "student", label: "Student" },
