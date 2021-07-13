@@ -62,11 +62,6 @@ export default function Post() {
   const onSubmit: SubmitHandler<PostValues>= (data) =>{despachadora(data); reset()}
   // const onSubmit: SubmitHandler<PostValues>= (data) =>{console.log(data); reset()}
 
-  const selectOptions = [
-    { value: "student", label: "Student" },
-    { value: "developer", label: "Developer" },
-    { value: "manager", label: "Manager" }
-  ];
   return (
     <form className={styles.postForm} onSubmit={handleSubmit(onSubmit)}>
         <section className={styles.postFormBeer}>

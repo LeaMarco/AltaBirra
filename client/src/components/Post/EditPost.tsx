@@ -1,18 +1,22 @@
 import React,{useEffect,useState} from "react";
 import { useForm, SubmitHandler, UseFormRegister,Controller } from "react-hook-form";
-import { CreatePostAction, PostValues } from "../../actions";
+import { CreatePostAction, editPost, PostValues } from "../../actions";
 import { useDispatch,useSelector } from "react-redux";
 import { Dispatch } from "redux";
 import { createPost,searchTypes } from "../../actions";
-import transformer from "./FormatData";
+import {transformEdit} from "./FormatData";
 import styles from './Post.module.css';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
+import { useParams } from "react-router-dom";
 
 //TIENE QUE TOMAR COMO PARAMETRO EL ID DEL POST QUE SE SELECCIONA Y RENDERIZAR EL COMPONENTE DETALLE PASANDOLE ESE ID.
-export default function EditPost() {const [estado, setEstado] = useState({"checked":false});
+export default function EditPost() {
+const [estado, setEstado] = useState({"checked":false});
 const [generic, setGeneric] = useState([]);
 const [specific, setSpecific] = useState([]);
+
+const postId : any = useParams();
 
 
 let checkboxClick = (e) => {
@@ -28,18 +32,18 @@ let checkboxClick = (e) => {
 const MySwal = withReactContent(Swal)
 const dispatch = useDispatch<Dispatch<any>>();
 
-async function despachadora2(){
+async function getBeerTypes(){
   let respuesta = await dispatch(searchTypes())
   setGeneric(respuesta[0])
   setSpecific(respuesta[1])
 }
 useEffect(() => {
-  despachadora2();
+  getBeerTypes();
 },[dispatch])
 
 //hacer destructuring de generic y specific
-async function despachadora(data){
-  let save = await dispatch(createPost(transformer(data)))
+async function despachadora(data,postId){
+  let save = await dispatch(editPost(transformEdit(data,postId)))
   if (save["status"]===200){
     MySwal.fire({
       position:'center',
@@ -60,14 +64,8 @@ async function despachadora(data){
 }
 
 const { register, handleSubmit,reset} = useForm<PostValues>();
-// const onSubmit: SubmitHandler<PostValues>= (data) =>{despachadora(data); reset()}
-const onSubmit: SubmitHandler<PostValues>= (data) =>{console.log(data); reset()}
+const onSubmit: SubmitHandler<PostValues> = (data) => {despachadora(data,postId); reset()};
 
-const selectOptions = [
-  { value: "student", label: "Student" },
-  { value: "developer", label: "Developer" },
-  { value: "manager", label: "Manager" }
-];
 return (
   <form className={styles.postForm} onSubmit={handleSubmit(onSubmit)}>
       <section className={styles.postFormBeer}>

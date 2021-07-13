@@ -264,11 +264,8 @@ export const createPost = (data) => {
 export const editPost = (data) => {
 	return async (dispatch: Dispatch) => {
 		const response = await axios.put<EditValues>(urledit, { params: data });
-		dispatch<Actionrara>({
-			type: ActionTypes.editPost,
-			payload: response.data
-		})
-	}
+		return response;
+	};
 }
 
 export type PostAction = CreatePostAction;

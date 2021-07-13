@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 
 router.get("/:id", async (req: Request, res: Response) => {
     let id = parseInt(req.params.id)
-
+    console.log("Entre")
     let inf_beer = await prisma.post.findUnique({
         where: {
             id: id,
