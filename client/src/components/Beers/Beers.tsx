@@ -12,7 +12,7 @@ const Beers = () => {
   }, [dispatch]);
      
   const usersPremium = useSelector((state) => state["usersPremium"]);
-  
+  console.log(usersPremium,"usersPremium")
   // const data = {
   //   id: usersPremium.id,
   //   image: 'IMAGEN',
@@ -30,16 +30,13 @@ const Beers = () => {
 	// roleId: number;
 	// cartId: number
   console.log(usersPremium);
-  
   return (
     <div className="containerBeersPremium">
-
       <h1 id="titulo">Las recomendadas de Alta Birra</h1>
       <div className="beers">
       {
         typeof usersPremium === "object" 
         ? usersPremium.map((userPremium) => (
-          
           <Beer
             key={userPremium.id}
             id={userPremium.id}
@@ -47,7 +44,6 @@ const Beers = () => {
             name={userPremium.beer.name}
             ibu={userPremium.beer.ibu}
             og={userPremium.beer.og}
-                        
           /> ))
         : <h1>Cargando...</h1>
       }

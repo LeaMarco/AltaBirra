@@ -252,17 +252,17 @@ const urledit = 'http://localhost:3001/edit';
 export const createPost = (data) => {
 	return async (dispatch: Dispatch) => {
 		const response = await axios.post<PostValues>(urlpost, { params: data });
-		console.log(ActionTypes)
-		dispatch<Actionrara>({
-			type: ActionTypes.createPost,
-			payload: response.data,
-		});
+		return response;
+		// dispatch<Actionrara>({
+		// 	type: ActionTypes.createPost,
+		// 	payload: response.data,
+		// });
+		//Hace falta dispatchar algo aca?, no creo rey
 	};
 };
 
 
 export const editPost = (data) => {
-	console.log(data, "data create post action")
 	return async (dispatch: Dispatch) => {
 		const response = await axios.put<EditValues>(urledit, { params: data });
 		dispatch<Actionrara>({

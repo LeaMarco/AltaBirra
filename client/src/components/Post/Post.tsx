@@ -5,14 +5,35 @@ import { useDispatch } from "react-redux";
 import { Dispatch } from "redux";
 import { createPost } from "../../actions";
 import transformer from "./FormatData";
-import styles from './Post.module.css'
+import styles from './Post.module.css';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
-export default function Post() {
+export default function Post({defaultValue}) {
+  const MySwal = withReactContent(Swal)
 //   const dispatch = useDispatch();
   const dispatch = useDispatch<Dispatch<any>>();
 
-  const { register, handleSubmit } = useForm<PostValues>();
-  const onSubmit: SubmitHandler<PostValues> = (data) => dispatch(createPost(transformer(data)))
+  async function despachadora(data){
+    let save = await dispatch(createPost(transformer(data)))
+    // console.log(save,"save despachadora");
+    MySwal.fire({
+      title: <p>Post Creado?</p>,
+      footer: 'Alta Birra',
+      didOpen: () => {
+        // `MySwal` is a subclass of `Swal`
+        //   with all the same instance & static methods
+        MySwal.clickConfirm()
+      }
+    }).then(() => {
+      return MySwal.fire(<p>Post Creado con exito!</p>)
+    })
+  }
+
+  const { register, handleSubmit,reset } = useForm<PostValues>(defaultValue);
+  const onSubmit: SubmitHandler<PostValues> = (data) => despachadora(data) ; reset(defaultValue);
+
+
   return (
     <form className={styles.postForm} onSubmit={handleSubmit(onSubmit)}>
         <section className={styles.postFormBeer}>
