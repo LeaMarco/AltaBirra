@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { QueryTypes, searchedPosts, setQuerySearch } from "../../actions";
+import { QueryTypes, searchedPosts, setQuerySearch, setTitleSearch } from "../../actions";
 import { RootState } from "../../reducers";
 import Style from "./FiltersList.module.css";
 
@@ -19,9 +19,17 @@ export default function FiltersList() {
     dispatch(searchedPosts(searchQuery));
   }
 
-  // useEffect(() => {
+  async function resetFilterValues() {
+    let temp: QueryTypes = {};
+    for (let prop in searchQuery) {
+      temp[prop] = (prop === "title" || prop === "orderBy") ? searchQuery[prop] : undefined;
+    }
+    await dispatch(setQuerySearch(temp));
+  }
 
-  // }, [searchQuery.title])
+  useEffect(() => {
+    dispatch(searchedPosts(searchQuery));
+  }, [searchQuery.genericType, searchQuery.specificType, searchQuery.rating, searchQuery.hasDryHop, searchQuery.hasShipping, searchQuery.hasDiscount])
 
   return (
     <div className={Style.container}>
@@ -30,8 +38,8 @@ export default function FiltersList() {
         <div>
           <label> Tipo generico </label>
           <select
-            name="genericType"
             value={searchQuery.genericType}
+            name="genericType"
             onChange={(event) => handleChange(event)}
           >
             <option> </option>
@@ -39,9 +47,6 @@ export default function FiltersList() {
             <option> Roja </option>
             <option> Negra </option>
           </select>
-          {searchQuery.genericType ? (
-            <button onClick={(event) => handleSubmit(event)}> + </button>
-          ) : null}
         </div>
         <div>
           <label> Tipo especifico </label>
@@ -75,9 +80,6 @@ export default function FiltersList() {
             <option> Faro </option>
             <option> Cerveza de fruta </option>
           </select>
-          {searchQuery.specificType ? (
-            <button onClick={(event) => handleSubmit(event)}> + </button>
-          ) : null}
         </div>
         <div>
           <label> Rating </label>
@@ -93,9 +95,6 @@ export default function FiltersList() {
             <option> ⭐⭐⭐⭐ </option>
             <option> ⭐⭐⭐⭐⭐ </option>
           </select>
-          {searchQuery.rating ? (
-            <button onClick={(event) => handleSubmit(event)}> + </button>
-          ) : null}
         </div>
         <div className={Style.inputDiv}>
           <label> Precio </label>
@@ -215,9 +214,6 @@ export default function FiltersList() {
             onChange={(event) => dispatch(setQuerySearch({ hasDryHop: event.target.checked ? true : undefined }))
             }
           />
-          {searchQuery.hasDryHop ? (
-            <button onClick={(event) => handleSubmit(event)}> + </button>
-          ) : null}
         </div>
         <div>
           <label> Con envio </label>
@@ -227,9 +223,6 @@ export default function FiltersList() {
             onChange={(event) => dispatch(setQuerySearch({ hasShipping: event.target.checked ? true : undefined }))
             }
           />
-          {searchQuery.hasShipping ? (
-            <button onClick={(event) => handleSubmit(event)}> + </button>
-          ) : null}
         </div>
         <div>          <label> Con descuento </label>
           <input
@@ -237,10 +230,8 @@ export default function FiltersList() {
             name="hasDiscount"
             onChange={(event) => dispatch(setQuerySearch({ hasDiscount: event.target.checked ? true : undefined }))}
           />
-          {searchQuery.hasDiscount ? (
-            <button onClick={(event) => handleSubmit(event)}> + </button>
-          ) : null}
         </div>
+        <input style={{ margin: "2vh auto", width: "5vw" }} type="reset" onClick={resetFilterValues} />
       </form>
     </div>
   );
