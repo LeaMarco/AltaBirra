@@ -1,4 +1,4 @@
-import PostComponent from "../Card/Card";
+import Card from "../Card/Card";
 import { useSelector } from "react-redux";
 import React from "react";
 import { RootState } from "../../reducers";
@@ -10,9 +10,10 @@ const Posts = () => {
   return (
     <div className={Style.container}>
       {
-        typeof searchedPosts === "object"
+        // typeof searchedPosts === "object"
+        searchedPosts.length
           ? searchedPosts?.map(post => (
-            <PostComponent
+            <Card
               key={post.id}
               id={post.id}
               title={post.title}
@@ -23,7 +24,8 @@ const Posts = () => {
               ibu={post.beer.ibu}
               abv={post.beer.abv}
             />))
-          : <img src="https://i.stack.imgur.com/MnyxU.gif" alt="loading" width="3%" height="3%" />
+          : <h3 style={{ margin: "auto" }}> No hay resultados para esa busqueda </h3>
+        // <img src="https://i.stack.imgur.com/MnyxU.gif" alt="loading" width="3%" height="3%" />
       }
     </div>
   );

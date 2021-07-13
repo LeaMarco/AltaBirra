@@ -13,7 +13,7 @@ function App() {
     <div className="App">
       <Route path="/" component={Nav} />
       <Route exact path="/" component={Home} />
-      <Route exact path="/algo/:title" component={Search} />
+      <Route exact path="/search/:title" component={Search} />
       <Route exact path="/post" component={Post} />
       <Route exact path="/detailBeer/:id" component={DetailBeer} />
     </div>

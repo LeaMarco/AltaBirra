@@ -85,7 +85,10 @@ router.get('/', async (req: Request, res: Response, next: NextFunction) => {
 
 	const posts = await prisma.post.findMany({
 		where: {
-			title: title,
+			title: {
+				contains: title,
+				mode: "insensitive"
+			},
 			shipping: hasShipping,
 			rating: { gte: rating },
 			countable: {
