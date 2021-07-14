@@ -79,11 +79,11 @@ model Cart {
 }
 
 model PostsOnCart {
+    amount Int @default(1)
     postId Int
     post   Post @relation(fields: [postId], references: [id])
     cartId Int
     cart   Cart @relation(fields: [cartId], references: [id])
-
     @@id([cartId, postId])
 }
 

@@ -29,14 +29,17 @@ const Beers = () => {
 	// premium: boolean;
 	// roleId: number;
 	// cartId: number
-  console.log(usersPremium);
+  const firstRandomBeer= Math.ceil(Math.random()*6)
+  
   return (
     <div className="containerBeersPremium">
       <h1 id="titulo">Las recomendadas de Alta Birra</h1>
       <div className="beers">
       {
         typeof usersPremium === "object" 
-        ? usersPremium.map((userPremium) => (
+        ? usersPremium.slice(firstRandomBeer, firstRandomBeer+5).map((userPremium) => (
+          
+
           <Beer
             key={userPremium.id}
             id={userPremium.id}
