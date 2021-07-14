@@ -8,7 +8,7 @@ export default  function DetailBeer() {
 
     const dispatch = useDispatch();
     const { id }: any = useParams();
-
+    console.log(id, "idDETAIL")
     const info: any = useSelector((state: RootState) =>  state.detailPosts)
 
     useEffect(() => {
@@ -19,7 +19,6 @@ export default  function DetailBeer() {
         <div id="Post">
             <hr />
             <img src={info.image} alt="La imagen no esta disponible" />
-            {console.log(info)}
             <div id="post">
                 <div>
                     <hr />

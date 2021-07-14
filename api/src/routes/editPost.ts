@@ -62,7 +62,6 @@ router.put("/", async (req: Request, res: Response, next: NextFunction) => {
   const { price, discount }: Countable = req.body.params.countable;
 
   const postId:number = req.body.params.postId
-  console.log(postId, "HOLA FRANCOOOO")
   const user = await prisma.user.findUnique({ where: { username: username } });
   const beerGenericType = await prisma.genericType.findUnique({
     where: { type: genericType }
@@ -108,8 +107,8 @@ router.put("/", async (req: Request, res: Response, next: NextFunction) => {
         }
       }
     },
-  }).catch((error) => console.log(error));
-  res.send("post actualizado");
+  }).catch((error) => res.status(500).send(error));
+  res.status(200).send('Post editado con exito');
 });
 
 export default router;
