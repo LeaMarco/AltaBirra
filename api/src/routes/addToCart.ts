@@ -7,10 +7,11 @@ const prisma = new PrismaClient();
 interface Cart {
 	username: string;
 	postId: number;
+	quantity: number;
 }
 
 router.post("/", async (req: Request, res: Response, next: NextFunction) => {
-	const { username, postId }: Cart = req.body;
+	const { username, postId, quantity }: Cart = req.body;
 	const user = await prisma.user.findUnique({ where: { username: username } });
 	const cart = await prisma.cart.findFirst({ where: { userId: user } });
 	const post = await prisma.post.findUnique({ where: { id: postId } });
@@ -21,10 +22,25 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
 			},
 			cart: {
 				connect: { id: cart?.id }
-			}
+			},
+			amount: quantity
 		}
 	})
-	res.send("creado");
+	res.send("Birra agregada al carrito");
+});
+
+
+
+router.put("/", async (req: Request, res: Response, next: NextFunction) => {
+	const { username, postId, quantity }: Cart = req.body;
+	const user = await prisma.user.findUnique({ where: { username: username } });
+	const cart = await prisma.cart.findFirst({ where: { userId: user } });
+	const post = await prisma.post.findUnique({ where: { id: postId } });
+	if(cart?.id)await prisma.postsOnCart.update({ where: {
+		cartId_postId: {cartId: cart.id, postId:postId  }	
+	}, data: {amount: quantity} 
+	})
+	res.send("Birra agregada al carrito");
 });
 
 export default router;

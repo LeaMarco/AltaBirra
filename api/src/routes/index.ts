@@ -6,6 +6,8 @@ import getSearchedPost from "./getSearchedPost";
 import transaction from "./transaction";
 import cart from "./addToCart";
 import editPost from "./editPost";
+import deletePost from "./deletePost";
+import removeBeer from "./removeToCart";
 
 import detail from "./detail"
 
@@ -18,7 +20,8 @@ router.use("/post", getSearchedPost);
 router.use("/transaction", transaction);
 router.use("/cart", cart);
 router.use("/edit", editPost);
-
+router.use("/delete", deletePost);
+router.use("/remove", removeBeer);
 router.use("/detailBeer", detail);
 
 export default router;
