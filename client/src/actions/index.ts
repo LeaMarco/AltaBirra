@@ -38,7 +38,8 @@ export enum ActionTypes {
 	createPost,
 	editPost,
 	loadUserPremium,
-	getDetail
+	getDetail,
+	getCart,
 }
 
 export interface PostValues {
@@ -214,7 +215,7 @@ export function setQuerySearch<SetQuerySearchAction>(query: QueryTypes) {
 	}
 }
 
-export type Action = SearchedPostAction | SetQuerySearchAction | getDetailAction;
+export type Action = SearchedPostAction | SetQuerySearchAction | getDetailAction | getCartAction;
 
 export interface CreatePostAction {
 	type: ActionTypes.createPost;
@@ -318,3 +319,40 @@ export const getDetail = (id) => {
 		})
 	}
 }
+
+export interface cart {
+	posts:post;
+	amount:number;
+}
+
+export interface getCartAction {
+	type: ActionTypes.getCart;
+	payload:cart[];
+}
+
+export const getCart = (id) => {
+	return async (dispatch: Dispatch) => {
+		const response = await axios.get<cart[]>(`http://localhost:3001/cart/${id}`)
+		dispatch<getCartAction>({
+			type: ActionTypes.getCart,
+			payload: response.data,
+		})
+	}
+}
+
+const urlremovetocart = 'http://localhost:3001/removeToCart';
+const urladdtocart = 'http://localhost:3001/addToCart';
+
+export const addToCart = (data) => {
+    return async (dispatch: Dispatch) => {
+        const response = await axios.put<PostValues>(urladdtocart, { params: data });
+        return response;
+    };
+};
+
+export const removeToCart = (data) => {
+    return async (dispatch: Dispatch) => {
+        const response = await axios.delete<PostValues>(urlremovetocart, { params: data });
+        return response;
+    };
+};

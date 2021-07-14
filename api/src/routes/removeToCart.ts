@@ -15,7 +15,7 @@ router.delete("/", async (req: Request, res: Response, next: NextFunction) => {
 	const cart = await prisma.cart.findFirst({ where: { userId: user } });
 	if(cart?.id)await prisma.postsOnCart.delete({
 		where: {
-        	cartId_postId: {cartId: cart.id, postId:postId  }	
+        	cartId_postId: {cartId: cart.id, postId:postId  }
 		}
 	})
 	res.send("Borrado del carrito");
