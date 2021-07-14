@@ -38,7 +38,7 @@ const Beers = () => {
       <div className="beers">
       {
         typeof usersPremium === "object" 
-        ? usersPremium.slice(firstRandomBeer, firstRandomBeer+6).map((userPremium) => (
+        ? usersPremium.slice(firstRandomBeer, firstRandomBeer+5).map((userPremium) => (
           
           <Beer
             key={userPremium.id}
