@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers/index";
 import { getDetail } from "../../actions/index"
 import { Link, useParams } from "react-router-dom";
+import axios from "axios";
 
 export default function DetailBeer() {
 
@@ -15,9 +16,14 @@ export default function DetailBeer() {
 		dispatch(getDetail(id))
 	}, [dispatch]);
 
+	// function addToFavorite() {
+	// 	axios.post('http://localhost:3001/addFavorite', {data: {"username": "TestUser", "postId": id}});
+	// }
+
 	return (
 		<div id="Post">
 			<hr />
+			{/* <button onClick={addToFavorite}> ❤ </button> */}
 			<img src={info.image} alt="La imagen no esta disponible" />
 			<div id="post">
 				<div>
