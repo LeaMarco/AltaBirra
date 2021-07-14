@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { QueryTypes, searchedPosts, setQuerySearch, setTitleSearch } from "../../actions";
+import { QueryTypes, searchedPosts, setQuerySearch } from "../../actions";
 import { RootState } from "../../reducers";
 import Style from "./FiltersList.module.css";
 
 export default function FiltersList() {
   const dispatch = useDispatch();
   const searchQuery: QueryTypes = useSelector((state: RootState) => state.postsSearchQuery);
-  console.log(searchQuery);
 
   function handleChange({ target }) {
     let temp = target.value === "" ? undefined : target.name === "rating" ? target.value.length : target.value;
@@ -19,12 +18,12 @@ export default function FiltersList() {
     dispatch(searchedPosts(searchQuery));
   }
 
-  async function resetFilterValues() {
+  function resetFilterValues() {
     let temp: QueryTypes = {};
     for (let prop in searchQuery) {
       temp[prop] = (prop === "title" || prop === "orderBy") ? searchQuery[prop] : undefined;
     }
-    await dispatch(setQuerySearch(temp));
+    dispatch(setQuerySearch(temp));
   }
 
   useEffect(() => {

@@ -10,8 +10,10 @@ import deletePost from "./deletePost";
 import removeBeer from "./removeToCart";
 import specificType from "./getSpecificTypes"
 import genericType from "./getGenericTypes"
-
+import autoComplete from "./autocomplete";
 import detail from "./detail"
+import addFavorite from "./addFavorite";
+import getFavorites from "./getFavorites";
 
 const router = Router();
 
@@ -26,6 +28,9 @@ router.use("/delete", deletePost);
 router.use("/remove", removeBeer);
 router.use("/specificTypes", specificType);
 router.use("/genericTypes", genericType);
+router.use("/autocomplete", autoComplete);
 router.use("/detailBeer", detail);
+router.use("/addFavorite", addFavorite);
+router.use("/getFavorites", getFavorites);
 
 export default router;

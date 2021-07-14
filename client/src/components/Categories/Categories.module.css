@@ -1,0 +1,17 @@
+.container {
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.subcontainer {
+	height: 85vh;
+	width: 100%;
+}
+
+.subcontainer + .subcontainer {
+	border-left: 1px solid grey;
+}
+
+.informacion {
+	margin: 2vh 3vw;
+}

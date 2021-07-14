@@ -29,6 +29,15 @@
   margin-top: 3vh;
 }
 
+.form {
+  height: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+}
+
 .searchInput {
   width: 100%;
   height: 1.5rem;
@@ -85,14 +94,37 @@
   filter: brightness(130%);
   transition: 400ms;
 }
-.lupa {
-  margin-left: -25px;
-}
 
 .buttonsRight {
-    margin-top: 3.5vh;
-    margin-right: 5vw;
-    display: flex;
-    justify-content: flex-end;
+  margin-top: 3.5vh;
+  margin-right: 5vw;
+  display: flex;
+  justify-content: flex-end;
+}
 
+.autocomplete {
+  visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.autocomplete > input {
+  cursor: pointer;
+  border: none;
+}
+
+.searchInput:hover > .autocomplete {
+  visibility: visible;
+  cursor: pointer;
+}
+
+.lupa {
+  background-color: inherit;
+  border: none;
+  cursor: pointer;
+}
+
+.inputContainer {
+  display: flex;
 }
