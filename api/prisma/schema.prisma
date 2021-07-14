@@ -28,7 +28,8 @@ model Post {
     countableId Int
     countable   Countable @relation(fields: [countableId], references: [id])
 
-    carts PostsOnCart[]
+    carts     PostsOnCart[]
+    favorites PostsOnFavorites[]
 
     transactionId Transaction[]
 }
@@ -53,13 +54,15 @@ model User {
     role          Role         @relation(fields: [roleId], references: [id])
     cartId        Int
     cart          Cart         @relation(fields: [cartId], references: [id])
+    favoriteId    Int
+    favorite      Favorite     @relation(fields: [favoriteId], references: [id])
     postId        Post[]
     transactionId Transaction?
 }
 
 model Transaction {
     id        Int      @id @default(autoincrement())
-    price     Int
+    price     Float
     createdAt DateTime @default(now())
 
     /////relacion de muchos (transacciones) a uno (usuario)
@@ -133,9 +136,26 @@ enum Group {
 
 model Countable {
     id         Int      @id @default(autoincrement())
-    price      Int
+    price      Float
     discount   Int
     expireDate DateTime @default(now())
 
     postId Post?
+}
+
+model Favorite {
+    id Int @id @default(autoincrement())
+
+    //relacion uno a uno con usuario (fk)
+    userId User?
+    posts  PostsOnFavorites[]
+}
+
+model PostsOnFavorites {
+    postId     Int
+    post       Post     @relation(fields: [postId], references: [id])
+    favoriteId Int
+    favorite   Favorite @relation(fields: [favoriteId], references: [id])
+
+    @@id([favoriteId, postId])
 }

@@ -1,13 +1,17 @@
 import { useState } from "react";
 import style from "./Nav.module.css";
 import logo from "./AltaBirra.svg";
-import lupa from "./Vector.svg";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { searchedPosts, setTitleSearch } from "../../actions";
 import { Modal } from "../Login/Modal/Modal.component";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
+import axios from "axios";
+
+interface Autocomplete {
+  title: string;
+}
 
 export default function Nav() {
   const [isEnterOpen, setEnterOpen] = useState(false);
@@ -16,6 +20,8 @@ export default function Nav() {
   const [isRegisterOpen, setRegisterOpen] = useState(false);
   const toogleRegister = () => setRegisterOpen(!isRegisterOpen);
 
+  const [autocomplete, setAutocomplete] = useState<Autocomplete[]>([]);
+
   const [register, setRegister] = useState<boolean>(false);
   const [searchInput, setSearchInput] = useState<string>("");
   const dispatch = useDispatch();
@@ -23,9 +29,25 @@ export default function Nav() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    dispatch(setTitleSearch(searchInput));
-    await dispatch(searchedPosts({ title: searchInput }));
-    history.push(`/search/${searchInput}`);
+    handleSearch(searchInput);
+  }
+
+  async function handleChange(event) {
+    setSearchInput(event.target.value);
+    let temp = await axios.get("http://localhost:3001/autocomplete", { params: { search: event.target.value } });
+    setAutocomplete(temp.data);
+  }
+
+  function handleAutocomplete(event) {
+    setSearchInput(event.target.value);
+    setAutocomplete([]);
+    handleSearch(event.target.value);
+  }
+
+  function handleSearch(searchParam) {
+    dispatch(setTitleSearch(searchParam));
+    dispatch(searchedPosts({ title: searchParam }));
+    history.push(`/search`);
     setSearchInput("");
   }
 
@@ -36,26 +58,39 @@ export default function Nav() {
       </Link>
       <div>
         <div className={style.searchBar}>
-          <Link to="/">
-            <img src={lupa} className={style.lupa} />
-          </Link>
           <form
             onSubmit={(event) => handleSubmit(event)}
             className={style.searchInput}
           >
-            <input
-              placeholder="Buscar"
-              className={style.searchInput}
-              value={searchInput}
-              onChange={(event) => setSearchInput(event.target.value)}
-            />
+            <div className={style.inputContainer}>
+              <input type="submit" readOnly value="🔎" className={style.lupa} />
+              <input
+                placeholder="Buscar"
+                className={style.searchInput}
+                value={searchInput}
+                onChange={event => handleChange(event)}
+                onSubmit={(event) => handleSubmit(event)}
+              />
+            </div>
+            {
+              searchInput && autocomplete.length
+                ?
+                <div className={style.autocomplete}>
+                  {
+                    autocomplete?.map(({ title }) => {
+                      return <input readOnly value={title} onClick={event => handleAutocomplete(event)} />
+                    })
+                  }
+                </div>
+                : null
+            }
           </form>
         </div>
         <div className={style.buttons}>
           <Link to="/" className={style.button}>
             Ofertas
           </Link>
-          <Link to="/" className={style.button}>
+          <Link to="/categories" className={style.button}>
             Categorías
           </Link>
           <Link to="/" className={style.button}>

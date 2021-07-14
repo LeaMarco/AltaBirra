@@ -18,6 +18,9 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
       },
       cart: {
         create: {}
+      },
+      favorite: {
+        create: {}
       }
     }
   })
