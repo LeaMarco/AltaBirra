@@ -12,7 +12,7 @@ interface Cart {
 
 
 router.put("/", async (req: Request, res: Response, next: NextFunction) => {
-    console.log(req.body.params,"req body params");
+    console.log("entre",req.body)
     const { username, postId, quantity }: Cart = req.body.params;
     const user = await prisma.user.findUnique({ where: { username: username } });
     const cart = await prisma.cart.findFirst({ where: { userId: user } });
@@ -31,9 +31,8 @@ router.put("/", async (req: Request, res: Response, next: NextFunction) => {
             },
             amount: quantity
         }
-    }))
-
-    res.send("Birra agregada al carrito");
+    })).catch((error) => res.status(500).send(error));
+    res.status(200).send("Birra agregada al carrito");
 });
 
 export default router;

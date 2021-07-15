@@ -7,11 +7,11 @@ const prisma = new PrismaClient();
 interface Cart {
 	username: string;
 	postId: number;
-}
+	cartId:number;
+	}
 
 router.delete("/", async (req: Request, res: Response, next: NextFunction) => {
-	console.log(req.body,"PARAMS DELETE");
-	const { username, postId }: Cart = req.body.params;
+	const { username, postId,cartId }: Cart = req.body;
 	const user = await prisma.user.findUnique({ where: { username: username } });
 	const cart = await prisma.cart.findFirst({ where: { userId: user } });
 	if(cart?.id)await prisma.postsOnCart.delete({
@@ -19,7 +19,20 @@ router.delete("/", async (req: Request, res: Response, next: NextFunction) => {
         	cartId_postId: {cartId: cart.id, postId:postId  }
 		}
 	})
-	res.send("Borrado del carrito");
+	const dart = await prisma.postsOnCart.findMany({
+        where: {
+            cartId: cartId
+        },
+        select: {
+            amount: true,
+            post: {
+                include: {
+                    countable: true
+                }
+            }
+        }
+    }).catch((error) => res.status(500).send(error));
+    res.status(200).send(dart)
 });
 
 export default router;

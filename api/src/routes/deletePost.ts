@@ -13,7 +13,6 @@ router.delete("/", async (req: Request, res: Response, next: NextFunction) => {
         	id: id	
 		}
 	})
-	res.send("post borrado");
 });
 
 export default router;

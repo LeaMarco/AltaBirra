@@ -1,13 +1,15 @@
 import React, { useEffect, useState} from "react";
 import { useParams,Link } from "react-router-dom";
-// import {removeToCart,addToCart} from "../../actions";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
+import {removeToCart} from "../../actions";
 import axios from 'axios';
 
-export function PostinCart({postId,postTitle,description,amount,countable}) {
-    
-    const dispatch = useDispatch();
+export function PostinCart({postId,postTitle,description,amount,countable,cartId}) {
     const [quantity, setQuantity] = useState(amount)
+
+    const dispatch = useDispatch(); 
+    let cartIdparsed = parseInt(cartId,10);
+
 
      useEffect(() => {
         addToCart(
@@ -15,10 +17,7 @@ export function PostinCart({postId,postTitle,description,amount,countable}) {
         );
      }, [quantity]);
 
-    let obj = {
-        "postId":5,
-        "username":"TestUser"
-    }
+    
     //estado local con amount
     //handle submit ejecuta action para cambiar amount en db
     return (
@@ -34,13 +33,12 @@ export function PostinCart({postId,postTitle,description,amount,countable}) {
             <p>{countable.price * quantity}</p>
             <p>{countable.discount}</p>
             <button onClick={(e) => quantity>1 ? setQuantity(quantity-1) : alert("Del piso no paso")}>➖</button>
-            <button onClick={(e) => removeToCart({"username":"TestUser","postId":3})}>❌</button>
+            <button onClick={(e) => dispatch(removeToCart({"username":"TestUser",postId,cartIdparsed}))}>❌</button>
           </div>
     )
 }
 
 export default PostinCart;
-
 export interface PostValues {
 	beer: {
 		name: string;
@@ -69,16 +67,14 @@ export interface PostValues {
 	};
 	date: Date;
 };
-
-const urlremovetocart = 'http://localhost:3001/removeToCart';
 const urladdtocart = 'http://localhost:3001/cart';
-
 
 async function addToCart (data:any){
         const response = await axios.put<PostValues>(urladdtocart, { params: data });
         return response;
 };
-async function removeToCart (data:any){
-        const response = await axios.delete<PostValues>(urlremovetocart, { params: data });
-        return response;
-};
+
+// async function removeToCart (data:any){
+//         const response = await axios.delete<cart[]>(urlremovetocart, { data: data });
+//         console.log(response,"que onda data remove")
+// };

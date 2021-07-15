@@ -23,7 +23,7 @@ function Cart() {
     <ul>
       {Array.isArray(carts) ? (
         carts.map((post) => (
-          <PostinCart postId={post.post.id} postTitle={post.post.title} description={post.post.description} amount={post.amount} countable={post.post.countable}/>
+          <PostinCart cartId= {id} postId={post.post.id} postTitle={post.post.title} description={post.post.description} amount={post.amount} countable={post.post.countable}/>
         ))
       ) : (
         <p>No hay posts</p>
