@@ -10,7 +10,8 @@ interface Cart {
 }
 
 router.delete("/", async (req: Request, res: Response, next: NextFunction) => {
-	const { username, postId }: Cart = req.body;
+	console.log(req.body,"PARAMS DELETE");
+	const { username, postId }: Cart = req.body.params;
 	const user = await prisma.user.findUnique({ where: { username: username } });
 	const cart = await prisma.cart.findFirst({ where: { userId: user } });
 	if(cart?.id)await prisma.postsOnCart.delete({

@@ -340,19 +340,3 @@ export const getCart = (id) => {
 	}
 }
 
-const urlremovetocart = 'http://localhost:3001/removeToCart';
-const urladdtocart = 'http://localhost:3001/addToCart';
-
-export const addToCart = (data) => {
-    return async (dispatch: Dispatch) => {
-        const response = await axios.put<PostValues>(urladdtocart, { params: data });
-        return response;
-    };
-};
-
-export const removeToCart = (data) => {
-    return async (dispatch: Dispatch) => {
-        const response = await axios.delete<PostValues>(urlremovetocart, { params: data });
-        return response;
-    };
-};

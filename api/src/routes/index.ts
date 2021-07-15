@@ -5,9 +5,10 @@ import createPost from "./createPost";
 import getSearchedPost from "./getSearchedPost";
 import transaction from "./transaction";
 import cart from "./addToCart";
+import getCart from "./getCart";
+import removeToCart from "./removeToCart";
 import editPost from "./editPost";
 import deletePost from "./deletePost";
-import removeBeer from "./removeToCart";
 import specificType from "./getSpecificTypes"
 import genericType from "./getGenericTypes"
 import autoComplete from "./autocomplete";
@@ -23,9 +24,10 @@ router.use("/post", createPost);
 router.use("/post", getSearchedPost);
 router.use("/transaction", transaction);
 router.use("/cart", cart);
+router.use("/cart", getCart);
 router.use("/edit", editPost);
 router.use("/delete", deletePost);
-router.use("/remove", removeBeer);
+router.use("/removeToCart", removeToCart);
 router.use("/specificTypes", specificType);
 router.use("/genericTypes", genericType);
 router.use("/autocomplete", autoComplete);

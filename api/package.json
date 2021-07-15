@@ -29,6 +29,7 @@
     "@types/react-redux": "^7.1.17",
     "@types/redux": "^3.6.0",
     "@types/redux-thunk": "^2.1.0",
+    "axios": "^0.21.1",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "date-fns": "^2.22.1",

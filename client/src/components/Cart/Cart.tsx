@@ -3,16 +3,14 @@ import { useParams,Link } from "react-router-dom";
 import { RootState } from "../../reducers/index";
 import { useDispatch, useSelector } from "react-redux";
 import { getCart } from "../../actions";
-import {PostinCart} from "../PostinCart/PostinCart"
+import {PostinCart} from "../PostInCart/PostInCart";
 
 
 function Cart() {
-    
-    const dispatch = useDispatch();
+    const dispatch = useDispatch();    
     const { id }: any = useParams();
     const carts: any = useSelector((state: RootState) => state.cart);
     console.log(carts,"carts")
-
 
 
   useEffect(() => {
