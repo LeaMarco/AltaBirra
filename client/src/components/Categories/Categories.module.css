@@ -15,3 +15,14 @@
 .informacion {
 	margin: 2vh 3vw;
 }
+
+.categoryName {
+	font-weight: bolder;
+	font-size: x-large;
+	border: none;
+	margin: 5vh auto;
+	cursor: pointer;
+	text-align: center;
+	width: 4vw;
+	text-decoration: 2px underline black;
+}

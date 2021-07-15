@@ -1,12 +1,15 @@
-import React, { useEffect } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { QueryTypes, searchedPosts, setQuerySearch } from "../../actions";
+import { QueryTypes, searchedPosts, searchTypes, setQuerySearch } from "../../actions";
 import { RootState } from "../../reducers";
 import Style from "./FiltersList.module.css";
 
 export default function FiltersList() {
   const dispatch = useDispatch();
   const searchQuery: QueryTypes = useSelector((state: RootState) => state.postsSearchQuery);
+  const [generic, setGeneric] = useState([]);
+  const [specific, setSpecific] = useState([]);
 
   function handleChange({ target }) {
     let temp = target.value === "" ? undefined : target.name === "rating" ? target.value.length : target.value;
@@ -26,6 +29,16 @@ export default function FiltersList() {
     dispatch(setQuerySearch(temp));
   }
 
+  async function getBeerTypes() {
+    let respuesta = await dispatch(searchTypes());
+    setGeneric(respuesta[0]);
+    setSpecific(respuesta[1]);
+  }
+
+  useEffect(() => {
+    getBeerTypes();
+  }, [dispatch])
+
   useEffect(() => {
     dispatch(searchedPosts(searchQuery));
   }, [searchQuery.genericType, searchQuery.specificType, searchQuery.rating, searchQuery.hasDryHop, searchQuery.hasShipping, searchQuery.hasDiscount])
@@ -41,10 +54,12 @@ export default function FiltersList() {
             name="genericType"
             onChange={(event) => handleChange(event)}
           >
-            <option> </option>
-            <option> Rubia </option>
-            <option> Roja </option>
-            <option> Negra </option>
+            <option></option>
+            {
+              generic.map(type => {
+                return <option> {type} </option>
+              })
+            }
           </select>
         </div>
         <div>
@@ -54,30 +69,12 @@ export default function FiltersList() {
             value={searchQuery.specificType}
             onChange={(event) => handleChange(event)}
           >
-            <option> </option>
-            <option> Amber </option>
-            <option> Vino de cebada </option>
-            <option> Ale belga </option>
-            <option> Ale escocesa </option>
-            <option> Duvel </option>
-            <option> Porter </option>
-            <option> Alt </option>
-            <option> Kölsch </option>
-            <option> Trappist </option>
-            <option> Flanders negra </option>
-            <option> Especial </option>
-            <option> Cerveza de trigo </option>
-            <option> Cerveza blanca </option>
-            <option> Pilsner </option>
-            <option> Dortmunder </option>
-            <option> Viena </option>
-            <option> Munich </option>
-            <option> Bock </option>
-            <option> Rauchbier </option>
-            <option> Schwarzbier </option>
-            <option> Gueze </option>
-            <option> Faro </option>
-            <option> Cerveza de fruta </option>
+            <option></option>
+            {
+              specific.map(type => {
+                return <option> {type} </option>
+              })
+            }
           </select>
         </div>
         <div>

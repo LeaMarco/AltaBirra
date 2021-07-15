@@ -14,6 +14,7 @@ import autoComplete from "./autocomplete";
 import detail from "./detail"
 import addFavorite from "./addFavorite";
 import getFavorites from "./getFavorites";
+import removeFavorite from "./removeFavorite";
 
 const router = Router();
 
@@ -32,5 +33,6 @@ router.use("/autocomplete", autoComplete);
 router.use("/detailBeer", detail);
 router.use("/addFavorite", addFavorite);
 router.use("/getFavorites", getFavorites);
+router.use("/removeFavorite", removeFavorite);
 
 export default router;
