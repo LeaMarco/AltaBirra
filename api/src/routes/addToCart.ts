@@ -12,14 +12,13 @@ interface Cart {
 
 
 router.put("/", async (req: Request, res: Response, next: NextFunction) => {
-    console.log("entre",req.body)
     const { username, postId, quantity }: Cart = req.body.params;
     const user = await prisma.user.findUnique({ where: { username: username } });
     const cart = await prisma.cart.findFirst({ where: { userId: user } });
     const post = await prisma.post.findUnique({ where: { id: postId } });
     if(cart?.id)await prisma.postsOnCart.update({ where: {
         cartId_postId: {cartId: cart.id, postId:postId  }
-    }, data: {amount: quantity} 
+    }, data: {amount: quantity}
     }).catch(async()=>
     await prisma.postsOnCart.create({
         data: {

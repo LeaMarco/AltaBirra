@@ -19,20 +19,8 @@ router.delete("/", async (req: Request, res: Response, next: NextFunction) => {
         	cartId_postId: {cartId: cart.id, postId:postId  }
 		}
 	})
-	const dart = await prisma.postsOnCart.findMany({
-        where: {
-            cartId: cartId
-        },
-        select: {
-            amount: true,
-            post: {
-                include: {
-                    countable: true
-                }
-            }
-        }
-    }).catch((error) => res.status(500).send(error));
-    res.status(200).send(dart)
+   .catch((error) => res.status(500).send(error));
+    res.status(200).send("Post eliminado")
 });
 
 export default router;

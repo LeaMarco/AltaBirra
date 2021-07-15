@@ -345,7 +345,7 @@ export const getCart = (id) => {
 	}
 }
 
-const urlremovetocart = 'http://localhost:3001/removeToCart';
+
 const urladdtocart = 'http://localhost:3001/addToCart';
 
 // export const addToCart = (data) => {
@@ -355,12 +355,3 @@ const urladdtocart = 'http://localhost:3001/addToCart';
 //     };
 // };
 
-export const removeToCart = (data)=>{
-	return async (dispatch: Dispatch) => {
-        const response = await axios.delete<cart[]>(urlremovetocart, { data: data });
-        dispatch<delPostInCartAction>({
-			type: ActionTypes.delPostInCart,
-			payload: response.data,
-		})
-	};
-}

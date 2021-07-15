@@ -9,13 +9,18 @@ router.get("/:id", async (req: Request, res: Response) => {
 
     const cart = await prisma.postsOnCart.findMany({
         where: {
-            cartId: id
+            cartId: id,
         },
         select: {
             amount: true,
             post: {
                 include: {
-                    countable: true
+                    countable: true,
+                }
+            },
+            cart:{
+                include: {
+                    userId:true
                 }
             }
         }
