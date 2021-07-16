@@ -112,7 +112,7 @@ router.get('/', async (req: Request, res: Response, next: NextFunction) => {
 					{ calories: { lte: maxCalories } },
 					{ dryHop: hasDryHop }
 				]
-			}
+			},
 		},
 		include: {
 			countable: true,

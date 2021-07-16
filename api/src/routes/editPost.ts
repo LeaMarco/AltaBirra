@@ -22,7 +22,6 @@ interface InfoPost {
   description: string;
   image: string;
   stock: number;
-  rating: number;
   shipping: boolean;
   visibility: boolean;
   username: string;
@@ -53,7 +52,6 @@ router.put("/", async (req: Request, res: Response, next: NextFunction) => {
     description,
     image,
     stock,
-    rating,
     shipping,
     visibility,
     username,
@@ -61,7 +59,7 @@ router.put("/", async (req: Request, res: Response, next: NextFunction) => {
 
   const { price, discount }: Countable = req.body.params.countable;
 
-  const postId:number = req.body.params.postId
+  const postId: number = req.body.params.postId
   const user = await prisma.user.findUnique({ where: { username: username } });
   const beerGenericType = await prisma.genericType.findUnique({
     where: { type: genericType }
@@ -70,13 +68,13 @@ router.put("/", async (req: Request, res: Response, next: NextFunction) => {
     where: { type: specificType }
   });
 
-  await prisma.post.update({where: { id: postId },
+  await prisma.post.update({
+    where: { id: postId },
     data: {
       title,
       description,
       image,
       stock,
-      rating,
       shipping,
       visibility,
       user: {

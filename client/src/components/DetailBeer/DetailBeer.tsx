@@ -1,28 +1,46 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers/index";
-import { getDetail } from "../../actions/index"
-import { Link, useParams } from "react-router-dom";
+import { getDetail, getFavoritePosts, Post } from "../../actions/index"
+import { useParams } from "react-router-dom";
 import axios from "axios";
+import Style from "./Detail.module.css";
+
+interface Favorites {
+	post: Post;
+}
 
 export default function DetailBeer() {
-
 	const dispatch = useDispatch();
 	const { id }: any = useParams();
-	const info: any = useSelector((state: RootState) => state.detailPosts)
+	const info: any = useSelector((state: RootState) => state.detailPosts);
+	const favorites: Favorites[] = useSelector((state: RootState) => state.favoritePosts);
+	const [isFavorite, setIsFavorite] = useState<boolean>(favorites.some(post => post.post.id === Number(id)));
 
 	useEffect(() => {
 		dispatch(getDetail(id))
 	}, [dispatch]);
 
-	// function addToFavorite() {
-	// 	axios.post('http://localhost:3001/addFavorite', {data: {"username": "TestUser", "postId": id}});
-	// }
+	async function addToFavorite() {
+		await axios.post('http://localhost:3001/addFavorite', { data: { "username": "TestUser", "postId": id } });
+		dispatch(getFavoritePosts("TestUser"));
+		setIsFavorite(true);
+	}
+
+	async function removeFavorite() {
+		await axios.delete('http://localhost:3001/removeFavorite', { data: { "username": "TestUser", "postId": id } });
+		dispatch(getFavoritePosts("TestUser"));
+		setIsFavorite(false);
+	}
 
 	return (
-		<div id="Post">
+		<div className={Style.post}>
 			<hr />
-			{/* <button onClick={addToFavorite}> ❤ </button> */}
+			{
+				isFavorite
+					? <button onClick={removeFavorite} className={Style.unfav}> ❤ </button>
+					: <button onClick={addToFavorite} className={Style.fav}> ❤ </button>
+			}
 			<img src={info.image} alt="La imagen no esta disponible" />
 			<div id="post">
 				<div>

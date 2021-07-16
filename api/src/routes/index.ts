@@ -17,7 +17,9 @@ import addFavorite from "./addFavorite";
 import getFavorites from "./getFavorites";
 import deleteAllCart from "./deleteAllCart";
 import mercadoPago from "./mercadoPago";
-
+import removeFavorite from "./removeFavorite";
+import ratePost from "./ratePost";
+import sellHistory from "./sellHistory";
 
 const router = Router();
 
@@ -39,6 +41,8 @@ router.use("/detailBeer", detail);
 router.use("/addFavorite", addFavorite);
 router.use("/getFavorites", getFavorites);
 router.use("/checkout", mercadoPago);
-
+router.use("/removeFavorite", removeFavorite);
+router.use("/ratePost", ratePost);
+router.use("/sellHistory", sellHistory);
 
 export default router;
