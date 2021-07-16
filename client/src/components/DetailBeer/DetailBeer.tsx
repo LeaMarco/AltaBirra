@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers/index";
-import { getDetail, getFavoritePosts, Post } from "../../actions/index"
-import { useParams } from "react-router-dom";
+import { getCart, getDetail, getFavoritePosts, Post } from "../../actions/index"
+import { Link, useHistory, useParams } from "react-router-dom";
 import axios from "axios";
 import Style from "./Detail.module.css";
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+
 
 interface Favorites {
 	post: Post;
@@ -16,10 +19,14 @@ export default function DetailBeer() {
 	const info: any = useSelector((state: RootState) => state.detailPosts);
 	const favorites: Favorites[] = useSelector((state: RootState) => state.favoritePosts);
 	const [isFavorite, setIsFavorite] = useState<boolean>(favorites.some(post => post.post.id === Number(id)));
-
+	const [cantidad, setCantidad]= useState(1)
+	const history = useHistory()
+	const MySwal = withReactContent(Swal)
+	
 	useEffect(() => {
 		dispatch(getDetail(id))
 	}, [dispatch]);
+
 
 	async function addToFavorite() {
 		await axios.post('http://localhost:3001/addFavorite', { data: { "username": "TestUser", "postId": id } });
@@ -27,11 +34,30 @@ export default function DetailBeer() {
 		setIsFavorite(true);
 	}
 
+	const addToCart = async () => {
+			const response = await axios.put(`http://localhost:3001/addToCart`, {params:{"username": "TestUser", "postId": parseInt(id), "quantity":cantidad}})
+			console.log(response.data)
+			return(response.data)
+		
+	}
+
+	
+
 	async function removeFavorite() {
 		await axios.delete('http://localhost:3001/removeFavorite', { data: { "username": "TestUser", "postId": id } });
 		dispatch(getFavoritePosts("TestUser"));
 		setIsFavorite(false);
 	}
+
+	const handleSubmit = async(e) => {
+		e.preventDefault();
+		e.stopPropagation();
+
+		await addToCart()
+		await getCart(id)
+		history.push(`/compra/1`); ///////////FALTA CARGAR EL ID DEL USUARIO QUE ESTÉ EN LA PÁGINA
+	   };
+	
 
 	return (
 		<div className={Style.post}>
@@ -57,6 +83,7 @@ export default function DetailBeer() {
 					</div>
 					<hr />
 					<div>
+						
 						<h3>Info Cerveza</h3>
 						<p>Tipo De Cerveza: {info.beer.genericType.type}</p>
 						<p>Descripcion del tipo {info.beer.genericType.type}: {info.beer.genericType.description}</p>
@@ -73,8 +100,17 @@ export default function DetailBeer() {
 						</div>
 					</div>
 					<div>
-						<p>Boton "Comprar"</p>
-						<p>Boton "Agregar Al Carrito"</p>
+						<form onSubmit={(e)=>handleSubmit(e)}>
+							<input placeholder="cantidad" type="number" defaultValue="1" onChange={(e)=> setCantidad(parseInt(e.target.value))}/>
+							<button type="submit">Comprar!</button>
+						</form>
+						<button onClick={async()=>{MySwal.fire({
+        position:'center',
+        icon:'success',
+        title: await addToCart(),
+        showConfirmButton:false,
+        timer:1500,
+      })}}>Agregar al Carrito</button>
 						<div>
 							Compartir
 							<div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>

@@ -115,6 +115,7 @@ export default function Nav() {
             >
               Mis Compras
             </Link>
+            
             <Link
               to="/"
               className={style.buttonEnter}
@@ -136,6 +137,12 @@ export default function Nav() {
             <Modal isOpen={showFavorites} handleClose={toogleFavorites}>
               <FavoritesTab />
             </Modal>
+            <Link
+              to="/cart/1" ////////FALTA METER EL ID DE USER
+              className={style.buttonEnter}
+            >
+              Carrito
+            </Link>
             <button className={style.buttonEnter} onClick={toogleEnter}>
               Entrar
             </button>

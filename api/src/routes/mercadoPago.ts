@@ -23,7 +23,8 @@ router.post("/", (req: Request, res: Response) => {
     const {data}:any = req.body
     // console.log(data.data,"DATA Merpa ruta")
     mercadopago.configurations.setAccessToken("TEST-6705724658801749-071415-219e5d5e25d43808d51486e102a0e9ed-30499530");
-      let preference:CreatePreferencePayload = {
+      
+    let preference:CreatePreferencePayload = {
           items: data.data,
           back_urls: { ////////urls donde te redirige en base a lo que respondio mp, puede
               "success": "http://localhost:8080/feedback",
