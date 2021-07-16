@@ -29,10 +29,10 @@ function validatePassword(password: string, user: User): boolean {
 
 export const signup = async (req: Request, res: Response) => {
 
-    const { username, email, name, password, googleId, facebookId } = req.body;
+    const { username, email, name, password, googleId, facebookId } = req.body.params;
+    console.log("asddsa", username, email, name, password, facebookId, facebookId, "asddsa")
 
-
-    //Busco al usuario
+    // Busco al usuario
     const user = await prisma.user.findUnique({
         where: {
             username
@@ -67,25 +67,28 @@ export const signup = async (req: Request, res: Response) => {
         return res.json(userCreado)
     }
 
+
 };
 
 
 export const signin = async (req: Request, res: Response) => {
 
+    console.log("Entre!")
 
     const user = await prisma.user.findUnique({
         where: {
-            username: req.body.username
+            username: req.body.params.nameMail
         }
     })
 
     // console.log(user, "user")
 
     if (!user) return res.status(200).json('Credencial invalida');
+    console.log(req.body.params.password)
 
-    const correctPassword: boolean = validatePassword(req.body.googleId || req.body.password, user);
+    const correctPassword: boolean = validatePassword(req.body.params.googleId || req.body.params.password, user || "");
 
-    if (!correctPassword) return res.status(400).json('Credencial invalida');
+    if (!correctPassword) return res.status(400).send('Credencial invalida');
 
     const token: string = jwt.sign({ username: user.username }, "secretKey", { expiresIn: 60 * 60 * 24 })
     res.header('authToken', token).send("Usuario validado, y toquen enviado")

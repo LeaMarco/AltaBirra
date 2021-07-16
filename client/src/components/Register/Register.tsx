@@ -5,6 +5,10 @@ import Style from "./Register.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { iData, iError, segurityLevels } from "./RegisterInterfaces";
+import axios from "axios";
+import FacebookLogin from "react-facebook-login";
+import GoogleLogin from "react-google-login";
+
 //MANEJO DE ERRORES/////////////////////////
 
 const onlyLettersMge = "Solo debe tener letras mayusculas o minusculas";
@@ -71,8 +75,65 @@ function validate(dataState: iData, errors: iError, e): iError {
 }
 
 ////////////////////////////////////////
-
+////////////////////////////////////////
 const Register: React.FunctionComponent<{}> = (props) => {
+  ///////////////LOGICA DE GOOGLE//////////////////////////
+
+  const responseGoogleRegister = (response: any) => {
+    const name = response.dt.uU;
+    const googleId = response.googleId;
+    const username = name + "_" + googleId;
+    const email = response.profileObj.email;
+
+    let params = {
+      username,
+      email,
+      googleId,
+    };
+
+    console.log(params);
+    //
+    axios
+      .post("http://localhost:3001/auth/signup", {
+        params: {
+          username,
+          email,
+          googleId,
+          name,
+        },
+      })
+      .then((e) => console.log(e.data));
+  };
+
+  const onFailureRegister = (response: any) => {
+    console.log(response, "Fallo el registro!");
+  };
+
+  const responseGoogleLogin = (response: any) => {
+    const nombre = response.dt.uU;
+    const googleId = response.googleId;
+    const username = nombre + "_" + googleId;
+
+    axios
+      .post("http://localhost:3001/auth/signin", {
+        username,
+        googleId,
+      })
+      .then((e) => console.log(e.data));
+  };
+  const onFailureLogin = (response: any) => {
+    console.log(response, "Fallo el login!");
+  };
+  ///////////////////////////////////////////////////////
+
+  const responseFacebook = (response: any) => {
+    console.log(response);
+  };
+
+  const componentClicked = (response: any) => {
+    console.log(response);
+  };
+
   const [data, setData] = useState<iData>({
     names: "",
     lastNames: "",
@@ -116,6 +177,19 @@ const Register: React.FunctionComponent<{}> = (props) => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
+    let postObj = {
+      username: data.userName,
+      password: data.password,
+      email: data.email,
+      name: `${data.names} ${data.lastNames}`,
+    };
+
+    axios
+      .post("http://localhost:3001/auth/signup/", { params: postObj })
+      .then((e: any) => {
+        if (typeof e.data === "object") alert("Usuario creado!");
+        else alert(e.data);
+      });
   };
 
   const handleOnChange = (e) => {
@@ -127,7 +201,7 @@ const Register: React.FunctionComponent<{}> = (props) => {
     // setErrors(newState);
     setData(newState);
 
-    // console.log(data);
+    console.log(data.userName);
     // console.log(errors);
   };
 
@@ -145,7 +219,6 @@ const Register: React.FunctionComponent<{}> = (props) => {
           placeholder=" Nombres"
         />
         <label className={Style.labels}>
-          {/*  {(() => console.log(errors))()} */}
           {(() => {
             if (errors.names.edit) {
               return errors.names.require
@@ -252,8 +325,30 @@ const Register: React.FunctionComponent<{}> = (props) => {
 
         <button id={Style.btnRegister}> Registarse </button>
       </form>
-      <img className={Style.imgSm} src="https://i.imgur.com/9cF89Xp.png" />
-      <img className={Style.imgSm} src="https://i.imgur.com/Akk6z13.png" />
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-around",
+        }}
+      >
+        {/* <img className={Style.imgSm} src="https://i.imgur.com/9cF89Xp.png" /> */}
+        {/* <img className={Style.imgSm} src="https://i.imgur.com/Akk6z13.png" /> */}
+      </div>
+      <FacebookLogin
+        appId="866652260898974"
+        autoLoad={false}
+        fields="name,email,picture"
+        onClick={componentClicked}
+        callback={responseFacebook}
+      />
+      <GoogleLogin
+        clientId="245898915217-tmmeiem93tnr14ar1lpv0qdsok0qcpnj.apps.googleusercontent.com"
+        buttonText="Register"
+        onSuccess={responseGoogleRegister}
+        onFailure={onFailureRegister}
+        cookiePolicy={"single_host_origin"}
+      />
     </div>
   );
 };

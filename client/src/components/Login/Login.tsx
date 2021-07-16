@@ -5,8 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import Style from "./Login.module.css";
 import { useImperativeHandle } from "react";
-// import FacebookLogin from "react-facebook-login";
-
+import axios from "axios";
 import { iError, iData } from "./LoginInterfaces";
 
 function validate(dataState: iData, errors: iError, e): iError {
@@ -68,7 +67,23 @@ const Login: React.FunctionComponent<{}> = (props) => {
     },
   });
 
-  const handleOnSubmit = (e) => {};
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+
+    let postObj = {
+      nameMail: data.nameMail,
+      password: data.password,
+    };
+
+    console.log(postObj);
+
+    axios
+      .post("http://localhost:3001/auth/signin/", { params: postObj })
+      .then((e: any) => {
+        console.log(e.data);
+        alert(e.data);
+      });
+  };
 
   const handleOnChange = (e) => {
     let newState: iData = {
@@ -133,8 +148,16 @@ const Login: React.FunctionComponent<{}> = (props) => {
 
         <button id={Style.btnRegister}>Continuar</button>
       </form>
-      <img className={Style.imgSm} src="https://i.imgur.com/9cF89Xp.png" />
-      <img className={Style.imgSm} src="https://i.imgur.com/Akk6z13.png" />
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-around",
+        }}
+      >
+        <img className={Style.imgSm} src="https://i.imgur.com/9cF89Xp.png" />
+        <img className={Style.imgSm} src="https://i.imgur.com/Akk6z13.png" />
+      </div>
     </div>
   );
 };
