@@ -21,7 +21,6 @@ async function main() {
   // })
 
 
-
   //USER-ADMIN
   await prisma.user.create({
     data: {
@@ -40,6 +39,8 @@ async function main() {
       }
     },
   });
+
+
   await prisma.user.create({
     data: {
       username: "TestAdmin",
@@ -57,6 +58,7 @@ async function main() {
       }
     },
   });
+
 
   await prisma.user.create({
     data: {
@@ -76,6 +78,7 @@ async function main() {
       }
     },
   });
+
 
   //TIPOS GENERICOS
   const rubia = await prisma.genericType.create({
@@ -394,12 +397,6 @@ enorme, como manzanas, plátanos y moras. Los sabores son muy variados. `,
 
 
   }///////////////////////////////////////////////////////////////
-
-
-
-
-
-
 
 
 

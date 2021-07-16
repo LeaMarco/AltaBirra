@@ -17,10 +17,12 @@ import addFavorite from "./addFavorite";
 import getFavorites from "./getFavorites";
 import deleteAllCart from "./deleteAllCart";
 import mercadoPago from "./mercadoPago";
-
+import autentication from "../autentication/routes/auth"
 
 const router = Router();
 
+
+router.use("/auth/", autentication)
 router.use("/register", register);
 router.use("/beer", beers);
 router.use("/post", createPost);
@@ -39,6 +41,7 @@ router.use("/detailBeer", detail);
 router.use("/addFavorite", addFavorite);
 router.use("/getFavorites", getFavorites);
 router.use("/checkout", mercadoPago);
+
 
 
 export default router;

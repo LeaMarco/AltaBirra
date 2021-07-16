@@ -13,8 +13,9 @@ router.get('/', async (req: Request, res: Response, next: NextFunction) => {
 	const user = await prisma.user.findUnique({ where: { username } });
 	console.log(user);
 	const posts = await prisma.postsOnFavorites.findMany({
+		//☢ comente esta de abajo sino rompia el codigo
 		where: {
-			favoriteId: user?.favoriteId
+			// favoriteId: user?.favoriteId
 		},
 		select: {
 			post: {

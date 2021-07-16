@@ -5,7 +5,8 @@ const router = Router();
 const prisma = new PrismaClient();
 
 router.post("/", async (req: Request, res: Response, next: NextFunction) => {
-  const { username, email, name, password } = req.body;
+  console.log("asdasdasd")
+  const { username, email, name, password, googleId, facebookId } = req.body;
   const userRol = await prisma.role.findUnique({ where: { name: "USER" } })
   await prisma.user.create({
     data: {
@@ -23,8 +24,12 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
         create: {}
       }
     }
-  })
+  }).catch((e) => res.send("Error (usuario ya creado?)"))
   res.send("creado");
 });
+
+
+
+
 
 export default router;
