@@ -11,7 +11,6 @@ interface Cart {
 }
 
 router.put("/", async (req: Request, res: Response, next: NextFunction) => {
-    console.log(req.body, "HOlLAA")
     const { username, postId, quantity }: Cart = req.body.params;
     const user = await prisma.user.findUnique({ where: { username: username } });
     const cart = await prisma.cart.findFirst({ where: { userId: user } });

@@ -34,7 +34,6 @@ interface Countable {
 
 
 router.put("/", async (req: Request, res: Response, next: NextFunction) => {
-  // console.log(req.body,"req body ruta express 443223")
   const {
     name,
     abv,

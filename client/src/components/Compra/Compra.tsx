@@ -18,7 +18,6 @@ export function Compra() {
     useEffect(() => {
         dispatch(getCart(id));
     }, []);
-    console.log(carts, "merpastate COMPRA")
 
     useEffect(() => {
         if (carts) generarboton(carts)
@@ -63,7 +62,6 @@ export function Compra() {
 
     async function merpa(data) {
         const response = await axios.post("http://localhost:3001/checkout", { data: { data } });
-        console.log(response.data, "merpa response")
         return response.data.id;
     }
 

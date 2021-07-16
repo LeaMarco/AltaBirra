@@ -40,7 +40,6 @@ function validate(dataState: iData, errors: iError, e): iError {
       errors[name].error = true;
     }
   }
-  console.log(errors[name]);
 
   //ONLY LETTER US AND NUMBERS
   if (errors[name].hasOwnProperty("onlyLettersUsAndNumbers")) {
@@ -127,8 +126,7 @@ const Register: React.FunctionComponent<{}> = (props) => {
     // setErrors(newState);
     setData(newState);
 
-    // console.log(data);
-    // console.log(errors);
+  
   };
 
   return (
@@ -145,7 +143,6 @@ const Register: React.FunctionComponent<{}> = (props) => {
           placeholder=" Nombres"
         />
         <label className={Style.labels}>
-          {/*  {(() => console.log(errors))()} */}
           {(() => {
             if (errors.names.edit) {
               return errors.names.require
@@ -168,7 +165,6 @@ const Register: React.FunctionComponent<{}> = (props) => {
         />
 
         <label className={Style.labels}>
-          {/*  {(() => console.log(errors))()} */}
           {(() => {
             if (errors.lastNames.edit) {
               return errors.lastNames.require
@@ -191,7 +187,6 @@ const Register: React.FunctionComponent<{}> = (props) => {
         />
 
         <label className={Style.labels}>
-          {/*  {(() => console.log(errors))()} */}
           {(() => {
             if (errors.userName.edit) {
               return errors.userName.require
@@ -214,7 +209,6 @@ const Register: React.FunctionComponent<{}> = (props) => {
         />
 
         <label className={Style.labels}>
-          {/*  {(() => console.log(errors))()} */}
           {(() => {
             if (errors.email.edit) {
               return errors.email.require
@@ -238,7 +232,6 @@ const Register: React.FunctionComponent<{}> = (props) => {
         />
 
         <label className={Style.labels}>
-          {/*  {(() => console.log(errors))()} */}
           {(() => {
             if (errors.password.edit) {
               return errors.password.require

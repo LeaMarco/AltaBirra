@@ -55,7 +55,6 @@ function Cart() {
 
 const urldeleteallcart = "http://localhost:3001/deleteAllCart";
 async function deleteAllCart(data) {
-  console.log(data, "data deleteallcart")
   const response = await axios.delete<cart[]>(urldeleteallcart, { data: { data } });
   return response;
 }

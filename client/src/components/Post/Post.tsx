@@ -60,7 +60,6 @@ export default function Post() {
 
   const { register, handleSubmit,reset} = useForm<PostValues>();
   const onSubmit: SubmitHandler<PostValues>= (data) =>{despachadora(data); reset()}
-  // const onSubmit: SubmitHandler<PostValues>= (data) =>{console.log(data); reset()}
 
   return (
     <form className={styles.postForm} onSubmit={handleSubmit(onSubmit)}>

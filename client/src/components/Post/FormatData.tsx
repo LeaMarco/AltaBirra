@@ -19,7 +19,6 @@ export default function transformer(Info){
 
   export function transformEdit(Info,{id}) {
     let firstStep = transformer(Info)
-    console.log(id,"id FORMAT DATA")
     firstStep.postId=parseInt(id,10)
     return firstStep
   }

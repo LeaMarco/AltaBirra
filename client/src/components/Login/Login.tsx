@@ -39,10 +39,9 @@ function validate(dataState: iData, errors: iError, e): iError {
       errors[name].error = true;
     }
   }
+*/
+ 
 
-  console.log(errors[name]); */
-
-  console.log(errors[name]);
 
   return errors;
 }
@@ -79,8 +78,6 @@ const Login: React.FunctionComponent<{}> = (props) => {
     // setErrors(newState);
     setData(newState);
 
-    // console.log(data);
-    // console.log(errors);
   };
 
   return (
@@ -96,7 +93,6 @@ const Login: React.FunctionComponent<{}> = (props) => {
           placeholder=" Correo electronico o nombre de usuario"
         />
         <label className={Style.labels}>
-          {/*  {(() => console.log(errors))()} */}
           {(() => {
             if (errors.nameMail.edit) {
               return errors.nameMail.require
@@ -119,7 +115,6 @@ const Login: React.FunctionComponent<{}> = (props) => {
           placeholder=" Password"
         />
         <label className={Style.labels}>
-          {/*  {(() => console.log(errors))()} */}
           {(() => {
             if (errors.password.edit) {
               return errors.password.require
