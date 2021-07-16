@@ -107,7 +107,7 @@ export interface EditValues {
 // 	payload: User[];
 // }
 
-export interface SearchedPostAction {
+export interface getPostsAction {
 	type: string;
 	payload: Post[];
 }
@@ -190,7 +190,7 @@ const URL = 'http://localhost:3001';
 export function searchedPosts(query) {
 	return async function (dispatch: Dispatch) {
 		const response = await axios.get<Post[]>(`${URL}/post`, { params: query })
-		dispatch<SearchedPostAction>({
+		dispatch<getPostsAction>({
 			type: "GET_SEARCHED_POST",
 			payload: response.data
 		});
@@ -216,7 +216,7 @@ export function setQuerySearch<SetQuerySearchAction>(query: QueryTypes) {
 	}
 }
 
-export type Action = SearchedPostAction | SetQuerySearchAction | getDetailAction | getCartAction | delPostInCartAction;
+export type Action = SetQuerySearchAction | getDetailAction | getCartAction | delPostInCartAction | getPostsAction | SetQuerySearchAction | getDetailAction;
 
 export interface CreatePostAction {
 	type: ActionTypes.createPost;
@@ -322,17 +322,17 @@ export const getDetail = (id) => {
 }
 
 export interface cart {
-	posts:post;
-	amount:number;
+	posts: post;
+	amount: number;
 }
 
 export interface getCartAction {
 	type: ActionTypes.getCart;
-	payload:cart[];
+	payload: cart[];
 }
 export interface delPostInCartAction {
 	type: ActionTypes.delPostInCart;
-	payload:cart[];
+	payload: cart[];
 }
 
 export const getCart = (id) => {
@@ -355,3 +355,12 @@ const urladdtocart = 'http://localhost:3001/addToCart';
 //     };
 // };
 
+export function getFavoritePosts(username) {
+	return async function (dispatch: Dispatch) {
+		const response = await axios.get<Post[]>(`${URL}/getFavorites`, { params: { username } })
+		dispatch<getPostsAction>({
+			type: "GET_FAVORITE_POSTS",
+			payload: response.data
+		});
+	}
+}

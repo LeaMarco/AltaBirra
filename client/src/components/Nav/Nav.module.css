@@ -128,3 +128,17 @@
 .inputContainer {
   display: flex;
 }
+
+.unfav {
+  background-color: transparent;
+  transform: scale(1.5);
+  border: none;
+  cursor: pointer;
+  margin: auto;
+  color: red;
+  transition: color 2000ms;
+}
+
+.unfav:hover {
+  color: grey;
+}

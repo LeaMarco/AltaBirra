@@ -1,23 +1,32 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 // import './Beer.scss';
 import './Beer.css';
 import cerveza from '../../img/cerveza.png';
+import { useDispatch } from 'react-redux';
+import { getDetail } from '../../actions';
 
-const Beer = ({id, image, name, ibu, og}) => {
+const Beer = ({ id, image, name, ibu, og }) => {
+	const dispatch = useDispatch();
+	const history = useHistory();
 
-    return ( 
-        <Link className="beerLink" to={`/beers/${id}`}>      
-            <div className="beer">
-                <img alt="birrita" src={cerveza} width="150px"></img>            
-                <h2 id="name">{name}</h2>
-                <br/>
-                <span id="ibu">ibu: {ibu} </span>
-                <span id="abv">abv: {og}</span>                
-            </div>   
-        </Link>      
-    
-    )
+	async function goToDetail() {
+		await dispatch(getDetail(id))
+		history.push(`/detailBeer/${id}`)
+	}
+
+	return (
+		<button className="beerLink" onClick={goToDetail}>
+			<div className="beer">
+				<img alt="birrita" src={cerveza} width="150px"></img>
+				<h2 id="name">{name}</h2>
+				<br />
+				<span id="ibu">ibu: {ibu} </span>
+				<span id="abv">abv: {og}</span>
+			</div>
+		</button>
+
+	)
 }
 
 export default Beer
