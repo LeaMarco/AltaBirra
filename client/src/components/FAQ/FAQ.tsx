@@ -16,11 +16,6 @@ export default function FAQ() {
                     <li>  ¿Son obligatorios Los Descuentos? </li>
                     <li>  ¿En Que Otra Cosa Podemos Ayudarte? </li>
                 </ul>
-                
-                <div>
-                    <h3>¿ En que podemos ayudarte ?</h3>
-                    <textarea name="comentarios" >Escribe aquí tus comentarios</textarea>
-                </div>
             </div>
         </div>
     )

@@ -29,7 +29,8 @@ export default function DetailBeer() {
 	return (
 
 		<div className={Style.post}>
-			{/* {console.log(price)} */}
+			
+			{console.log(info)}
 			{/* {
 				discount > 0? <h1>${discount}</h1>: <h1>Lo siento el Descuento se de "{discount}" :l</h1>
 			}  */}
@@ -99,7 +100,7 @@ export default function DetailBeer() {
 						<div className={Style.redes} >
 							<a className={Style.aCompartir} target="_blank" href={`http://twitter.com/share?text=Me gusta la ${info?.beer?.name} de AltaBirra &url=${window.location.href}`}><img src="https://img.icons8.com/color/452/twitter--v1.png" width="30px" /></a>
 							<a className={Style.aCompartir} target="_blank" href={`http://www.facebook.com/sharer.php?u=${window.location.href}`}><img src="https://img1.freepng.es/20171221/wgw/facebook-picture-5a3c060eccfa84.1675788915138831508396.jpg" width="25px" /></a>
-							<a className={Style.aCompartir} target="_blank" href={`https://wa.me/?text=${window.location.href}`}><img src="http://assets.stickpng.com/images/580b57fcd9996e24bc43c543.png" width="30px" /></a>
+							<a className={Style.aCompartir} target="_blank" href={`https://wa.me/?text=${window.location.href}.com Entra la concha de tu hermana`}><img src="http://assets.stickpng.com/images/580b57fcd9996e24bc43c543.png" width="30px" /></a>
 						</div>
 					</div>
 				</div>

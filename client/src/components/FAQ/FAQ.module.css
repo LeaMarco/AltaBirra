@@ -4,3 +4,8 @@
     align-items: flex-start;
     /* list-style: none; */
 }
+
+.Cajaloca{
+    width: max-content;
+    resize: none;
+}
