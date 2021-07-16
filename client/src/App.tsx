@@ -9,6 +9,7 @@ import { Route } from "react-router-dom";
 import DetailBeer from './components/DetailBeer/DetailBeer';
 import Categories from "./components/Categories/Categories";
 import Cart from './components/Cart/Cart';
+import Compra from './components/Compra/Compra';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
       <Route exact path="/detailBeer/:id" component={DetailBeer} />
       <Route exact path="/categories" component={Categories} />
       <Route exact path="/cart/:id" component={Cart} />
+      <Route exact path="/compra/:id" component={Compra} />
     </div>
   )
 }

@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { NextFunction, Request, Response, Router } from "express";
-import mercadopago from "mercadopago"
+import mercadopago = require("mercadopago");
 import { MercadoPago } from "mercadopago/interface";
 import { CreatePreferencePayload } from "mercadopago/models/preferences/create-payload.model";
 import { title } from "process";
@@ -20,12 +20,11 @@ interface item{
 
 
 router.post("/", (req: Request, res: Response) => {
-    console.log(req.body,"DATAAA2222")
     const {data}:any = req.body
-    console.log(data,"DATAAA33333333333333")
-    mercadopago.configurations.setAccessToken("TEST-6705724658801749-071415-219eZiN2tzLnyxKgvwAvMKgAny5qTvDDgtd-30499530");
+    // console.log(data.data,"DATA Merpa ruta")
+    mercadopago.configurations.setAccessToken("TEST-6705724658801749-071415-219e5d5e25d43808d51486e102a0e9ed-30499530");
       let preference:CreatePreferencePayload = {
-          items: data,
+          items: data.data,
           back_urls: { ////////urls donde te redirige en base a lo que respondio mp, puede
               "success": "http://localhost:8080/feedback",
               "failure": "http://localhost:8080/feedback",
