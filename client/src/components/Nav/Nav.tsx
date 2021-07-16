@@ -34,7 +34,7 @@ export default function Nav() {
 
   async function handleChange(event) {
     setSearchInput(event.target.value);
-    let temp = await axios.get("http://localhost:3001/autocomplete", { params: { search: event.target.value } });
+    let temp = await axios.get("https://altabirra.herokuapp.com/autocomplete", { params: { search: event.target.value } });
     setAutocomplete(temp.data);
   }
 

@@ -22,13 +22,13 @@ const Card = ({ title, id, price, image, rating, discount, ibu, abv }) => {
 	}
 
 	async function addToFavorite() {
-		await axios.post('http://localhost:3001/addFavorite', { data: { "username": "TestUser", "postId": id } });
+		await axios.post('https://altabirra.herokuapp.com/addFavorite', { data: { "username": "TestUser", "postId": id } });
 		dispatch(getFavoritePosts("TestUser"));
 		setIsFavorite(true);
 	}
 
 	async function removeFavorite() {
-		await axios.delete('http://localhost:3001/removeFavorite', { data: { "username": "TestUser", "postId": id } });
+		await axios.delete('https://altabirra.herokuapp.com/removeFavorite', { data: { "username": "TestUser", "postId": id } });
 		dispatch(getFavoritePosts("TestUser"));
 		setIsFavorite(false);
 	}

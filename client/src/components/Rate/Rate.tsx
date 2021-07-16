@@ -13,7 +13,7 @@ export default function Rate() {
 
 	async function handleSubmit(event) {
 		event.preventDefault();
-		await axios.put("http://localhost:3001/ratePost", { data: { postId: 252, userId: 2, rating: beer, comment: mensaje } });
+		await axios.put("https://altabirra.herokuapp.com/ratePost", { data: { postId: 252, userId: 2, rating: beer, comment: mensaje } });
 		let button = document.getElementById(`${event.target.name}Button`);
 		if (button) button.style.visibility = "hidden";
 	}

@@ -29,13 +29,13 @@ export default function DetailBeer() {
 
 
 	async function addToFavorite() {
-		await axios.post('http://localhost:3001/addFavorite', { data: { "username": "TestUser", "postId": id } });
+		await axios.post('https://altabirra.herokuapp.com/addFavorite', { data: { "username": "TestUser", "postId": id } });
 		dispatch(getFavoritePosts("TestUser"));
 		setIsFavorite(true);
 	}
 
 	const addToCart = async () => {
-			const response = await axios.put(`http://localhost:3001/addToCart`, {params:{"username": "TestUser", "postId": parseInt(id), "quantity":cantidad}})
+			const response = await axios.put(`https://altabirra.herokuapp.com/addToCart`, {params:{"username": "TestUser", "postId": parseInt(id), "quantity":cantidad}})
 			return(response.data)
 		
 	}
@@ -43,7 +43,7 @@ export default function DetailBeer() {
 	
 
 	async function removeFavorite() {
-		await axios.delete('http://localhost:3001/removeFavorite', { data: { "username": "TestUser", "postId": id } });
+		await axios.delete('https://altabirra.herokuapp.com/removeFavorite', { data: { "username": "TestUser", "postId": id } });
 		dispatch(getFavoritePosts("TestUser"));
 		setIsFavorite(false);
 	}
