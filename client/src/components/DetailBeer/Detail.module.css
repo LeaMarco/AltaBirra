@@ -1,0 +1,35 @@
+.post{
+    background-color: grey;
+}
+
+.fav {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    width: fit-content;
+    margin: 1vh auto;
+    color: black;
+    transform: scale(1.5);
+    transition: 1000ms;
+}
+  
+.fav:hover {
+    transform: scale(2);
+    color: red;
+}
+
+.unfav {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    width: fit-content;
+    margin: 1vh auto;
+    color: red;
+    transform: scale(1.5);
+    transition: 1000ms;
+}
+  
+.unfav:hover {
+    transform: scale(2);
+    color: black;
+}

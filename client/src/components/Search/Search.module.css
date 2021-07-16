@@ -1,0 +1,39 @@
+.container {
+  display: flex;
+  min-height: 85%;
+}
+
+.subcontainer {
+  background-color: darkgrey;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: fit-content;
+}
+
+.orderBar {
+  margin: 1rem;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.filtersTab {
+  display: flex;
+  align-items: flex-start;
+}
+
+.filtersTab > button {
+  height: 100%;
+  width: 3vw;
+  border: none;
+  transition: 250ms;
+  border-left: 1px solid lightgray;
+  font-size: large;
+}
+
+.filtersTab > button:hover {
+  background-color: lightgray;
+  box-shadow: 0.3rem 0rem 1rem rgba(0, 0, 0, 0.699);
+  font-size: x-large;
+}

@@ -1,0 +1,144 @@
+.NavBar {
+  background-image: repeating-linear-gradient(
+      45deg,
+      rgba(97, 97, 97, 0.1) 0px,
+      rgba(97, 97, 97, 0.1) 2px,
+      transparent 2px,
+      transparent 4px
+    ),
+    linear-gradient(90deg, rgb(43, 43, 43), rgb(43, 43, 43));
+  width: 100%;
+  height: 15vh;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+}
+
+.searchBar {
+  width: 80%;
+  height: 3vh;
+  background-color: rgb(122, 122, 122);
+  font-size: 16px;
+  border-radius: 2px;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 6px 6px 35px;
+  margin-top: 3vh;
+}
+
+.form {
+  height: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+}
+
+.searchInput {
+  width: 100%;
+  height: 1.5rem;
+  border: none;
+  background-color: rgb(122, 122, 122);
+  color: black;
+}
+
+.searchInput::placeholder {
+  font-size: 15px;
+  color: black;
+}
+
+.searchInput:focus {
+  width: 100%;
+  height: 1.5rem;
+  border: none;
+  filter: brightness(130%);
+  outline: none;
+  transition: 400ms;
+}
+
+.logo {
+  height: 7vh;
+  margin-left: 5vw;
+  margin-top: 3vh;
+  filter: invert(100%);
+}
+
+.button {
+  color: rgb(231, 231, 231);
+  text-decoration: none;
+  padding: 5px 20px 0px 10px;
+  font-size: 2vh;
+}
+
+.button:hover {
+  text-shadow: 0px 0px 2px #ffffff;
+  color: white;
+  transition: 500ms;
+}
+
+.buttonEnter {
+  margin-left: 2vw;
+  background-color:tomato;
+  border-radius: 2px;
+  color: white;
+  text-decoration: none;
+  padding: 3px 15px 3px 15px;
+  font-size: 2vh;
+}
+
+.buttonEnter:hover {
+  filter: brightness(130%);
+  transition: 400ms;
+}
+
+.buttonsRight {
+  margin-top: 3.5vh;
+  margin-right: 5vw;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.autocomplete {
+  visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.autocomplete > input {
+  cursor: pointer;
+  border: none;
+}
+
+.searchInput:hover > .autocomplete {
+  visibility: visible;
+  cursor: pointer;
+}
+
+.lupa {
+  background-color: inherit;
+  border: none;
+  cursor: pointer;
+}
+
+.inputContainer {
+  display: flex;
+}
+
+.unfav {
+  background-color: transparent;
+  transform: scale(1.5);
+  border: none;
+  cursor: pointer;
+  margin: auto;
+  color: red;
+  transition: color 2000ms;
+}
+
+.unfav:hover {
+  color: grey;
+}

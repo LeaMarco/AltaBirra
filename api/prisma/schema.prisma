@@ -1,0 +1,178 @@
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+generator client {
+    provider        = "prisma-client-js"
+    previewFeatures = ["orderByRelation"]
+}
+
+model Post {
+    id          Int      @id @default(autoincrement())
+    title       String
+    description String
+    image       String
+    rating      Float    @default(0)
+    stock       Int
+    shipping    Boolean
+    visibility  Boolean
+    createdAt   DateTime @default(now())
+
+    beerId Int
+    beer   Beer @relation(fields: [beerId], references: [id])
+
+    userId Int
+    user   User @relation(fields: [userId], references: [id])
+
+    countableId Int
+    countable   Countable @relation(fields: [countableId], references: [id])
+
+    carts     PostsOnCart[]
+    favorites PostsOnFavorites[]
+
+    transactionId Transaction[]
+
+    review Review[]
+}
+
+model Role {
+    id   Int    @id @default(autoincrement())
+    name String @unique
+
+    userId User[]
+}
+
+model User {
+    id       Int     @id @default(autoincrement())
+    username String  @unique
+    email    String  @unique
+    name     String
+    password String
+    premium  Boolean @default(false)
+
+    ///relacion de muchos a uno con TABLA ROLE
+    roleId        Int
+    role          Role         @relation(fields: [roleId], references: [id])
+    cartId        Int
+    cart          Cart         @relation(fields: [cartId], references: [id])
+    favoriteId    Int
+    favorite      Favorite     @relation(fields: [favoriteId], references: [id])
+    postId        Post[]
+    transactionId Transaction?
+    review        Review[]
+}
+
+model Transaction {
+    id        Int      @id @default(autoincrement())
+    price     Float
+    createdAt DateTime @default(now())
+
+    /////relacion de muchos (transacciones) a uno (usuario)
+    buyerId Int
+    buyer   User @relation(fields: [buyerId], references: [id])
+
+    postId Int
+    post   Post @relation(fields: [postId], references: [id])
+}
+
+model Cart {
+    id Int @id @default(autoincrement())
+
+    //relacion uno a uno con usuario (fk)
+    userId User?
+    posts  PostsOnCart[]
+}
+
+model PostsOnCart {
+    amount Int  @default(1)
+    postId Int
+    post   Post @relation(fields: [postId], references: [id])
+    cartId Int
+    cart   Cart @relation(fields: [cartId], references: [id])
+
+    @@id([cartId, postId])
+}
+
+model Beer {
+    id       Int      @id @default(autoincrement())
+    name     String
+    abv      Int
+    og       Int?
+    ibu      Int
+    calories Int?
+    dryHop   Boolean?
+    volume   Int
+
+    genericTypeId  Int
+    genericType    GenericType  @relation(fields: [genericTypeId], references: [id])
+    specificTypeId Int
+    specificType   SpecificType @relation(fields: [specificTypeId], references: [id])
+    postId         Post?
+}
+
+model GenericType {
+    id             Int            @id @default(autoincrement())
+    type           String         @unique
+    description    String
+    beerId         Beer[]
+    specificTypeId SpecificType[]
+}
+
+model SpecificType {
+    id          Int    @id @default(autoincrement())
+    type        String @unique
+    description String
+    group       Group
+
+
+    beerId        Beer[]
+    genericTypeId Int
+    genericType   GenericType @relation(fields: [genericTypeId], references: [id])
+}
+
+enum Group {
+    ALE
+    LAGER
+    LAMBIC
+    OTRA
+}
+
+model Countable {
+    id         Int      @id @default(autoincrement())
+    price      Float
+    discount   Int
+    expireDate DateTime @default(now())
+
+    postId Post?
+}
+
+model Favorite {
+    id Int @id @default(autoincrement())
+
+    //relacion uno a uno con usuario (fk)
+    userId User?
+    posts  PostsOnFavorites[]
+}
+
+model PostsOnFavorites {
+    postId     Int
+    post       Post     @relation(fields: [postId], references: [id])
+    favoriteId Int
+    favorite   Favorite @relation(fields: [favoriteId], references: [id])
+
+    @@id([favoriteId, postId])
+}
+
+model Review {
+    id      Int    @id @default(autoincrement())
+    rating  Float
+    comment String
+
+    postId Int
+    post   Post @relation(fields: [postId], references: [id])
+
+    userId Int
+    user   User @relation(fields: [userId], references: [id])
+    @@unique([userId, postId])
+}
