@@ -23,7 +23,8 @@
     "morgan": "^1.10.0",
     "nodemon": "^2.0.9",
     "prisma": "^2.26.0",
-    "ts-node": "^10.0.0"
+    "ts-node": "^10.0.0",
+    "node": "^16.5.0"
   },
   "dependencies": {
     "@prisma/client": "^2.26.0",
