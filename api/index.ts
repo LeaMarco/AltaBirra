@@ -1,5 +1,5 @@
 import app from './src/app';
 
-app.listen(3001, () => {
+app.listen(process.env.PORT, () => {
     console.log("Corriendo en https://localhost:3001/");
 })
