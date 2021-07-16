@@ -1,4 +1,4 @@
-import { Post, QueryTypes } from "../actions/index";
+import { ActionTypes, Post, QueryTypes } from "../actions/index";
 import { Action } from '../actions/index';
 
 const searchInitialState: Post[] = [];

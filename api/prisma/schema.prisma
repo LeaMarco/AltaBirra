@@ -13,8 +13,8 @@ model Post {
     title       String
     description String
     image       String
+    rating      Float    @default(0)
     stock       Int
-    rating      Int
     shipping    Boolean
     visibility  Boolean
     createdAt   DateTime @default(now())
@@ -32,6 +32,8 @@ model Post {
     favorites PostsOnFavorites[]
 
     transactionId Transaction[]
+
+    review Review[]
 }
 
 model Role {
@@ -58,6 +60,7 @@ model User {
     favorite      Favorite     @relation(fields: [favoriteId], references: [id])
     postId        Post[]
     transactionId Transaction?
+    review        Review[]
 }
 
 model Transaction {
@@ -82,11 +85,12 @@ model Cart {
 }
 
 model PostsOnCart {
-    amount Int @default(1)
+    amount Int  @default(1)
     postId Int
     post   Post @relation(fields: [postId], references: [id])
     cartId Int
     cart   Cart @relation(fields: [cartId], references: [id])
+
     @@id([cartId, postId])
 }
 
@@ -158,4 +162,17 @@ model PostsOnFavorites {
     favorite   Favorite @relation(fields: [favoriteId], references: [id])
 
     @@id([favoriteId, postId])
+}
+
+model Review {
+    id      Int    @id @default(autoincrement())
+    rating  Float
+    comment String
+
+    postId Int
+    post   Post @relation(fields: [postId], references: [id])
+
+    userId Int
+    user   User @relation(fields: [userId], references: [id])
+    @@unique([userId, postId])
 }
