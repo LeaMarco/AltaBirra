@@ -14,7 +14,6 @@ function Cart() {
   const [merpastate, setMerpa] = useState("");
 
 
-  console.log(id, "IDDDDDDDDDDDDDDDD")
   let cartIdparsed = parseInt(id, 10);
 
   useEffect(() => {

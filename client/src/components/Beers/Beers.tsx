@@ -12,7 +12,6 @@ const Beers = () => {
   }, [dispatch]);
 
   const usersPremium = useSelector((state) => state["usersPremium"]);
-  console.log(usersPremium,"usersPremium")
   // const data = {
   //   id: usersPremium.id,
   //   image: 'IMAGEN',

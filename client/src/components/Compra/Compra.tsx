@@ -13,16 +13,16 @@ export function Compra() {
     const { id }: any = useParams();
     const carts: any = useSelector((state: RootState) => state.cart);
     const [merpastate, setMerpa] = useState("");
-    console.log(merpastate, "merpastate COMPRA")
     useScript(merpastate)
-
+    
     useEffect(() => {
         dispatch(getCart(id));
     }, []);
+    console.log(carts, "merpastate COMPRA")
 
     useEffect(() => {
         if (carts) generarboton(carts)
-    }, [carts]);
+    }, [id]);
 
     return (
         <div>
