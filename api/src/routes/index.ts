@@ -17,13 +17,19 @@ import addFavorite from "./addFavorite";
 import getFavorites from "./getFavorites";
 import deleteAllCart from "./deleteAllCart";
 import mercadoPago from "./mercadoPago";
+<<<<<<< HEAD
 import removeFavorite from "./removeFavorite";
 import ratePost from "./ratePost";
 import sellHistory from "./sellHistory";
 import addToCart from './addToCart';
+=======
+import autentication from "../autentication/routes/auth"
+>>>>>>> loginSocialYLocal
 
 const router = Router();
 
+
+router.use("/auth/", autentication)
 router.use("/register", register);
 router.use("/beer", beers);
 router.use("/post", createPost);
@@ -46,5 +52,6 @@ router.use("/checkout", mercadoPago);
 router.use("/removeFavorite", removeFavorite);
 router.use("/ratePost", ratePost);
 router.use("/sellHistory", sellHistory);
+
 
 export default router;

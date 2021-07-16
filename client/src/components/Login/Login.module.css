@@ -43,6 +43,7 @@
 }
 
 .imgSm {
+  width: 45%;
   border-radius: 10px;
   margin-bottom: 5px;
   box-shadow: 0px 0px 0.2rem rgba(0, 0, 0, 0.548);
