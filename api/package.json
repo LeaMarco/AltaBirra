@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "start": "nodemon -L",
+    "startnodemon": "nodemon -L",
+    "start": "ts-node .",
     "test": "echo \"Error: no test specified\" && exit 1",
     "seed": "ts-node ./prisma/seed.ts",
     "resetdb": "npx prisma migrate reset --skip-seed --skip-generate; npx prisma db push --skip-generate;  npx prisma generate; npm run seed;"
