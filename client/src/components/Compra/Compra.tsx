@@ -29,7 +29,9 @@ export function Compra() {
             <ul>
                 {Array.isArray(carts) ? (
                     carts.map((post) => (
-                        <PostsCompra username={post.cart?.userId.username} cartId={id} postId={post.post.id} postTitle={post.post.title} description={post.post.description} amount={post.amount} countable={post.post.countable} />
+                        <div>
+                            <PostsCompra username={post.cart?.userId.username} cartId={id} postId={post.post.id} postTitle={post.post.title} description={post.post.description} amount={post.amount} countable={post.post.countable} />
+                        </div>
                     ))
                 ) : (
                     <p>No hay posts</p>
