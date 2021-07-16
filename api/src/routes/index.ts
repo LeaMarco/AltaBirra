@@ -20,6 +20,7 @@ import mercadoPago from "./mercadoPago";
 import removeFavorite from "./removeFavorite";
 import ratePost from "./ratePost";
 import sellHistory from "./sellHistory";
+import addToCart from './addToCart';
 
 const router = Router();
 
@@ -29,6 +30,7 @@ router.use("/post", createPost);
 router.use("/post", getSearchedPost);
 router.use("/transaction", transaction);
 router.use("/cart", cart);
+router.use("/addToCart", addToCart);
 router.use("/cart", getCart);
 router.use("/edit", editPost);
 router.use("/delete", deletePost);
