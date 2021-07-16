@@ -8,6 +8,7 @@ import EditPost from "./components/Post/EditPost";
 import { Route } from "react-router-dom";
 import DetailBeer from './components/DetailBeer/DetailBeer';
 import Categories from "./components/Categories/Categories";
+import FootHelp from "./components/FootHelp/FootHelp";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <Route exact path="/editpost/:id" component={EditPost} />
       <Route exact path="/detailBeer/:id" component={DetailBeer} />
       <Route exact path="/categories" component={Categories} />
+      <Route path="/" component={FootHelp} />
     </div>
   )
 }

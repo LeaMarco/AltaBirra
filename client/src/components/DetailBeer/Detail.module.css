@@ -1,3 +1,172 @@
-#Post{
-    background-color: grey;
+.borederTop{
+    border-top: 4px solid black;
+}
+.post {
+    /* background: radial-gradient(circle, rgba(115,69,0,1) 8%, rgba(252,238,70,1) 68%); */
+    align-items: center;
+    background-image: repeating-linear-gradient(135deg, rgba(0, 0, 0, 0.056) 0px, rgba(0, 0, 0, 0.487) 2px, transparent 2px, transparent 4px), linear-gradient(45deg, rgba(0, 0, 0, 0.78), rgb(170, 170, 170));
+}
+
+.redes {
+    display: flex;
+    justify-content: space-around;
+}
+
+.compartir {
+    /* height: 40px; */
+    background-color: rgb(5, 116, 101);
+}
+
+.hrSup {
+    width: 90%;
+
+}
+
+.aCompartir {
+    margin: 2px;
+    padding: 1rem;
+}
+
+.hrInf {
+    width: 60%;
+}
+
+.fsColor {
+    font-size: 20px;
+    color: white;
+}
+
+.imagen{
+    padding: 2rem;
+    width: 200px;
+    height: 500px;
+}
+
+.img {
+    padding: 1rem;
+    padding-left: 18rem;
+    /* background: rgb(245,245,245); */
+    background: radial-gradient(circle, rgba(245, 245, 245, 0.741) 3%, rgb(209, 197, 59) 45%, rgba(115, 69, 0, 1) 97%);
+
+    /* border: groove 1em black; */
+    /* border-radius: 0em 0em 0em 0em; */
+    border-right: 4px solid;
+    width: 500px;
+    height: 600px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+
+.botonFav {
+    float: right;
+    padding-right: 7px ;
+    padding-top: 2px;
+    width: 50px;
+    height: 48px;
+    box-shadow: 6px 6px 3px 2px rgb(0 0 0 / 20%);
+    border-radius: 20%;
+    font-size: 30px;
+    color: white;
+    /* text-decoration: red; */
+    background-color: red;
+    transition: 800ms;
+}
+
+.botonFav:hover {
+    float: right;
+    transition: 800ms;
+    box-shadow: 6px 6px 3px 2px rgb(0 0 0 / 20%);
+    border-radius: 100%;
+    color: rgb(255, 78, 78);
+    background-color: rgb(255, 255, 255);
+}
+
+.asdf {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+
+.asd {
+    display: flex;
+    flex-direction: row;
+}
+
+.marg {
+    /* margin-top: 10px; */
+    /* border: groove 1em rgb(255, 225, 0);
+    border-radius: 2em; */
+    width: 700px;
+    height: 500px;
+}
+
+.progress {
+    width: 50rem;
+    height: 2rem;
+    color: lightyellow;
+}
+
+.subTitle {
+    background-image: linear-gradient(292deg, rgba(150, 150, 150, 0.03) 0%, rgba(150, 150, 150, 0.03) 20%, rgba(151, 151, 151, 0.03) 20%, rgba(151, 151, 151, 0.03) 40%, rgba(215, 215, 215, 0.03) 40%, rgba(215, 215, 215, 0.03) 60%, rgba(254, 254, 254, 0.03) 60%, rgba(254, 254, 254, 0.03) 80%, rgba(112, 112, 112, 0.03) 80%, rgba(112, 112, 112, 0.03) 100%), linear-gradient(62deg, rgba(34, 34, 34, 0.03) 0%, rgba(34, 34, 34, 0.03) 20%, rgba(171, 171, 171, 0.03) 20%, rgba(171, 171, 171, 0.03) 40%, rgba(206, 206, 206, 0.03) 40%, rgba(206, 206, 206, 0.03) 60%, rgba(210, 210, 210, 0.03) 60%, rgba(210, 210, 210, 0.03) 80%, rgba(69, 69, 69, 0.03) 80%, rgba(69, 69, 69, 0.03) 100%), linear-gradient(314deg, rgba(235, 235, 235, 0.03) 0%, rgba(235, 235, 235, 0.03) 20%, rgba(254, 254, 254, 0.03) 20%, rgba(254, 254, 254, 0.03) 40%, rgba(178, 178, 178, 0.03) 40%, rgba(178, 178, 178, 0.03) 60%, rgba(211, 211, 211, 0.03) 60%, rgba(211, 211, 211, 0.03) 80%, rgba(73, 73, 73, 0.03) 80%, rgba(73, 73, 73, 0.03) 100%), linear-gradient(32deg, rgba(182, 182, 182, 0.01) 0%, rgba(182, 182, 182, 0.01) 12.5%, rgba(208, 208, 208, 0.01) 12.5%, rgba(208, 208, 208, 0.01) 25%, rgba(178, 178, 178, 0.01) 25%, rgba(178, 178, 178, 0.01) 37.5%, rgba(143, 143, 143, 0.01) 37.5%, rgba(143, 143, 143, 0.01) 50%, rgba(211, 211, 211, 0.01) 50%, rgba(211, 211, 211, 0.01) 62.5%, rgba(92, 92, 92, 0.01) 62.5%, rgba(92, 92, 92, 0.01) 75%, rgba(56, 56, 56, 0.01) 75%, rgba(56, 56, 56, 0.01) 87.5%, rgba(253, 253, 253, 0.01) 87.5%, rgba(253, 253, 253, 0.01) 100%), linear-gradient(247deg, rgba(103, 103, 103, 0.02) 0%, rgba(103, 103, 103, 0.02) 12.5%, rgba(240, 240, 240, 0.02) 12.5%, rgba(240, 240, 240, 0.02) 25%, rgba(18, 18, 18, 0.02) 25%, rgba(18, 18, 18, 0.02) 37.5%, rgba(38, 38, 38, 0.02) 37.5%, rgba(38, 38, 38, 0.02) 50%, rgba(246, 246, 246, 0.02) 50%, rgba(246, 246, 246, 0.02) 62.5%, rgba(9, 9, 9, 0.02) 62.5%, rgba(9, 9, 9, 0.02) 75%, rgba(167, 167, 167, 0.02) 75%, rgba(167, 167, 167, 0.02) 87.5%, rgba(86, 86, 86, 0.02) 87.5%, rgba(86, 86, 86, 0.02) 100%), linear-gradient(90deg, hsl(194, 0%, 10%), hsl(194, 0%, 10%));
+    color: white;
+    padding: 10px;
+    text-shadow: 2px 2px black;
+    border-bottom: 1px solid black;
+    border: 4px solid black;
+}
+
+.desType {
+    /* align-items: center; */
+    /* align-self: center; */
+    /* border: 1px solid black; */
+    align-content: center;
+    /* width: 100px; */
+}
+
+.button {
+    width: 200px;
+    background: radial-gradient(circle, rgba(245, 245, 245, 0.741) 0%, rgb(209, 197, 59) 0%, rgba(115, 69, 0, 1) 1%);
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition: 500ms;
+}
+
+.button:hover {
+    width: 210px;
+    background: radial-gradient(circle, rgba(245, 245, 245, 0.741) 5%, rgb(209, 197, 59) 65%, rgba(115, 69, 0, 1) 90%);
+    border: none;
+    color: black;
+    padding: 15px 32px;
+    font-size: larger;
+    font-weight: bolder;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition: 500ms;
+}
+
+.fav{
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-between; */
+    padding-left: 17rem;
+}
+
+.fsColorP {
+    font-size: 26px;
+    color: white;
+}
+
+.oldPrice{
+    font-size: 26px;
+    color: rgba(255, 255, 255, 0.481);
 }
