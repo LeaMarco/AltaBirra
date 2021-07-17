@@ -8,7 +8,7 @@ import CreateManyPost from "./postCreator";
 const Home = () => {
   return (
     <div className="Beers-container">
-      <button onClick={() => CreateManyPost(5)}> CREAR</button>
+      {/* <button onClick={() => CreateManyPost(5)}> CREAR</button> */}
 
       <Beers />
       <BeersVot />
