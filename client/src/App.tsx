@@ -6,11 +6,14 @@ import "./App.css";
 import Post from "./components/Post/Post";
 import EditPost from "./components/Post/EditPost";
 import { Route } from "react-router-dom";
-import DetailBeer from './components/DetailBeer/DetailBeer';
+import DetailBeer from "./components/DetailBeer/DetailBeer";
 import Categories from "./components/Categories/Categories";
-import Cart from './components/Cart/Cart';
-import Compra from './components/Compra/Compra';
+import Cart from "./components/Cart/Cart";
+import Compra from "./components/Compra/Compra";
 import Rate from "./components/Rate/Rate";
+import { BeeryButton } from "./components/styled_components";
+import { developerTools } from "./developerTools";
+developerTools({ consoleInfo: true, showMargins: true });
 
 function App() {
   return (
@@ -26,8 +29,7 @@ function App() {
       <Route exact path="/compra/:id" component={Compra} />
       <Route exact path="/calificar" component={Rate} />
     </div>
-  )
+  );
 }
 
 export default App;
-

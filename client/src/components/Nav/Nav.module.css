@@ -21,7 +21,6 @@
   background-color: rgb(122, 122, 122);
   font-size: 16px;
   border-radius: 2px;
-  font-family: inherit;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -82,7 +81,7 @@
 
 .buttonEnter {
   margin-left: 2vw;
-  background-color:tomato;
+  background-color: tomato;
   border-radius: 2px;
   color: white;
   text-decoration: none;

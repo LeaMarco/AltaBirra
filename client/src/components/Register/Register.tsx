@@ -199,13 +199,6 @@ const Register: React.FunctionComponent<{}> = (props) => {
     setErrors(validate(newState, errors, e));
     // setErrors(newState);
     setData(newState);
-
-<<<<<<< HEAD
-  
-=======
-    console.log(data.userName);
-    // console.log(errors);
->>>>>>> loginSocialYLocal
   };
 
   return (

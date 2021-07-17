@@ -20,30 +20,9 @@ interface item {
 
 
 router.post("/", (req: Request, res: Response) => {
-<<<<<<< HEAD
-    const {data}:any = req.body
-    mercadopago.configurations.setAccessToken("TEST-6705724658801749-071415-219e5d5e25d43808d51486e102a0e9ed-30499530");
-      
-    let preference:CreatePreferencePayload = {
-          items: data.data,
-          back_urls: { ////////urls donde te redirige en base a lo que respondio mp, puede
-              "success": "http://localhost:8080/feedback",
-              "failure": "http://localhost:8080/feedback",
-              "pending": "http://localhost:8080/feedback"
-          },
-          auto_return: "approved",
-      };
-      mercadopago.preferences.create(preference)
-          .then(function (response:any) {
-              res.json({id : response.body.id})
-          }).catch(function (error:any) {
-              console.log(error);
-          });
-  });
-=======
     const { data }: any = req.body
-    // console.log(data.data,"DATA Merpa ruta")
     mercadopago.configurations.setAccessToken("TEST-6705724658801749-071415-219e5d5e25d43808d51486e102a0e9ed-30499530");
+
     let preference: CreatePreferencePayload = {
         items: data.data,
         back_urls: { ////////urls donde te redirige en base a lo que respondio mp, puede
@@ -52,7 +31,7 @@ router.post("/", (req: Request, res: Response) => {
             "pending": "http://localhost:8080/feedback"
         },
         auto_return: "approved",
-    };//
+    };
     mercadopago.preferences.create(preference)
         .then(function (response: any) {
             res.json({ id: response.body.id })
@@ -60,7 +39,6 @@ router.post("/", (req: Request, res: Response) => {
             console.log(error);
         });
 });
->>>>>>> loginSocialYLocal
 
 router.get('/feedback', function (req: Request, res: Response) {
     res.json({

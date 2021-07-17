@@ -17,14 +17,11 @@ import addFavorite from "./addFavorite";
 import getFavorites from "./getFavorites";
 import deleteAllCart from "./deleteAllCart";
 import mercadoPago from "./mercadoPago";
-<<<<<<< HEAD
 import removeFavorite from "./removeFavorite";
 import ratePost from "./ratePost";
 import sellHistory from "./sellHistory";
 import addToCart from './addToCart';
-=======
 import autentication from "../autentication/routes/auth"
->>>>>>> loginSocialYLocal
 
 const router = Router();
 

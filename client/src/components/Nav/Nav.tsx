@@ -34,7 +34,9 @@ export default function Nav() {
 
   async function handleChange(event) {
     setSearchInput(event.target.value);
-    let temp = await axios.get("http://localhost:3001/autocomplete", { params: { search: event.target.value } });
+    let temp = await axios.get("http://localhost:3001/autocomplete", {
+      params: { search: event.target.value },
+    });
     setAutocomplete(temp.data);
   }
 
@@ -68,22 +70,23 @@ export default function Nav() {
                 placeholder="Buscar"
                 className={style.searchInput}
                 value={searchInput}
-                onChange={event => handleChange(event)}
+                onChange={(event) => handleChange(event)}
                 onSubmit={(event) => handleSubmit(event)}
               />
             </div>
-            {
-              searchInput && autocomplete.length
-                ?
-                <div className={style.autocomplete}>
-                  {
-                    autocomplete?.map(({ title }) => {
-                      return <input readOnly value={title} onClick={event => handleAutocomplete(event)} />
-                    })
-                  }
-                </div>
-                : null
-            }
+            {searchInput && autocomplete.length ? (
+              <div className={style.autocomplete}>
+                {autocomplete?.map(({ title }) => {
+                  return (
+                    <input
+                      readOnly
+                      value={title}
+                      onClick={(event) => handleAutocomplete(event)}
+                    />
+                  );
+                })}
+              </div>
+            ) : null}
           </form>
         </div>
         <div className={style.buttons}>
@@ -115,7 +118,7 @@ export default function Nav() {
             >
               Mis Compras
             </Link>
-            
+
             <Link
               to="/"
               className={style.buttonEnter}
@@ -146,6 +149,7 @@ export default function Nav() {
             <button className={style.buttonEnter} onClick={toogleEnter}>
               Entrar
             </button>
+
             <Modal isOpen={isEnterOpen} handleClose={toogleEnter}>
               <Login />
             </Modal>
@@ -153,6 +157,7 @@ export default function Nav() {
             <button className={style.buttonEnter} onClick={toogleRegister}>
               Registrarme
             </button>
+
             <Modal isOpen={isRegisterOpen} handleClose={toogleRegister}>
               <Register />
             </Modal>
