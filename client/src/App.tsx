@@ -11,6 +11,7 @@ import Categories from "./components/Categories/Categories";
 import Cart from './components/Cart/Cart';
 import Compra from './components/Compra/Compra';
 import Rate from "./components/Rate/Rate";
+import Historial from "./components/History/History";
 
 function App() {
   return (
@@ -24,7 +25,8 @@ function App() {
       <Route exact path="/categories" component={Categories} />
       <Route exact path="/cart/:id" component={Cart} />
       <Route exact path="/compra/:id" component={Compra} />
-      <Route exact path="/calificar" component={Rate} />
+      <Route exact path="/calificar/:id" component={Rate} />
+      <Route exact path="/historial" component={Historial} />
     </div>
   )
 }

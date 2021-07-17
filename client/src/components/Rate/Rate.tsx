@@ -2,9 +2,11 @@ import React from "react";
 import { useState } from "react";
 import Style from "./Rate.module.css";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 export default function Rate() {
 	const [beer, setBeer] = useState<number>(0);
+	const id: number = +useParams<{ id: string }>()?.id;
 
 	function handleChange(event) {
 		setBeer(event.target.value.length);
@@ -12,7 +14,7 @@ export default function Rate() {
 
 	async function handleSubmit(event) {
 		event.preventDefault();
-		await axios.put("http://localhost:3001/ratePost", { data: { postId: 22, userId: 2, rating: beer, comment: "Buena cerveza" } });
+		await axios.put("http://localhost:3001/ratePost", { data: { postId: id, userId: 2, rating: beer, comment: "Buena cerveza" } });
 		let button = document.getElementById(`${event.target.name}Button`);
 		if (button) button.style.visibility = "hidden";
 	}
