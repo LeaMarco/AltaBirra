@@ -9,7 +9,7 @@ interface Transaction {
 }
 
 router.get("/", async (req: Request, res: Response, next: NextFunction) => {
-	const { sellerId }: Transaction = req.body;
+	const sellerId: number = Number(req.query.userId);
 	const history = await prisma.transaction.findMany({
 		where: {
 			post: {
