@@ -2,11 +2,11 @@ import express, { Application } from 'express';
 import authRoutes from './routes/auth';
 import morgan from 'morgan';
 import cors from 'cors';
-import Facebook from 'passport-facebook'
-import passport from 'passport';
+// import Facebook from 'passport-facebook'
+// import passport from 'passport';
 import { prisma } from '@prisma/client';
 
-const FacebookStrategy = Facebook.Strategy
+// const FacebookStrategy = Facebook.Strategy
 
 const app: Application = express();
 

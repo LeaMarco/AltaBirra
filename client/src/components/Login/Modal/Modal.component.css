@@ -29,9 +29,8 @@
 .modal__content {
   display: flex;
   align-items: center;
-  min-width: 10%;
-  max-width: 50%;
-  max-height: fit-content;
+  width: fit-content;
+  height: fit-content;
   margin: 0 0;
   padding: 0 0 10px 0;
   box-sizing: border-box;

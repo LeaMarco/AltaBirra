@@ -15,10 +15,15 @@ interface User {
 }
 
 
+
+
 function encryptPassword(password: string): string {
     const salt = bcrypt.genSaltSync(10);
     return bcrypt.hashSync(password, salt);
 };
+
+
+
 
 function validatePassword(password: string, user: User): boolean {
     return bcrypt.compareSync(password, user.password);
@@ -27,8 +32,8 @@ function validatePassword(password: string, user: User): boolean {
 
 
 
-export const signup = async (req: Request, res: Response) => {
 
+export const signup = async (req: Request, res: Response) => {
     const { username, email, name, password, googleId, facebookId } = req.body.params;
     console.log("asddsa", username, email, name, password, facebookId, facebookId, "asddsa")
 
@@ -40,9 +45,9 @@ export const signup = async (req: Request, res: Response) => {
     })
 
     //Si existe le digo que se loguee
-    if (user) return res.send("Usuario ya registrado! Logueate!")
+    if (user) return res.sendStatus(409)
 
-    { //busco el rol (no hace falta podria pasarle el numero y listo)
+    else { //busco el rol (no hace falta podria pasarle el numero y listo)
         const userRol = await prisma.role.findUnique({ where: { name: "USER" } })
 
         //Creo el usuario (porque paso el else sin entrar en el return)
@@ -67,8 +72,9 @@ export const signup = async (req: Request, res: Response) => {
         return res.json(userCreado)
     }
 
-
 };
+
+
 
 
 export const signin = async (req: Request, res: Response) => {
@@ -125,8 +131,9 @@ export const profile = async (req: Request, res: Response) => {
 
 
 export const wipe = async (req: Request, res: Response) => {
-    //Validacion de entrada a la ruta
+    await prisma.post.deleteMany({})
     await prisma.user.deleteMany({})
+    // await prisma.user.deleteMany({})
     res.send("Database wipeada");
 };
 

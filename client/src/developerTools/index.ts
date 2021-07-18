@@ -2,7 +2,7 @@ import { connectAdvanced } from "react-redux";
 
 interface IdeveloperTools {
     consoleInfo: boolean;
-    showMargins: boolean;
+    showMargins?: boolean;
 }
 
 console.log(21321)
@@ -33,6 +33,7 @@ export const developerTools = function ({ consoleInfo, showMargins }: Ideveloper
                 console.log("> 🎯 >>> OnClick >>>", event.target.onclick ? " 💡" : "No posee! 📭");
                 console.log("> 👨‍👨‍👧‍👧 >>> ChildElementCount >>>", event.target.childElementCount, event.target.childElementCount ? " 💡" : "No posee! 📭");
                 console.log(event.target)
+                console.dir(event.target)
                 console.log("〰〰〰〰Click derecho para pausar y reiniciar de imprimir!〰〰〰〰");
             }
         }
@@ -40,7 +41,7 @@ export const developerTools = function ({ consoleInfo, showMargins }: Ideveloper
     }
 
     if (showMargins) {
-
+        //incompleto
         const a = document.getElementsByClassName("subcontainer")
 
         console.log(a)

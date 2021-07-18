@@ -16,9 +16,15 @@ export const Modal: React.FC<ModalProps> = ({
   const outsideRef = React.useRef(null);
 
   const closeModal = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+
+    if (e.target["id"] === "btnFantasma") {
+      handleClose()
+    }
+
     if (e.target === outsideRef.current) {
       handleClose();
     }
+
   };
 
   return isOpen ? (

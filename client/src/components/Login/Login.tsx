@@ -7,6 +7,8 @@ import Style from "./Login.module.css";
 import { useImperativeHandle } from "react";
 import axios from "axios";
 import { iError, iData } from "./LoginInterfaces";
+import GoogleLogin from "react-google-login";
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 
 function validate(dataState: iData, errors: iError, e): iError {
   let name = e.target.name;
@@ -39,13 +41,15 @@ function validate(dataState: iData, errors: iError, e): iError {
     }
   }
 */
- 
+
 
 
   return errors;
 }
 
 const Login: React.FunctionComponent<{}> = (props) => {
+
+  /////////////////////////////////ESTADOS/////////////////////////////////////////////
   const [data, setData] = useState<iData>({
     nameMail: "",
     password: "",
@@ -66,6 +70,11 @@ const Login: React.FunctionComponent<{}> = (props) => {
     },
   });
 
+  /////////////////////////////////ESTADOS/////////////////////////////////////////////
+
+
+
+  //////////////////////////////HANLDES///////////////////////////////////////////////////
   const handleOnSubmit = (e) => {
     e.preventDefault();
 
@@ -95,15 +104,27 @@ const Login: React.FunctionComponent<{}> = (props) => {
 
   };
 
+  //////////////////////////////FIN HANLDES///////////////////////////////////////////////////
+
+
+  //////////////////////////////FACEBOOK///////////////////////////////////////////////////
+  //////////////////////////////FIN FACEBOOK///////////////////////////////////////////////////
+  //////////////////////////////GOOGLE///////////////////////////////////////////////////
+  //////////////////////////////FIN///////////////////////////////////////////////////
+
+
+
+  let btnFacebookSize = 1
   return (
     <div id={Style.login}>
+
+
       <div style={{ fontWeight: 600, fontSize: "1.5em" }}>ENTRAR🍺</div>
       <form id={Style.form} onSubmit={handleOnSubmit}>
         <input
           onChange={handleOnChange}
-          className={`${Style.RegisterInputs} ${
-            errors.password.error ? Style.require : Style.ok
-          }`}
+          className={`${Style.RegisterInputs} ${errors.password.error ? Style.require : Style.ok
+            }`}
           name="nameMail"
           placeholder=" Correo electronico o nombre de usuario"
         />
@@ -113,46 +134,74 @@ const Login: React.FunctionComponent<{}> = (props) => {
               return errors.nameMail.require
                 ? "Campo requerido!"
                 : errors.nameMail.onlyLettersUsAndNumbersOrEmail
-                ? "☢Caracter inválido!"
-                : "Se ve bien 👌";
+                  ? "☢Caracter inválido!"
+                  : "Se ve bien 👌";
             } else return " ";
           })()}
         </label>
 
         <input
           type="password"
-          className={`${Style.RegisterInputs} ${
-            errors.password.error ? Style.require : Style.ok
-          }`}
+          className={`${Style.RegisterInputs} ${errors.password.error ? Style.require : Style.ok
+            }`}
           onChange={handleOnChange}
           name="password"
           value={data.password}
           placeholder=" Password"
         />
+
+
         <label className={Style.labels}>
           {(() => {
             if (errors.password.edit) {
               return errors.password.require
                 ? "Campo requerido!"
                 : data.password.length < 5
-                ? " Contraseña muy corta (minimo 5 caracteres)"
-                : "Probemos 🔐";
+                  ? " Contraseña muy corta (minimo 5 caracteres)"
+                  : "Probemos 🔐";
             } else return " ";
           })()}
         </label>
 
         <button id={Style.btnRegister}>Continuar</button>
       </form>
-      <div
+      {/* <div
         style={{
           display: "flex",
           alignItems: "center",
           justifyContent: "space-around",
         }}
-      >
-        <img className={Style.imgSm} src="https://i.imgur.com/9cF89Xp.png" />
-        <img className={Style.imgSm} src="https://i.imgur.com/Akk6z13.png" />
-      </div>
+      > */}
+      <FacebookLogin
+        appId="866652260898974"
+        autoLoad={false}
+        fields="name,email,picture"
+        // onClick={componentClicked}
+        // callback={responseFacebook}
+        textButton="Continuar con Google"
+        render={renderProps => (
+
+          <button className={Style.imgSm} style={{ background: "url(https://i.imgur.com/ULmHyN2.png)", backgroundSize: "cover", width: `${229 * btnFacebookSize}px`, height: `${55 * btnFacebookSize}px`, border: "none", borderRadius: "3px", marginBottom: "0.4em" }} onClick={renderProps.onClick} />
+
+        )}
+      />
+
+
+      <GoogleLogin
+        clientId="245898915217-k2cma8v306n8sreh56505vqv0nlql1do.apps.googleusercontent.com"
+        buttonText="Continuar con Google"
+        theme="dark"
+        // onSuccess={responseGoogleRegister}
+        // onFailure={onFailureRegister}
+        cookiePolicy={"single_host_origin"}
+        className="googleLogin"
+        style={{ width: "1000px" }}
+        render={renderProps => (
+
+          <button className={Style.imgSm} style={{ background: "url(https://i.imgur.com/YTsDRda.png)", backgroundSize: "cover", width: `${229 * btnFacebookSize}px`, height: `${55 * btnFacebookSize}px`, border: "none", borderRadius: "3px", marginBottom: "0.4em" }} onClick={renderProps.onClick} />
+
+        )}
+      />
     </div>
   );
 };

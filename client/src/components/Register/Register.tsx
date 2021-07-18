@@ -6,132 +6,39 @@ import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { iData, iError, segurityLevels } from "./RegisterInterfaces";
 import axios from "axios";
-import FacebookLogin from "react-facebook-login";
+// import FacebookLogin from "react-facebook-login";
 import GoogleLogin from "react-google-login";
+import { validate } from "./validate";
+import { SocialIcon } from 'react-social-icons'
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 
-//MANEJO DE ERRORES/////////////////////////
-
+///leand, facu  
 const onlyLettersMge = "Solo debe tener letras mayusculas o minusculas";
 const onlyLettersUsAndNumbersMge =
   "Solo debe tener letras mayusculas, minusculas, numeros o guiones bajos";
 const patternEmailMge = "Error en el formato del mail ingresado";
 
-function validate(dataState: iData, errors: iError, e): iError {
-  let name = e.target.name;
 
-  //AL PRINCIPIO SIN ERRORES A MENOS QUE ALGUIEN DIGA LO CONTRARIO
-  errors[name].error = false;
-  errors[name].edit = true;
 
-  //REQUIRE
-  if (dataState[name] === "") {
-    errors[name].require = true;
-    errors[name].error = true;
-  } else {
-    errors[name].require = false;
-  }
-  // /^[A-Za-zÁÉÍÓÚáéíóúñÑ]{2}[A-Za-zÁÉÍÓÚáéíóúñÑ ]+$/g.test(dataState[name]) ||
-
-  //ONLY LETTERS
-  if (errors[name].hasOwnProperty("onlyLetters")) {
-    if (
-      /^[A-Za-zÁÉÍÓÚáéíóúñÑ ]+$/g.test(dataState[name]) ||
-      dataState[name] === ""
-    ) {
-      errors[name].onlyLetters = "";
-    } else {
-      errors[name].onlyLetters = onlyLettersMge;
-      errors[name].error = true;
-    }
-  }
-
-  //ONLY LETTER US AND NUMBERS
-  if (errors[name].hasOwnProperty("onlyLettersUsAndNumbers")) {
-    if (/^[A-Za-z0-9_]*$/g.test(dataState[name])) {
-      errors[name].onlyLettersUsAndNumbers = "";
-    } else errors[name].onlyLettersUsAndNumbers = onlyLettersUsAndNumbersMge;
-  }
-
-  //PATTERN EMAIL
-  if (errors[name].hasOwnProperty("patternEmail")) {
-    if (
-      /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/g.test(
-        dataState[name]
-      )
-    ) {
-      errors[name].patternEmail = "";
-    } else errors[name].patternEmail = patternEmailMge;
-  }
-
-  //SEGURITY LEVEL
-  if (errors[name].hasOwnProperty("segurityLevel")) {
-    if (errors[name].hasOwnProperty("segurityLevel")) {
-      errors[name].segurityLevel = segurityLevels.low;
-    } else errors[name].segurityLevel = false;
-  }
-
-  return errors;
-}
+////MODEL///////////////////////////////////
+/* function closeModel() {
+  let btnF = document.getElementById("btnFantasma")
+  btnF?.click()
+} */
 
 ////////////////////////////////////////
+
+
 ////////////////////////////////////////
-const Register: React.FunctionComponent<{}> = (props) => {
-  ///////////////LOGICA DE GOOGLE//////////////////////////
+const Register: React.FunctionComponent<{ closeModal, toogleEnter, toogleRegister, }> = ({ closeModal, toogleEnter,
+  toogleRegister, }) => {
+  ////////////////////USE STATES///////////////////////////////////////
+  const [alreadyRegister, setAlreadyRegister] = useState<boolean>(false)
 
-  const responseGoogleRegister = (response: any) => {
-    const name = response.dt.uU;
-    const googleId = response.googleId;
-    const username = name + "_" + googleId;
-    const email = response.profileObj.email;
-
-    let params = {
-      username,
-      email,
-      googleId,
-    };
-
-    console.log(params);
-    //
-    axios
-      .post("http://localhost:3001/auth/signup", {
-        params: {
-          username,
-          email,
-          googleId,
-          name,
-        },
-      })
-      .then((e) => console.log(e.data));
-  };
-
-  const onFailureRegister = (response: any) => {
-    console.log(response, "Fallo el registro!");
-  };
-
-  const responseGoogleLogin = (response: any) => {
-    const nombre = response.dt.uU;
-    const googleId = response.googleId;
-    const username = nombre + "_" + googleId;
-
-    axios
-      .post("http://localhost:3001/auth/signin", {
-        username,
-        googleId,
-      })
-      .then((e) => console.log(e.data));
-  };
-  const onFailureLogin = (response: any) => {
-    console.log(response, "Fallo el login!");
-  };
-  ///////////////////////////////////////////////////////
-
-  const responseFacebook = (response: any) => {
-    console.log(response);
-  };
-
-  const componentClicked = (response: any) => {
-    console.log(response);
-  };
+  const renderLogin = () => {
+    toogleRegister()
+    toogleEnter()
+  }
 
   const [data, setData] = useState<iData>({
     names: "",
@@ -173,8 +80,93 @@ const Register: React.FunctionComponent<{}> = (props) => {
       segurityLevel: segurityLevels.none,
     },
   });
+  const handleOnChange = (e) => {
+    let newState: iData = {
+      ...data,
+      [e.target.name]: e.target.value,
+    };
+    setErrors(validate(newState, errors, e));
+    // setErrors(newState);
+    setData(newState);
+  };
+  ////////////////////FIN DE USE STATES///////////////////////////////////////
 
-  const handleOnSubmit = (e) => {
+
+  let sizeSocialButtons = 1.1
+
+  ///////////////LOGICA DE GOOGLE//////////////////////////
+  const responseGoogleRegister = (response: any) => {
+
+    const name = response.dt.uU;
+    const googleId = response.googleId;
+    const username = name + "_" + googleId;
+    const email = response.profileObj.email;
+
+
+    //
+    axios
+      .post("http://localhost:3001/auth/signup", {
+        params: {
+          username,
+          email,
+          googleId,
+          name,
+        },
+      })
+      .then(async (e: any) => {
+        console.log("Bienvenido !")
+        closeModal()
+      }).catch((e) => {
+        console.log("Ya tenés usuario, logueate!")
+        setAlreadyRegister(true)
+      })
+  };
+
+  const onFailureRegister = (response: any) => {
+    console.log(response, "Fallo el registro!");
+  };
+
+  const responseGoogleLogin = (response: any) => {
+    const nombre = response.dt.uU;
+    const googleId = response.googleId;
+    const username = nombre + "_" + googleId;
+
+    axios
+      .post("http://localhost:3001/auth/signin", {
+        username,
+        googleId,
+      })
+      .then(async (e: any) => {
+        console.log("Bienvenido !")
+        closeModal()
+      }).catch((e) => {
+        console.log("Ya tenés usuario, logueate!")
+        setAlreadyRegister(true)
+      })
+  };
+  const onFailureLogin = (response: any) => {
+    console.log(response, "Fallo el login!");
+  };
+  ////////////FIN DE LOGICA DE GOOGLE///////////////////
+
+
+
+  /////////////LOGICA DE FACBOOK//////////////////////
+
+  const responseFacebook = (response: any) => {
+    console.log(response);
+  };
+
+  const componentClicked = (response: any) => {
+    console.log(response);
+  };
+  ///////////////FIN DE LOGICA DE FACEBOOK/////////////////
+
+
+
+  ////////////////////LOGICA DE REGISTRO LOCAL ///////////////////////////////////////
+
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
     let postObj = {
       username: data.userName,
@@ -185,30 +177,27 @@ const Register: React.FunctionComponent<{}> = (props) => {
 
     axios
       .post("http://localhost:3001/auth/signup/", { params: postObj })
-      .then((e: any) => {
-        if (typeof e.data === "object") alert("Usuario creado!");
-        else alert(e.data);
-      });
-  };
+      .then(async (e: any) => {
+        console.log("Bienvenido !")
+        closeModal()
+      }).catch((e) => {
+        console.log("Ya tenés usuario, logueate!")
+        setAlreadyRegister(true)
+      })
 
-  const handleOnChange = (e) => {
-    let newState: iData = {
-      ...data,
-      [e.target.name]: e.target.value,
-    };
-    setErrors(validate(newState, errors, e));
-    // setErrors(newState);
-    setData(newState);
   };
+  ////////////////////FIN DE LOGICA DE REGISTRO LOCAL///////////////////////////////////////
+
 
   return (
     <div id={Style.register}>
+
+      {/* <button onClick={renderLogin}>Render login</button> */}
       <div style={{ fontWeight: 600, fontSize: "1.5em" }}>REGISTRARME🍻</div>
       <form id={Style.form} onSubmit={handleOnSubmit}>
         <input
-          className={` ${Style.RegisterInputs} ${
-            errors.names.error ? Style.require : Style.ok
-          }`}
+          className={` ${Style.RegisterInputs} ${errors.names.error ? Style.require : Style.ok
+            }`}
           onChange={handleOnChange}
           name="names"
           value={data.names}
@@ -220,16 +209,15 @@ const Register: React.FunctionComponent<{}> = (props) => {
               return errors.names.require
                 ? "☢Campo requerido!"
                 : errors.names.onlyLetters
-                ? "☢Caracter inválido!"
-                : "Se ve bien 👌";
+                  ? "☢Caracter inválido!"
+                  : "Se ve bien 👌"
             } else return " ";
           })()}
         </label>
 
         <input
-          className={`${Style.RegisterInputs} ${
-            errors.lastNames.error ? Style.require : Style.ok
-          }`}
+          className={`${Style.RegisterInputs} ${errors.lastNames.error ? Style.require : Style.ok
+            }`}
           onChange={handleOnChange}
           name="lastNames"
           value={data.lastNames}
@@ -242,16 +230,15 @@ const Register: React.FunctionComponent<{}> = (props) => {
               return errors.lastNames.require
                 ? "☢Campo requerido!"
                 : errors.lastNames.onlyLetters
-                ? " ☢Caracter inválido!"
-                : "Genial✨";
+                  ? " ☢Caracter inválido!"
+                  : "Genial✨";
             } else return " ";
           })()}
         </label>
 
         <input
-          className={`${Style.RegisterInputs} ${
-            errors.userName.error ? Style.require : Style.ok
-          }`}
+          className={`${Style.RegisterInputs} ${errors.userName.error ? Style.require : Style.ok
+            }`}
           onChange={handleOnChange}
           name="userName"
           value={data.userName}
@@ -264,16 +251,15 @@ const Register: React.FunctionComponent<{}> = (props) => {
               return errors.userName.require
                 ? "☢Campo requerido!"
                 : errors.userName.onlyLettersUsAndNumbers
-                ? "☢Caracter inválido, solo letras, numeros y guiones abajo"
-                : "Ok perfecto 😎";
+                  ? "☢Caracter inválido, solo letras, numeros y guiones abajo"
+                  : "Ok perfecto 😎";
             } else return " ";
           })()}
         </label>
 
         <input
-          className={`${Style.RegisterInputs} ${
-            errors.email.error ? Style.require : Style.ok
-          }`}
+          className={`${Style.RegisterInputs} ${errors.email.error ? Style.require : Style.ok
+            }`}
           onChange={handleOnChange}
           name="email"
           value={data.email}
@@ -286,17 +272,16 @@ const Register: React.FunctionComponent<{}> = (props) => {
               return errors.email.require
                 ? "☢Campo requerido!"
                 : errors.email.patternEmail
-                ? "☢Formato de email invalido"
-                : "Excelente ya casi entras al olimpo cervecero 🍻";
+                  ? "☢Formato de email invalido"
+                  : "Excelente ya casi entras al olimpo cervecero 🍻";
             } else return " ";
           })()}
         </label>
 
         <input
           type="password"
-          className={`${Style.RegisterInputs} ${
-            errors.password.error ? Style.require : Style.ok
-          }`}
+          className={`${Style.RegisterInputs} ${errors.password.error ? Style.require : Style.ok
+            }`}
           onChange={handleOnChange}
           name="password"
           value={data.password}
@@ -309,13 +294,20 @@ const Register: React.FunctionComponent<{}> = (props) => {
               return errors.password.require
                 ? "☢Campo requerido!"
                 : data.password.length < 5
-                ? " Contraseña muy corta (minimo 5 caracteres)"
-                : "Buenisimo!  🔐";
+                  ? " Contraseña muy corta (minimo 5 caracteres)"
+                  : "Buenisimo!  🔐";
             } else return " ";
           })()}
         </label>
+        {
+          alreadyRegister ?
+            <button id={Style.btnRegister} onClick={renderLogin} style={{ backgroundColor: "rgb(197, 203, 206)" }}>Ya estás registrado! <span style={{ fontWeight: "bold" }}> Ir a Loguin</span>{'>>'} </button>
+            :
+            <button id={Style.btnRegister}> Listo! </button>
 
-        <button id={Style.btnRegister}> Registarse </button>
+        }
+
+
       </form>
       <div
         style={{
@@ -324,24 +316,41 @@ const Register: React.FunctionComponent<{}> = (props) => {
           justifyContent: "space-around",
         }}
       >
-        {/* <img className={Style.imgSm} src="https://i.imgur.com/9cF89Xp.png" /> */}
-        {/* <img className={Style.imgSm} src="https://i.imgur.com/Akk6z13.png" /> */}
       </div>
+
+
       <FacebookLogin
         appId="866652260898974"
         autoLoad={false}
         fields="name,email,picture"
         onClick={componentClicked}
         callback={responseFacebook}
+        textButton="Continuar con Google"
+        render={renderProps => (
+
+          <button className={Style.imgSm} style={{ background: "url(https://i.imgur.com/ULmHyN2.png)", backgroundSize: "cover", width: `${229 * sizeSocialButtons}px`, height: `${55 * sizeSocialButtons}px`, border: "none", borderRadius: "3px", marginBottom: "0.4em" }} onClick={renderProps.onClick} />
+
+        )}
       />
+
+
       <GoogleLogin
-        clientId="245898915217-tmmeiem93tnr14ar1lpv0qdsok0qcpnj.apps.googleusercontent.com"
-        buttonText="Register"
+        clientId="245898915217-k2cma8v306n8sreh56505vqv0nlql1do.apps.googleusercontent.com"
+        buttonText="Continuar con Google"
+        theme="dark"
         onSuccess={responseGoogleRegister}
         onFailure={onFailureRegister}
         cookiePolicy={"single_host_origin"}
+        className="googleLogin"
+        style={{ width: "1000px" }}
+        render={renderProps => (
+
+          <button className={Style.imgSm} style={{ background: "url(https://i.imgur.com/YTsDRda.png)", backgroundSize: "cover", width: `${229 * sizeSocialButtons}px`, height: `${55 * sizeSocialButtons}px`, border: "none", borderRadius: "3px", marginBottom: "0.4em" }} onClick={renderProps.onClick} />
+
+        )}
       />
     </div>
+
   );
 };
 

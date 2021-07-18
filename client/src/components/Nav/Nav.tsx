@@ -159,7 +159,7 @@ export default function Nav() {
             </button>
 
             <Modal isOpen={isRegisterOpen} handleClose={toogleRegister}>
-              <Register />
+              <Register closeModal={toogleRegister} toogleEnter={toogleEnter} toogleRegister={toogleRegister} />
             </Modal>
 
             <Link to="/post">
