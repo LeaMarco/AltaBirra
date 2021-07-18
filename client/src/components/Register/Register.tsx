@@ -94,6 +94,10 @@ const Register: React.FunctionComponent<{ closeModal, toogleEnter, toogleRegiste
 
   let sizeSocialButtons = 1.1
 
+
+
+
+
   ///////////////LOGICA DE GOOGLE//////////////////////////
   const responseGoogleRegister = (response: any) => {
 
@@ -113,48 +117,50 @@ const Register: React.FunctionComponent<{ closeModal, toogleEnter, toogleRegiste
           name,
         },
       })
-      .then(async (e: any) => {
+      .then((e: any) => {
         console.log("Bienvenido !")
         closeModal()
       }).catch((e) => {
         console.log("Ya tenés usuario, logueate!")
         setAlreadyRegister(true)
       })
+
   };
 
   const onFailureRegister = (response: any) => {
     console.log(response, "Fallo el registro!");
   };
+  ////////////FIN DE LOGICA DE GOOGLE///////////////////
 
-  const responseGoogleLogin = (response: any) => {
-    const nombre = response.dt.uU;
-    const googleId = response.googleId;
-    const username = nombre + "_" + googleId;
 
-    axios
-      .post("http://localhost:3001/auth/signin", {
+
+  /////////////LOGICA DE FACEBOOK//////////////////////
+
+  const responseFacebook = (response: any) => {
+    console.log(response);
+
+    const name = response.name;
+    const facebookId = response.id;
+    const username = name.replaceAll(" ", "_") + "_" + facebookId;
+    const email = response.email;
+
+
+    axios.post("http://localhost:3001/auth/signup", {
+      params: {
         username,
-        googleId,
-      })
-      .then(async (e: any) => {
+        email,
+        name,
+      },
+    })
+      .then((e: any) => {
         console.log("Bienvenido !")
         closeModal()
       }).catch((e) => {
         console.log("Ya tenés usuario, logueate!")
         setAlreadyRegister(true)
       })
-  };
-  const onFailureLogin = (response: any) => {
-    console.log(response, "Fallo el login!");
-  };
-  ////////////FIN DE LOGICA DE GOOGLE///////////////////
 
 
-
-  /////////////LOGICA DE FACBOOK//////////////////////
-
-  const responseFacebook = (response: any) => {
-    console.log(response);
   };
 
   const componentClicked = (response: any) => {

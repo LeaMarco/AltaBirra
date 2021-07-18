@@ -77,7 +77,6 @@ const Login: React.FunctionComponent<{}> = (props) => {
   //////////////////////////////HANLDES///////////////////////////////////////////////////
   const handleOnSubmit = (e) => {
     e.preventDefault();
-
     let postObj = {
       nameMail: data.nameMail,
       password: data.password,
@@ -90,7 +89,7 @@ const Login: React.FunctionComponent<{}> = (props) => {
       .then((e: any) => {
         console.log(e.data);
         alert(e.data);
-      });
+      }).catch((error) => console.log('No te pudiste loguear!'))
   };
 
   const handleOnChange = (e) => {
@@ -103,16 +102,59 @@ const Login: React.FunctionComponent<{}> = (props) => {
     setData(newState);
 
   };
-
-  //////////////////////////////FIN HANLDES///////////////////////////////////////////////////
+  //////////////////////////////FIN HANLDLER///////////////////////////////////////////////////
 
 
   //////////////////////////////FACEBOOK///////////////////////////////////////////////////
+  const responseFacebookLogin = (response: any) => {
+
+    console.log(response)
+
+    const name = response.name;
+    const facebookId = response.id;
+    const nameMail = name.replaceAll(" ", "_") + "_" + facebookId;
+    // const email = response.email;
+
+
+    axios
+      .post("http://localhost:3001/auth/signin", {
+        params: {
+          nameMail,
+        }
+
+      })
+      .then((e) => console.log('Logueado!!!', e.data, localStorage.setItem('token', e.data)))
+      .catch((error) => console.log('No te pudiste loguear!'))
+  }
+
   //////////////////////////////FIN FACEBOOK///////////////////////////////////////////////////
-  //////////////////////////////GOOGLE///////////////////////////////////////////////////
-  //////////////////////////////FIN///////////////////////////////////////////////////
 
 
+  //////////////////////////////LOGICA DE GOOGLE///////////////////////////////////////////////////
+  const responseGoogleLogin = (response: any) => {
+
+    const name = response.dt.uU;
+    const googleId = response.googleId;
+    const nameMail = name + "_" + googleId;
+
+    console.log('PARAMSSSSSSSSSSSSSS', response);
+
+    axios
+      .post("http://localhost:3001/auth/signin", {
+        params: {
+          nameMail,
+        }
+
+      })
+      .then((e) => console.log('Logueado!!!', e.data, localStorage.setItem('token', e.data)))
+      .catch((error) => console.log('No te pudiste loguear!'))
+  }
+
+  const onFailureLogin = (response: any) => {
+    console.log(response, "Fallo el login!");
+  };
+
+  //////////////////////////////FIN DE LOGICA DE GOOGLE///////////////////////////////////////////////////
 
   let btnFacebookSize = 1
   return (
@@ -177,7 +219,7 @@ const Login: React.FunctionComponent<{}> = (props) => {
         autoLoad={false}
         fields="name,email,picture"
         // onClick={componentClicked}
-        // callback={responseFacebook}
+        callback={responseFacebookLogin}
         textButton="Continuar con Google"
         render={renderProps => (
 
@@ -191,8 +233,8 @@ const Login: React.FunctionComponent<{}> = (props) => {
         clientId="245898915217-k2cma8v306n8sreh56505vqv0nlql1do.apps.googleusercontent.com"
         buttonText="Continuar con Google"
         theme="dark"
-        // onSuccess={responseGoogleRegister}
-        // onFailure={onFailureRegister}
+        onSuccess={responseGoogleLogin}
+        onFailure={onFailureLogin}
         cookiePolicy={"single_host_origin"}
         className="googleLogin"
         style={{ width: "1000px" }}

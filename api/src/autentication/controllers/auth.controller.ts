@@ -23,8 +23,6 @@ function encryptPassword(password: string): string {
 };
 
 
-
-
 function validatePassword(password: string, user: User): boolean {
     return bcrypt.compareSync(password, user.password);
 }
@@ -34,8 +32,8 @@ function validatePassword(password: string, user: User): boolean {
 
 
 export const signup = async (req: Request, res: Response) => {
-    const { username, email, name, password, googleId, facebookId } = req.body.params;
-    console.log("asddsa", username, email, name, password, facebookId, facebookId, "asddsa")
+    const { username, email, name, password } = req.body.params;
+    console.log("asddsa", username, email, name, password)
 
     // Busco al usuario
     const user = await prisma.user.findUnique({
@@ -56,7 +54,7 @@ export const signup = async (req: Request, res: Response) => {
                 username,
                 email,
                 name,
-                password: encryptPassword(password || googleId || facebookId),
+                password: password ? encryptPassword(password) : "socialPassword",
                 role: {
                     connect: { id: userRol?.id }
                 },
@@ -79,7 +77,8 @@ export const signup = async (req: Request, res: Response) => {
 
 export const signin = async (req: Request, res: Response) => {
 
-    console.log("Entre!")
+
+    console.log(req.body.params.nameMail)
 
     const user = await prisma.user.findUnique({
         where: {
@@ -89,16 +88,23 @@ export const signin = async (req: Request, res: Response) => {
 
     // console.log(user, "user")
 
-    if (!user) return res.status(200).json('Credencial invalida');
-    console.log(req.body.params.password)
+    if (!user) return res.sendStatus(400);
 
-    const correctPassword: boolean = validatePassword(req.body.params.googleId || req.body.params.password, user || "");
+    else {
+        if (req.body.params.password) {
+            const correctPassword: boolean = validatePassword(req.body.params.password, user);
+            console.log("Aca", correctPassword, "Aca")
+            if (correctPassword === false) return res.status(400).send('Credencial invalida');
+        }
 
-    if (!correctPassword) return res.status(400).send('Credencial invalida');
-
-    const token: string = jwt.sign({ username: user.username }, "secretKey", { expiresIn: 60 * 60 * 24 })
-    res.header('authToken', token).send("Usuario validado, y toquen enviado")
-
+        if (process.env.SECRET_CODE) {
+            const token: string = jwt.sign({ username: user.username }, process.env.SECRET_CODE, { expiresIn: 60 * 60 * 24 })
+            res.json(token)
+        }
+        else {
+            res.status(500).send("CONTRASEÑA PARA GENERAR TOKENS AUSENTE EN VARIABLES DE ENTORNO DEL SERVER!")
+        }
+    }
 
 };
 
@@ -109,6 +115,9 @@ interface payload {
     iat: number,
     exp: number
 }
+
+
+
 
 export const profile = async (req: Request, res: Response) => {
 
@@ -133,7 +142,8 @@ export const profile = async (req: Request, res: Response) => {
 export const wipe = async (req: Request, res: Response) => {
     await prisma.post.deleteMany({})
     await prisma.user.deleteMany({})
+
     // await prisma.user.deleteMany({})
-    res.send("Database wipeada");
+    res.send(process.env.SECRET_CODE);
 };
 
