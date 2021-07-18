@@ -1,11 +1,20 @@
-.ul{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    /* list-style: none; */
+#show,
+#hide {
+    display: none;
 }
 
-.Cajaloca{
-    width: max-content;
-    resize: none;
+div#content {
+    display: none;
+    padding: 10px;
+    background-color: #f6f6f6;
+    width: 200px;
+    cursor: pointer;
+}
+
+input#show:checked~div#content {
+    display: block;
+}
+
+input#hide:checked~div#content {
+    display: none;
 }

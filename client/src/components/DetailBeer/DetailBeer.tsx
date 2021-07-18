@@ -29,7 +29,6 @@ export default function DetailBeer() {
 	return (
 
 		<div className={Style.post}>
-			
 			{console.log(info)}
 			{/* {
 				discount > 0? <h1>${discount}</h1>: <h1>Lo siento el Descuento se de "{discount}" :l</h1>
@@ -57,7 +56,7 @@ export default function DetailBeer() {
 						<p className={Style.fsColor} > <strong>Cal:</strong>  {info?.beer?.calories}</p>
 					</div>
 					<div>
-						<p className={Style.subTitle}  > Description:</p>
+						<h3 className={Style.subTitle}  > Description:</h3>
 						<p className={Style.fsColor}  >{info?.description}</p>
 					</div>
 					<div  >
