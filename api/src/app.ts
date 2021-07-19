@@ -15,14 +15,14 @@ app.use(morgan('dev'));
 
 app.use(cors())
 
-app.use(
-	cors({
-		origin: "https://alta-birra.vercel.app",
-		credentials: false,
-		methods: ['GET', 'POST', 'OPTIONS', 'PUT', 'DELETE'],
-		allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept'],
-	})
-);
+// app.use(
+// 	cors({
+// 		origin: "https://alta-birra.vercel.app",
+// 		credentials: false,
+// 		methods: ['GET', 'POST', 'OPTIONS', 'PUT', 'DELETE'],
+// 		allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept'],
+// 	})
+// );
 
 app.use("/", routes);
 
