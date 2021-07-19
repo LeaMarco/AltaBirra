@@ -52,10 +52,10 @@ export default async (amount) => {
 
         let beer = {
             "name": beerName[Math.floor(Math.random() * (beerName.length))],
-            "abv": Math.floor(Math.random() * 20),
+            "abv": 2+Math.floor(Math.random() * 15),
             "og": Math.floor(Math.random() * 200),
-            "ibu": Math.floor(Math.random() * 80),
-            "calories": Math.floor(Math.random() * 20),
+            "ibu": 15+Math.floor(Math.random() * 80),
+            "calories": 110+Math.floor(Math.random() * 70),
             "dryHop": Math.random() > 0.5 ? true : false,
             "volume": 500,
             "genericType": gtype[Math.floor(Math.random() * (gtype.length))],
