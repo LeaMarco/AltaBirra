@@ -26,9 +26,9 @@ router.post("/", (req: Request, res: Response) => {
     let preference: CreatePreferencePayload = {
         items: data.data,
         back_urls: { ////////urls donde te redirige en base a lo que respondio mp, puede
-            "success": "https://alta-birra.vercel.app/",
-            "failure": "https://alta-birra.vercel.app/",
-            "pending": "https://alta-birra.vercel.app/"
+            "success": "https://alta-birra.vercel.app",
+            "failure": "https://alta-birra.vercel.app",
+            "pending": "https://alta-birra.vercel.app"
         },
         auto_return: "approved",
     };
