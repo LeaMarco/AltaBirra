@@ -109,7 +109,7 @@ const Register: React.FunctionComponent<{ closeModal, toogleEnter, toogleRegiste
 
     //
     axios
-      .post("http://localhost:3001/auth/signup", {
+      .post("https://altabirra.herokuapp.com/auth/signup", {
         params: {
           username,
           email,
@@ -145,7 +145,7 @@ const Register: React.FunctionComponent<{ closeModal, toogleEnter, toogleRegiste
     const email = response.email;
 
 
-    axios.post("http://localhost:3001/auth/signup", {
+    axios.post("https://altabirra.herokuapp.com/auth/signup", {
       params: {
         username,
         email,
@@ -188,7 +188,7 @@ const Register: React.FunctionComponent<{ closeModal, toogleEnter, toogleRegiste
     console.log(postObj)
 
     axios
-      .post("http://localhost:3001/auth/signup/", { params: postObj })
+      .post("https://altabirra.herokuapp.com/auth/signup/", { params: postObj })
       .then(async (e: any) => {
         console.log("Bienvenido !")
         closeModal()

@@ -36,7 +36,7 @@ const Card = ({
   };
 
   async function addToFavorite() {
-    await axios.post("http://localhost:3001/addFavorite", {
+    await axios.post("https://altabirra.herokuapp.com/addFavorite", {
       data: { username: "TestUser", postId: id },
     });
     dispatch(getFavoritePosts("TestUser"));
@@ -44,7 +44,7 @@ const Card = ({
   }
 
   async function removeFavorite() {
-    await axios.delete("http://localhost:3001/removeFavorite", {
+    await axios.delete("https://altabirra.herokuapp.com/removeFavorite", {
       data: { username: "TestUser", postId: id },
     });
     dispatch(getFavoritePosts("TestUser"));
@@ -117,10 +117,3 @@ const Card = ({
 
 export default Card;
 
-<div>
-  <h3>Info De Compra</h3>
-
-  <div>
-
-  </div>
-</div>;
