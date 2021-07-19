@@ -51,14 +51,10 @@ interface Results {
 }
 
 router.get("/", async (req: Request, res: Response, next: NextFunction) => {
-	const sellerId: number = Number(req.query.userId);
+	const buyerId: number = Number(req.query.userId);
 	const history: Algo[] = await prisma.transaction.findMany({
 		where: {
-			post: {
-				is: {
-					userId: sellerId
-				}
-			}
+			buyerId
 		},
 		select: {
 			price: true,

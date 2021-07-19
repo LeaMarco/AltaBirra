@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { Post } from '../actions/index';
-import { postsFavoritesReducer, postsSearchQueryReducer, postsSearchReducer } from './posts';
+import { getHistoryReducer, postsFavoritesReducer, postsSearchQueryReducer, postsSearchReducer } from './posts';
 import { usersPremium } from './users';
 import { UserPremium } from '../actions/index';
 import { detailReducer } from './detail';
@@ -19,7 +19,8 @@ export const rootReducer = combineReducers({
 	usersPremium: usersPremium,
 	detailPosts: detailReducer,
 	cart: cartReducer,
-	favoritePosts: postsFavoritesReducer
+	favoritePosts: postsFavoritesReducer,
+	history: getHistoryReducer
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

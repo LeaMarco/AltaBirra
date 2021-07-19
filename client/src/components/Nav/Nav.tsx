@@ -163,8 +163,8 @@ export default function Nav() {
               <Register closeModal={toogleRegister} toogleEnter={toogleEnter} toogleRegister={toogleRegister} />
             </Modal>
 
-            <Link to="/post">
-              <button className={style.buttonEnter}>Crear post</button>
+            <Link to="/panel">
+              <button className={style.buttonEnter}>Panel</button>
             </Link>
 
             {

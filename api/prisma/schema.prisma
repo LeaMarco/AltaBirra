@@ -54,13 +54,13 @@ model User {
     ///relacion de muchos a uno con TABLA ROLE
     //☢ agregue cosas condicionales para poder generar usuarios sin que joda
     roleId        Int
-    role          Role         @relation(fields: [roleId], references: [id])
+    role          Role          @relation(fields: [roleId], references: [id])
     cartId        Int
-    cart          Cart         @relation(fields: [cartId], references: [id])
+    cart          Cart          @relation(fields: [cartId], references: [id])
     favoriteId    Int
-    favorite      Favorite     @relation(fields: [favoriteId], references: [id])
+    favorite      Favorite      @relation(fields: [favoriteId], references: [id])
     postId        Post[]
-    transactionId Transaction?
+    transactionId Transaction[]
     review        Review[]
 }
 

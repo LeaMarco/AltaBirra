@@ -11,9 +11,12 @@ import Categories from "./components/Categories/Categories";
 import Cart from "./components/Cart/Cart";
 import Compra from "./components/Compra/Compra";
 import Rate from "./components/Rate/Rate";
-import { BeeryButton } from "./components/styled_components";
-import { developerTools } from "./developerTools";
+// import { developerTools } from "./developerTools";
+// import { BeeryButton } from "./components/styled_components";
 // developerTools({ consoleInfo: true });
+import UserPanel from "./components/UserPanel/UserPanel";
+import BuyHistory from "./components/BuyHistory/BuyHistory";
+import SellHistory from "./components/SellHistory/SellHistory";
 
 function App() {
   return (
@@ -27,7 +30,10 @@ function App() {
       <Route exact path="/categories" component={Categories} />
       <Route exact path="/cart/:id" component={Cart} />
       <Route exact path="/compra/:id" component={Compra} />
-      <Route exact path="/calificar" component={Rate} />
+      <Route exact path="/panel" component={UserPanel} />
+      <Route exact path="/historialCompras" component={BuyHistory} />
+      <Route exact path="/historialVentas" component={SellHistory} />
+      <Route exact path="/calificar/:id" component={Rate} />
     </div>
   );
 }

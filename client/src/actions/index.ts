@@ -357,10 +357,20 @@ const urladdtocart = 'http://localhost:3001/addToCart';
 
 export function getFavoritePosts(username) {
 	return async function (dispatch: Dispatch) {
-		const response = await axios.get<Post[]>(`${URL}/getFavorites`, { params: { username } })
+		const response = await axios.get<Post[]>(`${URL}/getFavorites`, { params: { username } });
 		dispatch<getPostsAction>({
 			type: "GET_FAVORITE_POSTS",
 			payload: response.data
 		});
+	}
+}
+
+export function getHistory(type, userId) {
+	return async function (dispatch: Dispatch) {
+		const response = await axios.get(`${URL}/${type}History`, { params: { userId } });
+		dispatch({
+			type: "GET_HISTORY",
+			payload: response.data
+		})
 	}
 }

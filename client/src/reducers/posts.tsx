@@ -2,10 +2,9 @@ import { ActionTypes, Post, QueryTypes } from "../actions/index";
 import { Action } from '../actions/index';
 
 const searchInitialState: Post[] = [];
-
 const initialQuery: QueryTypes = {};
-
 const initialFavoritePosts: Post[] = [];
+const initialHistory = [];
 
 export const postsSearchReducer = (state: Post[] = searchInitialState, action: Action) => {
 	switch (action.type) {
@@ -35,3 +34,12 @@ export const postsFavoritesReducer = (state: Post[] = initialFavoritePosts, acti
 			return state;
 	}
 };
+
+export const getHistoryReducer = (state = initialHistory, action) => {
+	switch (action.type) {
+		case "GET_HISTORY":
+			return action.payload;
+		default:
+			return state;
+	}
+}
