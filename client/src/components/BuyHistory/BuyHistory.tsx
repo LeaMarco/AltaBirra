@@ -20,14 +20,18 @@ export default function BuyHistory() {
 				history.length
 					? history.map(post => {
 						return (
-							<div key={post.post.id} style={{ border: "1px solid black" }}>
-								<Link to={`/calificar/${post.post.id}`}> Calificar </Link>
-								<Link to={`/detailBeer/${post.post.id}`} key={post.post.id}><div>
+							<div key={post.post.id} style={{ border: "1px solid black" }} className={Style.subcontainer}>
+								<Link to={`/calificar/${post.post.id}`} style={{ textDecoration: "none", color: "black", fontWeight: "bold" }}> Calificar </Link>
+								<Link to={`/detailBeer/${post.post.id}`} key={post.post.id} style={{ textDecoration: "none", color: "black" }}><div className={Style.detail}>
 									<h3> {post.post.title} </h3>
-									<h4> ${post.price} </h4>
-									<h4> {post.createdAt} </h4>
-									<h4> Cantidad: {post.count} </h4>
-									<h4> Fecha: {post.createdAt} </h4>
+									<div className={Style.subdetail}>
+										<img src={post.post.image} alt='' />
+										<div>
+											<h4> ${post.price} </h4>
+											<h4> Cantidad compradas: {post.count} </h4>
+										</div>
+									</div>
+									{/* <h4> Fecha: {post.createdAt} </h4> */}
 								</div></Link>
 							</div>
 						)

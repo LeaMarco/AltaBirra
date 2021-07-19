@@ -5,7 +5,7 @@ import Style from "./UserPanel.module.css";
 export default function UserPanel() {
 	return (
 		<div className={Style.container}>
-			<h2> Username </h2>
+			<h2> TestUser </h2>
 			<Link to="/historialCompras" className={Style.subcontainer}>
 				<div >
 					Historial de compras
