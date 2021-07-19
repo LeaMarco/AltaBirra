@@ -157,8 +157,8 @@ export default function Nav() {
               <Register />
             </Modal>
 
-            <Link to="/post">
-              <button className={style.buttonEnter}>Crear post</button>
+            <Link to="/panel">
+              <button className={style.buttonEnter}>Panel</button>
             </Link>
           </div>
         )}

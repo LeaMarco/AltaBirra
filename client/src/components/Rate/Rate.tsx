@@ -2,10 +2,12 @@ import React from "react";
 import { useState } from "react";
 import Style from "./Rate.module.css";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 export default function Rate() {
 	const [beer, setBeer] = useState<number>(1);
 	const [mensaje, setMensaje] = useState<string>("");
+	const id: number = +useParams<{ id: string }>()?.id;
 
 	function handleChange(event) {
 		setBeer(event.target.value.length);
@@ -30,7 +32,7 @@ export default function Rate() {
 						<option> ⭐⭐⭐⭐ </option>
 						<option> ⭐⭐⭐⭐⭐ </option>
 					</select>
-					<textarea placeholder="dejanos tu comentario" onChange={(e)=>setMensaje(e.target.value)}></textarea>
+					<textarea placeholder="dejanos tu comentario" onChange={(e) => setMensaje(e.target.value)}></textarea>
 					<button id="beerButton"> Ok </button>
 				</form>
 			</div>

@@ -11,33 +11,38 @@ interface Rating {
 	comment: string;
 }
 
-router.put("/", async (req: Request, res: Response, next: NextFunction) => {
-	const { userId, postId, rating, comment }: Rating = req.body.data;
-	const allRating = await prisma.review.findMany({
+async function getAverageRating(postId: number) {
+	const result = await prisma.review.aggregate({
 		where: {
 			postId
 		},
-		select: {
+		_avg: {
 			rating: true
 		}
-	});
-	const averageRating = allRating.length ? +((allRating.map(obj => obj.rating).reduce((a: number, b: number) => (a + b), 0) + rating) / (allRating.length + 1)).toFixed(2) : undefined;
+	})
+	return result._avg.rating ? result._avg.rating : undefined;
+}
 
+router.put("/", async (req: Request, res: Response, next: NextFunction) => {
+	const { userId, postId, rating, comment }: Rating = req.body.data;
+	const allRating = await prisma.review.create({
+		data: {
+			rating,
+			comment,
+			user: {
+				connect: { id: userId }
+			},
+			post: {
+				connect: { id: postId }
+			}
+		}
+	});
 	await prisma.post.update({
 		where: {
 			id: postId
 		},
 		data: {
-			rating: averageRating,
-			review: {
-				create: {
-					rating,
-					comment,
-					user: {
-						connect: { id: userId }
-					}
-				}
-			}
+			rating: await getAverageRating(postId)
 		}
 	})
 	res.send("creado");
