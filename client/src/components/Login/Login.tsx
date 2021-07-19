@@ -47,7 +47,15 @@ function validate(dataState: iData, errors: iError, e): iError {
   return errors;
 }
 
-const Login: React.FunctionComponent<{}> = (props) => {
+const Login: React.FunctionComponent<{ toogleAuth }> = ({ toogleAuth }) => {
+
+
+  //Agregar un estado nuevox
+
+  //////////////////
+  /* funcion setStateGlobal */
+  /////////////////
+
 
   /////////////////////////////////ESTADOS/////////////////////////////////////////////
   const [data, setData] = useState<iData>({
@@ -124,7 +132,10 @@ const Login: React.FunctionComponent<{}> = (props) => {
         }
 
       })
-      .then((e) => console.log('Logueado!!!', e.data, localStorage.setItem('token', e.data)))
+      .then((e) => {
+        console.log('Logueado!!!', e.data, localStorage.setItem('token', e.data))
+        toogleAuth()
+      })
       .catch((error) => console.log('No te pudiste loguear!'))
   }
   //////////////////////////////FIN FACEBOOK///////////////////////////////////////////////////////
@@ -147,7 +158,10 @@ const Login: React.FunctionComponent<{}> = (props) => {
         }
 
       })
-      .then((e) => console.log('Logueado!!!', e.data, localStorage.setItem('token', e.data)))
+      .then((e) => {
+        console.log('Logueado!!!', e.data, localStorage.setItem('token', e.data))
+        toogleAuth()
+      })
       .catch((error) => console.log('No te pudiste loguear!'))
   }
 
@@ -161,6 +175,7 @@ const Login: React.FunctionComponent<{}> = (props) => {
   return (
     <div id={Style.login}>
 
+      <button onClick={toogleAuth}>LOGUEO</button>
 
       <div style={{ fontWeight: 600, fontSize: "1.5em" }}>ENTRAR🍺</div>
       <form id={Style.form} onSubmit={handleOnSubmit}>

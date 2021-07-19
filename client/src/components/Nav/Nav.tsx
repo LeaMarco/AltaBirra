@@ -27,6 +27,10 @@ export default function Nav() {
   const dispatch = useDispatch();
   const history = useHistory();
 
+  const [isAuth, setAuth] = useState<boolean>(false);
+  const toogleAuth = () => setAuth(!isAuth);
+
+
   function handleSubmit(event) {
     event.preventDefault();
     handleSearch(searchInput);
@@ -146,12 +150,25 @@ export default function Nav() {
             >
               Carrito
             </Link>
+
             <button className={style.buttonEnter} onClick={toogleEnter}>
               Entrar
             </button>
 
+            {
+
+              isAuth ?
+                <button className={style.buttonEnter} >
+                  Bienvenido!!
+                </button>
+                :
+                <button className={style.buttonEnter} >
+                  NO TE CONOZCO AMIGO
+                </button>
+            }
+
             <Modal isOpen={isEnterOpen} handleClose={toogleEnter}>
-              <Login />
+              <Login toogleAuth={toogleAuth} />
             </Modal>
 
             <button className={style.buttonEnter} onClick={toogleRegister}>
