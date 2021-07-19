@@ -44,10 +44,12 @@ const BeersVot = () => {
             key={userPremium.id}
             id={userPremium.id}
             image={userPremium.image}
-            name={userPremium.beer.name}
+            title={userPremium.beer.name}
             ibu={userPremium.beer.ibu}
-            og={userPremium.beer.og}
-                        
+            abv={userPremium.beer.abv}
+            discount={userPremium.countable.discount}
+            price={userPremium.countable.price}
+            rating={userPremium.rating}
           /> ))
         : <h1>Cargando...</h1>
       }

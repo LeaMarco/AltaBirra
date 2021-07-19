@@ -133,15 +133,18 @@ export default function Nav() {
             >
               Entrar
             </Link> */}
-            <button onClick={toogleFavorites}> ▽ </button>
             <Modal isOpen={showFavorites} handleClose={toogleFavorites}>
               <FavoritesTab />
             </Modal>
+            <button onClick={toogleFavorites} className={style.buttonFavorites}> 
+            <img className={style.buttonImg} src="https://image.flaticon.com/icons/png/512/126/126482.png" alt="Cart"/>
+            
+             </button>
             <Link
               to="/cart/1" ////////FALTA METER EL ID DE USER
-              className={style.buttonEnter}
+              className={style.buttonCart}
             >
-              Carrito
+              <img className={style.buttonImg} src="https://image.flaticon.com/icons/png/512/3144/3144456.png" alt="Cart"/>
             </Link>
             <button className={style.buttonEnter} onClick={toogleEnter}>
               Entrar

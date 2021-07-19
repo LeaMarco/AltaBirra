@@ -82,12 +82,54 @@
 
 .buttonEnter {
   margin-left: 2vw;
-  background-color:tomato;
-  border-radius: 2px;
+  background-color: #F49E51;
+  border-radius: 5px;
   color: white;
   text-decoration: none;
+  border: none;
   padding: 3px 15px 3px 15px;
   font-size: 2vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.buttonCart{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  background-color: #F49E51;
+  border-radius: 5rem;
+  border:none;
+}
+
+.buttonFavorites{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  background-color: #F49E51;
+  border-radius: 5rem;
+  border:none;
+  margin-right: 1.5rem;
+  cursor: pointer;
+}
+
+.buttonCart:hover{
+  filter: brightness(130%);
+  transition: 400ms;
+}
+
+.buttonFavorites:hover{
+  filter: brightness(130%);
+  transition: 400ms;
+}
+.buttonImg{
+  width: 25px;
+  height: 25px;
+  filter: invert(100%);
 }
 
 .buttonEnter:hover {

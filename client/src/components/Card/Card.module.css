@@ -1,125 +1,121 @@
 .container {
-  background-color: grey;
+  background-color: rgb(255, 255, 255);
   display: flex;
   flex-direction: column;
-  width: 13vw;
-  min-height: fit-content;
-  margin: 2vw;
-  padding: 2vh 2vw;
+  width: 18vw;
+  height: 26vw;
+  margin: 1.5vw;
   font-weight: bold;
   text-decoration: none;
   color: black;
-  box-shadow: 0 0 0.6em;
-  border-radius: 10%;
-  background-image: radial-gradient(
-      circle at 69% 3%,
-      rgba(255, 255, 255, 0.04) 0%,
-      rgba(255, 255, 255, 0.04) 8%,
-      transparent 8%,
-      transparent 92%
-    ),
-    radial-gradient(
-      circle at 85% 72%,
-      rgba(255, 255, 255, 0.04) 0%,
-      rgba(255, 255, 255, 0.04) 8%,
-      transparent 8%,
-      transparent 92%
-    ),
-    radial-gradient(
-      circle at 43% 49%,
-      rgba(255, 255, 255, 0.03) 0%,
-      rgba(255, 255, 255, 0.03) 6%,
-      transparent 6%,
-      transparent 94%
-    ),
-    radial-gradient(
-      circle at 12% 98%,
-      rgba(255, 255, 255, 0.03) 0%,
-      rgba(255, 255, 255, 0.03) 6%,
-      transparent 6%,
-      transparent 94%
-    ),
-    radial-gradient(
-      circle at 37% 52%,
-      rgba(255, 255, 255, 0.03) 0%,
-      rgba(255, 255, 255, 0.03) 6%,
-      transparent 6%,
-      transparent 94%
-    ),
-    radial-gradient(
-      circle at 22% 59%,
-      rgba(255, 255, 255, 0.03) 0%,
-      rgba(255, 255, 255, 0.03) 6%,
-      transparent 6%,
-      transparent 94%
-    ),
-    radial-gradient(
-      circle at 25% 56%,
-      rgba(255, 255, 255, 0.04) 0%,
-      rgba(255, 255, 255, 0.04) 4%,
-      transparent 4%,
-      transparent 96%
-    ),
-    radial-gradient(
-      circle at 22% 79%,
-      rgba(255, 255, 255, 0.04) 0%,
-      rgba(255, 255, 255, 0.04) 4%,
-      transparent 4%,
-      transparent 96%
-    ),
-    radial-gradient(
-      circle at 80% 81%,
-      rgba(255, 255, 255, 0.04) 0%,
-      rgba(255, 255, 255, 0.04) 4%,
-      transparent 4%,
-      transparent 96%
-    ),
-    radial-gradient(
-      circle at 52% 16%,
-      rgba(255, 255, 255, 0.04) 0%,
-      rgba(255, 255, 255, 0.04) 4%,
-      transparent 4%,
-      transparent 96%
-    ),
-    linear-gradient(180deg, rgb(205, 220, 48), rgb(224, 131, 17));
-  transition: transform 500ms, filter 1000ms;
+  box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.192);
+    transition: transform 500ms, filter 1000ms;
+  border-radius: 1rem;
+}
+
+
+
+.info{
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  height: 12vw;
+  background-image: radial-gradient(circle at center center, rgb(64,65,67),rgb(36,32,33));
+}
+
+
+
+.numberColum{
+  margin-top: 3rem;
+  color: white;
+  font-weight: 600;
+}
+
+.description{
+  color: white;
+  font-weight: 400;
+
+  height: 10rem;
+}
+
+.originalPrice{
+  color: #8C8C8C;
+  font-size: 1.3rem;
+  position: absolute;
+  margin-top: -5.2rem;
+  text-decoration:line-through
+}
+
+.discount{
+  color: #01E26D;
+  font-size: 1.3rem;
+  position: absolute;
+  margin-top: -4rem;
 }
 
 .container:hover {
-  transform: scale(1.1);
+  transform: scale(1.03);
   filter: brightness(1.1);
-  transition: transform 300ms, filter 300ms;
+  box-shadow: 0px 10px 25px 5px rgba(0, 0, 0, 0.288);
+  transition: 600ms;
 }
 
 .image {
-  height: 11vh;
+  margin-top: 0.5rem;
+  height: 12.8vw;
+}
+.stars{
+  position: absolute;
+  margin-top: -11rem;
+  margin-left: 0.3rem;
 }
 
+.title{
+  position: absolute;
+  margin-top: -0.5rem;
+  color: white;
+  background-color: #F49E51;
+  width: fit-content;
+  padding: 0.3rem;
+  font-size: 1.5rem;
+  max-width: 16vw;
+  overflow: hidden;
+white-space: nowrap;
+  text-overflow: ellipsis;
+}
 .props {
   display: flex;
   justify-content: center;
   flex-direction: column;
 }
-
+.price{
+  color: white;
+  position: absolute;
+  font-size: 1.8rem;
+  margin-top: -2.5rem;
+  background-color: #515050;
+  width: fit-content;
+}
 .props > div {
   display: flex;
   justify-content: space-evenly;
 }
 
 .fav {
+  position: absolute;
+  margin-left: 1rem;
+  margin-top: 1rem;
   border: none;
   background-color: transparent;
   cursor: pointer;
   width: fit-content;
-  margin: 1vh auto;
-  color: black;
+  color: rgb(129, 129, 129);
   transform: scale(1.5);
   transition: 1000ms;
 }
 
 .fav:hover {
   transform: scale(2);
-  color: red;
+  color: tomato;
 }
 
 .unfav {

@@ -5,7 +5,7 @@ import Cards from "../Cards/Cards";
 import Style from "./Search.module.css";
 
 export default function Search() {
-  const [showFilters, setShowFilters] = useState<boolean>(true);
+  const [showFilters, setShowFilters] = useState<boolean>(false);
   return (
     <div className={Style.container}>
       <div className={Style.filtersTab}>

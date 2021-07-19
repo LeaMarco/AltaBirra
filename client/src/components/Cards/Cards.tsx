@@ -7,6 +7,7 @@ import Style from "./Cards.module.css";
 
 const Posts = () => {
   const searchedPosts: Post[] = useSelector((state: RootState) => state.searchedPosts);
+  console.log(searchedPosts, "POSTTTT")
   return (
     <div className={Style.container}>
       {
@@ -23,6 +24,7 @@ const Posts = () => {
               discount={post.countable.discount}
               ibu={post.beer.ibu}
               abv={post.beer.abv}
+              description={post.description}
             />))
           : <h3 style={{ margin: "auto" }}> No hay resultados para esa busqueda </h3>
         // <img src="https://i.stack.imgur.com/MnyxU.gif" alt="loading" width="3%" height="3%" />

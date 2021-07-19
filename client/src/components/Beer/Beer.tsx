@@ -1,33 +1,69 @@
 import React from 'react'
 import { Link, useHistory } from 'react-router-dom';
 // import './Beer.scss';
-import './Beer.css';
+import Style from './Beer.module.css';
 import cerveza from '../../img/cerveza.png';
 import { useDispatch } from 'react-redux';
 import { getDetail } from '../../actions';
 
-const Beer = ({ id, image, name, ibu, og }) => {
+const Beer = ({ id, image, title, ibu, abv, discount,price, rating }) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
-
-	async function goToDetail() {
-		await dispatch(getDetail(id))
-		history.push(`/detailBeer/${id}`)
-	}
+	
+	const fetchDetail = async () => {
+		await dispatch(getDetail(id));
+		history.push(`/detailBeer/${id}`);
+	  };
+	
 
 	return (
-		<button className="beerLink" onClick={goToDetail}>
-			<div className="beer">
-				<img alt="birrita" src={cerveza} width="150px"></img>
-				<h2 id="name">{name}</h2>
-				<br />
-				<span id="ibu">ibu: {ibu} </span>
-				<span id="abv">abv: {og}</span>
-			</div>
-		</button>
+		<div className={Style.containerBack}>
+		<div className={Style.container}>
+		  <button
+			onClick={fetchDetail}
+			style={{ backgroundColor: "transparent", border: "none" }}
+		  >
+			<img className={Style.image} alt="" src={image}></img>
+			<div className={Style.info}>
+		
+			  <h2 className={Style.title}>{title.toUpperCase()}</h2>
+			  <div className={Style.props}>
+				<div className={Style.bottomInfo}>
+						<div className={Style.numbers}>
+							<div className={Style.numberColum}>
+								<p className={Style.numberInColum}> IBU: </p>
+								<p className={Style.numberInColum}> {ibu} </p>
+							</div>
+							<div className={Style.numberColum}>
+								<p className={Style.numberInColum}> ABV: </p>
+								<p className={Style.numberInColum}> {abv}% </p>
+							</div>
+						</div>
+						<div className={Style.countabled}>
+						<p  className={Style.stars}> {"⭐".repeat(rating)} </p>
+						{discount !== 0 ? (
+							<div className={Style.countable}>
+								<p className={Style.price}> ${(price - price * (discount / 100)).toFixed(2)} </p>
+								<div  className={Style.discountInfo}>
+									<p className={Style.originalPrice}>${price}</p>
+									<p className={Style.discount}> {discount}% OFF </p>
+								</div>
+							</div>
+								) : 
+								<div className={Style.countable}>
+								<p className={Style.price}>${price}</p>
+								</div>
 
-	)
-}
+							}
+							</div>
+					</div>
+			  </div>
+			</div>
+		  </button>
+		</div>
+	  </div>
+	);
+  };
 
 export default Beer
 
