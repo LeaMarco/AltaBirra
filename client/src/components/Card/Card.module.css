@@ -62,6 +62,7 @@
 .image {
   margin-top: 0.5rem;
   height: 12.8vw;
+  max-width: 100%;
 }
 .stars{
   position: absolute;
