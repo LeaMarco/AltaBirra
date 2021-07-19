@@ -17,7 +17,7 @@ app.use(morgan('dev'));
 
 app.use(
 	cors({
-		origin: "https://localhost:3000",
+		origin: "https://alta-birra.vercel.app/",
 		credentials: false,
 		methods: ['GET', 'POST', 'OPTIONS', 'PUT', 'DELETE'],
 		allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept'],
