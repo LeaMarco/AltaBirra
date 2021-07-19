@@ -1,7 +1,70 @@
-.post{
-    background-color: grey;
+.detailContainer{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #A9A9A9;
+    width: 100vw;
+    height: 100vh;
+}
+.detailViewContainer{
+    width:100rem;
+    background-color:white;
+    margin:0.5rem;
+    color:white;
+    border-radius: 66px;
+    padding:3px;
+}
+.detailView{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    color:white;
+    border-radius: 66px;
+    box-shadow: 0.5px 0.5px 30px 21px rgba(0,0,0,0.1) inset;
+    -webkit-box-shadow: 0.5px 0.5px 30px 21px rgba(0,0,0,0.1) inset;
+    -moz-box-shadow: 0.5px 0.5px 30px 21px rgba(0,0,0,0.1) inset;
 }
 
+.priceWODiscount{
+    text-decoration:line-through;
+    color:#8C8C8C;
+}
+.discount{
+    color:#01E26D;
+}
+.imageSection{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: space-around;
+    justify-content: space-between;
+    margin:0.5rem 0 0.5rem 0.5rem;
+    border-top-left-radius: 66px;
+    border-bottom-left-radius: 66px;
+    width:35%;
+    height:40rem;
+}
+.beerDescription{
+    display:flex;
+    align-items: center;
+    justify-content:center;
+    margin:0.5rem 0.5rem 0.5rem 0rem;
+    background-color:black;
+    width:65%;
+    height: 50rem;
+    max-height: 50rem;
+    background: radial-gradient(50% 50% at 50% 50%, #404143 0%, #242021 100%);
+    border-top-right-radius: 66px;
+    border-bottom-right-radius: 66px;
+}
+.beerDescription h1{
+    background-color:#F49E51;
+    width: 40rem;
+    padding-bottom: 10px;
+    vertical-align: middle;
+}
 .fav {
     border: none;
     background-color: transparent;
@@ -12,7 +75,28 @@
     transform: scale(1.5);
     transition: 1000ms;
 }
-  
+.buttonComprar{
+    background-color:#F49E51;
+    border:none;
+    width:15rem;
+    height:3rem;
+    color:white;
+}
+.addtoCartButton{
+    background-color:#69C3C4;
+    border:none;
+    width:15rem;
+    height:3rem;
+    color:white;
+}
+
+.buyButtons{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .fav:hover {
     transform: scale(2);
     color: red;
@@ -28,8 +112,96 @@
     transform: scale(1.5);
     transition: 1000ms;
 }
-  
+
 .unfav:hover {
     transform: scale(2);
     color: black;
+}
+
+.types{
+    display: flex;
+    font-size: 35px;
+    font-weight: bold;
+    margin-left:2rem;
+    color:#C6C2C2;
+}
+.types p {
+    margin:0;
+}
+
+.Head{
+    display:flex;
+    flex-direction: column;
+    align-items:start;
+    margin-top:-5rem;
+    text-align:start;
+}
+.Head h1 {
+    font-size: 40px;
+}
+.specs{
+    display:flex;
+    align-items:center;
+    justify-content:space-evenly;
+    width: 400px;
+    font-size:20px;
+}
+.textContent{
+    padding:20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items:center;
+}
+
+.buyInfo{
+    display:flex;
+    align-content: center;
+    width: 26rem;
+    justify-content:center;
+}
+
+.socialLinks{
+    display: flex;
+    align-Items: center;
+    justify-Content: space-between;
+}
+.socialLinks a{
+    margin:1rem;
+}
+
+.buttonsPago{
+    display:flex;
+    align-content: center;
+}
+.buttonsPago p{
+    margin:0;
+}
+.originalPrice{
+    padding-top: 5px;
+    font-size:4rem;
+    font-weight: bold;
+    margin-left: 1rem;
+}
+.SecondPrices{
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content:space-evenly;
+    margin-right: 3rem;
+    margin-left: 1rem;
+}
+
+.share{
+    margin-top:2rem;
+    margin-bottom:-5rem;
+}
+
+.infoCompra{
+    margin-top: 2rem;
+}
+
+.infoBeer{
+    margin-top: 2rem;
 }
