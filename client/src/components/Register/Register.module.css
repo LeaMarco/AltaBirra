@@ -59,10 +59,10 @@
 
 #btnRegister {
   border-radius: 30px;
-  font-size: 1.4em;
+  font-size: 1.2em;
   padding: 0;
-  width: 50%;
-  height: 2.5em;
+  width: 80%;
+  height: 2em;
   border: 1px solid rgb(128, 128, 128);
   box-shadow: 0px 0px 0.2rem rgba(0, 0, 0, 0.548);
   margin-top: 1em;

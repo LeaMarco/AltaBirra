@@ -151,29 +151,13 @@ export default function Nav() {
               Carrito
             </Link>
 
-            <button className={style.buttonEnter} onClick={toogleEnter}>
-              Entrar
-            </button>
 
-            {
-
-              isAuth ?
-                <button className={style.buttonEnter} >
-                  Bienvenido!!
-                </button>
-                :
-                <button className={style.buttonEnter} >
-                  NO TE CONOZCO AMIGO
-                </button>
-            }
 
             <Modal isOpen={isEnterOpen} handleClose={toogleEnter}>
-              <Login toogleAuth={toogleAuth} />
+              <Login closeModal={toogleEnter} toogleAuth={toogleAuth} />
             </Modal>
 
-            <button className={style.buttonEnter} onClick={toogleRegister}>
-              Registrarme
-            </button>
+
 
             <Modal isOpen={isRegisterOpen} handleClose={toogleRegister}>
               <Register closeModal={toogleRegister} toogleEnter={toogleEnter} toogleRegister={toogleRegister} />
@@ -182,6 +166,21 @@ export default function Nav() {
             <Link to="/post">
               <button className={style.buttonEnter}>Crear post</button>
             </Link>
+
+            {
+              isAuth ?
+                <button className={style.buttonEnter} style={{ borderRadius: "30px", backgroundColor: "forestgreen" }} >
+                  Bienvenido!!
+                </button>
+                :
+                <div> <button className={style.buttonEnter} onClick={toogleEnter}>
+                  Entrar
+                </button>
+                  <button className={style.buttonEnter} onClick={toogleRegister}>
+                    Registrarme
+                  </button></div>
+            }
+
           </div>
         )}
       </div>

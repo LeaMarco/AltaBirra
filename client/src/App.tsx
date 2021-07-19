@@ -13,7 +13,7 @@ import Compra from "./components/Compra/Compra";
 import Rate from "./components/Rate/Rate";
 import { BeeryButton } from "./components/styled_components";
 import { developerTools } from "./developerTools";
-developerTools({ consoleInfo: true });
+// developerTools({ consoleInfo: true });
 
 function App() {
   return (

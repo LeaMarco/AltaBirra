@@ -47,7 +47,7 @@ function validate(dataState: iData, errors: iError, e): iError {
   return errors;
 }
 
-const Login: React.FunctionComponent<{ toogleAuth }> = ({ toogleAuth }) => {
+const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth, closeModal }) => {
 
 
   //Agregar un estado nuevox
@@ -96,7 +96,8 @@ const Login: React.FunctionComponent<{ toogleAuth }> = ({ toogleAuth }) => {
       .post("http://localhost:3001/auth/signin/", { params: postObj })
       .then((e: any) => {
         console.log(e.data);
-        alert(e.data);
+        toogleAuth()
+        closeModal()
       }).catch((error) => console.log('No te pudiste loguear!'))
   };
 
@@ -115,6 +116,11 @@ const Login: React.FunctionComponent<{ toogleAuth }> = ({ toogleAuth }) => {
 
 
   //////////////////////////////FACEBOOK///////////////////////////////////////////////////////
+
+  const componentClicked = () => {
+    console.log("me pulsaste")
+  }
+
   const responseFacebookLogin = (response: any) => {
 
     console.log(response)
@@ -135,6 +141,8 @@ const Login: React.FunctionComponent<{ toogleAuth }> = ({ toogleAuth }) => {
       .then((e) => {
         console.log('Logueado!!!', e.data, localStorage.setItem('token', e.data))
         toogleAuth()
+        closeModal()
+
       })
       .catch((error) => console.log('No te pudiste loguear!'))
   }
@@ -161,6 +169,8 @@ const Login: React.FunctionComponent<{ toogleAuth }> = ({ toogleAuth }) => {
       .then((e) => {
         console.log('Logueado!!!', e.data, localStorage.setItem('token', e.data))
         toogleAuth()
+        closeModal()
+
       })
       .catch((error) => console.log('No te pudiste loguear!'))
   }
@@ -174,9 +184,6 @@ const Login: React.FunctionComponent<{ toogleAuth }> = ({ toogleAuth }) => {
   let btnFacebookSize = 1
   return (
     <div id={Style.login}>
-
-      <button onClick={toogleAuth}>LOGUEO</button>
-
       <div style={{ fontWeight: 600, fontSize: "1.5em" }}>ENTRAR🍺</div>
       <form id={Style.form} onSubmit={handleOnSubmit}>
         <input
@@ -223,6 +230,7 @@ const Login: React.FunctionComponent<{ toogleAuth }> = ({ toogleAuth }) => {
 
         <button id={Style.btnRegister}>Continuar</button>
       </form>
+
       {/* <div
         style={{
           display: "flex",
@@ -230,17 +238,30 @@ const Login: React.FunctionComponent<{ toogleAuth }> = ({ toogleAuth }) => {
           justifyContent: "space-around",
         }}
       > */}
+
+
+      {/* <FacebookLogin
+        appId="866652260898974"
+        autoLoad={false}
+        fields="name,email,picture"
+        onClick={componentClicked}
+        callback={responseFacebookLogin}
+        textButton="Continuar con Google"
+        render={renderProps => (
+          <button className={Style.imgSm} style={{ background: "url(https://i.imgur.com/ULmHyN2.png)", backgroundSize: "cover", width: `${229 * btnFacebookSize}px`, height: `${55 * btnFacebookSize}px`, border: "none", borderRadius: "3px", marginBottom: "0.4em" }} onClick={renderProps.onClick} />
+        )}
+      /> */}
+
+
       <FacebookLogin
         appId="866652260898974"
         autoLoad={false}
         fields="name,email,picture"
-        // onClick={componentClicked}
+        onClick={componentClicked}
         callback={responseFacebookLogin}
         textButton="Continuar con Google"
         render={renderProps => (
-
           <button className={Style.imgSm} style={{ background: "url(https://i.imgur.com/ULmHyN2.png)", backgroundSize: "cover", width: `${229 * btnFacebookSize}px`, height: `${55 * btnFacebookSize}px`, border: "none", borderRadius: "3px", marginBottom: "0.4em" }} onClick={renderProps.onClick} />
-
         )}
       />
 
@@ -260,6 +281,8 @@ const Login: React.FunctionComponent<{ toogleAuth }> = ({ toogleAuth }) => {
 
         )}
       />
+
+
     </div>
   );
 };

@@ -307,7 +307,7 @@ const Register: React.FunctionComponent<{ closeModal, toogleEnter, toogleRegiste
         </label>
         {
           alreadyRegister ?
-            <button id={Style.btnRegister} onClick={renderLogin} style={{ backgroundColor: "rgb(197, 203, 206)" }}>Ya estás registrado! <span style={{ fontWeight: "bold" }}> Ir a Loguin</span>{'>>'} </button>
+            <button id={Style.btnRegister} onClick={renderLogin} style={{ backgroundColor: "rgb(248, 245, 245)" }}>Ya estás registrado! <span style={{ fontWeight: "bold" }}> Ir a Loguin</span>{'>>'} </button>
             :
             <button id={Style.btnRegister}> Listo! </button>
 
