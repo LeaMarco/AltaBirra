@@ -53,7 +53,7 @@ function Cart() {
   );
 }
 
-const urldeleteallcart = "http://localhost:3001/deleteAllCart";
+const urldeleteallcart = "https://altabirra.herokuapp.com/deleteAllCart";
 async function deleteAllCart(data) {
   const response = await axios.delete<cart[]>(urldeleteallcart, { data: { data } });
   return response;

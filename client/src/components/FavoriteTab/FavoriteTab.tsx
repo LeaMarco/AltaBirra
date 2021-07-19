@@ -17,7 +17,7 @@ export default function FavoritesTab() {
 	const favoritePosts: Favorites[] = useSelector((state: RootState) => state.favoritePosts);
 
 	async function removeFavorite(id) {
-		await axios.delete('http://localhost:3001/removeFavorite', { data: { "username": "TestUser", "postId": id } });
+		await axios.delete('https://altabirra.herokuapp.com/removeFavorite', { data: { "username": "TestUser", "postId": id } });
 		dispatch(getFavoritePosts("TestUser"));
 	}
 

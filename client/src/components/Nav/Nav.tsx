@@ -26,7 +26,7 @@ export default function Nav() {
   const [searchInput, setSearchInput] = useState<string>("");
   const dispatch = useDispatch();
   const history = useHistory();
-  
+
 
   const [isAuth, setAuth] = useState<boolean>(false);
   const toogleAuth = () => setAuth(!isAuth);
@@ -39,9 +39,7 @@ export default function Nav() {
 
   async function handleChange(event) {
     setSearchInput(event.target.value);
-    let temp = await axios.get("http://localhost:3001/autocomplete", {
-      params: { search: event.target.value },
-    });
+    let temp = await axios.get("https://altabirra.herokuapp.com/autocomplete", { params: { search: event.target.value } });
     setAutocomplete(temp.data);
   }
 
@@ -144,15 +142,15 @@ export default function Nav() {
             <Modal isOpen={showFavorites} handleClose={toogleFavorites}>
               <FavoritesTab />
             </Modal>
-            <button onClick={toogleFavorites} className={style.buttonFavorites}> 
-            <img className={style.buttonImg} src="https://image.flaticon.com/icons/png/512/126/126482.png" alt="Cart"/>
-            
-             </button>
+            <button onClick={toogleFavorites} className={style.buttonFavorites}>
+              <img className={style.buttonImg} src="https://image.flaticon.com/icons/png/512/126/126482.png" alt="Cart" />
+
+            </button>
             <Link
               to="/cart/1" ////////FALTA METER EL ID DE USER
               className={style.buttonCart}
             >
-              <img className={style.buttonImg} src="https://image.flaticon.com/icons/png/512/3144/3144456.png" alt="Cart"/>
+              <img className={style.buttonImg} src="https://image.flaticon.com/icons/png/512/3144/3144456.png" alt="Cart" />
             </Link>
 
 
@@ -167,27 +165,27 @@ export default function Nav() {
               <Register closeModal={toogleRegister} toogleEnter={toogleEnter} toogleRegister={toogleRegister} />
             </Modal>
 
-              <div className={style.buttonsRight}>
-            <Link to="/panel">
-              <button className={style.buttonEnter}>Panel</button>
-            </Link>
+            <div className={style.buttonsRight}>
+              <Link to="/panel">
+                <button className={style.buttonEnter}>Panel</button>
+              </Link>
 
-            {
-              isAuth ?
-                <button className={style.buttonEnter} style={{ borderRadius: "30px", backgroundColor: "forestgreen" }} >
-                  Bienvenido!!
-                </button>
-                :
-                <div className={style.buttonsRightEnter}> 
+              {
+                isAuth ?
+                  <button className={style.buttonEnter} style={{ borderRadius: "30px", backgroundColor: "forestgreen" }} >
+                    Bienvenido!!
+                  </button>
+                  :
+                  <div className={style.buttonsRightEnter}>
                     <button className={style.buttonEnter} onClick={toogleEnter}>
                       Entrar
                     </button>
                     <button className={style.buttonEnter} onClick={toogleRegister}>
                       Registrarme
                     </button>
-                </div>
-                
-            }
+                  </div>
+
+              }
             </div>
           </div>
         )}

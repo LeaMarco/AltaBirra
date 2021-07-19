@@ -18,14 +18,14 @@ function paginated(model: Array<typeof beers>, page: number) {
   if (end < model.length) {
     let aja = page + 1;
     result.next = {
-      page: `http://localhost:3001/beers?page=${aja}`,
+      page: `https://altabirra.herokuapp.com/beers?page=${aja}`,
       limit: limit,
     };
   }
   if (start > 0) {
     let aja = page - 1;
     result.previous = {
-      page: `http://localhost:3001/beers?page=${aja}`,
+      page: `https://altabirra.herokuapp.com/beers?page=${aja}`,
       limit: limit,
     };
   }

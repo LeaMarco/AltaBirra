@@ -185,7 +185,7 @@ export interface SetQuerySearchAction {
 	payload: QueryTypes;
 }
 
-const URL = 'http://localhost:3001';
+const URL = 'https://altabirra.herokuapp.com';
 
 export function searchedPosts(query) {
 	return async function (dispatch: Dispatch) {
@@ -235,11 +235,11 @@ export interface Actionrara {
 
 
 
-const url = 'http://localhost:3001/beers';
-const urlpost = 'http://localhost:3001/post';
-const urledit = 'http://localhost:3001/edit';
-const urlspecific = 'http://localhost:3001/specificTypes';
-const urlgeneric = 'http://localhost:3001/genericTypes';
+const url = 'https://altabirra.herokuapp.com/beers';
+const urlpost = 'https://altabirra.herokuapp.com/post';
+const urledit = 'https://altabirra.herokuapp.com/edit';
+const urlspecific = 'https://altabirra.herokuapp.com/specificTypes';
+const urlgeneric = 'https://altabirra.herokuapp.com/genericTypes';
 
 
 export const searchTypes = () => {
@@ -294,7 +294,7 @@ export interface UsersPremiumAction {
 
 export const loadUsersPremium = () => {
 	return (dispatch: Dispatch) => {
-		return axios.get<UserPremium[]>('http://localhost:3001/beer/premium')
+		return axios.get<UserPremium[]>('https://altabirra.herokuapp.com/beer/premium')
 			.then(response => {
 				dispatch<UsersPremiumAction>({
 					type: ActionTypes.loadUserPremium,
@@ -309,7 +309,7 @@ export const loadUsersPremium = () => {
 export type ActionUsersPremium = UsersPremiumAction;
 
 
-const urlDetail = 'http://localhost:3001/detailBeer'
+const urlDetail = 'https://altabirra.herokuapp.com/detailBeer'
 
 export const getDetail = (id) => {
 	return async (dispatch: Dispatch) => {
@@ -337,7 +337,7 @@ export interface delPostInCartAction {
 
 export const getCart = (id) => {
 	return async (dispatch: Dispatch) => {
-		const response = await axios.get<cart[]>(`http://localhost:3001/cart/${id}`)
+		const response = await axios.get<cart[]>(`https://altabirra.herokuapp.com/cart/${id}`)
 		dispatch<getCartAction>({
 			type: ActionTypes.getCart,
 			payload: response.data,
@@ -346,7 +346,7 @@ export const getCart = (id) => {
 }
 
 
-const urladdtocart = 'http://localhost:3001/addToCart';
+const urladdtocart = 'https://altabirra.herokuapp.com/addToCart';
 
 // export const addToCart = (data) => {
 //     return async (dispatch: Dispatch) => {

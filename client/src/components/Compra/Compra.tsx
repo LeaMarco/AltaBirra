@@ -61,7 +61,7 @@ export function Compra() {
     }
 
     async function merpa(data) {
-        const response = await axios.post("http://localhost:3001/checkout", { data: { data } });
+        const response = await axios.post("https://altabirra.herokuapp.com/checkout", { data: { data } });
         return response.data.id;
     }
 

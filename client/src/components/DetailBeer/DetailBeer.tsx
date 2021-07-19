@@ -46,6 +46,8 @@ export default function DetailBeer() {
 
 	}
 
+
+
 	async function removeFavorite() {
 		await axios.delete('https://altabirra.herokuapp.com/removeFavorite', { data: { "username": "TestUser", "postId": id } });
 		dispatch(getFavoritePosts("TestUser"));

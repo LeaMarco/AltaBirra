@@ -79,7 +79,7 @@ export default async (amount) => {
 
         let infoToPost = { beer, infoPost, countable }
 
-        await axios.post('http://localhost:3001/post', { params: infoToPost })
+        await axios.post('https://altabirra.herokuapp.com/post', { params: infoToPost })
     } return ("TERMINE")
 
 }

@@ -58,13 +58,13 @@ export function PostinCart({
 
 export default PostinCart;
 
-const urladdtocart = "http://localhost:3001/cart";
+const urladdtocart = "https://altabirra.herokuapp.com/cart";
 async function addToCart(data: any) {
 	const response = await axios.put<PostValues>(urladdtocart, { params: data });
 	return response;
 }
 
-const urlremovetocart = "http://localhost:3001/removeToCart";
+const urlremovetocart = "https://altabirra.herokuapp.com/removeToCart";
 async function removeToCart(data) {
 	const response = await axios.delete<cart[]>(urlremovetocart, { data: data });
 	return response;
