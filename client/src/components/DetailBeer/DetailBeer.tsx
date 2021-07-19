@@ -13,6 +13,7 @@ import Style from "./Detail.module.css";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import Beer from "../Beer/Beer";
+import { card } from "mercadopago";
 
 interface Favorites {
 	post: Post;
@@ -61,7 +62,7 @@ export default function DetailBeer() {
 	};
 
 
-	return (
+	return info?.beer ? (
 		<div className={Style.detailContainer}>
 			<div className={Style.detailViewContainer}>
 				<div className={Style.detailView}>
@@ -102,7 +103,9 @@ export default function DetailBeer() {
 										<h3>Info De Compra</h3>
 										<div className={Style.buyInfo}>
 											<div className={Style.buyButtons}>
-												<button className={Style.buttonComprar} type="submit">Comprar!</button>
+												<form onSubmit={handleSubmit} >
+													<button className={Style.buttonComprar} type="submit">Comprar!</button>
+												</form>
 												<button className={Style.addtoCartButton} onClick={async () => {
 													MySwal.fire({
 														position: 'center',
@@ -147,5 +150,5 @@ export default function DetailBeer() {
 			</div>
 		</div >
 
-	)
+	) : <span>Cargando!</span>
 }

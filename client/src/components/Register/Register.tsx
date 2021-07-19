@@ -156,7 +156,7 @@ const Register: React.FunctionComponent<{ closeModal, toogleEnter, toogleRegiste
         console.log("Bienvenido !")
         closeModal()
       }).catch((e) => {
-        console.log("Ya tenés usuario, logueate!")
+        console.log(e, "Error!")
         setAlreadyRegister(true)
       })
 
@@ -173,6 +173,8 @@ const Register: React.FunctionComponent<{ closeModal, toogleEnter, toogleRegiste
   ////////////////////LOGICA DE REGISTRO LOCAL ///////////////////////////////////////
 
   const handleOnSubmit = async (e) => {
+
+
     e.preventDefault();
     let postObj = {
       username: data.userName,
@@ -180,6 +182,10 @@ const Register: React.FunctionComponent<{ closeModal, toogleEnter, toogleRegiste
       email: data.email,
       name: `${data.names} ${data.lastNames}`,
     };
+
+
+    console.log(e)
+    console.log(postObj)
 
     axios
       .post("http://localhost:3001/auth/signup/", { params: postObj })
