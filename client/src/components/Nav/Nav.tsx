@@ -26,6 +26,7 @@ export default function Nav() {
   const [searchInput, setSearchInput] = useState<string>("");
   const dispatch = useDispatch();
   const history = useHistory();
+  
 
   const [isAuth, setAuth] = useState<boolean>(false);
   const toogleAuth = () => setAuth(!isAuth);
@@ -140,15 +141,18 @@ export default function Nav() {
             >
               Entrar
             </Link> */}
-            <button onClick={toogleFavorites}> ▽ </button>
             <Modal isOpen={showFavorites} handleClose={toogleFavorites}>
               <FavoritesTab />
             </Modal>
+            <button onClick={toogleFavorites} className={style.buttonFavorites}> 
+            <img className={style.buttonImg} src="https://image.flaticon.com/icons/png/512/126/126482.png" alt="Cart"/>
+            
+             </button>
             <Link
               to="/cart/1" ////////FALTA METER EL ID DE USER
-              className={style.buttonEnter}
+              className={style.buttonCart}
             >
-              Carrito
+              <img className={style.buttonImg} src="https://image.flaticon.com/icons/png/512/3144/3144456.png" alt="Cart"/>
             </Link>
 
 
@@ -163,6 +167,7 @@ export default function Nav() {
               <Register closeModal={toogleRegister} toogleEnter={toogleEnter} toogleRegister={toogleRegister} />
             </Modal>
 
+              <div className={style.buttonsRight}>
             <Link to="/panel">
               <button className={style.buttonEnter}>Panel</button>
             </Link>
@@ -173,14 +178,17 @@ export default function Nav() {
                   Bienvenido!!
                 </button>
                 :
-                <div> <button className={style.buttonEnter} onClick={toogleEnter}>
-                  Entrar
-                </button>
-                  <button className={style.buttonEnter} onClick={toogleRegister}>
-                    Registrarme
-                  </button></div>
+                <div className={style.buttonsRightEnter}> 
+                    <button className={style.buttonEnter} onClick={toogleEnter}>
+                      Entrar
+                    </button>
+                    <button className={style.buttonEnter} onClick={toogleRegister}>
+                      Registrarme
+                    </button>
+                </div>
+                
             }
-
+            </div>
           </div>
         )}
       </div>

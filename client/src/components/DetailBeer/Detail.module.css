@@ -46,6 +46,10 @@
     width:35%;
     height:40rem;
 }
+.imageSection img{
+    max-width: 100%;
+    max-height: 100%;
+}
 .beerDescription{
     display:flex;
     align-items: center;
