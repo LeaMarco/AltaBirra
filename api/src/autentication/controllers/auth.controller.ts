@@ -32,6 +32,9 @@ function validatePassword(password: string, user: User): boolean {
 
 
 export const signup = async (req: Request, res: Response) => {
+
+    console.log(req)
+
     const { username, email, name, password } = req.body.params;
     console.log("asddsa", username, email, name, password)
 

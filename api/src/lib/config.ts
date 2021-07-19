@@ -13,7 +13,7 @@ const config = {
 	dev: process.env.NODE_ENV !== 'production',
 	port: process.env.API_PORT || '3001',
 	host: process.env.API_host || 'localhost',
-	cors: process.env.CORS || 'http://localhost:3000/',
+	cors: process.env.CORS || 'https://localhost:3000/',
 }
 
 

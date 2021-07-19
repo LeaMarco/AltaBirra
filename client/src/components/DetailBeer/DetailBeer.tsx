@@ -67,13 +67,13 @@ export default function DetailBeer() {
 			<div className={Style.detailViewContainer}>
 				<div className={Style.detailView}>
 					<div className={Style.imageSection}>
-						<div className={Style.favbutton}>
+						{/* <div className={Style.favbutton}>
 							{
 								isFavorite
 									? <button onClick={removeFavorite} className={Style.unfav}> ❤ </button>
 									: <button onClick={addToFavorite} className={Style.fav}> ❤ </button>
 							}
-						</div>
+						</div> */}
 						<img src={info.image} alt="La imagen no esta disponible" />
 						<p className={Style.ratingStars}>{info.rating}⭐⭐⭐⭐</p>
 					</div>
