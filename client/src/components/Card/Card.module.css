@@ -120,6 +120,9 @@ white-space: nowrap;
 }
 
 .unfav {
+  position: absolute;
+  margin-left: 1rem;
+  margin-top: 1rem;
   border: none;
   background-color: transparent;
   cursor: pointer;
