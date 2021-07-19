@@ -267,7 +267,7 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
 
 
       <GoogleLogin
-        clientId="245898915217-k2cma8v306n8sreh56505vqv0nlql1do.apps.googleusercontent.com"
+        clientId="245898915217-vn77s7m8uipu4lf0n3nkdcqtdu2ej2to.apps.googleusercontent.com"
         buttonText="Continuar con Google"
         theme="dark"
         onSuccess={responseGoogleLogin}
