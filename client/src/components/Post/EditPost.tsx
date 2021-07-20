@@ -9,6 +9,7 @@ import styles from './Post.module.css';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { useParams } from "react-router-dom";
+import Preview from "./Preview"
 
 //TIENE QUE TOMAR COMO PARAMETRO EL ID DEL POST QUE SE SELECCIONA Y RENDERIZAR EL COMPONENTE DETALLE PASANDOLE ESE ID.
 export default function EditPost() {
@@ -67,6 +68,8 @@ const { register, handleSubmit,reset} = useForm<PostValues>();
 const onSubmit: SubmitHandler<PostValues> = (data) => {despachadora(data,postId); reset()};
 
 return (
+  <div>
+
   <form className={styles.postForm} onSubmit={handleSubmit(onSubmit)}>
       <section className={styles.postFormBeer}>
         <h3 id={styles["beerh2"]}> Beer</h3>
@@ -187,6 +190,8 @@ return (
       <input className={styles.postFormSubmitButton} type="submit" />
     </div>
   </form>
+  <Preview/>
+  </div>
 );
 }
 
