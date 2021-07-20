@@ -41,6 +41,7 @@ export enum ActionTypes {
 	getDetail,
 	getCart,
 	delPostInCart,
+	welcome
 }
 
 export interface PostValues {
@@ -292,6 +293,12 @@ export interface UsersPremiumAction {
 	payload: UserPremium[];
 }
 
+export interface welcome {
+	type: ActionTypes.welcome;
+	payload: string;
+}
+
+
 export const loadUsersPremium = () => {
 	return (dispatch: Dispatch) => {
 		return axios.get<UserPremium[]>('http://localhost:3001/beer/premium')
@@ -307,6 +314,17 @@ export const loadUsersPremium = () => {
 
 // export type Action = FetchUsersAction;
 export type ActionUsersPremium = UsersPremiumAction;
+
+
+export const welcomeUser = (user:string) => {
+	return <welcome> ({
+		type: ActionTypes.welcome,
+		payload: user
+	})
+}
+
+export type ActionWelcome = welcome;
+
 
 
 const urlDetail = 'http://localhost:3001/detailBeer'

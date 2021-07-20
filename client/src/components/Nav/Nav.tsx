@@ -2,13 +2,15 @@ import { useState } from "react";
 import style from "./Nav.module.css";
 import logo from "./AltaBirra.svg";
 import { Link, useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { searchedPosts, setTitleSearch } from "../../actions";
 import { Modal } from "../Login/Modal/Modal.component";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import axios from "axios";
 import FavoritesTab from "../FavoriteTab/FavoriteTab";
+
+
 
 interface Autocomplete {
   title: string;
@@ -26,6 +28,9 @@ export default function Nav() {
   const [searchInput, setSearchInput] = useState<string>("");
   const dispatch = useDispatch();
   const history = useHistory();
+  const selector = useSelector((state) => state["welcome"]);
+  
+  console.log('BIENVENIDO', selector);
 
   function handleSubmit(event) {
     event.preventDefault();

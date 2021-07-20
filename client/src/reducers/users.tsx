@@ -1,4 +1,4 @@
-import {ActionTypes, UserPremium, ActionUsersPremium} from '../actions';
+import {ActionTypes, UserPremium, ActionUsersPremium, ActionWelcome} from '../actions';
 
 // export const usersReducer = (state: User[] = [], action: Action) => {
 
@@ -24,6 +24,15 @@ import {ActionTypes, UserPremium, ActionUsersPremium} from '../actions';
 export const usersPremium = (state: UserPremium[] = [], action: ActionUsersPremium) => {
 	switch (action.type) {
 		case ActionTypes.loadUserPremium:
+			return action.payload;
+		default:
+			return state;
+	}
+};
+
+export const welcome = (state: string = '', action: ActionWelcome) => {
+	switch (action.type) {
+		case ActionTypes.welcome:
 			return action.payload;
 		default:
 			return state;

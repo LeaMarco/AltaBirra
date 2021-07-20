@@ -341,7 +341,7 @@ const Register: React.FunctionComponent<{ closeModal, toogleEnter, toogleRegiste
 
 
       <GoogleLogin
-        clientId="245898915217-k2cma8v306n8sreh56505vqv0nlql1do.apps.googleusercontent.com"
+        clientId="718855918635-dd6u7lc5oteij79hesojqg2rcudi34uh.apps.googleusercontent.com"
         buttonText="Continuar con Google"
         theme="dark"
         onSuccess={responseGoogleRegister}

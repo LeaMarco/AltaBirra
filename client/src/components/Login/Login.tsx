@@ -9,6 +9,8 @@ import axios from "axios";
 import { iError, iData } from "./LoginInterfaces";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
+import { welcomeUser } from '../../actions'
+
 
 function validate(dataState: iData, errors: iError, e): iError {
   let name = e.target.name;
@@ -131,6 +133,9 @@ const Login: React.FunctionComponent<{}> = (props) => {
 
 
   //////////////////////////////LOGICA DE GOOGLE///////////////////////////////////////////////////
+  const dispatch = useDispatch();
+  
+
   const responseGoogleLogin = (response: any) => {
 
     const name = response.dt.uU;
@@ -146,7 +151,10 @@ const Login: React.FunctionComponent<{}> = (props) => {
         }
 
       })
-      .then((e) => console.log('Logueado!!!', e.data, localStorage.setItem('token', e.data)))
+      .then((e) => {
+        localStorage.setItem('token', e.data);
+        dispatch(welcomeUser(name));
+      })
       .catch((error) => console.log('No te pudiste loguear!'))
   }
 
@@ -230,7 +238,7 @@ const Login: React.FunctionComponent<{}> = (props) => {
 
 
       <GoogleLogin
-        clientId="245898915217-k2cma8v306n8sreh56505vqv0nlql1do.apps.googleusercontent.com"
+        clientId="718855918635-dd6u7lc5oteij79hesojqg2rcudi34uh.apps.googleusercontent.com"
         buttonText="Continuar con Google"
         theme="dark"
         onSuccess={responseGoogleLogin}

@@ -6,6 +6,7 @@ import { UserPremium } from '../actions/index';
 import { detailReducer } from './detail';
 import { cartReducer } from './cart';
 import { cart } from '../actions/index';
+import { welcome } from './users';
 
 export interface StoreState {
 
@@ -19,7 +20,8 @@ export const rootReducer = combineReducers({
 	usersPremium: usersPremium,
 	detailPosts: detailReducer,
 	cart: cartReducer,
-	favoritePosts: postsFavoritesReducer
+	favoritePosts: postsFavoritesReducer,
+	welcome: welcome
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
