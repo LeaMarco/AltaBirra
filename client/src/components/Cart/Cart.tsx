@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { cart, getCart } from "../../actions";
 import { PostinCart } from "../postInCart/PostInCart";
 import axios from 'axios';
+import Swal from "sweetalert2";
 
 
 function Cart() {
@@ -30,9 +31,26 @@ function Cart() {
     await deleteAllCart(id);
     dispatch(getCart(id));
   }
-
-
-
+  function deleteConfirm(id) {
+    Swal.fire({
+      title: '¿Seguro de borrar todo tu carrito?',
+      text: "No se puede revertir...",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Borrar Todo'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        despachadora(id)
+        Swal.fire(
+          '¡Borrado!',
+          'Se limpió tu carrito',
+          'success'
+        )
+      }
+    })
+  }
 
   return (
     <div>
@@ -47,7 +65,7 @@ function Cart() {
         )
         }
       </ul>
-      <button onClick={(e) => despachadora(cartIdparsed)}> BORROTODO</button>
+      <button onClick={(e) => deleteConfirm(cartIdparsed)}> Limpiar carrito</button>
       <Link to={`/compra/${id}`}>Comprar</Link>
     </div >
   );

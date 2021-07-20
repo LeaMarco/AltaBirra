@@ -34,7 +34,6 @@ export default function DetailBeer() {
 		dispatch(getDetail(id))
 	}, [dispatch]);
 
-
 	async function addToFavorite() {
 		await axios.post('https://altabirra.herokuapp.com/addFavorite', { data: { "username": "TestUser", "postId": id } });
 		dispatch(getFavoritePosts("TestUser"));
@@ -77,11 +76,12 @@ export default function DetailBeer() {
 						<div>
 							<p>Reviews</p>
 							<ul className={Style.ratingComment}>
-								{info.review.map((comment) => (
+								{info.review.slice(0, 6).map((comment) => (
 									<li>{comment.comment} <span className={Style.ratingStars}>{"⭐".repeat(comment.rating)}</span></li>))
 								}</ul>
 						</div>
 						<p className={Style.ratingStars}><p>Rating Total</p>{"⭐".repeat(info.rating)}</p>
+						<p>{info.review.length} opiniones</p>
 					</div>
 					<div className={Style.beerDescription}>
 						<div id="post">
