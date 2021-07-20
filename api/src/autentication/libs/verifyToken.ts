@@ -1,7 +1,7 @@
-import { Request, Response, NextFunction } from 'express'
+import { Request, Response, NextFunction, request } from 'express'
 import jwt from "jsonwebtoken"
 //////////////////////////////////////VALIDACION/////////////////////////////////////////////////////////////////////
-interface payload {
+interface infoToken {
     id: number;
     adminRole: boolean;
     iat: number;
@@ -16,15 +16,15 @@ export const tokenValidation = (req: Request, res: Response, next: NextFunction)
     if (!token) return res.status(401).json('Acces denied(falta el token!)');
 
     // El metodo verify toma el token y devuelve los datos que estaban dentro de ese token
-    let payload;
+    let infoToken;
     if (process.env.SECRET_CODE) {
-        payload = jwt.verify(token, process.env.SECRET_CODE) as payload
+        infoToken = jwt.verify(token, process.env.SECRET_CODE) as infoToken
+
+
     }
     else res.sendStatus(501) //NO HAY ENV!
-
-    req.body = { ...req.body, payload }
-    req.userName = "asd"
-
+    // req.userName = "añskjdnalskdnlaskdjnaslk"///////////////////////////////PREGUNTAR MARTINA MARTINIARLA
+    req.body = { ...req.body, infoToken }
     next();
 
 }

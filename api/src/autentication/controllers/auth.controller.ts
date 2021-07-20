@@ -85,9 +85,9 @@ export const signup = async (req: Request, res: Response) => {
 
 export const signin = async (req: Request, res: Response) => {
 
+    // const infoToken = req.body.infoToken
 
-    // console.log(req.body.params.nameMail)
-
+    console.log(req.body, "infotoken")
     const user = await prisma.user.findUnique({
         where: {
             username: req.body.params.nameMail
@@ -103,8 +103,17 @@ export const signin = async (req: Request, res: Response) => {
         }
 
         if (process.env.SECRET_CODE) {
+
+            const userData = {
+                id: user.id,
+                nombre: user.name,
+                premium: user.premium,
+                favoritos: user.favoriteId
+            }
+
+
             const token: string = jwt.sign({ id: user.id, adminRole: false }, process.env.SECRET_CODE, { expiresIn: 60 * 60 * 24 })
-            res.json(token)
+            res.json({ token, userData })
         }
         else {
             res.status(500).send("CONTRASEÑA PARA GENERAR TOKENS AUSENTE EN VARIABLES DE ENTORNO DEL SERVER!")
@@ -126,7 +135,7 @@ interface payload {
 
 export const profile = async (req: Request, res: Response) => {
 
-    res.send("Hola!")
+    res.send("Ho,a soy profiel")
 
 
     /*  const token = req.header('authToken');
