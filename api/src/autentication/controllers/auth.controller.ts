@@ -3,6 +3,11 @@ import bcrypt from "bcryptjs"
 import { PrismaClient } from "@prisma/client";
 import { NextFunction, Request, Response, Router } from "express";
 
+
+
+
+
+
 const router = Router();
 const prisma = new PrismaClient();
 
@@ -33,10 +38,10 @@ function validatePassword(password: string, user: User): boolean {
 
 export const signup = async (req: Request, res: Response) => {
 
-    console.log(req)
+    // console.log(req)
 
     const { username, email, name, password } = req.body.params;
-    console.log("asddsa", username, email, name, password)
+    // console.log("asddsa", username, email, name, password)
 
     // Busco al usuario
     const user = await prisma.user.findUnique({
@@ -81,7 +86,7 @@ export const signup = async (req: Request, res: Response) => {
 export const signin = async (req: Request, res: Response) => {
 
 
-    console.log(req.body.params.nameMail)
+    // console.log(req.body.params.nameMail)
 
     const user = await prisma.user.findUnique({
         where: {
@@ -89,19 +94,16 @@ export const signin = async (req: Request, res: Response) => {
         }
     })
 
-    // console.log(user, "user")
-
     if (!user) return res.sendStatus(400);
 
     else {
         if (req.body.params.password) {
             const correctPassword: boolean = validatePassword(req.body.params.password, user);
-            console.log("Aca", correctPassword, "Aca")
             if (correctPassword === false) return res.status(400).send('Credencial invalida');
         }
 
         if (process.env.SECRET_CODE) {
-            const token: string = jwt.sign({ username: user.username }, process.env.SECRET_CODE, { expiresIn: 60 * 60 * 24 })
+            const token: string = jwt.sign({ id: user.id, adminRole: false }, process.env.SECRET_CODE, { expiresIn: 60 * 60 * 24 })
             res.json(token)
         }
         else {
@@ -124,25 +126,29 @@ interface payload {
 
 export const profile = async (req: Request, res: Response) => {
 
-    const token = req.header('authToken');
+    res.send("Hola!")
 
-    if (!token) return res.status(401).json('Acces denied');
-    // El metodo verify toma el token y devuelve los datos que estaban dentro de ese token
-    const payload = jwt.verify(token, 'secretKey') as payload
-    //Validacion de entrada a la ruta
-    const username = payload.username;
 
-    const user = await prisma.user.findUnique({ where: { username } })
-
-    if (!user) return res.status(404).send("Acceso denegado")
-    else {
-        res.send("Bienvenido a tu perfil!!!!");
-    }
+    /*  const token = req.header('authToken');
+ 
+     if (!token) return res.status(401).json('Acces denied');
+     // El metodo verify toma el token y devuelve los datos que estaban dentro de ese token
+     const payload = jwt.verify(token, 'secretKey') as payload
+     //Validacion de entrada a la ruta
+     const username = payload.username;
+ 
+     const user = await prisma.user.findUnique({ where: { username } })
+ 
+     if (!user) return res.status(404).send("Acceso denegado")
+     else {
+         res.send("Bienvenido a tu perfil!!!!");
+     } */
 };
 
 
 
 export const wipe = async (req: Request, res: Response) => {
+    await prisma.transaction.deleteMany({})
     await prisma.post.deleteMany({})
     await prisma.user.deleteMany({})
 

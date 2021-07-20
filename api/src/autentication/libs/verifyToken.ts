@@ -1,22 +1,31 @@
-import { Request, Response, NextFunction, request } from 'express';
-import jwt from 'jsonwebtoken';
-
+import { Request, Response, NextFunction } from 'express'
+import jwt from "jsonwebtoken"
+//////////////////////////////////////VALIDACION/////////////////////////////////////////////////////////////////////
 interface payload {
-    usernam: string,
-    iat: number,
-    exp: number
+    id: number;
+    adminRole: boolean;
+    iat: number;
+    exp: number;
 }
 
 
-/* export const tokenValidation = (req: Request, res: Response, next: NextFunction) => {
+export const tokenValidation = (req: Request, res: Response, next: NextFunction) => {
+
     const token = req.header('authToken');
 
-    if (!token) return res.status(401).json('Acces denied');
+    if (!token) return res.status(401).json('Acces denied(falta el token!)');
 
     // El metodo verify toma el token y devuelve los datos que estaban dentro de ese token
-    const payload = jwt.verify(token, 'secretKey') as payload
+    let payload;
+    if (process.env.SECRET_CODE) {
+        payload = jwt.verify(token, process.env.SECRET_CODE) as payload
+    }
+    else res.sendStatus(501) //NO HAY ENV!
 
-    req.username = payload.usernam;
+    req.body = { ...req.body, payload }
+    req.userName = "asd"
 
     next();
-} */
+
+}
+//////////////////////////////////////////FIN DE VALIDACION/////////////////////////////////////////////////////
