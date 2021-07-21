@@ -23,6 +23,7 @@ import sellHistory from "./sellHistory";
 import addToCart from './addToCart';
 import autentication from "../autentication/routes/auth"
 import buyHistory from "./buyHistory";
+import { tokenValidation } from '../autentication/libs/verifyToken';
 
 const router = Router();
 
@@ -30,7 +31,7 @@ const router = Router();
 router.use("/auth/", autentication)
 router.use("/register", register);
 router.use("/beer", beers);
-router.use("/post", createPost);
+router.use("/post", tokenValidation, createPost);
 router.use("/post", getSearchedPost);
 router.use("/transaction", transaction);
 router.use("/cart", cart);

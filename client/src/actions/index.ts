@@ -253,8 +253,9 @@ export const searchTypes = () => {
 };
 
 export const createPost = (data) => {
+
 	return async (dispatch: Dispatch) => {
-		const response = await axios.post<PostValues>(urlpost, { params: data });
+		const response = await axios.post<PostValues>(urlpost, { params: data }, { headers: {authToken: localStorage.tokenLocal} } );
 		return response;
 		// dispatch<Actionrara>({
 		// 	type: ActionTypes.createPost,

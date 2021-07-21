@@ -166,9 +166,7 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
     const name = response.dt.uU;
     const googleId = response.googleId;
     const nameMail = name + "_" + googleId;
-
-    console.log('PARAMSSSSSSSSSSSSSS', response);
-
+    
     axios
       .post("http://localhost:3001/auth/signin", {
         params: {

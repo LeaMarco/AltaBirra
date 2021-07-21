@@ -12,7 +12,7 @@ interface infoToken {
 export const tokenValidation = (req: Request, res: Response, next: NextFunction) => {
 
     const token = req.header('authToken');
-
+    console.log('TOKENNNNNN N N N N', token);
     if (!token) return res.status(401).json('Acces denied(falta el token!)');
     let infoToken;
     if (process.env.SECRET_CODE) {
