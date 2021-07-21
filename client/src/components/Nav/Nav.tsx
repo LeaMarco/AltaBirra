@@ -9,8 +9,8 @@ import Login from "../Login/Login";
 import Register from "../Register/Register";
 import axios from "axios";
 import FavoritesTab from "../FavoriteTab/FavoriteTab";
-import { token } from "morgan";
 import { useEffect } from "react";
+import { ModalFavorites } from "../FavoriteTab/ModalFavorites/Modal.component";
 
 interface Autocomplete {
   title: string;
@@ -54,7 +54,7 @@ export default function Nav() {
     if (tokenLocal && once) {
       once = false
 
-      axios.get('http://localhost:3001/auth/localSignIn', {
+      axios.get(`${window.env.HOST_BACKEND}/auth/localSignIn`, {
         headers: {
           authToken: tokenLocal
         }
@@ -81,7 +81,7 @@ export default function Nav() {
 
   async function handleChange(event) {
     setSearchInput(event.target.value);
-    let temp = await axios.get("http://localhost:3001/autocomplete", {
+    let temp = await axios.get(`${window.env.HOST_BACKEND}/autocomplete`, {
       params: { search: event.target.value },
     });
     setAutocomplete(temp.data);
@@ -176,34 +176,21 @@ export default function Nav() {
           </div>
         ) : (
           <div className={style.buttonsRight}>
-            {/* <Link
-              to="/login"
-              className={style.buttonEnter}
-              onClick={() => setRegister(!register)}
-            >
-              Entrar
-            </Link> */}
-            <Modal isOpen={showFavorites} handleClose={toogleFavorites}>
-              <FavoritesTab />
-            </Modal>
-            <button onClick={toogleFavorites} className={style.buttonFavorites}>
-              <img className={style.buttonImg} src="https://image.flaticon.com/icons/png/512/126/126482.png" alt="Cart" />
+            <ModalFavorites isOpen={showFavorites} handleClose={toogleFavorites}>
+              <FavoritesTab closeModal={toogleFavorites} />
+            </ModalFavorites>
 
+            <button onClick={toogleFavorites} className={style.buttonFavorites}>
+              <img className={style.buttonImg} src="https://image.flaticon.com/icons/png/512/1077/1077035.png" alt="Favorites" height="1vh" />
             </button>
-            <Link
-              to="/cart/1" ////////FALTA METER EL ID DE USER
-              className={style.buttonCart}
-            >
+
+            <Link to="/cart/1" className={style.buttonCart}>
               <img className={style.buttonImg} src="https://image.flaticon.com/icons/png/512/3144/3144456.png" alt="Cart" />
             </Link>
-
-
 
             <Modal isOpen={isEnterOpen} handleClose={toogleEnter}>
               <Login closeModal={toogleEnter} toogleAuth={toogleAuth} />
             </Modal>
-
-
 
             <Modal isOpen={isRegisterOpen} handleClose={toogleRegister}>
               <Register closeModal={toogleRegister} toogleEnter={toogleEnter} toogleRegister={toogleRegister} />
@@ -218,7 +205,7 @@ export default function Nav() {
 
               {
                 isAuth ?
-                  <div>
+                  <>
                     <button className={style.buttonEnter} style={{ borderRadius: "30px", backgroundColor: "forestgreen" }} >
                       Bienvenido!!
                     </button>
@@ -226,8 +213,7 @@ export default function Nav() {
                     <button className={style.buttonEnter} style={{ borderRadius: "30px", backgroundColor: "red" }} onClick={() => { localStorage.clear(); toogleAuth() }} >
                       Cerras cesion
                     </button>
-
-                  </div>
+                  </>
                   :
                   <div className={style.buttonsRightEnter}>
                     <button className={style.buttonEnter} onClick={toogleEnter}>
@@ -241,6 +227,7 @@ export default function Nav() {
               }
             </div>
           </div>
+          // </div>
         )}
       </div>
     </div>

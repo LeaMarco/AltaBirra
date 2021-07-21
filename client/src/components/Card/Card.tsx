@@ -36,16 +36,16 @@ const Card = ({
   };
 
   async function addToFavorite() {
-    await axios.post("http://localhost:3001/addFavorite", {
-      data: { username: "TestUser", postId: id },
+    await axios.post(`${window.env.HOST_BACKEND}/addFavorite`, {
+      data: { username: `TestUser`, postId: id },
     });
     dispatch(getFavoritePosts("TestUser"));
     setIsFavorite(true);
   }
 
   async function removeFavorite() {
-    await axios.delete("http://localhost:3001/removeFavorite", {
-      data: { username: "TestUser", postId: id },
+    await axios.delete(`${window.env.HOST_BACKEND}/removeFavorite`, {
+      data: { username: `TestUser`, postId: id },
     });
     dispatch(getFavoritePosts("TestUser"));
     setIsFavorite(false);
@@ -82,16 +82,16 @@ const Card = ({
                 <p className={Style.discount}> {discount}% OFF </p>
               </>
             ) : null}
-			{discount !== 0 ? (
-      <p className={Style.price}>
-        $ {(price - price * (discount / 100)).toFixed(2)}
-      </p>
-    ) : (
-      <p className={Style.price}>${price}</p>
-    )}
+            {discount !== 0 ? (
+              <p className={Style.price}>
+                $ {(price - price * (discount / 100)).toFixed(2)}
+              </p>
+            ) : (
+              <p className={Style.price}>${price}</p>
+            )}
             <h2 className={Style.title}>{title.toUpperCase()}</h2>
             <div className={Style.props}>
-              <p  className={Style.stars}> {"⭐".repeat(rating)} </p>
+              <p className={Style.stars}> {"⭐".repeat(rating)} </p>
               <div className={Style.numbers}>
                 <div className={Style.numberColum}>
                   <p> IBU: </p>
@@ -106,7 +106,7 @@ const Card = ({
                   <p> {ibu} </p>
                 </div>
               </div>
-				<div className={Style.description}>{shorten(description,110)}...</div>
+              <div className={Style.description}>{shorten(description, 110)}...</div>
             </div>
           </div>
         </button>
@@ -121,6 +121,6 @@ export default Card;
   <h3>Info De Compra</h3>
 
   <div>
-    
+
   </div>
 </div>;

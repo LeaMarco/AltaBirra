@@ -25,18 +25,30 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>AltaBirra!</title>
+    <script id="react-dotenv" src="./env.js"></script>
   </head>
   <body>
-    
     <noscript>You need to enable JavaScript to run this app.</noscript>
+
+    <style>
+      df-messenger {
+        --df-messenger-button-titlebar-color: #69c3c4;
+        --df-messenger-send-icon: #69c3c4;
+        --df-messenger-bot-message: rgba(140, 43, 43, 0);
+        --df-messenger-chat-background-color: #160d0d;
+        --df-messenger-font-color: white;
+        --df-messenger-user-message: #479b3d;
+      }
+    </style>
+
     <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1%22%3E"></script>
-      <df-messenger
-        intent="WELCOME"
-        chat-icon="https://i.imgur.com/VersYqd.png"
-        chat-title="AltaBirra"
-        agent-id="9998ef59-1b94-48e8-b07f-253756393b59"
-        language-code="es"
-      ></df-messenger>
+    <df-messenger
+      intent="WELCOME"
+      chat-icon="https://i.imgur.com/VersYqd.png"
+      chat-title="AltaBirra"
+      agent-id="9998ef59-1b94-48e8-b07f-253756393b59"
+      language-code="es"
+    ></df-messenger>
 
     <div id="root"></div>
     <div id="modal-portal"></div>

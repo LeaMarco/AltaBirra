@@ -185,7 +185,7 @@ export interface SetQuerySearchAction {
 	payload: QueryTypes;
 }
 
-const URL = 'http://localhost:3001';
+const URL = `${window.env.HOST_BACKEND}`;
 
 export function searchedPosts(query) {
 	return async function (dispatch: Dispatch) {
@@ -235,11 +235,11 @@ export interface Actionrara {
 
 
 
-const url = 'http://localhost:3001/beers';
-const urlpost = 'http://localhost:3001/post';
-const urledit = 'http://localhost:3001/edit';
-const urlspecific = 'http://localhost:3001/specificTypes';
-const urlgeneric = 'http://localhost:3001/genericTypes';
+const url = `${window.env.HOST_BACKEND}/beers`;
+const urlpost = `${window.env.HOST_BACKEND}/post`;
+const urledit = `${window.env.HOST_BACKEND}/edit`;
+const urlspecific = `${window.env.HOST_BACKEND}/specificTypes`;
+const urlgeneric = `${window.env.HOST_BACKEND}/genericTypes`;
 
 
 export const searchTypes = () => {
@@ -294,7 +294,7 @@ export interface UsersPremiumAction {
 
 export const loadUsersPremium = () => {
 	return (dispatch: Dispatch) => {
-		return axios.get<UserPremium[]>('http://localhost:3001/beer/premium')
+		return axios.get<UserPremium[]>(`${window.env.HOST_BACKEND}/beer/premium`)
 			.then(response => {
 				dispatch<UsersPremiumAction>({
 					type: ActionTypes.loadUserPremium,
@@ -308,8 +308,7 @@ export const loadUsersPremium = () => {
 // export type Action = FetchUsersAction;
 export type ActionUsersPremium = UsersPremiumAction;
 
-
-const urlDetail = 'http://localhost:3001/detailBeer'
+const urlDetail = `${window.env.HOST_BACKEND}/detailBeer`
 
 export const getDetail = (id) => {
 	return async (dispatch: Dispatch) => {
@@ -337,7 +336,7 @@ export interface delPostInCartAction {
 
 export const getCart = (id) => {
 	return async (dispatch: Dispatch) => {
-		const response = await axios.get<cart[]>(`http://localhost:3001/cart/${id}`)
+		const response = await axios.get<cart[]>(`${window.env.HOST_BACKEND}/cart/${id}`)
 		dispatch<getCartAction>({
 			type: ActionTypes.getCart,
 			payload: response.data,
@@ -346,7 +345,7 @@ export const getCart = (id) => {
 }
 
 
-const urladdtocart = 'http://localhost:3001/addToCart';
+const urladdtocart = `${window.env.HOST_BACKEND}/addToCart`;
 
 // export const addToCart = (data) => {
 //     return async (dispatch: Dispatch) => {

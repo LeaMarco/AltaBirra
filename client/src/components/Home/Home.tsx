@@ -6,9 +6,10 @@ import "./Home.scss";
 import CreateManyPost from "./postCreator";
 
 const Home = () => {
+
   return (
     <div className="Beers-container">
-      <button onClick={() => CreateManyPost(100)}> CREAR</button>
+      <button onClick={() => CreateManyPost(1000)}> CREAR</button>
 
       <Beers />
       <BeersVot />

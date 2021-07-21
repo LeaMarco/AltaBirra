@@ -5,6 +5,17 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux"; //Sirve para proveer el estado global de redux a los componentes de React
 import store from "./store"; //importa la store creada en otro lado
+import env from "react-dotenv";
+
+console.log(env.HOST_BACKEND, "back")
+
+declare global {
+  interface Window {
+    env: any;
+  }
+}
+
+
 
 ReactDOM.render(
   <React.StrictMode>

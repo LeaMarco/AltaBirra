@@ -20,13 +20,15 @@
     "mkcert": "^1.4.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-dotenv": "^0.1.3",
     "react-facebook-login": "^4.1.1",
     "react-google-login": "^5.2.2",
     "react-hook-form": "^7.10.1",
     "react-icons": "^4.2.0",
     "react-redux": "^7.2.4",
+    "react-responsive-carousel": "^3.2.20",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.3",
+    "react-scripts": "^4.0.3",
     "react-social-icons": "^5.5.1",
     "redux-thunk": "^2.3.0",
     "sass": "^1.35.2",
@@ -36,8 +38,8 @@
     "typescript": "^4.3.5"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "react-dotenv && react-scripts start",
+    "build": "react-dotenv && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -61,5 +63,8 @@
   },
   "devDependencies": {
     "@types/react-router-dom": "^5.1.8"
+  },
+  "react-dotenv": {
+    "whitelist": ["HOST_BACKEND"]
   }
 }

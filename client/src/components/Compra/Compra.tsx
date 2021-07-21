@@ -14,7 +14,7 @@ export function Compra() {
     const carts: any = useSelector((state: RootState) => state.cart);
     const [merpastate, setMerpa] = useState("");
     useScript(merpastate)
-    
+
     useEffect(() => {
         dispatch(getCart(id));
     }, []);
@@ -61,7 +61,7 @@ export function Compra() {
     }
 
     async function merpa(data) {
-        const response = await axios.post("http://localhost:3001/checkout", { data: { data } });
+        const response = await axios.post(`${window.env.HOST_BACKEND}/checkout`, { data: { data } });
         return response.data.id;
     }
 

@@ -58,13 +58,13 @@ export function PostinCart({
 
 export default PostinCart;
 
-const urladdtocart = "http://localhost:3001/cart";
+const urladdtocart = `${window.env.HOST_BACKEND}/cart`;
 async function addToCart(data: any) {
 	const response = await axios.put<PostValues>(urladdtocart, { params: data });
 	return response;
 }
 
-const urlremovetocart = "http://localhost:3001/removeToCart";
+const urlremovetocart = `${window.env.HOST_BACKEND}/removeToCart`;
 async function removeToCart(data) {
 	const response = await axios.delete<cart[]>(urlremovetocart, { data: data });
 	return response;
