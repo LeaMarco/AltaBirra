@@ -22,7 +22,7 @@ interface User {
 
 
 
-function encryptPassword(password: string): string {
+export function encryptPassword(password: string): string {
     const salt = bcrypt.genSaltSync(10);
     return bcrypt.hashSync(password, salt);
 };
@@ -120,6 +120,42 @@ export const signin = async (req: Request, res: Response) => {
     
 
 };
+
+
+export const localSignIn = async (req: Request, res: Response) => {
+
+
+    const { id } = req.body.infoToken
+
+
+    const user = await prisma.user.findUnique({
+        where: {
+            id: id
+        }
+    })
+
+    if (!user) return res.sendStatus(400);
+
+    else {
+
+        if (process.env.SECRET_CODE) {
+
+            const userData = {
+                id: user.id,
+                nombre: user.name,
+                premium: user.premium,
+                favoritos: user.favoriteId
+            }
+
+            res.json(userData)
+        }
+        else {
+            res.status(500).send("CONTRASEÑA PARA GENERAR TOKENS AUSENTE EN VARIABLES DE ENTORNO DEL SERVER!")
+        }
+    }
+
+};
+
 
 
 
