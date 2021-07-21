@@ -23,7 +23,7 @@ export const tokenValidation = (req: Request, res: Response, next: NextFunction)
     else res.sendStatus(501) //NO HAY ENV!
 
     req.body = { ...req.body, payload }
-    req.userName = "asd"
+    // req.userName = "asd"
 
     next();
 

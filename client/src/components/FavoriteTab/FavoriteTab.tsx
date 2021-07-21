@@ -40,7 +40,7 @@ export default function FavoritesTab({ closeModal }) {
 					return (
 						<div className={Style.card}>
 							<button onClick={() => removeFavorite(post.post.id)} className={Style.unfav}> 💔 </button>
-							<button onClick={() => goToDetail(post.post.id)} style={{ margin: 0, border: "none" }}> <div>
+							<button onClick={() => goToDetail(post.post.id)} style={{ margin: 0, border: "none", cursor: "pointer" }}> <div>
 								<h5> {post.post.title} </h5>
 								<img src={post.post.image} height="150vh" />
 								<h5> $ {post.post.countable.price} </h5>

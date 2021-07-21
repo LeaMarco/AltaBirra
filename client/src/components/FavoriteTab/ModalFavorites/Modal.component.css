@@ -1,13 +1,15 @@
 .modalFavorites {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   position: absolute;
-  top: 10vh;
-  left: 62.3vw;
+  height: 200%;
+  top: 0;
+  left: 0;
+  right: 0;
 }
 
 .modalContentFavorites {
+  position: absolute;
+  top: 10vh;
+  left: 62.5vw; 
   display: flex;
   align-items: flex-start;
   width: 10vw;
