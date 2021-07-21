@@ -49,34 +49,34 @@ export const signup = async (req: Request, res: Response) => {
             username
         }
     })
-
+    
     //Si existe le digo que se loguee
     if (user) return res.sendStatus(409)
+         
+    //busco el rol (no hace falta podria pasarle el numero y listo)
+    const userRol = await prisma.role.findUnique({ where: { name: "USER" } })
 
-    else { //busco el rol (no hace falta podria pasarle el numero y listo)
-        const userRol = await prisma.role.findUnique({ where: { name: "USER" } })
-
-        //Creo el usuario (porque paso el else sin entrar en el return)
-        const userCreado = await prisma.user.create({
-            data: {
-                username,
-                email,
-                name,
-                password: password ? encryptPassword(password) : "socialPassword",
-                role: {
-                    connect: { id: userRol?.id }
-                },
-                cart: {
-                    create: {}
-                },
-                favorite: {
-                    create: {}
-                }
+    //Creo el usuario (porque paso el else sin entrar en el return)
+    const userCreado = await prisma.user.create({
+        data: {
+            username,
+            email,
+            name,
+            password: password ? encryptPassword(password) : "socialPassword",
+            role: {
+                connect: { id: userRol?.id }
+            },
+            cart: {
+                create: {}
+            },
+            favorite: {
+                create: {}
             }
-        }).catch((e) => res.send("Error al registrar usuario"))
+        }
+    }).catch((e) => res.send("Error al registrar usuario"))
 
-        return res.json(userCreado)
-    }
+    return res.json(userCreado)
+    
 
 };
 
@@ -124,10 +124,8 @@ export const signin = async (req: Request, res: Response) => {
 
 export const localSignIn = async (req: Request, res: Response) => {
 
-
     const { id } = req.body.infoToken
-
-
+   
     const user = await prisma.user.findUnique({
         where: {
             id: id

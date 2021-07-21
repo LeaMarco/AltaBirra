@@ -10,7 +10,8 @@ import Register from "../Register/Register";
 import axios from "axios";
 import FavoritesTab from "../FavoriteTab/FavoriteTab";
 import { token } from "morgan";
-import { useEffect } from "react";
+import { getUserData, login } from '../../actions/index'
+
 
 interface Autocomplete {
   title: string;
@@ -19,25 +20,13 @@ let once = true
 
 export default function Nav() {
   
-  const stateWelcome = useSelector((state) => state["welcome"]);
+  
 
-<<<<<<< HEAD
-  useEffect(() => {
-    // NO TOCAR
-  }, [stateWelcome]);
+  
   ///////////////////AUTENTICACION AUTOMATICA/////////////////////////////////////////
 
 
   //////////////////autenticacion automatica//////////////////////////////////////////
-=======
->>>>>>> 27cca6f7108ae13b2e2239a0a4d19990d6061f1a
-
-
-
-
-
-
-
 
   const [isEnterOpen, setEnterOpen] = useState<boolean>(false);
   const toogleEnter = () => setEnterOpen(!isEnterOpen);
@@ -61,17 +50,18 @@ export default function Nav() {
   ///////////////////AUTENTICACION AUTOMATICA/////////////////////////////////////////
   useEffect(() => {
 
-
     let tokenLocal = localStorage.tokenLocal
-    if (tokenLocal && once) {
-      once = false
-
+    if (tokenLocal) {
+      
       axios.get('http://localhost:3001/auth/localSignIn', {
         headers: {
           authToken: tokenLocal
         }
       })
         .then((e) => {
+          dispatch(getUserData(e.data))
+          dispatch(login(true));
+          
           toogleAuth()
           console.log(e.data)
           console.log('Logueado automatico con token local EXITOSO!')
@@ -80,7 +70,14 @@ export default function Nav() {
         .catch((error) => console.log(error, 'No te pudiste loguear de forma local automatica!'))
     }
 
-  }, [])
+  },[])
+
+  const stateWelcome = useSelector((state) => state["welcome"]);
+
+  useEffect(() => {
+    // NO TOCAR
+    
+  }, [stateWelcome]);
   //////////////////autenticacion automatica//////////////////////////////////////////
 
 
@@ -110,6 +107,14 @@ export default function Nav() {
     dispatch(searchedPosts({ title: searchParam }));
     history.push(`/search`);
     setSearchInput("");
+  }
+
+  function close(){
+    var opcion = window.confirm('¿Desea cerrar sesión?');
+    if(opcion) {
+      localStorage.clear();
+      window.location.reload();
+    }
   }
 
   return (
@@ -220,36 +225,15 @@ export default function Nav() {
             <Modal isOpen={isRegisterOpen} handleClose={toogleRegister}>
               <Register closeModal={toogleRegister} toogleEnter={toogleEnter} toogleRegister={toogleRegister} />
             </Modal>
-<<<<<<< HEAD
           
-=======
-
-
-
->>>>>>> 27cca6f7108ae13b2e2239a0a4d19990d6061f1a
             <div className={style.buttonsRight}>
               <Link className={style.textDecoration} to="/panel">
                 <button className={style.buttonEnter}>Panel</button>
               </Link>
 
               {
-<<<<<<< HEAD
                 !isAuth ?
                   
-=======
-                isAuth ?
-                  <div>
-                    <button className={style.buttonEnter} style={{ borderRadius: "30px", backgroundColor: "forestgreen" }} >
-                      Bienvenido!!
-                    </button>
-
-                    <button className={style.buttonEnter} style={{ borderRadius: "30px", backgroundColor: "red" }} onClick={() => { localStorage.clear(); toogleAuth() }} >
-                      Cerras cesion
-                    </button>
-
-                  </div>
-                  :
->>>>>>> 27cca6f7108ae13b2e2239a0a4d19990d6061f1a
                   <div className={style.buttonsRightEnter}>
                     <button className={style.buttonEnter} onClick={toogleEnter}>
                       Entrar
@@ -267,15 +251,15 @@ export default function Nav() {
       <div>
 
         {
-          isAuth && localStorage.getItem('token') ?
+          isAuth ?
               (              
               <div className={style.fourColumn}>
                 <span className={style.welcome} >
                   Bienvenido {stateWelcome.nombre}
                 </span>
-                <span className={style.closeSesion}>
+                <button className={style.closeSesion} onClick={ close }>
                   Cerrar sesión
-                </span>
+                </button>
               </div>
               )
               : null

@@ -103,6 +103,8 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
       .post("http://localhost:3001/auth/signin/", { params: postObj })
       .then((e: any) => {
         console.log('Logueado!!!', e.data, localStorage.setItem('tokenLocal', e.data.token))
+        dispatch(getUserData(e.data.userData))
+        dispatch(login(true));
         toogleAuth()
         closeModal()
       }).catch((error) => console.log('No te pudiste loguear local!'))
@@ -146,7 +148,9 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
 
       })
       .then((e) => {
-        console.log('Logueado!!!', e.data, localStorage.setItem('tokenFacebook', e.data.token))
+        localStorage.setItem('tokenFacebook', e.data.token)
+        dispatch(getUserData(e.data.userData))
+        dispatch(login(true));
         toogleAuth()
         closeModal()
 
@@ -172,8 +176,9 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
         }
 
       })
-      .then( (e) => {        
-        console.log(dispatch(getUserData(e.data.userData)), localStorage.setItem('token', e.data.token))
+      .then( (e) => {      
+        localStorage.setItem('tokenLocal', e.data.token)  
+        dispatch(getUserData(e.data.userData))
         dispatch(login(true));
         toogleAuth()
         closeModal()
