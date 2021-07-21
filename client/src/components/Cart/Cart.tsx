@@ -21,12 +21,6 @@ function Cart() {
     dispatch(getCart(id));
   }, []);
 
-  // useEffect(() => {
-  //   if (carts) generarboton(carts)
-  // }, [carts]);
-
-  //armar array de items
-
   async function despachadora(id) {
     await deleteAllCart(id);
     dispatch(getCart(id));
@@ -76,8 +70,6 @@ async function deleteAllCart(data) {
   const response = await axios.delete<cart[]>(urldeleteallcart, { data: { data } });
   return response;
 }
-
-
 
 
 

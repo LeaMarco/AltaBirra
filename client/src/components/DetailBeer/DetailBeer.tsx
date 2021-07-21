@@ -73,15 +73,17 @@ export default function DetailBeer() {
 							}
 						</div> */}
 						<img src={info.image} alt="La imagen no esta disponible" />
-						<div>
-							<p>Reviews</p>
-							<ul className={Style.ratingComment}>
+						<div className={Style.reviews}>
+							<div className={Style.reviewsTitle}>{info.review.length > 0 ? (<p>Reviews</p>) : null}</div>
+							<div className={Style.ratingComment}>
 								{info.review.slice(0, 6).map((comment) => (
-									<li>{comment.comment} <span className={Style.ratingStars}>{"⭐".repeat(comment.rating)}</span></li>))
-								}</ul>
+									<p>{"⭐".repeat(comment.rating)}<br />{comment.comment}</p>))
+								}</div>
+							<div className={Style.ratingTotal}>
+								<p className={Style.ratingStars}><p>Rating Total</p>{"⭐".repeat(info.rating)}</p>
+								{info.review.length > 0 ? (<p>{info.review.length} opiniones</p>) : null}
+							</div>
 						</div>
-						<p className={Style.ratingStars}><p>Rating Total</p>{"⭐".repeat(info.rating)}</p>
-						<p>{info.review.length} opiniones</p>
 					</div>
 					<div className={Style.beerDescription}>
 						<div id="post">
