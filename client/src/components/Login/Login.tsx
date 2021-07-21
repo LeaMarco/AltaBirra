@@ -172,14 +172,9 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
         }
 
       })
-<<<<<<< HEAD
       .then( (e) => {        
         console.log(dispatch(getUserData(e.data.userData)), localStorage.setItem('token', e.data.token))
         dispatch(login(true));
-=======
-      .then((e) => {
-        console.log('Logueado!!!', e.data, localStorage.setItem('tokenGoogle', e.data.token))
->>>>>>> 27cca6f7108ae13b2e2239a0a4d19990d6061f1a
         toogleAuth()
         closeModal()
         
