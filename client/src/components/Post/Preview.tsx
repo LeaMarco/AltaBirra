@@ -19,35 +19,13 @@ interface Favorites {
 	post: Post;
 }
 
-export default function DetailBeer() {
+export default function Preview({info}) {
+	console.log(info, "holaaaaaaaaaaaa")
 	const dispatch = useDispatch();
 	const { id }: any = useParams();
 	const history = useHistory()
 	const MySwal = withReactContent(Swal)
-	const [info, setInfo]= useState({
-		image: "http://assets.stickpng.com/images/580b57fcd9996e24bc43c543.png",
-		rating: 5,
-		title: "holi",
-		description: "holi",
-		beer:{
-			name: "holi",
-			ibu: 51,
-			abv: 51, 
-			calories: 51,
-			genericType: {
-				type: "holi",
-				description: "holi"
-			},
-			specificType: {
-				type: "holi",
-				description: "holi"
-			}
-		},
-		countable:{
-			discount: 5,
-			price: 150
-		}
-	})
+	
 
 	useEffect(() => {
 		dispatch(getDetail(id))
@@ -63,7 +41,7 @@ export default function DetailBeer() {
 
 
 	return info?.beer ? (
-		<div className={Style.detailContainer}>
+	
 			<div className={Style.detailViewContainer}>
 				<div className={Style.detailView}>
 					<div className={Style.imageSection}>
@@ -74,10 +52,10 @@ export default function DetailBeer() {
 						<div id="post">
 							<div>
 								<div className={Style.Head}>
-									<h1>{info.title}</h1>
+									<h1>{info.beer.name}</h1>
 									{/* <p>Nombre: {info.beer.name}</p> */}
 									<div className={Style.types}>
-										<p>{info.beer.genericType.type}/</p><p>{info.beer.specificType.type}</p>
+										{/* <p>{info.beer.genericType.type}/</p><p>{info.beer.specificType.type}</p> */}
 									</div>
 								</div>
 								<div className={Style.textContent}>
@@ -90,11 +68,21 @@ export default function DetailBeer() {
 									<p>Description: {info.description}</p>
 									<div className={Style.infoBeer}>
 										<h3>Info Cerveza</h3>
-										<p>Descripcion del Estilo {info.beer.specificType.type}: {info.beer.specificType.description}</p>
+										{/* <p>Descripcion del Estilo {info.beer.specificType.type}: {info.beer.specificType.description}</p> */}
 									</div>
 									<div className={Style.infoCompra}>
 										<h3>Info De Compra</h3>
 										<div className={Style.buyInfo}>
+											<div className={Style.buttonsPago}>
+												{info.countable.discount !== 0 ?
+													<p className={Style.originalPrice}> ${(info.countable.price - info.countable.price * (info.countable.discount / 100)).toFixed(2)} </p> : <p className={Style.originalPrice} > ${info.countable.price}</p>}
+												{info.countable.discount !== 0 ?
+													<div className={Style.SecondPrices}>
+														<p className={Style.priceWODiscount}>${info.countable.price}</p>
+														<p className={Style.discount}>{info.countable.discount}%OFF</p>
+													</div>
+													: null}
+											</div>
 											<div className={Style.buyButtons}>
 												<form onSubmit={handleSubmit} >
 													<button className={Style.buttonComprar} type="submit">Comprar!</button>
@@ -108,16 +96,6 @@ export default function DetailBeer() {
 														timer: 1500,
 													})
 												}}>Agregar al Carrito</button>
-											</div>
-											<div className={Style.buttonsPago}>
-												{info.countable.discount !== 0 ?
-													<p className={Style.originalPrice}> ${(info.countable.price - info.countable.price * (info.countable.discount / 100)).toFixed(2)} </p> : <p className={Style.originalPrice} > ${info.countable.price}</p>}
-												{info.countable.discount !== 0 ?
-													<div className={Style.SecondPrices}>
-														<p className={Style.priceWODiscount}>${info.countable.price}</p>
-														<p className={Style.discount}>{info.countable.discount}%OFF</p>
-													</div>
-													: null}
 											</div>
 										</div>
 									</div>
@@ -141,7 +119,6 @@ export default function DetailBeer() {
 					</div>
 				</div>
 			</div>
-		</div >
 
 	) : <span>Cargando!</span>
 }

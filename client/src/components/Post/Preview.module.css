@@ -1,18 +1,10 @@
-.detailContainer{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-    background-color: #A9A9A9;
-    width: 100vw;
-    height: 100vh;
-}
+
 .detailViewContainer{
-    width:100rem;
+    width:50rem;
     background-color:white;
     margin:0.5rem;
     color:white;
-    border-radius: 66px;
+    border-radius: 33px;
     padding:3px;
 }
 .detailView{
@@ -21,7 +13,7 @@
     align-items: center;
     justify-content: space-around;
     color:white;
-    border-radius: 66px;
+    border-radius: 33px;
     box-shadow: 0.5px 0.5px 30px 21px rgba(0,0,0,0.1) inset;
     -webkit-box-shadow: 0.5px 0.5px 30px 21px rgba(0,0,0,0.1) inset;
     -moz-box-shadow: 0.5px 0.5px 30px 21px rgba(0,0,0,0.1) inset;
@@ -41,10 +33,10 @@
     align-content: space-around;
     justify-content: space-between;
     margin:0.5rem 0 0.5rem 0.5rem;
-    border-top-left-radius: 66px;
-    border-bottom-left-radius: 66px;
+    border-top-left-radius: 33px;
+    border-bottom-left-radius: 33px;
     width:35%;
-    height:40rem;
+    height:20rem;
 }
 .imageSection img{
     max-width: 100%;
@@ -57,16 +49,17 @@
     margin:0.5rem 0.5rem 0.5rem 0rem;
     background-color:black;
     width:65%;
-    height: 50rem;
-    max-height: 50rem;
+    height: 25rem;
+    max-height: 25rem;
     background: radial-gradient(50% 50% at 50% 50%, #404143 0%, #242021 100%);
-    border-top-right-radius: 66px;
-    border-bottom-right-radius: 66px;
+    border-top-right-radius: 33px;
+    border-bottom-right-radius: 33px;
+    font-size: 0.7rem;
 }
 .beerDescription h1{
     background-color:#F49E51;
-    width: 40rem;
-    padding-bottom: 10px;
+    width: 20rem;
+    padding-bottom: 5px;
     vertical-align: middle;
 }
 .fav {
@@ -82,15 +75,15 @@
 .buttonComprar{
     background-color:#F49E51;
     border:none;
-    width:15rem;
-    height:3rem;
+    width:8rem;
+    height:1.5rem;
     color:white;
 }
 .addtoCartButton{
     background-color:#69C3C4;
     border:none;
-    width:15rem;
-    height:3rem;
+    width:8rem;
+    height:1.5rem;
     color:white;
 }
 
@@ -124,9 +117,9 @@
 
 .types{
     display: flex;
-    font-size: 35px;
+    font-size: 17px;
     font-weight: bold;
-    margin-left:2rem;
+    margin-left:1rem;
     color:#C6C2C2;
 }
 .types p {
@@ -137,21 +130,21 @@
     display:flex;
     flex-direction: column;
     align-items:start;
-    margin-top:-5rem;
+    margin-top:-2.5rem;
     text-align:start;
 }
 .Head h1 {
-    font-size: 40px;
+    font-size: 20px;
 }
 .specs{
     display:flex;
     align-items:center;
     justify-content:space-evenly;
-    width: 400px;
-    font-size:20px;
+    width: 200px;
+    font-size:10px;
 }
 .textContent{
-    padding:20px;
+    padding:10px;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -162,7 +155,7 @@
 .buyInfo{
     display:flex;
     align-content: center;
-    width: 26rem;
+    width: 13rem;
     justify-content:center;
 }
 
@@ -172,7 +165,7 @@
     justify-Content: space-between;
 }
 .socialLinks a{
-    margin:1rem;
+    margin:0.5rem;
 }
 
 .buttonsPago{
@@ -183,29 +176,29 @@
     margin:0;
 }
 .originalPrice{
-    padding-top: 5px;
-    font-size:4rem;
+    padding-top: 2.5px;
+    font-size:2rem;
     font-weight: bold;
-    margin-left: 1rem;
+    margin-left: 0.5rem;
 }
 .SecondPrices{
     display:flex;
     flex-direction: column;
     align-items:center;
     justify-content:space-evenly;
-    margin-right: 3rem;
-    margin-left: 1rem;
+    margin-right: 1.5rem;
+    margin-left: 0.5rem;
 }
 
 .share{
-    margin-top:2rem;
-    margin-bottom:-5rem;
+    margin-top:1rem;
+    margin-bottom:-2.5rem;
 }
 
 .infoCompra{
-    margin-top: 2rem;
+    margin-top: 1rem;
 }
 
 .infoBeer{
-    margin-top: 2rem;
+    margin-top: 1rem;
 }

@@ -1,23 +1,24 @@
 import React,{useEffect,useState} from "react";
 import { useForm, SubmitHandler, UseFormRegister,Controller } from "react-hook-form";
-import { CreatePostAction, editPost, PostValues } from "../../actions";
+import { editPost, EditPostInterface, PostValues } from "../../actions";
 import { useDispatch,useSelector } from "react-redux";
 import { Dispatch } from "redux";
-import { createPost,searchTypes } from "../../actions";
+import { createPost,searchTypes, getDetail } from "../../actions";
 import {transformEdit} from "./FormatData";
 import styles from './Post.module.css';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { useParams } from "react-router-dom";
 import Preview from "./Preview"
+import { RootState } from "../../reducers";
 
 //TIENE QUE TOMAR COMO PARAMETRO EL ID DEL POST QUE SE SELECCIONA Y RENDERIZAR EL COMPONENTE DETALLE PASANDOLE ESE ID.
 export default function EditPost() {
+const { id }: any = useParams();
 const [estado, setEstado] = useState({"checked":false});
 const [generic, setGeneric] = useState([]);
 const [specific, setSpecific] = useState([]);
-
-const postId : any = useParams();
+const info: any = useSelector((state: RootState) => state.detailPosts);
 
 
 let checkboxClick = (e) => {
@@ -38,9 +39,17 @@ async function getBeerTypes(){
   setGeneric(respuesta[0])
   setSpecific(respuesta[1])
 }
+console.log(info, "SOY LA INFO")
+
+
 useEffect(() => {
+  dispatch(getDetail(id));
   getBeerTypes();
 },[dispatch])
+
+useEffect(() => {
+  reset(info);
+},[info])
 
 //hacer destructuring de generic y specific
 async function despachadora(data,postId){
@@ -63,24 +72,30 @@ async function despachadora(data,postId){
     })
   }
 }
+let dataPrevia
+if(info.beer) {dataPrevia={
+  beer:{
+    name:info.beer.name
+  }
+}}
 
-const { register, handleSubmit,reset} = useForm<PostValues>();
-const onSubmit: SubmitHandler<PostValues> = (data) => {despachadora(data,postId); reset()};
+const { register, handleSubmit,reset, watch, setValue} = useForm({defaultValues:info.beer?dataPrevia:null});
+const onSubmit: SubmitHandler<PostValues> = (data) => {despachadora(data,id);console.log(data, "chauuuuuu"); reset()};
 
 return (
+  <div className={styles.mainContainer}>
   <div>
-
   <form className={styles.postForm} onSubmit={handleSubmit(onSubmit)}>
       <section className={styles.postFormBeer}>
         <h3 id={styles["beerh2"]}> Beer</h3>
           <div className={styles.row1}>
             <div className={styles.container} id={styles["name"]}>
-              <input {...register("beer.name")} autoComplete="off" className={styles.input} required/>
+              <input {...register("beer.name")} autoComplete="off" className={styles.input} />
               <label>Beer Name *</label>
               <span className={styles.focusBorder}></span>
             </div>
             <div className={styles.container}>
-              <input {...register("beer.abv")}  type="number" min="1" autoComplete="off" className={styles.input} required/>
+              <input {...register("beer.abv")}  type="number" min="1" autoComplete="off" className={styles.input} />
               <label>Abv *</label>
               <span className={styles.focusBorder}></span>
             </div>
@@ -92,7 +107,7 @@ return (
               <span className={styles.focusBorder}></span>
             </div>
             <div className={styles.container}>
-              <input {...register("beer.ibu")} type="number"  min="1" autoComplete="off" className={styles.input} required/>
+              <input {...register("beer.ibu")} type="number"  min="1" autoComplete="off" className={styles.input} />
               <label>IBU *</label>
               <span className={styles.focusBorder}></span>
             </div>
@@ -104,7 +119,7 @@ return (
               <span className={styles.focusBorder}></span>
             </div>
             <div className={styles.container}>
-              <input {...register("beer.volume")} type="number" min="1" autoComplete="off" className={styles.input} required/>
+              <input {...register("beer.volume")} type="number" min="1" autoComplete="off" className={styles.input} />
               <label>Volume *</label>
               <span className={styles.focusBorder}></span>
             </div>
@@ -139,13 +154,13 @@ return (
     <section className={styles.postFormInfoPost}>
       <h3>Post Info</h3>
       <div className={styles.container}>
-        <input {...register("infoPost.title")}  autoComplete="off" className={styles.input} required/>
+        <input {...register("infoPost.title")}  autoComplete="off" className={styles.input} />
           <label>Post Title *</label>
           <span className={styles.focusBorder}></span>
       </div>
       <div className={styles.postrow1}>
         <div className={styles.container}>
-            <input {...register("infoPost.stock")} type="number" min="1" autoComplete="off"  className={styles.input} required/>
+            <input {...register("infoPost.stock")} type="number" min="1" autoComplete="off"  className={styles.input} />
             <label>Stock *</label>
             <span className={styles.focusBorder}></span>
         </div>
@@ -157,7 +172,7 @@ return (
         </div>
       </div>
         <div className={styles.container}>
-            <textarea {...register("infoPost.description")}  autoComplete="off" className={styles.input} required/>
+            <textarea {...register("infoPost.description")}  autoComplete="off" className={styles.input} />
             <label>Description *</label>
             <span className={styles.focusBorder}></span>
         </div>
@@ -166,7 +181,7 @@ return (
       <h3>Countables</h3>
       <div className={styles.countablerow}>
         <div className={styles.container}>
-          <input {...register("countable.price")} type="number" min="1" autoComplete="off" className={styles.input} required/>
+          <input {...register("countable.price")} type="number" min="1" autoComplete="off" className={styles.input} />
             <label>Price *</label>
             <span className={styles.focusBorder}></span>
         </div>
@@ -178,19 +193,21 @@ return (
           {estado.checked ?
             <div>
               <div className={styles.container}>
-                <input {...register("countable.discount")} type="number" min="1" autoComplete="off" className={styles.input} required/>
+                <input {...register("countable.discount")} type="number" min="1" autoComplete="off" className={styles.input} />
                 <label>Discount *</label>
                 <span className={styles.focusBorder}></span>
               </div>
               <p>Fecha Expiracion del Descuento</p>
-              <input {...register("date")}type="date" required/>
+              <input {...register("date")}type="date" />
             </div> : <p>Sin oferta? ratón</p>}
         </div>
     <div className={styles.submitButton}>
       <input className={styles.postFormSubmitButton} type="submit" />
     </div>
   </form>
-  <Preview/>
+  
+  </div>
+  <div><Preview info={watch()}/></div>
   </div>
 );
 }
