@@ -14,13 +14,9 @@ export const tokenValidation = (req: Request, res: Response, next: NextFunction)
     const token = req.header('authToken');
 
     if (!token) return res.status(401).json('Acces denied(falta el token!)');
-
-    // El metodo verify toma el token y devuelve los datos que estaban dentro de ese token
     let infoToken;
     if (process.env.SECRET_CODE) {
         infoToken = jwt.verify(token, process.env.SECRET_CODE) as infoToken
-
-
     }
     else res.sendStatus(501) //NO HAY ENV!
     // req.userName = "añskjdnalskdnlaskdjnaslk"///////////////////////////////PREGUNTAR MARTINA MARTINIARLA
