@@ -95,10 +95,10 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
     axios
       .post("http://localhost:3001/auth/signin/", { params: postObj })
       .then((e: any) => {
-        console.log(e.data);
+        console.log('Logueado!!!', e.data, localStorage.setItem('tokenLocal', e.data.token))
         toogleAuth()
         closeModal()
-      }).catch((error) => console.log('No te pudiste loguear!'))
+      }).catch((error) => console.log('No te pudiste loguear local!'))
   };
 
   const handleOnChange = (e) => {
@@ -139,12 +139,12 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
 
       })
       .then((e) => {
-        console.log('Logueado!!!', e.data, localStorage.setItem('token', e.data))
+        console.log('Logueado!!!', e.data, localStorage.setItem('tokenFacebook', e.data.token))
         toogleAuth()
         closeModal()
 
       })
-      .catch((error) => console.log('No te pudiste loguear!'))
+      .catch((error) => console.log('No te pudiste loguear con theFacebook!'))
   }
   //////////////////////////////FIN FACEBOOK///////////////////////////////////////////////////////
 
@@ -166,12 +166,12 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
 
       })
       .then((e) => {
-        console.log('Logueado!!!', e.data, localStorage.setItem('token', e.data))
+        console.log('Logueado!!!', e.data, localStorage.setItem('tokenGoogle', e.data.token))
         toogleAuth()
         closeModal()
 
       })
-      .catch((error) => console.log('No te pudiste loguear!'))
+      .catch((error) => console.log('No te pudiste loguear con Google!'))
   }
 
   const onFailureLogin = (response: any) => {

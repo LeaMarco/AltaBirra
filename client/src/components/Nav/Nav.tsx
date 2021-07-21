@@ -9,17 +9,16 @@ import Login from "../Login/Login";
 import Register from "../Register/Register";
 import axios from "axios";
 import FavoritesTab from "../FavoriteTab/FavoriteTab";
+import { token } from "morgan";
+import { useEffect } from "react";
 
 interface Autocomplete {
   title: string;
 }
+let once = true
 
 export default function Nav() {
 
-  ///////////////////AUTENTICACION AUTOMATICA/////////////////////////////////////////
-
-
-  //////////////////autenticacion automatica//////////////////////////////////////////
 
 
 
@@ -43,6 +42,36 @@ export default function Nav() {
 
   const [isAuth, setAuth] = useState<boolean>(false);
   const toogleAuth = () => setAuth(!isAuth);
+
+
+
+
+  ///////////////////AUTENTICACION AUTOMATICA/////////////////////////////////////////
+  useEffect(() => {
+
+
+    let tokenLocal = localStorage.tokenLocal
+    if (tokenLocal && once) {
+      once = false
+
+      axios.get('http://localhost:3001/auth/localSignIn', {
+        headers: {
+          authToken: tokenLocal
+        }
+      })
+        .then((e) => {
+          toogleAuth()
+          console.log(e.data)
+          console.log('Logueado automatico con token local EXITOSO!')
+        })
+
+        .catch((error) => console.log(error, 'No te pudiste loguear de forma local automatica!'))
+    }
+
+  }, [])
+  //////////////////autenticacion automatica//////////////////////////////////////////
+
+
 
 
   function handleSubmit(event) {
@@ -180,6 +209,8 @@ export default function Nav() {
               <Register closeModal={toogleRegister} toogleEnter={toogleEnter} toogleRegister={toogleRegister} />
             </Modal>
 
+
+
             <div className={style.buttonsRight}>
               <Link to="/panel">
                 <button className={style.buttonEnter}>Panel</button>
@@ -187,9 +218,16 @@ export default function Nav() {
 
               {
                 isAuth ?
-                  <button className={style.buttonEnter} style={{ borderRadius: "30px", backgroundColor: "forestgreen" }} >
-                    Bienvenido!!
-                  </button>
+                  <div>
+                    <button className={style.buttonEnter} style={{ borderRadius: "30px", backgroundColor: "forestgreen" }} >
+                      Bienvenido!!
+                    </button>
+
+                    <button className={style.buttonEnter} style={{ borderRadius: "30px", backgroundColor: "red" }} onClick={() => { localStorage.clear(); toogleAuth() }} >
+                      Cerras cesion
+                    </button>
+
+                  </div>
                   :
                   <div className={style.buttonsRightEnter}>
                     <button className={style.buttonEnter} onClick={toogleEnter}>
