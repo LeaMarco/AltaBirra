@@ -8,7 +8,8 @@ import { useImperativeHandle } from "react";
 import axios from "axios";
 import { iError, iData } from "./LoginInterfaces";
 import GoogleLogin from "react-google-login";
-import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+import { getUserData, login } from '../../actions/index'
 
 function validate(dataState: iData, errors: iError, e): iError {
   let name = e.target.name;
@@ -49,9 +50,15 @@ function validate(dataState: iData, errors: iError, e): iError {
 
 const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth, closeModal }) => {
 
+  const dispatch = useDispatch();
+  const stateWelcome = useSelector((state) => state["welcome"]);
+  const stateLogin = useSelector((state) => state["loginState"]);
 
+  useEffect(() => {
+    console.log('REDUX', stateWelcome.nombre);
+    console.log('REDUX login', stateLogin);
+  }, [stateWelcome, stateLogin]);
   //Agregar un estado nuevox
-
   //////////////////
   /* funcion setStateGlobal */
   /////////////////
@@ -79,7 +86,7 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
   });
 
   /////////////////////////////////ESTADOS/////////////////////////////////////////////
-
+  
 
 
   //////////////////////////////HANLDES///////////////////////////////////////////////////
@@ -165,11 +172,12 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
         }
 
       })
-      .then((e) => {
-        console.log('Logueado!!!', e.data, localStorage.setItem('token', e.data))
+      .then( (e) => {        
+        console.log(dispatch(getUserData(e.data.userData)), localStorage.setItem('token', e.data.token))
+        dispatch(login(true));
         toogleAuth()
         closeModal()
-
+        
       })
       .catch((error) => console.log('No te pudiste loguear!'))
   }

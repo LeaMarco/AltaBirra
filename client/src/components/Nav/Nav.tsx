@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import style from "./Nav.module.css";
 import logo from "./AltaBirra.svg";
 import { Link, useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { searchedPosts, setTitleSearch } from "../../actions";
 import { Modal } from "../Login/Modal/Modal.component";
 import Login from "../Login/Login";
@@ -15,7 +15,12 @@ interface Autocomplete {
 }
 
 export default function Nav() {
+  
+  const stateWelcome = useSelector((state) => state["welcome"]);
 
+  useEffect(() => {
+    // NO TOCAR
+  }, [stateWelcome]);
   ///////////////////AUTENTICACION AUTOMATICA/////////////////////////////////////////
 
 
@@ -119,7 +124,7 @@ export default function Nav() {
           </Link>
         </div>
       </div>
-      <div>
+      <div> {/* TERCER COLUMNA*/}
         {register ? (
           <div className={style.buttonsRight}>
             <Link
@@ -179,18 +184,15 @@ export default function Nav() {
             <Modal isOpen={isRegisterOpen} handleClose={toogleRegister}>
               <Register closeModal={toogleRegister} toogleEnter={toogleEnter} toogleRegister={toogleRegister} />
             </Modal>
-
+          
             <div className={style.buttonsRight}>
-              <Link to="/panel">
+              <Link className={style.textDecoration} to="/panel">
                 <button className={style.buttonEnter}>Panel</button>
               </Link>
 
               {
-                isAuth ?
-                  <button className={style.buttonEnter} style={{ borderRadius: "30px", backgroundColor: "forestgreen" }} >
-                    Bienvenido!!
-                  </button>
-                  :
+                !isAuth ?
+                  
                   <div className={style.buttonsRightEnter}>
                     <button className={style.buttonEnter} onClick={toogleEnter}>
                       Entrar
@@ -199,12 +201,32 @@ export default function Nav() {
                       Registrarme
                     </button>
                   </div>
-
+                  : null
               }
             </div>
           </div>
         )}
       </div>
+      <div>
+
+        {
+          isAuth && localStorage.getItem('token') ?
+              (              
+              <div className={style.fourColumn}>
+                <span className={style.welcome} >
+                  Bienvenido {stateWelcome.nombre}
+                </span>
+                <span className={style.closeSesion}>
+                  Cerrar sesión
+                </span>
+              </div>
+              )
+              : null
+        }
+      </div>
+
+
+
     </div>
   );
 }

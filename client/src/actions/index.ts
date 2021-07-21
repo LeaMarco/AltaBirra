@@ -41,6 +41,8 @@ export enum ActionTypes {
 	getDetail,
 	getCart,
 	delPostInCart,
+	ActionUserDataType,
+	ActionLoginTypes
 }
 
 export interface PostValues {
@@ -374,3 +376,76 @@ export function getHistory(type, userId) {
 		})
 	}
 }
+
+// USER DATA ================================
+export interface iuserData {
+	id: number,
+	nombre: string,
+	premium: boolean,
+	favoritos: number
+}
+
+export interface ActionUserData {
+	type: ActionTypes.ActionUserDataType;
+	payload: iuserData;
+}
+
+export const getUserData = (user: iuserData) => {
+	return <ActionUserData> {
+		type: ActionTypes.ActionUserDataType,
+		payload: user
+	}
+}
+
+// Login True or False
+export interface ActionLoginType {
+	type: ActionTypes.ActionLoginTypes;
+	payload: boolean;
+}
+
+export const login = (login: boolean) => {
+	return <ActionLoginType> {
+		type: ActionTypes.ActionLoginTypes,
+		payload: login
+	}
+}
+
+export type ActionLoginTypes = ActionLoginType;
+
+
+// export interface UserPremium {
+// 	id: number;
+// 	username: string;
+// 	email: string;
+// 	name: string;
+// 	password: string;
+// 	premium: boolean;
+// 	roleId: number;
+// 	cartId: number
+// }
+
+// export interface UsersPremiumAction {
+// 	type: ActionTypes.loadUserPremium;
+// 	payload: UserPremium[];
+// }
+
+// export const loadUsersPremium = () => {
+// 	return (dispatch: Dispatch) => {
+// 		return axios.get<UserPremium[]>('http://localhost:3001/beer/premium')
+// 			.then(response => {
+// 				dispatch<UsersPremiumAction>({
+// 					type: ActionTypes.loadUserPremium,
+// 					payload: response.data,
+// 				});
+// 			})
+// 			.catch(error => console.error('No se pudieron obtener las cervezas premium'))
+// 	}
+
+
+// welcomeUser
+// const userData = {
+// 	id: user.id,
+// 	nombre: user.name,
+// 	premium: user.premium,
+// 	favoritos: user.favoriteId
+// }

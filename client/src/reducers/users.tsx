@@ -1,4 +1,4 @@
-import {ActionTypes, UserPremium, ActionUsersPremium} from '../actions';
+import {ActionTypes, UserPremium, ActionUsersPremium, iuserData, ActionUserData, ActionLoginTypes } from '../actions';
 
 // export const usersReducer = (state: User[] = [], action: Action) => {
 
@@ -29,3 +29,26 @@ export const usersPremium = (state: UserPremium[] = [], action: ActionUsersPremi
 			return state;
 	}
 };
+
+
+export const userData = (state: iuserData[] = [], action: ActionUserData) => {
+	switch (action.type) {
+		case ActionTypes.ActionUserDataType:
+			return action.payload;
+		default:
+			return state;
+	}
+};
+
+export const login = (state: boolean = false, action: ActionLoginTypes) => {
+	switch (action.type) {
+		case ActionTypes.ActionLoginTypes:
+			return action.payload;
+		default:
+			return state;
+	}
+};
+
+
+
+
