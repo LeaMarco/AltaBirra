@@ -96,31 +96,34 @@ export const signin = async (req: Request, res: Response) => {
 
     if (!user) return res.sendStatus(400);
 
-    else {
-        if (req.body.params.password) {
-            const correctPassword: boolean = validatePassword(req.body.params.password, user);
-            if (correctPassword === false) return res.status(400).send('Credencial invalida');
+    else if (process.env.SECRET_CODE) {
+
+        const userData = {
+            id: user.id,
+            nombre: user.name,
+            premium: user.premium,
+            favoritos: user.favoriteId
         }
 
-        if (process.env.SECRET_CODE) {
 
-            const userData = {
-                id: user.id,
-                nombre: user.name,
-                premium: user.premium,
-                favoritos: user.favoriteId
-            }
-
-
+        if (req.body.params.password) {//Si es registrado local
+            const correctPassword: boolean = validatePassword(req.body.params.password, user);
+            if (correctPassword === false) return res.status(400).send('Credencial invalida');
             const token: string = jwt.sign({ id: user.id, adminRole: false }, process.env.SECRET_CODE, { expiresIn: 60 * 60 * 24 })
             res.json({ token, userData })
         }
-        else {
-            res.status(500).send("CONTRASEÑA PARA GENERAR TOKENS AUSENTE EN VARIABLES DE ENTORNO DEL SERVER!")
+        else {//Si es registrado social
+            res.json(userData)
         }
+
     }
 
-};
+    else {
+        res.status(500).send("CONTRASEÑA PARA GENERAR TOKENS AUSENTE EN VARIABLES DE ENTORNO DEL SERVER!")
+    }
+}
+
+
 
 
 export const localSignIn = async (req: Request, res: Response) => {
@@ -139,20 +142,15 @@ export const localSignIn = async (req: Request, res: Response) => {
 
     else {
 
-        if (process.env.SECRET_CODE) {
-
-            const userData = {
-                id: user.id,
-                nombre: user.name,
-                premium: user.premium,
-                favoritos: user.favoriteId
-            }
-
-            res.json(userData)
+        const userData = {
+            id: user.id,
+            nombre: user.name,
+            premium: user.premium,
+            favoritos: user.favoriteId
         }
-        else {
-            res.status(500).send("CONTRASEÑA PARA GENERAR TOKENS AUSENTE EN VARIABLES DE ENTORNO DEL SERVER!")
-        }
+
+        res.json(userData)
+
     }
 
 };

@@ -19,6 +19,7 @@ import BuyHistory from "./components/BuyHistory/BuyHistory";
 import SellHistory from "./components/SellHistory/SellHistory";
 
 function App() {
+  console.log("asdasd")
   return (
     <div className="App">
       <Route path="/" component={Nav} />

@@ -7,7 +7,6 @@ import { Provider } from "react-redux"; //Sirve para proveer el estado global de
 import store from "./store"; //importa la store creada en otro lado
 import env from "react-dotenv";
 
-console.log(env.HOST_BACKEND, "back")
 
 declare global {
   interface Window {

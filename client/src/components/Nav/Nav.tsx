@@ -15,7 +15,6 @@ import { ModalFavorites } from "../FavoriteTab/ModalFavorites/Modal.component";
 interface Autocomplete {
   title: string;
 }
-let once = true
 
 export default function Nav() {
 
@@ -45,14 +44,11 @@ export default function Nav() {
 
 
 
-
   ///////////////////AUTENTICACION AUTOMATICA/////////////////////////////////////////
+
   useEffect(() => {
-
-
     let tokenLocal = localStorage.tokenLocal
-    if (tokenLocal && once) {
-      once = false
+    if (tokenLocal) {
 
       axios.get(`${window.env.HOST_BACKEND}/auth/localSignIn`, {
         headers: {
@@ -67,8 +63,8 @@ export default function Nav() {
 
         .catch((error) => console.log(error, 'No te pudiste loguear de forma local automatica!'))
     }
-
-  }, [])
+  }
+    , [])
   //////////////////autenticacion automatica//////////////////////////////////////////
 
 

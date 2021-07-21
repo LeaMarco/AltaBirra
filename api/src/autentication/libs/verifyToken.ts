@@ -1,4 +1,6 @@
 import { Request, Response, NextFunction, request } from 'express'
+
+
 import jwt from "jsonwebtoken"
 //////////////////////////////////////VALIDACION/////////////////////////////////////////////////////////////////////
 interface infoToken {
@@ -9,6 +11,8 @@ interface infoToken {
 }
 
 
+
+
 export const tokenValidation = (req: Request, res: Response, next: NextFunction) => {
 
     const token = req.header('authToken');
@@ -17,11 +21,12 @@ export const tokenValidation = (req: Request, res: Response, next: NextFunction)
     let infoToken;
     if (process.env.SECRET_CODE) {
         infoToken = jwt.verify(token, process.env.SECRET_CODE) as infoToken
+        req.body = { ...req.body, infoToken }
+        next();
     }
     else res.sendStatus(501) //NO HAY ENV!
     // req.userName = "añskjdnalskdnlaskdjnaslk"///////////////////////////////PREGUNTAR MARTINA MARTINIARLA
-    req.body = { ...req.body, infoToken }
-    next();
+
 
 }
 //////////////////////////////////////////FIN DE VALIDACION/////////////////////////////////////////////////////

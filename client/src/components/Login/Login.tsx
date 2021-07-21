@@ -81,7 +81,6 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
   /////////////////////////////////ESTADOS/////////////////////////////////////////////
 
 
-
   //////////////////////////////HANLDES///////////////////////////////////////////////////
   const handleOnSubmit = (e) => {
     e.preventDefault();
@@ -131,15 +130,13 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
     // const email = response.email;
 
 
-    axios
-      .post(`${window.env.HOST_BACKEND}/auth/signin`, {
-        params: {
-          nameMail,
-        }
-
-      })
+    axios.post(`${window.env.HOST_BACKEND}/auth/signin`, {
+      params: {
+        nameMail,
+      }
+    })
       .then((e) => {
-        console.log('Logueado!!!', e.data, localStorage.setItem('tokenFacebook', e.data.token))
+        console.log('Logueado!!!', e.data)
         toogleAuth()
         closeModal()
 
@@ -147,6 +144,8 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
       .catch((error) => console.log('No te pudiste loguear con theFacebook!'))
   }
   //////////////////////////////FIN FACEBOOK///////////////////////////////////////////////////////
+
+
 
 
   //////////////////////////////LOGICA DE GOOGLE///////////////////////////////////////////////////
@@ -166,7 +165,7 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
 
       })
       .then((e) => {
-        console.log('Logueado!!!', e.data, localStorage.setItem('tokenGoogle', e.data.token))
+        console.log('Logueado!!!', e.data)
         toogleAuth()
         closeModal()
 
