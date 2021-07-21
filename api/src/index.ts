@@ -7,5 +7,5 @@ console.log(process.env.SECRET_CODE);
 
 
 app.listen(3001, () => {
-    console.log("Corriendo en https://localhost:3001/");
+    console.log("Corriendo en http://localhost:3001/");
 })

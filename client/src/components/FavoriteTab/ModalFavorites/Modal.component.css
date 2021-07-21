@@ -1,0 +1,19 @@
+.modalFavorites {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 10vh;
+  left: 62.3vw;
+}
+
+.modalContentFavorites {
+  display: flex;
+  align-items: flex-start;
+  width: 10vw;
+  height: 28vh;
+  box-sizing: border-box;
+  border-radius: 0.5rem;
+  background-color: grey;
+  border: 2px solid rgb(3, 3, 3);
+}

@@ -24,7 +24,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 6px 6px 6px 35px;
+  padding: 6px 6px 6px 6px;
   margin-top: 3vh;
 }
 
@@ -98,6 +98,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 3rem;
   width: 3rem;
   background-color: #F49E51;
   border-radius: 5rem;
@@ -109,6 +110,7 @@
   justify-content: center;
   align-items: center;
   width: 3rem;
+  height: 3rem;
   background-color: #F49E51;
   border-radius: 5rem;
   border:none;
@@ -141,6 +143,7 @@
   margin-right: 5vw;
   display: flex;
   justify-content: flex-end;
+  align-items: center;
 }
 
 .autocomplete {
