@@ -45,7 +45,7 @@ export default function Preview({info}) {
 			<div className={Style.detailViewContainer}>
 				<div className={Style.detailView}>
 					<div className={Style.imageSection}>
-						<img src={info.image} alt="La imagen no esta disponible" />
+						<img src={info.infoPost.image} alt="La imagen no esta disponible" />
 						<p className={Style.ratingStars}>{info.rating}⭐⭐⭐⭐</p>
 					</div>
 					<div className={Style.beerDescription}>
@@ -59,17 +59,14 @@ export default function Preview({info}) {
 									</div>
 								</div>
 								<div className={Style.textContent}>
-									{/* <p>Descripcion del tipo {info.beer.genericType.type}: {info.beer.genericType.description}</p> */}
+									<p>{info.beer.genericType} / {info.beer.specificType} </p>
 									<div className={Style.specs}>
 										<p>ibu: {info.beer.ibu}</p>
 										<p>abv: {info.beer.abv}</p>
 										<p>Cal: {info.beer.calories}</p>
 									</div>
-									<p>Description: {info.description}</p>
-									<div className={Style.infoBeer}>
-										<h3>Info Cerveza</h3>
-										{/* <p>Descripcion del Estilo {info.beer.specificType.type}: {info.beer.specificType.description}</p> */}
-									</div>
+									<p>Description: {info.infoPost.description}</p>
+								
 									<div className={Style.infoCompra}>
 										<h3>Info De Compra</h3>
 										<div className={Style.buyInfo}>

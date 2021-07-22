@@ -1,4 +1,5 @@
 .mainContainer{
+    height: 40rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -7,13 +8,14 @@
     display: flex;
     flex-direction: column;
     width: 40em;
-    margin-top: 5em;
+    height: 30rem;
     align-items: center;
     justify-content:center;
     text-align: center;
     border: 1px solid tomato;
     border-radius: 20px;
-    align-self: center;
+    overflow-y: scroll;
+    scroll-behavior:smooth;
 }
 
 .container{display: flex; align-items:center;flex-direction: column; float: left; width: 12.75rem; margin: 20px 3%; position: relative;}
@@ -34,7 +36,7 @@ input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width
     background:rgb(92, 221, 135);
 }
 .postFormBeer{
-    margin-top: 1em;
+    margin-top: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -91,6 +93,16 @@ input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width
     justify-content:space-around;
     align-items: center;
 }
+
+.checkbox{
+    transform: scale(0.8);
+}
+
+.checkboxDiscount{
+    margin-top: 2%;
+    transform: scale(1.8);
+}
+
 .row1{
     display: flex;
     flex-direction: row;
@@ -113,7 +125,9 @@ input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: space-evenly;
     width:29em;
+    margin-bottom: 5%;
 }
 
 .countablerow{

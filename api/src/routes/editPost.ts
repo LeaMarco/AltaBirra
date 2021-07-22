@@ -34,6 +34,7 @@ interface Countable {
 
 
 router.put("/", async (req: Request, res: Response, next: NextFunction) => {
+  console.log(req.body.params, "soy los params")
   const {
     name,
     abv,
