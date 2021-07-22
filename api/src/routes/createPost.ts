@@ -2,6 +2,8 @@ import { PrismaClient } from "@prisma/client";
 import { NextFunction, Request, Response, Router } from "express";
 import { LabeledStatement } from "typescript";
 
+
+
 const router = Router();
 const prisma = new PrismaClient();
 

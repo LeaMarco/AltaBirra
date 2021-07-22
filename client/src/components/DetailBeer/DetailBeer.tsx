@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers/index";
+import Modal from 'react-modal';
 import {
 	getCart,
 	getDetail,
@@ -27,7 +28,7 @@ export default function DetailBeer() {
 	const favorites: Favorites[] = useSelector((state: RootState) => state.favoritePosts);
 	const [isFavorite, setIsFavorite] = useState<boolean>(favorites.some(post => post.post.id === Number(id)));
 	const [cantidad, setCantidad] = useState(1);
-	const [modalIsOpen, setmodalIsOpen] = useState(false);
+	const [modalIsOpen, setModalIsOpen] = useState(false);
 	const history = useHistory();
 	const MySwal = withReactContent(Swal);
 
@@ -64,7 +65,12 @@ export default function DetailBeer() {
 								<p className={Style.ratingStars}><p>Rating Total</p>{"⭐".repeat(info.rating)}</p>
 								{info.review.length > 0 ? (<p>{info.review.length} opiniones</p>) : null}
 							</div>
-							<button onClick={() => setActive("moreReviews")}>Ver mas Reviews</button>
+							<button onClick={() => setModalIsOpen(true)}>Ver mas Reviews</button>
+							<Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)}>
+								<p>Reviews</p>
+
+								<button onClick={() => setModalIsOpen(false)}>Cerrar</button>
+							</Modal>
 
 						</div>
 					</div>
