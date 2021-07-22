@@ -35,15 +35,15 @@ export function PostinCart({
 				<div className={style.titleContainer}>
 					<h1 className={style.title}>{postTitle}</h1>
 					<span>{description.slice(0, 50)}...</span>
-					<button
-						onClick={(e) => {
-							despachadora();
-						}}
-					>
-						Eliminar
-					</button>
 				</div>
 			</Link>
+			<button className={style.deletebutton}
+				onClick={(e) => {
+					despachadora();
+				}}
+			>
+				Eliminar
+			</button>
 			<div className={style.modifyContainer}>
 				<button onClick={(e) => setQuantity(quantity + 1)}>➕</button>
 				<p>Amount: {quantity}</p>

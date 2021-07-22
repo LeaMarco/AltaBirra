@@ -47,6 +47,7 @@
 
 .modifyContainer{
     display:flex;
+    flex-direction:row-reverse;
     background-color: white;
     border-radius: 10px;
     color: black;

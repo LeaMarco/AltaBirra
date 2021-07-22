@@ -45,7 +45,7 @@ export default function EditPost() {
   useEffect(() => {
     dispatch(getDetail(id));
     getBeerTypes();
-  }, [dispatch])
+  }, [dispatch, image])
 
 
 
@@ -53,7 +53,7 @@ export default function EditPost() {
 
   //hacer destructuring de generic y specific
   async function despachadora(data) {
-    let save = await dispatch(createPost(transformer(data)))
+    let save = await dispatch(createPost(transformer(data, image)))
     if (save["status"] === 200) {
       MySwal.fire({
         position: 'center',
@@ -87,11 +87,10 @@ export default function EditPost() {
     const formData = new FormData()
     formData.append('image', file)
     let response = await axios.post("http://localhost:3001/upload", formData)
-    setImage(response.data.filename);
-    // dataPrevia.infoPost.image = response.data.filename;
+    setImage('http://localhost:3001/upload/' + response.data.filename);
   }
 
-  let dataPrevia = {
+  let dataPrevie = {
     beer: {
       abv: "99",
       dryHop: false,
@@ -105,7 +104,7 @@ export default function EditPost() {
     infoPost: {
       title: "NOMBRE DE TU CERVEZA",
       description: "Completá acá con tu descripción",
-      image: "https://i.imgur.com/FsGTu6Q.png",
+      image: image ? image : "https://i.imgur.com/FsGTu6Q.png",
       stock: 1,
       shipping: false,
       visibility: true,
@@ -117,11 +116,9 @@ export default function EditPost() {
       expireDate: Date.now(),
     }
   }
-  if (image.length > 5) {
-    dataPrevia.infoPost.image = `"http://localhost:3001/upload/${image}"`;
-  }
+  const [dataPrevia, setDataPrevia] = useState(dataPrevie)
 
-  console.log(dataPrevia.infoPost.image, "dataprevia")
+  console.log(dataPrevia, "dataprevia")
 
   const { register, handleSubmit, reset, watch } = useForm({ defaultValues: dataPrevia });
   const onSubmit: SubmitHandler<PostValues> = (data) => { despachadora(data); reset() };
@@ -129,7 +126,7 @@ export default function EditPost() {
 
   return (
     <div className={styles.mainContainer}>
-      {image.length > 5 ? (<img src={`"http://localhost:3001/upload/${image}"`} alt="dale anda" />) : null}
+      {/* {image.length > 5 ? (<img src={image} alt="dale anda" />) : null} */}
       <div>
         <form className={styles.postForm} onSubmit={handleSubmit(onSubmit)}>
           <section className={styles.postFormBeer}>

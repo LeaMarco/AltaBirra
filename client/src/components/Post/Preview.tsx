@@ -21,7 +21,7 @@ interface Favorites {
 
 export default function Preview({ info, image }) {
 	console.log(info, "holaaaaaaaaaaaa")
-	console.log(`"http://localhost:3001/upload/${image}"`, "IMAGENEENENENEN")
+	console.log(image, "IMAGENEENENENEN")
 	const dispatch = useDispatch();
 	const { id }: any = useParams();
 	const history = useHistory()
@@ -46,7 +46,7 @@ export default function Preview({ info, image }) {
 		<div className={Style.detailViewContainer}>
 			<div className={Style.detailView}>
 				<div className={Style.imageSection}>
-					<img src={image.length > 5 ? `"http://localhost:3001/upload/${image}"` : info.infoPost.image} alt="La imagen no esta disponible" />
+					{image.length > 5 ? (<img src={image} alt="La imagen no esta disponible" />) : <img src="https://i.imgur.com/FsGTu6Q.png" alt="La imagen no esta disponible" />}
 					<p className={Style.ratingStars}>{info.rating}⭐⭐⭐⭐</p>
 				</div>
 				<div className={Style.beerDescription}>

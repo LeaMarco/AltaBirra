@@ -12,6 +12,7 @@ import { useParams } from "react-router-dom";
 import Preview from "./Preview"
 import { RootState } from "../../reducers";
 import Beer from "../Beer/Beer";
+import axios from 'axios';
 
 //TIENE QUE TOMAR COMO PARAMETRO EL ID DEL POST QUE SE SELECCIONA Y RENDERIZAR EL COMPONENTE DETALLE PASANDOLE ESE ID.
 export default function EditPost() {
@@ -86,7 +87,7 @@ export default function EditPost() {
 
   //hacer destructuring de generic y specific
   async function despachadora(data, postId) {
-    let save = await dispatch(editPost(transformEdit(data, postId)))
+    let save = await dispatch(editPost(transformEdit(data, postId, "asodaoskdoasdk")))
     if (save["status"] === 200) {
       MySwal.fire({
         position: 'center',
