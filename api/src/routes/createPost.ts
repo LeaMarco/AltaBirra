@@ -34,6 +34,9 @@ interface Countable {
 }
 
 router.post("/", async (req: Request, res: Response, next: NextFunction) => {
+
+  const id = req.body.infoToken.id
+
   const {
     name,
     abv,
@@ -60,7 +63,7 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
   const price: number = +req.body.params.countable.price;
   const discount: number = +req.body.params.countable.discount;
 
-  const user = await prisma.user.findUnique({ where: { username: username } });
+  const user = await prisma.user.findUnique({ where: { id: id } });
   const beerGenericType = await prisma.genericType.findUnique({ where: { type: genericType } });
   const beerSpecificType = await prisma.specificType.findUnique({ where: { type: specificType } });
 

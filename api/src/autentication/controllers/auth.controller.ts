@@ -38,7 +38,6 @@ function validatePassword(password: string, user: User): boolean {
 
 export const signup = async (req: Request, res: Response) => {
 
-    // console.log(req)
 
     const { username, email, name, password } = req.body.params;
     // console.log("asddsa", username, email, name, password)
@@ -87,7 +86,6 @@ export const signin = async (req: Request, res: Response) => {
 
     // const infoToken = req.body.infoToken
 
-    console.log(req.body, "infotoken")
     const user = await prisma.user.findUnique({
         where: {
             username: req.body.params.nameMail
@@ -109,6 +107,7 @@ export const signin = async (req: Request, res: Response) => {
         if (req.body.params.password) {//Si es registrado local
             const correctPassword: boolean = validatePassword(req.body.params.password, user);
             if (correctPassword === false) return res.status(400).send('Credencial invalida');
+
             const token: string = jwt.sign({ id: user.id, adminRole: false }, process.env.SECRET_CODE, { expiresIn: 60 * 60 * 24 })
             res.json({ token, userData })
         }

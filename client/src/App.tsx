@@ -19,9 +19,10 @@ import BuyHistory from "./components/BuyHistory/BuyHistory";
 import SellHistory from "./components/SellHistory/SellHistory";
 
 function App() {
-  console.log("asdasd")
+
   return (
     <div className="App">
+
       <Route path="/" component={Nav} />
       <Route exact path="/" component={Home} />
       <Route exact path="/search" component={Search} />
@@ -35,6 +36,7 @@ function App() {
       <Route exact path="/historialCompras" component={BuyHistory} />
       <Route exact path="/historialVentas" component={SellHistory} />
       <Route exact path="/calificar/:id" component={Rate} />
+
     </div>
   );
 }
