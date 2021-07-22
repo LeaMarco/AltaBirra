@@ -225,7 +225,7 @@ return dataPrevia?.beer?(
           {estado.checked ?
             <div>
               <div className={styles.container}>
-                <input {...register("countable.discount")} type="number" min="1" autoComplete="off" className={styles.input} />
+                <input {...register("countable.discount")} type="number" min="0" autoComplete="off" className={styles.input} />
                 <label>Discount *</label>
                 <span className={styles.focusBorder}></span>
               </div>
