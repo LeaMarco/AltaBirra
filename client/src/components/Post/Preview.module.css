@@ -1,0 +1,208 @@
+
+.detailViewContainer{
+    width:50rem;
+    background-color:white;
+    margin:0.5rem;
+    color:white;
+    border-radius: 33px;
+    padding:3px;
+}
+.detailView{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    color:white;
+    border-radius: 33px;
+    box-shadow: 0.5px 0.5px 30px 21px rgba(0,0,0,0.1) inset;
+    -webkit-box-shadow: 0.5px 0.5px 30px 21px rgba(0,0,0,0.1) inset;
+    -moz-box-shadow: 0.5px 0.5px 30px 21px rgba(0,0,0,0.1) inset;
+}
+
+.priceWODiscount{
+    text-decoration:line-through;
+    color:#8C8C8C;
+}
+.discount{
+    color:#01E26D;
+}
+.imageSection{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: space-around;
+    justify-content: space-between;
+    margin:0.5rem 0 0.5rem 0.5rem;
+    border-top-left-radius: 33px;
+    border-bottom-left-radius: 33px;
+    width:35%;
+    height:20rem;
+}
+.imageSection img{
+    max-width: 100%;
+    max-height: 100%;
+}
+.beerDescription{
+    display:flex;
+    align-items: center;
+    justify-content:center;
+    margin:0.5rem 0.5rem 0.5rem 0rem;
+    background-color:black;
+    width:65%;
+    height: 25rem;
+    max-height: 25rem;
+    background: radial-gradient(50% 50% at 50% 50%, #404143 0%, #242021 100%);
+    border-top-right-radius: 33px;
+    border-bottom-right-radius: 33px;
+    font-size: 0.7rem;
+}
+.beerDescription h1{
+    background-color:#F49E51;
+    width: 100%;
+    padding-bottom: 5px;
+    vertical-align: middle;
+}
+.fav {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    width: fit-content;
+    margin: 1vh auto;
+    color: black;
+    transform: scale(1.5);
+    transition: 1000ms;
+}
+.buttonComprar{
+    background-color:#F49E51;
+    border:none;
+    width:8rem;
+    height:1.5rem;
+    color:white;
+}
+.addtoCartButton{
+    background-color:#69C3C4;
+    border:none;
+    width:8rem;
+    height:1.5rem;
+    color:white;
+}
+
+.buyButtons{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.fav:hover {
+    transform: scale(2);
+    color: red;
+}
+
+.unfav {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    width: fit-content;
+    margin: 1vh auto;
+    color: red;
+    transform: scale(1.5);
+    transition: 1000ms;
+}
+
+.unfav:hover {
+    transform: scale(2);
+    color: black;
+}
+
+.types{
+    display: flex;
+    font-size: 17px;
+    font-weight: bold;
+    margin-left:1rem;
+    color:#C6C2C2;
+}
+.types p {
+    margin:0;
+}
+
+.Head{
+    width: 100%;
+    display:flex;
+    flex-direction: column;
+    align-items:initial;
+    margin-top:-2.5rem;
+}
+.Head h1 {
+    font-size: 20px;
+}
+.specs{
+    display:flex;
+    align-items:center;
+    justify-content:space-evenly;
+    width: 200px;
+    font-size:10px;
+}
+.textContent{
+    padding:10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items:center;
+}
+
+.buyInfo{
+    display:flex;
+    align-content: center;
+    width: 13rem;
+    justify-content:center;
+}
+
+.socialLinks{
+    display: flex;
+    align-Items: center;
+    justify-Content: space-between;
+}
+.socialLinks a{
+    margin:0.5rem;
+}
+
+.buttonsPago{
+    display:flex;
+    align-content: center;
+}
+.buttonsPago p{
+    margin:0;
+}
+.originalPrice{
+    padding-top: 2.5px;
+    font-size:2rem;
+    font-weight: bold;
+    margin-left: 0.5rem;
+}
+.SecondPrices{
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content:space-evenly;
+    margin-right: 1.5rem;
+    margin-left: 0.5rem;
+}
+
+.share{
+    margin-top:1rem;
+    margin-bottom:-2.5rem;
+}
+
+.infoCompra{
+    margin-top: 1rem;
+}
+
+.infoBeer{
+    margin-top: 1rem;
+}
+
+#post{
+    width: 100%;
+}

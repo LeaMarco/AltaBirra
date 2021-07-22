@@ -6,7 +6,6 @@ const router = Router();
 const prisma = new PrismaClient();
 
 interface Beer {
-  name: string;
   abv: number;
   og: number;
   ibu: number;
@@ -34,8 +33,8 @@ interface Countable {
 
 
 router.put("/", async (req: Request, res: Response, next: NextFunction) => {
+  console.log(req.body.params, "soy los params")
   const {
-    name,
     abv,
     og,
     ibu,
@@ -81,7 +80,6 @@ router.put("/", async (req: Request, res: Response, next: NextFunction) => {
       },
       beer: {
         create: {
-          name,
           abv,
           og,
           ibu,

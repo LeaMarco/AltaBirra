@@ -45,7 +45,6 @@ export enum ActionTypes {
 
 export interface PostValues {
 	beer: {
-		name: string;
 		abv: number;
 		og: number;
 		ibu: number;
@@ -72,9 +71,8 @@ export interface PostValues {
 	date: Date;
 };
 
-export interface EditValues {
+export interface EditValues { ///////CREO QUE NO SE USA
 	beer: {
-		name: string;
 		abv: number;
 		og: number;
 		ibu: number;
@@ -99,6 +97,37 @@ export interface EditValues {
 		discount: number;
 	};
 	postId: number;
+};
+
+
+export interface EditPostInterface {
+	beer: {
+		name: string;
+		abv: string;
+		og: string;
+		ibu: string;
+		calories: string;
+		dryHop: string;
+		volume: string;
+		genericType: string;
+		specificType: string;
+	};
+	infoPost: {
+		title: string;
+		description: string;
+		image: string;
+		stock: string;
+		rating: string;
+		shipping: string;
+		visibility: string;
+		username: string;
+	};
+	countable: {
+		price: string;
+		discount: string;
+	};
+	postId: string;
+	date: string;
 };
 
 
