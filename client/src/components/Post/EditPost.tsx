@@ -49,7 +49,6 @@ console.log(info, "SOY LA INFOOOOOOO")
 let dataPrevia
 if(info.beer) {dataPrevia={
   beer:{
-    name:info.beer.name,
     abv:info.beer.abv,
     dryHop:info.beer.dryHop,
     genericType:info.beer.genericType.type,
@@ -122,7 +121,7 @@ return dataPrevia?.beer?(
         <h3 id={styles["beerh2"]}> Beer</h3>
           <div className={styles.row1}>
             <div className={styles.container} id={styles["name"]}>
-              <input {...register("beer.name")} autoComplete="off" className={styles.input} />
+              <input {...register("infoPost.title")} autoComplete="off" className={styles.input} />
               <label>Beer Name *</label>
               <span className={styles.focusBorder}></span>
             </div>
@@ -185,11 +184,6 @@ return dataPrevia?.beer?(
       </section>
     <section className={styles.postFormInfoPost}>
       <h3>Post Info</h3>
-      <div className={styles.container}>
-        <input {...register("infoPost.title")}  autoComplete="off" className={styles.input} />
-          <label>Post Title *</label>
-          <span className={styles.focusBorder}></span>
-      </div>
       <div className={styles.postrow1}>
         <div className={styles.container}>
             <input {...register("infoPost.stock")} type="number" min="1" autoComplete="off"  className={styles.input} />

@@ -50,16 +50,13 @@ export default function Preview({info}) {
 					</div>
 					<div className={Style.beerDescription}>
 						<div id="post">
-							<div>
 								<div className={Style.Head}>
-									<h1>{info.beer.name}</h1>
-									{/* <p>Nombre: {info.beer.name}</p> */}
+									<h1>{info.infoPost.title}</h1>
 									<div className={Style.types}>
-										{/* <p>{info.beer.genericType.type}/</p><p>{info.beer.specificType.type}</p> */}
+										<p>{info.beer.genericType}/</p><p>{info.beer.specificType}</p>
 									</div>
 								</div>
 								<div className={Style.textContent}>
-									<p>{info.beer.genericType} / {info.beer.specificType} </p>
 									<div className={Style.specs}>
 										<p>ibu: {info.beer.ibu}</p>
 										<p>abv: {info.beer.abv}</p>
@@ -111,7 +108,6 @@ export default function Preview({info}) {
 										</div>
 									</div>
 								</div>
-							</div>
 						</div>
 					</div>
 				</div>

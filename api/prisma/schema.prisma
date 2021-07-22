@@ -97,7 +97,6 @@ model PostsOnCart {
 
 model Beer {
     id       Int      @id @default(autoincrement())
-    name     String
     abv      Int
     og       Int?
     ibu      Int

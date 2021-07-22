@@ -58,7 +58,7 @@
 }
 .beerDescription h1{
     background-color:#F49E51;
-    width: 20rem;
+    width: 100%;
     padding-bottom: 5px;
     vertical-align: middle;
 }
@@ -127,11 +127,11 @@
 }
 
 .Head{
+    width: 100%;
     display:flex;
     flex-direction: column;
-    align-items:start;
+    align-items:initial;
     margin-top:-2.5rem;
-    text-align:start;
 }
 .Head h1 {
     font-size: 20px;
@@ -201,4 +201,8 @@
 
 .infoBeer{
     margin-top: 1rem;
+}
+
+#post{
+    width: 100%;
 }

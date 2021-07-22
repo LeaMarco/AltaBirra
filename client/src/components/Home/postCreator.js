@@ -51,7 +51,6 @@ export default async (amount) => {
     for (let i = 0; i < amount; i++) {
 
         let beer = {
-            "name": beerName[Math.floor(Math.random() * (beerName.length))],
             "abv": 2+Math.floor(Math.random() * 15),
             "og": Math.floor(Math.random() * 200),
             "ibu": 15+Math.floor(Math.random() * 80),
@@ -63,7 +62,7 @@ export default async (amount) => {
         }
 
         let infoPost = {
-            "title": beer.name,
+            "title": beerName[Math.floor(Math.random() * (beerName.length))],
             "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus dolores ut consectetur nostrum doloremque numquam labore voluptate quos consequatur enim architecto, laboriosam hic quasi provident cumque reprehenderit aspernatur reiciendis ullam?",
             "image": beer.genericType === "Rubia" ? CERVEZAS_RUBIAS[Math.floor(Math.random() * (CERVEZAS_RUBIAS.length))] : beer.genericType === "Negra" ? CERVEZAS_NEGRAS[Math.floor(Math.random() * (CERVEZAS_NEGRAS.length))] : CERVEZAS_ROJAS[Math.floor(Math.random() * (CERVEZAS_ROJAS.length))],
             "rating": Math.ceil(Math.random() * 5),

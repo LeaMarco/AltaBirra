@@ -45,7 +45,6 @@ export enum ActionTypes {
 
 export interface PostValues {
 	beer: {
-		name: string;
 		abv: number;
 		og: number;
 		ibu: number;
@@ -74,7 +73,6 @@ export interface PostValues {
 
 export interface EditValues { ///////CREO QUE NO SE USA
 	beer: {
-		name: string;
 		abv: number;
 		og: number;
 		ibu: number;

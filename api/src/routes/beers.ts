@@ -5,7 +5,6 @@ const router = Router();
 const prisma = new PrismaClient();
 
 interface Body {
-  name: string;
   abv: number;
   og: number;
   ibu: number;
@@ -18,7 +17,6 @@ interface Body {
 
 router.post("/", async (req: Request, res: Response, next: NextFunction) => {
   const {
-    name,
     abv,
     og,
     ibu,
@@ -34,7 +32,6 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
 
   await prisma.beer.create({
     data: {
-      name,
       abv,
       og,
       ibu,
