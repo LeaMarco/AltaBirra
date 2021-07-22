@@ -9,6 +9,7 @@
     border: 1px solid tomato;
     border-radius: 20px;
     align-self: center;
+    height: 800px;
 }
 
 .container{display: flex; align-items:center;flex-direction: column; float: left; width: 12.75rem; margin: 20px 3%; position: relative;}

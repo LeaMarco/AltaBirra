@@ -26,29 +26,18 @@ export default function DetailBeer() {
 	console.log(info, "INFOOO")
 	const favorites: Favorites[] = useSelector((state: RootState) => state.favoritePosts);
 	const [isFavorite, setIsFavorite] = useState<boolean>(favorites.some(post => post.post.id === Number(id)));
-	const [cantidad, setCantidad] = useState(1)
-	const history = useHistory()
-	const MySwal = withReactContent(Swal)
+	const [cantidad, setCantidad] = useState(1);
+	const [modalIsOpen, setmodalIsOpen] = useState(false);
+	const history = useHistory();
+	const MySwal = withReactContent(Swal);
 
 	useEffect(() => {
 		dispatch(getDetail(id))
 	}, [dispatch]);
 
-	async function addToFavorite() {
-		await axios.post('https://altabirra.herokuapp.com/addFavorite', { data: { "username": "TestUser", "postId": id } });
-		dispatch(getFavoritePosts("TestUser"));
-		setIsFavorite(true);
-	}
-
 	const addToCart = async () => {
 		const response = await axios.put(`http://localhost:3001/addToCart`, { params: { "username": "TestUser", "postId": parseInt(id), "quantity": cantidad } })
 		return (response.data)
-	}
-
-	async function removeFavorite() {
-		await axios.delete('https://altabirra.herokuapp.com/removeFavorite', { data: { "username": "TestUser", "postId": id } });
-		dispatch(getFavoritePosts("TestUser"));
-		setIsFavorite(false);
 	}
 
 	const handleSubmit = async (e) => {
@@ -59,19 +48,11 @@ export default function DetailBeer() {
 		history.push(`/compra/1`); ///////////FALTA CARGAR EL ID DEL USUARIO QUE ESTÉ EN LA PÁGINA
 	};
 
-
 	return info?.beer ? (
 		<div className={Style.detailContainer}>
 			<div className={Style.detailViewContainer}>
 				<div className={Style.detailView}>
 					<div className={Style.imageSection}>
-						{/* <div className={Style.favbutton}>
-							{
-								isFavorite
-									? <button onClick={removeFavorite} className={Style.unfav}> ❤ </button>
-									: <button onClick={addToFavorite} className={Style.fav}> ❤ </button>
-							}
-						</div> */}
 						<img src={info.image} alt="La imagen no esta disponible" />
 						<div className={Style.reviews}>
 							<div className={Style.reviewsTitle}>{info.review.length > 0 ? (<p>Reviews</p>) : null}</div>
@@ -83,6 +64,8 @@ export default function DetailBeer() {
 								<p className={Style.ratingStars}><p>Rating Total</p>{"⭐".repeat(info.rating)}</p>
 								{info.review.length > 0 ? (<p>{info.review.length} opiniones</p>) : null}
 							</div>
+							<button onClick={() => setActive("moreReviews")}>Ver mas Reviews</button>
+
 						</div>
 					</div>
 					<div className={Style.beerDescription}>

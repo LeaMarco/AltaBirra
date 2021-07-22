@@ -1,0 +1,28 @@
+.cartContainer{
+    width:100rem;
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    align-content: center;
+    justify-content:center;
+    align-self: center;
+}
+.Link {
+    text-decoration: none;
+    color:white;
+    font-size: 30px;
+    width: 10rem;
+    margin-top: 10px;
+    background-color: green;
+}
+
+
+.deleteButton{
+    border: 1px solid red;
+    width:10rem;
+    height:2rem;
+    color: white;
+    background-color:red;
+    font-size: bold;
+    cursor:pointer;
+}

@@ -6,7 +6,7 @@ import { cart, getCart } from "../../actions";
 import { PostinCart } from "../postInCart/PostInCart";
 import axios from 'axios';
 import Swal from "sweetalert2";
-
+import styles from './Cart.module.css';
 
 function Cart() {
   const dispatch = useDispatch();
@@ -47,9 +47,9 @@ function Cart() {
   }
 
   return (
-    <div>
-      <div id="button-checkout"></div>
-      <ul>
+    <div className={styles.cartContainer}>
+      {/* <div id="button-checkout"></div> */}
+      <div className={styles.cart}>
         {Array.isArray(carts) ? (
           carts.map((post) => (
             <PostinCart username={post.cart?.userId.username} cartId={id} postId={post.post.id} postTitle={post.post.title} description={post.post.description} amount={post.amount} countable={post.post.countable} />
@@ -58,9 +58,10 @@ function Cart() {
           <p>No hay posts</p>
         )
         }
-      </ul>
-      <button onClick={(e) => deleteConfirm(cartIdparsed)}> Limpiar carrito</button>
-      <Link to={`/compra/${id}`}>Comprar</Link>
+      </div>
+      <button className={styles.deleteButton} onClick={(e) => deleteConfirm(cartIdparsed)}> Limpiar carrito</button>
+      <Link className={styles.Link} to={`/compra/${id}`}>Comprar</Link>
+
     </div >
   );
 }
