@@ -12,6 +12,7 @@ import { useParams } from "react-router-dom";
 import Preview from "./Preview"
 import { RootState } from "../../reducers";
 import Beer from "../Beer/Beer";
+import axios from 'axios';
 
 //TIENE QUE TOMAR COMO PARAMETRO EL ID DEL POST QUE SE SELECCIONA Y RENDERIZAR EL COMPONENTE DETALLE PASANDOLE ESE ID.
 export default function EditPost() {
@@ -19,6 +20,7 @@ export default function EditPost() {
   const [generic, setGeneric] = useState([]);
   const [specific, setSpecific] = useState([]);
   const [estado, setEstado] = useState({ "checked": true });
+  const [image, setImage] = useState("");
 
   let checkboxClick = (e) => {
     let { name, checked } = e.target;
@@ -71,9 +73,23 @@ export default function EditPost() {
       })
     }
   }
+  //image
+  const [file, setFile] = useState();
+  console.log(file, "fileeeeeeee rocky")
 
-
-
+  const handleFileChange = (event) => {
+    setFile(event.target.files);
+    console.log(file)
+  }
+  async function imageHandler(event) {
+    const file = event.target.files[0];
+    event.preventDefault();
+    const formData = new FormData()
+    formData.append('image', file)
+    let response = await axios.post("http://localhost:3001/upload", formData)
+    setImage(response.data.filename);
+    // dataPrevia.infoPost.image = response.data.filename;
+  }
 
   let dataPrevia = {
     beer: {
@@ -101,6 +117,11 @@ export default function EditPost() {
       expireDate: Date.now(),
     }
   }
+  if (image.length > 5) {
+    dataPrevia.infoPost.image = `"http://localhost:3001/upload/${image}"`;
+  }
+
+  console.log(dataPrevia.infoPost.image, "dataprevia")
 
   const { register, handleSubmit, reset, watch } = useForm({ defaultValues: dataPrevia });
   const onSubmit: SubmitHandler<PostValues> = (data) => { despachadora(data); reset() };
@@ -108,6 +129,7 @@ export default function EditPost() {
 
   return (
     <div className={styles.mainContainer}>
+      {image.length > 5 ? (<img src={`"http://localhost:3001/upload/${image}"`} alt="dale anda" />) : null}
       <div>
         <form className={styles.postForm} onSubmit={handleSubmit(onSubmit)}>
           <section className={styles.postFormBeer}>
@@ -223,10 +245,23 @@ export default function EditPost() {
           <div className={styles.submitButton}>
             <input className={styles.postFormSubmitButton} type="submit" />
           </div>
+          <div className="form-group" >
+            <label htmlFor="file">Upload File:</label>
+            <input
+              className="form-control-file mb-3"
+              type="file" id="file"
+              accept=".jpg"
+              multiple
+              onChange={imageHandler}
+            />
+            <button
+              className="btn btn-primary mt-3"
+            >Upload</button>
+          </div>
         </form>
 
       </div>
-      <div><Preview info={watch()} /></div>
+      <div><Preview image={image} info={watch()} /></div>
     </div>
   )
 }

@@ -338,8 +338,8 @@ export const loadUsersPremium = () => {
 export type ActionUsersPremium = UsersPremiumAction;
 
 
-// const urlDetail = 'http://localhost:3001/detailBeer'
-const urlDetail = 'https://altabirra.herokuapp.com/detailBeer'
+const urlDetail = 'http://localhost:3001/detailBeer'
+// const urlDetail = 'https://altabirra.herokuapp.com/detailBeer'
 
 export const getDetail = (id) => {
 	return async (dispatch: Dispatch) => {
