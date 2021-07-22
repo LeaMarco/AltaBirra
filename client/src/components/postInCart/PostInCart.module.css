@@ -1,0 +1,66 @@
+.itemCarrito{
+    display:flex;
+    justify-content:space-between;
+    padding:10px;
+    align-items:center;
+    background:#69C3C4;
+    color:white;
+    font-weight: bold;
+    text-decoration: none;
+    width: 100%;
+    border-radius: 30px;
+    margin:20px;
+}
+.itemCarrito a h1 {
+    margin:0;
+}
+
+.Link{
+    margin-top: 30px;
+    text-decoration: none;
+    color:white;
+    font-weight:900;
+    cursor:pointer;
+}
+.Link h1{
+    margin-bottom: 10px;
+    text-decoration: none;
+    color:white;
+    font-weight:900;
+}
+.titleContainer{
+    margin-top:-20px;
+    padding:0 0 10px 10px;
+    display:flex;
+    flex-direction: column;
+    justify-content:space-between;
+    height: 100px;
+}
+
+.titleContainer button{
+    margin-top: 10px;
+    border:none;
+    color:red;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.modifyContainer{
+    display:flex;
+    background-color: white;
+    border-radius: 10px;
+    color: black;
+    font-size: 20px;
+}
+.modifyContainer button{
+    border:none;
+    cursor:pointer;
+}
+
+.amount {
+    padding: 40px;
+    padding-right: 50px;
+    max-width: 150px;
+    font-size: 50px;
+    font-weight: 500;
+}
