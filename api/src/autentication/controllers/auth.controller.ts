@@ -40,7 +40,6 @@ export const signup = async (req: Request, res: Response) => {
 
 
     const { username, email, name, password } = req.body.params;
-    // console.log("asddsa", username, email, name, password)
 
     // Busco al usuario
     const user = await prisma.user.findUnique({
@@ -187,7 +186,44 @@ export const profile = async (req: Request, res: Response) => {
      } */
 };
 
+export const socialSignIn = async (req: Request, res: Response) => {
 
+    const email = req.query.email?.toString()//esto lo envia google! solo mail!
+    const username = req.query.userName?.toString()//esto lo envia facebook, solo username! (porque es lo que devuelven los token)
+
+    const user = await prisma.user.findUnique({
+        where: {
+            email,
+            username
+        }
+    })
+
+    if (!user) return res.sendStatus(400);
+
+    else {
+        const userData = {
+            id: user.id,
+            nombre: user.name,
+            premium: user.premium,
+            favoritos: user.favoriteId
+        }
+        res.json(userData)
+    }
+}
+
+export const autoLogin = async (req: Request, res: Response) => {
+    const tokenPackage = req.body.tokenPackage //todo lo que tenga el token
+    const uniqueSearchLabel = tokenPackage.uniqueSearchLabel //Puede ser username, email o id, dependiendo si viene de facebook, google o local respectivamente.
+    const uniqueSearchValue = tokenPackage[uniqueSearchLabel] //el valor que esta en el dato unique
+
+    const user = await prisma.user.findUnique({
+        where: {
+            [uniqueSearchLabel]: uniqueSearchValue //siempre envia un solo dato unique, y poniendolo asi lo busca de forma correcta sea lo que sea
+        }
+    })
+    if (!user) return res.sendStatus(400)
+    else return res.sendStatus(200)
+}
 
 export const wipe = async (req: Request, res: Response) => {
     await prisma.transaction.deleteMany({})

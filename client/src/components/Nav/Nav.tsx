@@ -11,19 +11,13 @@ import axios from "axios";
 import FavoritesTab from "../FavoriteTab/FavoriteTab";
 import { useEffect } from "react";
 import { ModalFavorites } from "../FavoriteTab/ModalFavorites/Modal.component";
+import { useLayoutEffect } from "react";
 
 interface Autocomplete {
   title: string;
 }
 
 export default function Nav() {
-
-
-
-
-
-
-
 
 
   const [isEnterOpen, setEnterOpen] = useState<boolean>(false);
@@ -43,29 +37,111 @@ export default function Nav() {
   const toogleAuth = () => setAuth(!isAuth);
 
 
+  useLayoutEffect(() => {
 
-  ///////////////////AUTENTICACION AUTOMATICA/////////////////////////////////////////
+    const { tokenFacebook, tokenLocal, tokenGoogle } = localStorage
 
-  useEffect(() => {
-    let tokenLocal = localStorage.tokenLocal
-    if (tokenLocal) {
+    const uniqueSearchLabel =
+      tokenFacebook ? "username"
+        :
+        tokenLocal ? "id"
+          :
+          tokenGoogle ? "email"
+            : null
 
-      axios.get(`http://localhost:3001/auth/localSignIn`, {
+    const tokenType =
+      tokenFacebook ? "tokenFacebook"
+        :
+        tokenLocal ? "tokenLocal"
+          :
+          tokenGoogle ? "tokenGoogle"
+            : null
+
+    const token =
+      tokenFacebook ? tokenFacebook
+        :
+        tokenLocal ? tokenLocal
+          :
+          tokenGoogle ? tokenGoogle
+            : null
+
+    /*  console.log({
+       tokenType, //type de token
+       uniqueSearchLabel, //label unica para buscar en el where
+       token//el token propiamente dicho
+     }) */
+
+
+    if (tokenFacebook || tokenLocal || tokenGoogle) {
+
+      axios.get(`http://localhost:3001/auth/autoLogin`, {
         headers: {
-          authToken: tokenLocal
+          tokenType, //type de token
+          uniqueSearchLabel, //label unica para buscar en el where
+          token//el token propiamente dicho}
         }
-      })
-        .then((e) => {
-          toogleAuth()
-          console.log(e.data)
-          console.log('Logueado automatico con token local EXITOSO!')
-        })
+      }).then(e => {
+        toogleAuth()
+      }).catch(e => { console.log("ERROR EN AA LOCAL", e) })
+      /* 
+          if (tokenLocal) {
+            //////////////LOCAL/////////////////////////////////////////////////
+            axios.get(`http://localhost:3001/auth/localSignIn`, {
+              headers: {
+                authToken: tokenLocal
+              }
+            })
 
-        .catch((error) => console.log(error, 'No te pudiste loguear de forma local automatica!'))
+              .then((e) => {
+                toogleAuth()
+                console.log(e.data)
+                console.log('Logueado automatico con token local EXITOSO!')
+              })
+              .catch((error) => console.log(error, 'No te pudiste loguear de forma local automatica!'))
+          }
+
+          else if (tokenGoogle) {
+            axios("https://oauth2.googleapis.com/tokeninfo?id_token=" + tokenGoogle)
+              .then((res) => {
+                axios.get("http://localhost:3001/auth/socialSignIn", { params: { email: res.data.email } })
+                  .then((e) => {
+
+                    console.log(e, "auto autentificado de GOOGLE exitoso")
+                    toogleAuth()
+
+                  })
+                  .catch(e => console.log(e))
+              })
+          }
+          ////////////////////////////local//////////////////////////////////////////////
+
+
+          ///////////////////////////////FACEBOOK///////////////////////////////////////////////
+          else if (tokenFacebook) {
+            axios("https://graph.facebook.com/me?access_token=" + tokenFacebook)
+              .then((res) => {
+                console.log("Respuesta facebook token validado", res,)
+                const name = res.data.name;
+                const facebookId = res.data.id;
+                const userName = name.replaceAll(" ", "_") + "_" + facebookId;
+                // console.log(nameMail)
+
+                axios.get("http://localhost:3001/auth/socialSignIn", { params: { userName } })
+                  .then((e) => {
+
+                    console.log(e, "auto autentificado de FACEBOOK exitoso")
+                    toogleAuth()
+
+                  })
+                  .catch(e => console.log(e))
+              })*/
     }
   }
     , [])
-  //////////////////autenticacion automatica//////////////////////////////////////////
+  /////////////////////////////fin facebook///////////////////////////////////////////////
+
+
+  //////////////////fin autenticacion automatica//////////////////////////////////////////
 
 
 

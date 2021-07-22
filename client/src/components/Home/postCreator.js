@@ -86,4 +86,4 @@ export default async (amount) => {
 
 //////import CreateManyPost from "./postCreator";
 
-/////INVOCARLA DONDE LA QUIERAN USAR CON <button onClick={()=>CreateManyPost(CANTIDAD DE POST QUE QUIERAN)}> CREAR</button>
+/////INVOCARLA DONDE LA QUIERAN USAR CON <button onClick={()=>CreateManyPost(CANTIDAD DE POST QUE QUIERAN)}> CREAR</button> //maquina Lean

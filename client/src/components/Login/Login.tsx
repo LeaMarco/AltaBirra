@@ -24,26 +24,6 @@ function validate(dataState: iData, errors: iError, e): iError {
   } else {
     errors[name].require = false;
   }
-
-  /* 
-  if (errors[name].hasOwnProperty("onlyLettersUsAndNumbersOrEmail")) {
-    if (
-      /^[A-Za-zÁÉÍÓÚáéíóúñÑ ]+$/g.test(dataState[name]) ||
-      dataState[name] === "" ||
-      /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/g.test(
-        dataState[name]
-      )
-    ) {
-      errors[name].onlyLettersUsAndNumbersOrEmail = "";
-    } else {
-      errors[name].onlyLettersUsAndNumbersOrEmail = "onlyLettersMge";
-      errors[name].error = true;
-    }
-  }
-*/
-
-
-
   return errors;
 }
 
@@ -81,7 +61,7 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
   /////////////////////////////////ESTADOS/////////////////////////////////////////////
 
 
-  //////////////////////////////HANLDES///////////////////////////////////////////////////
+  //////////////////////////////HANDLES///////////////////////////////////////////////////
   const handleOnSubmit = (e) => {
     e.preventDefault();
     let postObj = {
@@ -94,7 +74,9 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
     axios
       .post(`${window.env.HOST_BACKEND}/auth/signin/`, { params: postObj })
       .then((e: any) => {
-        console.log('Logueado!!!', e.data, localStorage.setItem('tokenLocal', e.data.token))
+        console.log('Logueado!!!', e.data)
+        localStorage.clear()
+        localStorage.setItem('tokenLocal', e.data.token)
         toogleAuth()
         closeModal()
       }).catch((error) => console.log('No te pudiste loguear local!'))
@@ -122,13 +104,11 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
 
   const responseFacebookLogin = (response: any) => {
 
-    console.log(response)
-
+    console.log("Respuesta Facebook", response)
+    const tokenId = response.accessToken
     const name = response.name;
     const facebookId = response.id;
     const nameMail = name.replaceAll(" ", "_") + "_" + facebookId;
-    // const email = response.email;
-
 
     axios.post(`${window.env.HOST_BACKEND}/auth/signin`, {
       params: {
@@ -137,15 +117,15 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
     })
       .then((e) => {
         console.log('Logueado!!!', e.data)
+        localStorage.clear()
+        localStorage.setItem('tokenFacebook', tokenId)
         toogleAuth()
         closeModal()
 
       })
       .catch((error) => console.log('No te pudiste loguear con theFacebook!'))
   }
-  //////////////////////////////FIN FACEBOOK///////////////////////////////////////////////////////
-
-
+  //////////////////////////////fin facebook///////////////////////////////////////////////////////
 
 
   //////////////////////////////LOGICA DE GOOGLE///////////////////////////////////////////////////
@@ -154,30 +134,30 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
     const name = response.dt.uU;
     const googleId = response.googleId;
     const nameMail = name + "_" + googleId;
+    const tokenId = response.tokenId
 
-    console.log('PARAMSSSSSSSSSSSSSS', response);
-
+    console.log('Respuesta en bruto de google', response);
     axios
       .post(`${window.env.HOST_BACKEND}/auth/signin`, {
         params: {
           nameMail,
         }
-
       })
       .then((e) => {
         console.log('Logueado!!!', e.data)
+        localStorage.clear()
+        localStorage.setItem("tokenGoogle", tokenId)
         toogleAuth()
         closeModal()
-
       })
       .catch((error) => console.log('No te pudiste loguear con Google!'))
   }
-
   const onFailureLogin = (response: any) => {
     console.log(response, "Fallo el login!");
   };
 
-  //////////////////////////////FIN DE LOGICA DE GOOGLE///////////////////////////////////////////////////
+  //////////////////////////////fin de logica de google///////////////////////////////////////////////////
+
 
   let btnFacebookSize = 1
   return (
@@ -229,27 +209,6 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
         <button id={Style.btnRegister}>Continuar</button>
       </form>
 
-      {/* <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-around",
-        }}
-      > */}
-
-
-      {/* <FacebookLogin
-        appId="866652260898974"
-        autoLoad={false}
-        fields="name,email,picture"
-        onClick={componentClicked}
-        callback={responseFacebookLogin}
-        textButton="Continuar con Google"
-        render={renderProps => (
-          <button className={Style.imgSm} style={{ background: "url(https://i.imgur.com/ULmHyN2.png)", backgroundSize: "cover", width: `${229 * btnFacebookSize}px`, height: `${55 * btnFacebookSize}px`, border: "none", borderRadius: "3px", marginBottom: "0.4em" }} onClick={renderProps.onClick} />
-        )}
-      /> */}
-
 
       <FacebookLogin
         appId="866652260898974"
@@ -274,9 +233,7 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
         className="googleLogin"
         style={{ width: "1000px" }}
         render={renderProps => (
-
           <button className={Style.imgSm} style={{ background: "url(https://i.imgur.com/YTsDRda.png)", backgroundSize: "cover", width: `${229 * btnFacebookSize}px`, height: `${55 * btnFacebookSize}px`, border: "none", borderRadius: "3px", marginBottom: "0.4em" }} onClick={renderProps.onClick} />
-
         )}
       />
 

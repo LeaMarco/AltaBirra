@@ -7,14 +7,11 @@ import { Provider } from "react-redux"; //Sirve para proveer el estado global de
 import store from "./store"; //importa la store creada en otro lado
 import env from "react-dotenv";
 
-
 declare global {
   interface Window {
     env: any;
   }
 }
-
-
 
 ReactDOM.render(
   <React.StrictMode>

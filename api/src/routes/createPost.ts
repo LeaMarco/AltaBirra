@@ -34,8 +34,8 @@ interface Countable {
 }
 
 router.post("/", async (req: Request, res: Response, next: NextFunction) => {
-
-  const id = req.body.infoToken.id
+  const id = 1
+  // const id = req.body.infoToken.id
 
   const {
     name,

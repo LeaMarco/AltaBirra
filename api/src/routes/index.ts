@@ -31,7 +31,7 @@ const router = Router();
 router.use("/auth/", autentication)
 router.use("/register", register);
 router.use("/beer", beers);
-router.use("/post", tokenValidation, createPost);
+router.use("/post", createPost);
 router.use("/post", getSearchedPost);
 router.use("/transaction", transaction);
 router.use("/cart", cart);
