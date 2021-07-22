@@ -11,6 +11,7 @@ import axios from "axios";
 import FavoritesTab from "../FavoriteTab/FavoriteTab";
 import { token } from "morgan";
 import { getUserData, login } from '../../actions/index'
+import swal from 'sweetalert';
 
 
 interface Autocomplete {
@@ -63,7 +64,6 @@ export default function Nav() {
           dispatch(login(true));
           
           toogleAuth()
-          console.log(e.data)
           console.log('Logueado automatico con token local EXITOSO!')
         })
 
@@ -110,11 +110,22 @@ export default function Nav() {
   }
 
   function close(){
-    var opcion = window.confirm('¿Desea cerrar sesión?');
-    if(opcion) {
-      localStorage.clear();
-      window.location.reload();
-    }
+    swal({
+      title: "Cerrar sesión",
+      text: "¿Desea cerrar sesión?",
+      icon: "error",
+      buttons: ["No", "Si"]
+      // timer: 2000,
+    }).then(response => {
+      if(response){
+        swal({title: 'Adiós, vuelve pronto!', text: 'Suerte!', icon: "success", timer: 3000, buttons: ['']})
+        setTimeout(() => {
+          localStorage.clear();
+          window.location.reload();  
+        }, 2900);
+        
+      }
+    })    
   }
 
   return (

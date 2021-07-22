@@ -8,6 +8,10 @@
   padding: 0 10px;
 }
 
+.googleLogin{
+  cursor: pointer;
+}
+
 #form {
   width: 100%;
   display: flex;
@@ -43,11 +47,13 @@
 }
 
 .imgSm {
-transition: .1s;
+  transition: .1s;
+  cursor: pointer;
 }
+
 .imgSm:hover{
   filter: brightness(1.2);
-  }
+}
 
 #btnRegister {
   border-radius: 30px;

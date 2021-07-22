@@ -55,8 +55,8 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
   const stateLogin = useSelector((state) => state["loginState"]);
 
   useEffect(() => {
-    console.log('REDUX', stateWelcome.nombre);
-    console.log('REDUX login', stateLogin);
+    // console.log('REDUX', stateWelcome.nombre);
+    // console.log('REDUX login', stateLogin);
   }, [stateWelcome, stateLogin]);
   //Agregar un estado nuevox
   //////////////////
@@ -285,7 +285,7 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
         onSuccess={responseGoogleLogin}
         onFailure={onFailureLogin}
         cookiePolicy={"single_host_origin"}
-        className="googleLogin"
+        className={Style.googleLogin}
         style={{ width: "1000px" }}
         render={renderProps => (
 
