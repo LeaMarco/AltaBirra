@@ -157,8 +157,6 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
   };
 
   //////////////////////////////fin de logica de google///////////////////////////////////////////////////
-
-
   let btnFacebookSize = 1
   return (
     <div id={Style.login}>

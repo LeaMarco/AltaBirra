@@ -17,6 +17,7 @@ import Rate from "./components/Rate/Rate";
 import UserPanel from "./components/UserPanel/UserPanel";
 import BuyHistory from "./components/BuyHistory/BuyHistory";
 import SellHistory from "./components/SellHistory/SellHistory";
+import E_Unauthorized from "./components/E_Unauthorized/E_Unauthorized";
 
 function App() {
 
@@ -36,6 +37,7 @@ function App() {
       <Route exact path="/historialCompras" component={BuyHistory} />
       <Route exact path="/historialVentas" component={SellHistory} />
       <Route exact path="/calificar/:id" component={Rate} />
+      <Route exact path="/E_Unauthorized" component={E_Unauthorized} />
 
     </div>
   );

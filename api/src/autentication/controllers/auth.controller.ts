@@ -221,6 +221,7 @@ export const autoLogin = async (req: Request, res: Response) => {
             [uniqueSearchLabel]: uniqueSearchValue //siempre envia un solo dato unique, y poniendolo asi lo busca de forma correcta sea lo que sea
         }
     })
+    console.log(user)
     if (!user) return res.sendStatus(400)
     else return res.sendStatus(200)
 }
