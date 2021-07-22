@@ -57,15 +57,25 @@
     margin:5px;
 }
 .reviewsTitle{
+    width: 100px;
     margin-top:1rem;
     margin-bottom: 1rem;
-    background-color: #F49E51;
+    color: #F49E51;
+    font-size: 30px;
+    font-weight: 500;
     border-radius: 10px;
 }
-.reviews{
+/* .reviews{
     margin-top: 0;
     display:flex;
     flex-direction: column;
+} */
+.reviews{
+    margin-top: 20px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 .ratingTotal{
     padding-top: 5px;
@@ -78,10 +88,9 @@
     margin-top: 1;
 }
 .ratingStars{
-    background-color: #69C3C4;
     border-radius: 10px;
     margin-top: -10px;
-    min-width: 200px;
+    min-width: 150px;
     text-align: center;
 }
 .beerDescription{
@@ -94,6 +103,7 @@
     border-top-right-radius: 66px;
     border-bottom-right-radius: 66px;
 }
+
 
 .fav {
     border: none;
@@ -268,8 +278,12 @@
     height:4.2rem;
 }
 .ratingComment{
+    display:flex;
+    flex-wrap:wrap;
     text-decoration: none;
     color:black;
+    height:100px;
+    width:620px;
 }
 .ratingStars{
     color:black;

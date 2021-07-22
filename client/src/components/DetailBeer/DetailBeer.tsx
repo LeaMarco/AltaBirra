@@ -76,8 +76,8 @@ export default function DetailBeer() {
 						<div className={Style.reviews}>
 							<div className={Style.reviewsTitle}>{info.review.length > 0 ? (<p>Reviews</p>) : null}</div>
 							<div className={Style.ratingComment}>
-								{info.review.slice(0, 6).map((comment) => (
-									<p>{"⭐".repeat(comment.rating)}<br />{comment.comment}</p>))
+								{info.review.slice(0, 5).map((comment) => (
+									<p>{"⭐".repeat(comment.rating)}<br /><p>{comment.comment}</p></p>))
 								}</div>
 							<div className={Style.ratingTotal}>
 								<p className={Style.ratingStars}><p>Rating Total</p>{"⭐".repeat(info.rating)}</p>
