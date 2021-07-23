@@ -14,7 +14,7 @@ export function Compra() {
     const carts: any = useSelector((state: RootState) => state.cart);
     const [merpastate, setMerpa] = useState("");
     useScript(merpastate)
-    
+
     useEffect(() => {
         dispatch(getCart(id));
     }, []);

@@ -20,6 +20,7 @@ export default function EditPost() {
   const [generic, setGeneric] = useState([]);
   const [specific, setSpecific] = useState([]);
   const [image, setImage] = useState("");
+  console.log(image, "IMAGE STATE")
   const info: any = useSelector((state: RootState) => state.detailPosts);
   const [estado, setEstado] = useState({ "checked": true });
 
@@ -46,7 +47,7 @@ export default function EditPost() {
   useEffect(() => {
     dispatch(getDetail(id));
     getBeerTypes();
-  }, [dispatch])
+  }, [dispatch, image])
 
   async function imageHandler(event) {
     const file = event.target.files[0];
@@ -56,8 +57,6 @@ export default function EditPost() {
     let response = await axios.post("http://localhost:3001/upload", formData)
     setImage('http://localhost:3001/upload/' + response.data.filename);
   }
-
-
 
 
   let dataPrevia
@@ -98,8 +97,8 @@ export default function EditPost() {
   }, [info])
 
   //hacer destructuring de generic y specific
-  async function despachadora(data, postId) {
-    let save = await dispatch(editPost(transformEdit(data, postId, info.image)))
+  async function despachadora(data, postId, image) {
+    let save = await dispatch(editPost(transformEdit(data, postId, image)))
     if (save["status"] === 200) {
       MySwal.fire({
         position: 'center',
@@ -121,7 +120,7 @@ export default function EditPost() {
   }
 
   const { register, handleSubmit, reset, watch } = useForm({ defaultValues: dataPrevia });
-  const onSubmit: SubmitHandler<PostValues> = (data) => { despachadora(data, id); reset() };
+  const onSubmit: SubmitHandler<PostValues> = (data) => { despachadora(data, id, image); reset() };
 
   // useEffect(() => {
   //   dispatch(getDetail(id));
@@ -137,7 +136,7 @@ export default function EditPost() {
             <h3 id={styles["beerh2"]}> Beer</h3>
             <div className={styles.row1}>
               <div className={styles.container} id={styles["name"]}>
-                <input {...register("infoPost.title")} autoComplete="off" className={styles.input} required/>
+                <input {...register("infoPost.title")} autoComplete="off" className={styles.input} required />
                 <label>Beer Name *</label>
                 <span className={styles.focusBorder}></span>
               </div>
@@ -214,7 +213,7 @@ export default function EditPost() {
               </div>
             </div>
             <div className={styles.container}>
-              <textarea {...register("infoPost.description")} autoComplete="off" className={styles.input}  required/>
+              <textarea {...register("infoPost.description")} autoComplete="off" className={styles.input} required />
               <label>Description *</label>
               <span className={styles.focusBorder}></span>
             </div>
@@ -223,7 +222,7 @@ export default function EditPost() {
             <h3>Countables</h3>
             <div className={styles.countablerow}>
               <div className={styles.container}>
-                <input {...register("countable.price")} type="number" min="1" autoComplete="off" step=".01" className={styles.input}  required/>
+                <input {...register("countable.price")} type="number" min="1" autoComplete="off" step=".01" className={styles.input} required />
                 <label>Price *</label>
                 <span className={styles.focusBorder}></span>
               </div>
@@ -247,18 +246,15 @@ export default function EditPost() {
             <input className={styles.postFormSubmitButton} type="submit" />
           </div>
           <div className={styles.uploadGroup} >
-            <label htmlFor="file" > Cambiar imagen:</label>
-            <input 
+            <label htmlFor="file" > Cambiar imagen: &nbsp;</label>
+            <input
               type="file" id="file"
               accept=".jpg"
               multiple
               onChange={imageHandler}
             />
-            <button className={styles.postUploadButton}
-            >Subir!</button>
           </div>
         </form>
-
       </div>
       <div><Preview image={image} info={watch()} /></div>
     </div>
