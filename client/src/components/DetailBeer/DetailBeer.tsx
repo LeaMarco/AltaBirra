@@ -24,7 +24,6 @@ export default function DetailBeer() {
 	const dispatch = useDispatch();
 	const { id }: any = useParams();
 	const info: any = useSelector((state: RootState) => state.detailPosts);
-	console.log(info, "INFOOO")
 	const favorites: Favorites[] = useSelector((state: RootState) => state.favoritePosts);
 	const [isFavorite, setIsFavorite] = useState<boolean>(favorites.some(post => post.post.id === Number(id)));
 	const [cantidad, setCantidad] = useState(1);
@@ -68,10 +67,11 @@ export default function DetailBeer() {
 							{info.review.length > 0 ? (<button onClick={() => setModalIsOpen(true)}>Ver mas Reviews</button>) : null}
 							<Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)}>
 								<p>Reviews</p>
-
-								{info.review.map((comment) => (
-									<p>{"⭐".repeat(comment.rating)}<br /><p>{comment.comment}</p></p>))
-								}
+								<div className={Style.modalContent}>
+									{info.review.map((comment) => (
+										<p>{"⭐".repeat(comment.rating)}<br /><p>{comment.comment}</p></p>))
+									}
+								</div>
 								<button onClick={() => setModalIsOpen(false)}>Cerrar</button>
 							</Modal>
 

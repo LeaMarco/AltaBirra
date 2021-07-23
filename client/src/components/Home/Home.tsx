@@ -9,7 +9,6 @@ const Home = () => {
   return (
     <div className="Beers-container">
       {/* <button onClick={() => CreateManyPost(100)}> CREAR</button> */}
-
       <Beers />
       <BeersVot />
       <BeersNew />

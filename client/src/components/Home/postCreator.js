@@ -27,7 +27,7 @@ export default async (amount) => {
         "https://mms.businesswire.com/media/20191204005216/es/760413/5/WW-La-Rubia-12oz-bottle-6-pack-plus-1-3D-layered-102919.jpg",
         "http://4.bp.blogspot.com/-mjO2LSepfvs/VRGugOUmHII/AAAAAAAAHlY/omrj-CAf0aw/s1600/f1219-califa-rubia-p.jpg",
         "https://vgb.com.ar/tienda/wp-content/uploads/2020/05/Brunnen-Lager-Bier-Cerveza-Artesanal-Rubia-365-cc-2.jpg?v1620308524",
-        "https://lh3.googleusercontent.com/proxy/VW2m6TE-sWn_T3go_Ux7Gi4fKayyOJJXVMz2mjiDF8ZUZRQ-Vd9ZHdgDFzucIHO-h_mMhazKKENFl1E6TUgXvy8foGsFOdZT5vdFX95J4BR-oSALXD1jv8dXB91pzfTA",
+        "http://cdn.shopify.com/s/files/1/0895/3560/products/Blonde_Can_Rebrand_4x_6c8e3b4a-28bf-4dd5-98aa-04750e041339_1024x.png?v=1606856086",
         "https://sentipatagonia.com.ar/wp-content/uploads/2020/09/PHOTO-2020-08-21-13-12-57.jpg",
     ]
     let CERVEZAS_NEGRAS = [

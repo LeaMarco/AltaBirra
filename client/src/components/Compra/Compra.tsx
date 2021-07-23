@@ -35,7 +35,6 @@ export function Compra() {
                     <p>¡No hay items para pagar!</p>
                 )
                 }
-                
             </div>
             <div id="button-checkout"></div>
             <Link to={`/cart/${id}`}>Volver para atras</Link>
