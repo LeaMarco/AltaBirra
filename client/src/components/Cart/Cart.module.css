@@ -1,5 +1,6 @@
 .cartContainer{
-    width:80%;
+    margin-top: 5rem;
+    width:80rem;
     display:flex;
     flex-direction: column;
     align-items:center;
@@ -11,22 +12,29 @@
     text-decoration: none;
     color:white;
     font-size: 30px;
-    width: 10rem;
-    margin-top: 10px;
-    background-color: green;
+    width: 14rem;
+    background-color:#69c4a1;
+    border: none;
+    border-radius: 11px;
 }
 
-
 .deleteButton{
-    border: 1px solid red;
-    width:10rem;
-    height:2rem;
+    border: none;
+    width:14rem;
     color: white;
-    background-color:red;
-    font-size: bold;
+    background-color:#F65454;
+    font-size: 30px;
     cursor:pointer;
+    border-radius: 11px;
 }
 
 .cart{
-    width: 80%
+    width: 80rem;
+}
+.buttonscart{
+    margin-top: -10px;
+    display: flex;
+    justify-content:space-between;
+    width:480px;
+    margin-bottom: 10px;
 }

@@ -3,11 +3,11 @@
     justify-content:space-between;
     padding:10px;
     align-items:center;
-    background:#69C3C4;
+    background: linear-gradient(180deg, #69C3C4 0%, rgba(105, 195, 196, 0.51) 100%);
     color:white;
     font-weight: bold;
     text-decoration: none;
-    width: 100%;
+    width: 95%;
     border-radius: 30px;
     margin:20px;
 }
@@ -37,10 +37,11 @@
     height: 100px;
 }
 
-.titleContainer button{
-    margin-top: 10px;
+.deletebutton{
+    margin-bottom: 50px;
     border:none;
     color:red;
+    font-size: 20px;
     font-weight:bold;
     cursor:pointer;
 }
@@ -59,9 +60,14 @@
 }
 
 .amount {
-    padding: 40px;
+    padding: px;
     padding-right: 50px;
     max-width: 150px;
-    font-size: 50px;
+    font-size: 40px;
     font-weight: 500;
+}
+
+.priceAndDelete{
+    display: flex;
+    flex-direction: column;
 }

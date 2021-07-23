@@ -39,7 +39,7 @@ function Cart() {
         despachadora(id)
         Swal.fire(
           '¡Borrado!',
-          'Se limpió tu carrito',
+          '¡Se limpió tu carrito!',
           'success'
         )
       }
@@ -59,8 +59,10 @@ function Cart() {
         )
         }
       </div>
-      <button className={styles.deleteButton} onClick={(e) => deleteConfirm(cartIdparsed)}> Limpiar carrito</button>
-      <Link className={styles.Link} to={`/compra/${id}`}>Comprar</Link>
+      <div className={styles.buttonscart}>
+        <button className={styles.deleteButton} onClick={(e) => deleteConfirm(cartIdparsed)}> Limpiar carrito</button>
+        <Link className={styles.Link} to={`/compra/${id}`}>Comprar</Link>
+      </div>
 
     </div >
   );
