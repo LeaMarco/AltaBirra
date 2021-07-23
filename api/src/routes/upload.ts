@@ -13,15 +13,15 @@ const db = knex(
         connection: {
             host: '127.0.0.1',
             user: 'postgres',
-            password: '193728',
-            database: 'beers',
+            password: 'Wycrd123',
+            database: 'image_upload', //crear tabla en beers y cambiar abajito
         },
     }
 );
 
 export interface MulterFile {
-    key: string // Available using `S3`.
-    path: string // Available using `DiskStorage`.
+    key: string
+    path: string
     mimetype: string
     originalname: string
     size: number
@@ -43,7 +43,7 @@ const imageUpload = multer({
     ),
 });
 router.post('/',  imageUpload.single('image'), (req: any, res: Response) => {
-    console.log(req.file, "REQ FILEE")
+    // console.log(req.file, "REQ FILEE")
     const { filename, mimetype, size } = req.file;
     const filepath = req.file?.path;
     db.insert({
@@ -52,14 +52,14 @@ router.post('/',  imageUpload.single('image'), (req: any, res: Response) => {
             mimetype,
             size,
         })
-        .into('image_upload')
+        .into('image_files')
         .then(() => res.json({ success: true, filename }))
         .catch((error:any) => res.json({success: false,message: 'upload failed',stack: error.stack,}));
 });
 // Image Get Routes
 router.get('/:filename', (req, res) => {
     const { filename } = req.params;
-    db.select('*').from('image_upload').where({ filename }).then((images:any) => {
+    db.select('*').from('image_files').where({ filename }).then((images:any) => {
             if (images[0]) {
                 const dirname = path.resolve();
                 const fullfilepath = path.join(dirname,images[0].filepath);

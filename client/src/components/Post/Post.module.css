@@ -1,5 +1,5 @@
 .mainContainer{
-    height: 40rem;
+    height: 50rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -8,7 +8,7 @@
     display: flex;
     flex-direction: column;
     width: 40em;
-    height: 30rem;
+    height: 40rem;
     align-items: center;
     justify-content:center;
     text-align: center;
@@ -36,7 +36,7 @@ input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width
     background:rgb(92, 221, 135);
 }
 .postFormBeer{
-    margin-top: 100%;
+    margin-top: 70%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -133,8 +133,10 @@ input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width
 .countablerow{
     margin-top: 5px;
     display: flex;
+    align-content: center;
     flex-direction: row;
     flex-wrap: wrap;
+    align-self: center;
     width:29em;
 }
 

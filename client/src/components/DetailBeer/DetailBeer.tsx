@@ -65,13 +65,14 @@ export default function DetailBeer() {
 								<p className={Style.ratingStars}><p>Rating Total</p>{"⭐".repeat(info.rating)}</p>
 								{info.review.length > 0 ? (<p>{info.review.length} opiniones</p>) : null}
 							</div>
-							<button onClick={() => setModalIsOpen(true)}>Ver mas Reviews</button>
-							<Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)}>
+							{info.review.length > 0 ? (<button onClick={() => setModalIsOpen(true)}>Ver mas Reviews</button>) : null}
+							<Modal style={Style.modal} isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)}>
 								<p>Reviews</p>
-
-								{info.review.map((comment) => (
-									<p>{"⭐".repeat(comment.rating)}<br /><p>{comment.comment}</p></p>))
-								}
+								<div className={Style.modalContent}>
+									{info.review.map((comment) => (
+										<p>{"⭐".repeat(comment.rating)}<br /><p>{comment.comment}</p></p>))
+									}
+								</div>
 								<button onClick={() => setModalIsOpen(false)}>Cerrar</button>
 							</Modal>
 
