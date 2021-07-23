@@ -13,8 +13,8 @@ const db = knex(
         connection: {
             host: '127.0.0.1',
             user: 'postgres',
-            password: 'Wycrd123',
-            database: 'image_upload', //crear tabla en beers y cambiar abajito
+            password: '193728',
+            database: 'beers', //crear tabla en beers y cambiar abajito
         },
     }
 );
@@ -52,14 +52,14 @@ router.post('/',  imageUpload.single('image'), (req: any, res: Response) => {
             mimetype,
             size,
         })
-        .into('image_files')
+        .into('image_upload')
         .then(() => res.json({ success: true, filename }))
         .catch((error:any) => res.json({success: false,message: 'upload failed',stack: error.stack,}));
 });
 // Image Get Routes
 router.get('/:filename', (req, res) => {
     const { filename } = req.params;
-    db.select('*').from('image_files').where({ filename }).then((images:any) => {
+    db.select('*').from('image_upload').where({ filename }).then((images:any) => {
             if (images[0]) {
                 const dirname = path.resolve();
                 const fullfilepath = path.join(dirname,images[0].filepath);

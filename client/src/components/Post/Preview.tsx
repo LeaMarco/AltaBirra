@@ -20,16 +20,12 @@ interface Favorites {
 }
 
 export default function Preview({ info, image }) {
-	console.log(image, "IMAGENNN")
 	const dispatch = useDispatch();
 	const { id }: any = useParams();
 	const history = useHistory()
 	const MySwal = withReactContent(Swal)
 
 
-	useEffect(() => {
-		dispatch(getDetail(id))
-	}, [dispatch]);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();

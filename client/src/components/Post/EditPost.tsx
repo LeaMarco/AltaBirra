@@ -33,7 +33,6 @@ export default function EditPost() {
   };
 
 
-  // const usersPremium = useSelector((state) => state["usersPremium"]);
   const MySwal = withReactContent(Swal)
   const dispatch = useDispatch<Dispatch<any>>();
 
@@ -89,7 +88,6 @@ export default function EditPost() {
     };
   }
 
-  // if(info.beer) {info.countable.discount>0?setEstado(estado.checked=true):null}
 
 
   useEffect(() => {
@@ -121,11 +119,6 @@ export default function EditPost() {
 
   const { register, handleSubmit, reset, watch } = useForm({ defaultValues: dataPrevia });
   const onSubmit: SubmitHandler<PostValues> = (data) => { despachadora(data, id, image); reset() };
-
-  // useEffect(() => {
-  //   dispatch(getDetail(id));
-  //   getBeerTypes();
-  // },[onSubmit])
 
 
   return dataPrevia?.beer ? (
@@ -239,7 +232,7 @@ export default function EditPost() {
                   <span className={styles.focusBorder}></span>
                 </div>
                 <p>Fecha Expiracion del Descuento</p>
-                <input {...register("date")} type="date" />
+                <input {...register("countable.expireDate")} type="date" />
               </div> : <p>Sin oferta? ratón</p>}
           </div>
           <div className={styles.submitButton}>

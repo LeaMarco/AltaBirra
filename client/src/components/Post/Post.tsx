@@ -16,7 +16,6 @@ import axios from 'axios';
 
 //TIENE QUE TOMAR COMO PARAMETRO EL ID DEL POST QUE SE SELECCIONA Y RENDERIZAR EL COMPONENTE DETALLE PASANDOLE ESE ID.
 export default function EditPost() {
-  const { id }: any = useParams();
   const [generic, setGeneric] = useState([]);
   const [specific, setSpecific] = useState([]);
   const [estado, setEstado] = useState({ "checked": true });
@@ -31,7 +30,6 @@ export default function EditPost() {
   };
 
 
-  // const usersPremium = useSelector((state) => state["usersPremium"]);
   const MySwal = withReactContent(Swal)
   const dispatch = useDispatch<Dispatch<any>>();
 
@@ -43,7 +41,6 @@ export default function EditPost() {
 
 
   useEffect(() => {
-    dispatch(getDetail(id));
     getBeerTypes();
   }, [dispatch, image])
 
@@ -62,7 +59,6 @@ export default function EditPost() {
         showConfirmButton: false,
         timer: 1500,
       })
-      dispatch(getDetail(id))
     } else {
       MySwal.fire({
         position: 'center',
@@ -86,7 +82,6 @@ export default function EditPost() {
     const formData = new FormData()
     formData.append('image', file)
     let response = await axios.post("http://localhost:3001/upload", formData)
-    console.log(response.data, "DATA RESPONSE")
     setImage('http://localhost:3001/upload/' + response.data.filename);
   }
 
@@ -117,8 +112,6 @@ export default function EditPost() {
     }
   }
   const [dataPrevia, setDataPrevia] = useState(dataPrevie)
-
-  console.log(dataPrevia, "dataprevia")
 
   const { register, handleSubmit, reset, watch } = useForm({ defaultValues: dataPrevia });
   const onSubmit: SubmitHandler<PostValues> = (data) => { despachadora(data, dataPrevie.infoPost.image); reset() };

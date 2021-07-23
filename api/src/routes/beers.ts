@@ -65,11 +65,38 @@ router.get('/premium', async (req:Request, res:Response) => {
     }
 
   });
+
+
   
   if(premiumUsers.length === 0) return res.send('VACIO');
   else return res.json(premiumUsers);
 
 }) // cerrar funcion
+
+
+router.get('/premium', async (req:Request, res:Response) => {
+  var premiumUsers = await prisma.post.findMany({
+    where: {
+      user: {
+        is: { premium: true }
+      }
+    },
+    include: {
+      countable: true,
+      beer: true
+    }
+
+  });
+
+  
+  
+  if(premiumUsers.length === 0) return res.send('VACIO');
+  else return res.json(premiumUsers);
+
+}) // cerrar funcion
+
+
+
 
 
 

@@ -29,11 +29,11 @@ interface InfoPost {
 interface Countable {
   price: number;
   discount: number;
+  expireDate: Date;
 }
 
 
 router.put("/", async (req: Request, res: Response, next: NextFunction) => {
-  console.log(req.body.params, "soy los params")
   const {
     abv,
     og,
@@ -55,7 +55,12 @@ router.put("/", async (req: Request, res: Response, next: NextFunction) => {
     username,
   }: InfoPost = req.body.params.infoPost;
 
-  const { price, discount }: Countable = req.body.params.countable;
+  
+  const {
+    price,
+    discount,
+    expireDate
+  } : Countable = req.body.params.countable
 
   const postId: number = req.body.params.postId
   const user = await prisma.user.findUnique({ where: { username: username } });
@@ -98,7 +103,7 @@ router.put("/", async (req: Request, res: Response, next: NextFunction) => {
         create: {
           price,
           discount,
-          expireDate: new Date()
+          expireDate,
         }
       }
     },
