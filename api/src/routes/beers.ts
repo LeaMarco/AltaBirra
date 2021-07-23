@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { Prisma, PrismaClient } from "@prisma/client";
 import { NextFunction, Request, Response, Router } from "express";
 
 const router = Router();
@@ -14,6 +14,14 @@ interface Body {
   genericType: string;
   specificType: string;
 }
+
+interface OrderPosts {
+	createdAt?:  Prisma.SortOrder;
+	// review?: Prisma.SortOrder;
+	rating?: Prisma.SortOrder;
+}
+
+
 
 router.post("/", async (req: Request, res: Response, next: NextFunction) => {
   const {
@@ -53,7 +61,7 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
 // HECHO POR FACU: ruta creada para obtener las cervezas "Premium"
 
 router.get('/premium', async (req:Request, res:Response) => {
-  var premiumUsers = await prisma.post.findMany({
+  var premiumBeers = await prisma.post.findMany({
     where: {
       user: {
         is: { premium: true }
@@ -65,11 +73,45 @@ router.get('/premium', async (req:Request, res:Response) => {
     }
 
   });
-  
-  if(premiumUsers.length === 0) return res.send('VACIO');
-  else return res.json(premiumUsers);
-
+  if(premiumBeers.length === 0) return res.send('No hay cervezas premium');
+  else {let firstRandomBeer= Math.floor(Math.random() * (premiumBeers.length-6))
+  premiumBeers= premiumBeers.slice(firstRandomBeer, firstRandomBeer+5)
+   return res.json(premiumBeers);}
 }) // cerrar funcion
+
+
+
+
+router.get('/news', async (req:Request, res:Response) => {
+  let orderTemp: OrderPosts | undefined = {  createdAt: "desc"  }
+  
+  var newBeers = await prisma.post.findMany({
+    include: {
+      countable: true,
+      beer: true,
+    },
+    orderBy: orderTemp
+  });
+  newBeers= newBeers.slice(0, 5)
+   return res.json(newBeers);
+}) // cerrar funcion
+
+router.get('/ranked', async (req:Request, res:Response) => {
+  let orderTemp: OrderPosts | undefined = { review: { rating: "desc" } }
+  
+  var rankedBeers = await prisma.post.findMany({
+    include: {
+      countable: true,
+      beer: true,
+      review: true,
+    },
+    orderBy: orderTemp
+  });
+  rankedBeers= rankedBeers.slice(0, 5)
+   return res.json(rankedBeers);
+}) // cerrar funcion
+
+
 
 
 
