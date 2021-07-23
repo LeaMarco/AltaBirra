@@ -242,7 +242,7 @@ export default function EditPost() {
           <div className={styles.submitButton}>
             <input className={styles.postFormSubmitButton} type="submit" />
           </div>
-          <div className="form-group" >
+          <div className={styles.uploadGroup} >
             <label htmlFor="file">Subir imagen:</label>
             <input
               type="file" id="file"
@@ -250,7 +250,7 @@ export default function EditPost() {
               multiple
               onChange={imageHandler}
             />
-            <button
+            <button className={styles.postUploadButton}
             >Subir!</button>
           </div>
         </form>
