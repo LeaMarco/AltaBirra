@@ -90,37 +90,10 @@ export default function EditPost() {
     setImage('http://localhost:3001/upload/' + response.data.filename);
   }
 
-  let dataPrevie = {
-    beer: {
-      abv: "99",
-      dryHop: false,
-      genericType: "TIPO GENÉRICO?",
-      ibu: "88",
-      volume: "777",
-      og: "66",
-      specificType: "TIPO ESPECIFICO?",
-      calories: "555",
-    },
-    infoPost: {
-      title: "NOMBRE DE TU CERVEZA",
-      description: "Completá acá con tu descripción",
-      image: image ? image : "https://i.imgur.com/FsGTu6Q.png",
-      stock: 1,
-      shipping: false,
-      visibility: true,
-      username: "testUser",
-    },
-    countable: {
-      price: "999",
-      discount: "5",
-      expireDate: Date.now(),
-    }
-  }
-  const [dataPrevia, setDataPrevia] = useState(dataPrevie)
+ 
 
-  console.log(dataPrevia, "dataprevia")
 
-  const { register, handleSubmit, reset, watch } = useForm({ defaultValues: dataPrevia });
+  const { register, handleSubmit, reset, watch } = useForm({});
   const onSubmit: SubmitHandler<PostValues> = (data) => { despachadora(data); reset() };
 
 
@@ -133,12 +106,12 @@ export default function EditPost() {
             <h3 id={styles["beerh2"]}> Beer</h3>
             <div className={styles.row1}>
               <div className={styles.container} id={styles["name"]}>
-                <input {...register("infoPost.title")} autoComplete="off" className={styles.input} />
+                <input {...register("infoPost.title")} autoComplete="off" className={styles.input} required />
                 <label>Beer Name *</label>
                 <span className={styles.focusBorder}></span>
               </div>
               <div className={styles.container}>
-                <input {...register("beer.abv")} type="number" min="1" autoComplete="off" className={styles.input} />
+                <input {...register("beer.abv")} type="number" min="1" autoComplete="off" className={styles.input}  required />
                 <label>Abv *</label>
                 <span className={styles.focusBorder}></span>
               </div>
@@ -150,7 +123,7 @@ export default function EditPost() {
                 <span className={styles.focusBorder}></span>
               </div>
               <div className={styles.container}>
-                <input {...register("beer.ibu")} type="number" min="1" autoComplete="off" className={styles.input} />
+                <input {...register("beer.ibu")} type="number" min="1" autoComplete="off" className={styles.input}  required />
                 <label>IBU *</label>
                 <span className={styles.focusBorder}></span>
               </div>
@@ -162,7 +135,7 @@ export default function EditPost() {
                 <span className={styles.focusBorder}></span>
               </div>
               <div className={styles.container}>
-                <input {...register("beer.volume")} type="number" min="1" autoComplete="off" className={styles.input} />
+                <input {...register("beer.volume")} type="number" min="1" autoComplete="off" className={styles.input}  required />
                 <label>Volume *</label>
                 <span className={styles.focusBorder}></span>
               </div>
@@ -170,7 +143,7 @@ export default function EditPost() {
             <div className={styles.row4}>
               <div className={styles.genericType}>
                 <label>Generic Type:  </label>
-                <select {...register("beer.genericType")} >
+                <select {...register("beer.genericType")}  required >
                   {generic && generic.map(value => (
                     <option key={value} value={value}>
                       {value}
@@ -180,7 +153,7 @@ export default function EditPost() {
               </div>
               <div className={styles.specificType}>
                 <label>Specific Type:  </label>
-                <select {...register("beer.specificType")}>
+                <select {...register("beer.specificType")}  required >
                   {specific && specific.map(value => (
                     <option key={value} value={value}>
                       {value}
@@ -198,7 +171,7 @@ export default function EditPost() {
             <h3>Post Info</h3>
             <div className={styles.postrow1}>
               <div className={styles.container}>
-                <input {...register("infoPost.stock")} type="number" min="1" autoComplete="off" className={styles.input} />
+                <input {...register("infoPost.stock")} type="number" min="1" autoComplete="off" className={styles.input}  required />
                 <label>Stock *</label>
                 <span className={styles.focusBorder}></span>
               </div>
@@ -210,7 +183,7 @@ export default function EditPost() {
               </div>
             </div>
             <div className={styles.container}>
-              <textarea {...register("infoPost.description")} autoComplete="off" className={styles.input} />
+              <textarea {...register("infoPost.description")} autoComplete="off" className={styles.input}  required />
               <label>Description *</label>
               <span className={styles.focusBorder}></span>
             </div>
@@ -219,7 +192,7 @@ export default function EditPost() {
             <h3>Countables</h3>
             <div className={styles.countablerow}>
               <div className={styles.container}>
-                <input {...register("countable.price")} type="number" min="1" autoComplete="off" step=".01" className={styles.input} />
+                <input {...register("countable.price")} type="number" min="1" autoComplete="off" step=".01" className={styles.input}  required />
                 <label>Price *</label>
                 <span className={styles.focusBorder}></span>
               </div>
@@ -232,28 +205,25 @@ export default function EditPost() {
               <div>
                 <div className={styles.container}>
                   <input {...register("countable.discount")} type="number" min="0" autoComplete="off" className={styles.input} />
-                  <label>Discount *</label>
+                  <label>Discount</label>
                   <span className={styles.focusBorder}></span>
                 </div>
                 <p>Fecha Expiracion del Descuento</p>
                 <input {...register("countable.expireDate")} type="date" />
               </div> : <p>Sin oferta? ratón</p>}
           </div>
-          <div className={styles.submitButton}>
-            <input className={styles.postFormSubmitButton} type="submit" />
-          </div>
           <div className="form-group" >
             <label htmlFor="file">Upload File:</label>
             <input
-              className="form-control-file mb-3"
+            className={styles.imageInput}
               type="file" id="file"
               accept=".jpg"
               multiple
               onChange={imageHandler}
             />
-            <button
-              className="btn btn-primary mt-3"
-            >Upload</button>
+          </div>
+          <div className={styles.submitButton}>
+            <input className={styles.postFormSubmitButton} type="submit" />
           </div>
         </form>
 

@@ -12,8 +12,6 @@ const Beers = () => {
   }, [dispatch]);
 
   const usersPremium = useSelector((state) => state["usersPremium"]);
- console.log(usersPremium, "user premium")
-  const firstRandomBeer= Math.ceil(Math.random()*6)
   
   return (
     <div className="containerBeersPremium">
@@ -21,7 +19,7 @@ const Beers = () => {
       <div className="beers">
       {
         typeof usersPremium === "object" 
-        ? usersPremium.slice(firstRandomBeer, firstRandomBeer+5).map((userPremium) => (
+        ? usersPremium.map((userPremium) => (
           
 
           <Beer
