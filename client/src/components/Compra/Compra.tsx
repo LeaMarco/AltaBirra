@@ -25,16 +25,17 @@ export function Compra() {
     return (
         <div className={style.compraContainer}>
             <div className={style.compras}>
-                {Array.isArray(carts) ? (
+                {Array.isArray(carts) && carts.length > 0 ? (
                     carts.map((post) => (
                         <div className={style.compra}>
                             <PostsCompra username={post.cart?.userId.username} cartId={id} postId={post.post.id} postTitle={post.post.title} description={post.post.description} amount={post.amount} countable={post.post.countable} />
                         </div>
                     ))
                 ) : (
-                    <p>No hay posts</p>
+                    <p>¡No hay items para pagar!</p>
                 )
                 }
+                
             </div>
             <div id="button-checkout"></div>
             <Link to={`/cart/${id}`}>Volver para atras</Link>

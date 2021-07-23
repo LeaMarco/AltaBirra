@@ -58,7 +58,7 @@ export default function EditPost() {
       MySwal.fire({
         position: 'center',
         icon: 'success',
-        title: 'Post modificado con Exito!',
+        title: 'Post creado con Exito!',
         showConfirmButton: false,
         timer: 1500,
       })
@@ -67,7 +67,7 @@ export default function EditPost() {
       MySwal.fire({
         position: 'center',
         icon: 'error',
-        title: 'No se ha podido modificar el Post :( Intenta nuevamente!',
+        title: 'No se ha podido crear el Post :( Intenta nuevamente!',
         showConfirmButton: false,
         timer: 1500,
       })
@@ -239,21 +239,18 @@ export default function EditPost() {
                 <input {...register("countable.expireDate")} type="date" />
               </div> : <p>Sin oferta? ratón</p>}
           </div>
-          <div className={styles.submitButton}>
-            <input className={styles.postFormSubmitButton} type="submit" />
-          </div>
-          <div className="form-group" >
+          <div className={styles.imageUpload}>
             <label htmlFor="file">Upload File:</label>
             <input
-              className="form-control-file mb-3"
+              className={styles.imageUploadButton}
               type="file" id="file"
               accept=".jpg"
               multiple
               onChange={imageHandler}
             />
-            <button
-              className="btn btn-primary mt-3"
-            >Upload</button>
+          </div>
+          <div className={styles.submitButton}>
+            <input className={styles.postFormSubmitButton} type="submit" />
           </div>
         </form>
 

@@ -12,7 +12,8 @@
     text-decoration: none;
     color:white;
     font-size: 30px;
-    width: 14rem;
+    width: 16rem;
+    padding:5px;
     background-color:#69c4a1;
     border: none;
     border-radius: 11px;
@@ -20,12 +21,14 @@
 
 .deleteButton{
     border: none;
+    padding:5px;
     width:14rem;
     color: white;
     background-color:#F65454;
     font-size: 30px;
     cursor:pointer;
     border-radius: 11px;
+    margin-right: 10px;
 }
 
 .cart{
@@ -37,4 +40,10 @@
     justify-content:space-between;
     width:480px;
     margin-bottom: 10px;
+}
+
+.emptyCart{
+    margin-top: 50px;
+    height: 10rem;
+    font-size: 50px;
 }
