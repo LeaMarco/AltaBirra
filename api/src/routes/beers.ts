@@ -96,20 +96,20 @@ router.get('/news', async (req:Request, res:Response) => {
    return res.json(newBeers);
 }) // cerrar funcion
 
-// router.get('/ranked', async (req:Request, res:Response) => {
-//   let orderTemp: OrderPosts | undefined = { review: { rating: "desc" } }
+router.get('/ranked', async (req:Request, res:Response) => {
+  let orderTemp: OrderPosts | undefined = { rating: "desc" }
   
-//   var rankedBeers = await prisma.post.findMany({
-//     include: {
-//       countable: true,
-//       beer: true,
-//       review: true,
-//     },
-//     orderBy: orderTemp
-//   });
-//   rankedBeers= rankedBeers.slice(0, 5)
-//    return res.json(rankedBeers);
-// }) // cerrar funcion
+  var rankedBeers = await prisma.post.findMany({
+    include: {
+      countable: true,
+      beer: true,
+      review: true,
+    },
+    orderBy: orderTemp
+  });
+  rankedBeers= rankedBeers.slice(0, 5)
+   return res.json(rankedBeers);
+}) // cerrar funcion
 
 
 router.get('/premium', async (req:Request, res:Response) => {
