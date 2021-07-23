@@ -30,3 +30,9 @@
 .cart{
     width: 80%
 }
+
+.emptyCart{
+    margin-top: 50px;
+    height: 10rem;
+    font-size: 50px;
+}
