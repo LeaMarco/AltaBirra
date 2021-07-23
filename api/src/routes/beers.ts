@@ -96,20 +96,45 @@ router.get('/news', async (req:Request, res:Response) => {
    return res.json(newBeers);
 }) // cerrar funcion
 
-router.get('/ranked', async (req:Request, res:Response) => {
-  let orderTemp: OrderPosts | undefined = { review: { rating: "desc" } }
+// router.get('/ranked', async (req:Request, res:Response) => {
+//   let orderTemp: OrderPosts | undefined = { review: { rating: "desc" } }
   
-  var rankedBeers = await prisma.post.findMany({
+//   var rankedBeers = await prisma.post.findMany({
+//     include: {
+//       countable: true,
+//       beer: true,
+//       review: true,
+//     },
+//     orderBy: orderTemp
+//   });
+//   rankedBeers= rankedBeers.slice(0, 5)
+//    return res.json(rankedBeers);
+// }) // cerrar funcion
+
+
+router.get('/premium', async (req:Request, res:Response) => {
+  var premiumUsers = await prisma.post.findMany({
+    where: {
+      user: {
+        is: { premium: true }
+      }
+    },
     include: {
       countable: true,
-      beer: true,
-      review: true,
-    },
-    orderBy: orderTemp
+      beer: true
+    }
+
   });
-  rankedBeers= rankedBeers.slice(0, 5)
-   return res.json(rankedBeers);
+
+  
+  
+  if(premiumUsers.length === 0) return res.send('VACIO');
+  else return res.json(premiumUsers);
+
 }) // cerrar funcion
+
+
+
 
 
 

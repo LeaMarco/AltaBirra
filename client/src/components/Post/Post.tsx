@@ -16,7 +16,6 @@ import axios from 'axios';
 
 //TIENE QUE TOMAR COMO PARAMETRO EL ID DEL POST QUE SE SELECCIONA Y RENDERIZAR EL COMPONENTE DETALLE PASANDOLE ESE ID.
 export default function EditPost() {
-  const { id }: any = useParams();
   const [generic, setGeneric] = useState([]);
   const [specific, setSpecific] = useState([]);
   const [estado, setEstado] = useState({ "checked": true });
@@ -31,7 +30,6 @@ export default function EditPost() {
   };
 
 
-  // const usersPremium = useSelector((state) => state["usersPremium"]);
   const MySwal = withReactContent(Swal)
   const dispatch = useDispatch<Dispatch<any>>();
 
@@ -43,7 +41,6 @@ export default function EditPost() {
 
 
   useEffect(() => {
-    dispatch(getDetail(id));
     getBeerTypes();
   }, [dispatch, image])
 
@@ -52,22 +49,21 @@ export default function EditPost() {
 
 
   //hacer destructuring de generic y specific
-  async function despachadora(data) {
+  async function despachadora(data, image) {
     let save = await dispatch(createPost(transformer(data, image)))
     if (save["status"] === 200) {
       MySwal.fire({
         position: 'center',
         icon: 'success',
-        title: 'Post modificado con Exito!',
+        title: '¡Post creado con Éxito!',
         showConfirmButton: false,
         timer: 1500,
       })
-      dispatch(getDetail(id))
     } else {
       MySwal.fire({
         position: 'center',
         icon: 'error',
-        title: 'No se ha podido modificar el Post :( Intenta nuevamente!',
+        title: 'No se ha podido crear el Post :( Intenta nuevamente!',
         showConfirmButton: false,
         timer: 1500,
       })
@@ -75,7 +71,6 @@ export default function EditPost() {
   }
   //image
   const [file, setFile] = useState();
-  console.log(file, "fileeeeeeee rocky")
 
   const handleFileChange = (event) => {
     setFile(event.target.files);
@@ -94,7 +89,7 @@ export default function EditPost() {
 
 
   const { register, handleSubmit, reset, watch } = useForm({});
-  const onSubmit: SubmitHandler<PostValues> = (data) => { despachadora(data); reset() };
+  const onSubmit: SubmitHandler<PostValues> = (data) => { despachadora(data, image); reset() };
 
 
   return (
@@ -111,7 +106,7 @@ export default function EditPost() {
                 <span className={styles.focusBorder}></span>
               </div>
               <div className={styles.container}>
-                <input {...register("beer.abv")} type="number" min="1" autoComplete="off" className={styles.input}  required />
+                <input {...register("beer.abv")} type="number" min="1" autoComplete="off" className={styles.input} required />
                 <label>Abv *</label>
                 <span className={styles.focusBorder}></span>
               </div>
@@ -123,7 +118,7 @@ export default function EditPost() {
                 <span className={styles.focusBorder}></span>
               </div>
               <div className={styles.container}>
-                <input {...register("beer.ibu")} type="number" min="1" autoComplete="off" className={styles.input}  required />
+                <input {...register("beer.ibu")} type="number" min="1" autoComplete="off" className={styles.input} required />
                 <label>IBU *</label>
                 <span className={styles.focusBorder}></span>
               </div>
@@ -135,7 +130,7 @@ export default function EditPost() {
                 <span className={styles.focusBorder}></span>
               </div>
               <div className={styles.container}>
-                <input {...register("beer.volume")} type="number" min="1" autoComplete="off" className={styles.input}  required />
+                <input {...register("beer.volume")} type="number" min="1" autoComplete="off" className={styles.input} required />
                 <label>Volume *</label>
                 <span className={styles.focusBorder}></span>
               </div>
@@ -183,7 +178,7 @@ export default function EditPost() {
               </div>
             </div>
             <div className={styles.container}>
-              <textarea {...register("infoPost.description")} autoComplete="off" className={styles.input}  required />
+              <textarea {...register("infoPost.description")} autoComplete="off" className={styles.input} required />
               <label>Description *</label>
               <span className={styles.focusBorder}></span>
             </div>
@@ -192,7 +187,7 @@ export default function EditPost() {
             <h3>Countables</h3>
             <div className={styles.countablerow}>
               <div className={styles.container}>
-                <input {...register("countable.price")} type="number" min="1" autoComplete="off" step=".01" className={styles.input}  required />
+                <input {...register("countable.price")} type="number" min="1" autoComplete="off" step=".01" className={styles.input} required />
                 <label>Price *</label>
                 <span className={styles.focusBorder}></span>
               </div>
@@ -212,7 +207,7 @@ export default function EditPost() {
                 <input {...register("countable.expireDate")} type="date" />
               </div> : <p>Sin oferta? ratón</p>}
           </div>
-          <div className="form-group" >
+          <div >
             <label htmlFor="file">Upload File:</label>
             <input
             className={styles.imageInput}
@@ -227,9 +222,9 @@ export default function EditPost() {
           </div>
         </form>
 
-      </div>
+      </div >
       <div><Preview image={image} info={watch()} /></div>
-    </div>
+    </div >
   )
 }
 

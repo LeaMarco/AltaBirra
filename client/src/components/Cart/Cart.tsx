@@ -39,7 +39,7 @@ function Cart() {
         despachadora(id)
         Swal.fire(
           '¡Borrado!',
-          'Se limpió tu carrito',
+          '¡Se limpió tu carrito!',
           'success'
         )
       }
@@ -50,18 +50,20 @@ function Cart() {
     <div className={styles.cartContainer}>
       {/* <div id="button-checkout"></div> */}
       <div className={styles.cart}>
-        {Array.isArray(carts) ? (
+        {Array.isArray(carts) && carts.length > 0 ? (
           carts.map((post) => (
             <PostinCart username={post.cart?.userId.username} cartId={id} postId={post.post.id} postTitle={post.post.title} description={post.post.description} amount={post.amount} countable={post.post.countable} />
           ))
         ) : (
-          <p>No hay posts</p>
+          <p className={styles.emptyCart}>¡Mi copa esta vacia y tu carrito también!</p>
         )
         }
       </div>
-      <button className={styles.deleteButton} onClick={(e) => deleteConfirm(cartIdparsed)}> Limpiar carrito</button>
-      <Link className={styles.Link} to={`/compra/${id}`}>Comprar</Link>
-
+      {Array.isArray(carts) && carts.length > 0 ? (
+        <div>
+          <button className={styles.deleteButton} onClick={(e) => deleteConfirm(cartIdparsed)}> Limpiar carrito</button>
+          <Link className={styles.Link} to={`/compra/${id}`}>Comprar</Link>
+        </div>) : null}
     </div >
   );
 }
