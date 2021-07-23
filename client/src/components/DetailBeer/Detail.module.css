@@ -288,3 +288,7 @@
 .ratingStars{
     color:black;
 }
+.modal{
+    background-color:red;
+    align-self: center;
+}
