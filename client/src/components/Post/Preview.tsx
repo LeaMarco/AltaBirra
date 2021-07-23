@@ -20,8 +20,7 @@ interface Favorites {
 }
 
 export default function Preview({ info, image }) {
-	console.log(info, "holaaaaaaaaaaaa")
-	console.log(image, "IMAGENEENENENEN")
+	console.log(image, "IMAGENNN")
 	const dispatch = useDispatch();
 	const { id }: any = useParams();
 	const history = useHistory()
@@ -46,7 +45,7 @@ export default function Preview({ info, image }) {
 		<div className={Style.detailViewContainer}>
 			<div className={Style.detailView}>
 				<div className={Style.imageSection}>
-					{image.length > 5 ? (<img src={image} alt="La imagen no esta disponible" />) : <img src="https://i.imgur.com/FsGTu6Q.png" alt="La imagen no esta disponible" />}
+					{image.length > 5 ? (<img src={image} alt="La imagen no esta disponible" />) : info.infoPost.image ? (<img src={info.infoPost.image} alt="La imagen no esta disponible" />) : <img src="https://i.imgur.com/FsGTu6Q.png" alt="La imagen no esta disponible" />}
 					<p className={Style.ratingStars}>{info.rating}⭐⭐⭐⭐</p>
 				</div>
 				<div className={Style.beerDescription}>
