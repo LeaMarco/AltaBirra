@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers/index";
-import Modal from 'react-modal';
+// import ReactModal from 'react-modal';
+import { Modal } from "./DetailModal.component";
 import {
 	getCart,
 	getDetail,
@@ -65,7 +66,7 @@ export default function DetailBeer() {
 								{info.review.length > 0 ? (<p>{info.review.length} opiniones</p>) : null}
 							</div>
 							{info.review.length > 0 ? (<button onClick={() => setModalIsOpen(true)}>Ver mas Reviews</button>) : null}
-							<Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)}>
+							<Modal isOpen={modalIsOpen} handleClose={() => setModalIsOpen(false)}>
 								<p>Reviews</p>
 								<div className={Style.modalContent}>
 									{info.review.map((comment) => (
