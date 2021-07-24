@@ -60,10 +60,12 @@ export default function Nav() {
 
   return (
     <div className={style.NavBar}>
-      <Link to="/">
-        <img src={logo} className={style.logo}></img>
-      </Link>
-      <div>
+      <div className={style.LogoContainer}>
+        <Link to="/">
+          <img src={logo} className={style.logo}></img>
+        </Link>
+      </div>
+      <div className={style.SearchBarContainer}>
         <div className={style.searchBar}>
           <form
             onSubmit={(event) => handleSubmit(event)}
@@ -106,7 +108,7 @@ export default function Nav() {
           </Link>
         </div>
       </div>
-      <div>
+      <div className={style.ButtonsNavBar}>
         {register ? (
           <div className={style.buttonsRight}>
             <Link
@@ -131,6 +133,10 @@ export default function Nav() {
               Salir
             </Link>
           </div>
+
+
+
+
         ) : (
           <div className={style.buttonsRight}>
             {/* <Link
@@ -145,7 +151,6 @@ export default function Nav() {
             </Modal>
             <button onClick={toogleFavorites} className={style.buttonFavorites}>
               <img className={style.buttonImg} src="https://image.flaticon.com/icons/png/512/126/126482.png" alt="Cart" />
-
             </button>
             <Link
               to="/cart/1" ////////FALTA METER EL ID DE USER
@@ -153,41 +158,30 @@ export default function Nav() {
             >
               <img className={style.buttonImg} src="https://image.flaticon.com/icons/png/512/3144/3144456.png" alt="Cart" />
             </Link>
-
-
-
             <Modal isOpen={isEnterOpen} handleClose={toogleEnter}>
               <Login closeModal={toogleEnter} toogleAuth={toogleAuth} />
             </Modal>
-
-
-
             <Modal isOpen={isRegisterOpen} handleClose={toogleRegister}>
               <Register closeModal={toogleRegister} toogleEnter={toogleEnter} toogleRegister={toogleRegister} />
             </Modal>
-
-            <div className={style.buttonsRight}>
-              <Link to="/panel">
-                <button className={style.buttonEnter}>Panel</button>
-              </Link>
-
-              {
-                isAuth ?
-                  <button className={style.buttonEnter} style={{ borderRadius: "30px", backgroundColor: "forestgreen" }} >
-                    Bienvenido!!
+            <Link to="/panel">
+              <button className={style.buttonEnter}>Panel</button>
+            </Link>
+            {
+              isAuth ?
+                <button className={style.buttonEnter} style={{ borderRadius: "30px", backgroundColor: "forestgreen" }} >
+                  Bienvenido!!
+                </button>
+                :
+                <div className={style.buttonsRightEnter}>
+                  <button className={style.buttonEnter} onClick={toogleEnter}>
+                    Entrar
                   </button>
-                  :
-                  <div className={style.buttonsRightEnter}>
-                    <button className={style.buttonEnter} onClick={toogleEnter}>
-                      Entrar
-                    </button>
-                    <button className={style.buttonEnter} onClick={toogleRegister}>
-                      Registrarme
-                    </button>
-                  </div>
-
-              }
-            </div>
+                  <button className={style.buttonEnter} onClick={toogleRegister}>
+                    Registrarme
+                  </button>
+                </div>
+            }
           </div>
         )}
       </div>

@@ -61,7 +61,6 @@
 
 .logo {
   height: 7vh;
-  margin-left: 5vw;
   margin-top: 3vh;
   filter: invert(100%);
 }
@@ -136,12 +135,6 @@
   transition: 400ms;
 }
 
-.buttonsRight {
-  margin-top: 3.5vh;
-  margin-right: 5vw;
-  display: flex;
-  justify-content: flex-end;
-}
 
 .autocomplete {
   visibility: hidden;
@@ -185,10 +178,31 @@
   color: grey;
 }
 
-
-.buttons{
-margin-left: -2.2rem;}
-
 .buttonsRightEnter{
   display: flex;
+  justify-content: space-around;
+}
+
+.SearchBarContainer{
+  display:flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-evenly;
+  min-width: 21.375rem;
+}
+
+.ButtonsNavBar{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* flex-wrap: wrap; */
+  justify-content: space-evenly;
+}
+
+.buttonsRight {
+  display: flex;
+  justify-content: flex-start;
+  align-content: center;
+  flex-wrap: wrap;
+  height: 3rem;
 }
