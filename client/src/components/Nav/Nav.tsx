@@ -109,6 +109,13 @@ export default function Nav() {
         </div>
       </div>
       <div className={style.ButtonsNavBar}>
+        <label className={style.label} htmlFor="toggle">&#9776;</label>
+        <input type="checkbox" id={style.toggle} />
+        <div className={style.manu}>
+          <span className={style.bar}>Opcion1</span>
+          <span className={style.bar}>Opcion2</span>
+          <span className={style.bar}>Opcion3</span>
+        </div>
         {register ? (
           <div className={style.buttonsRight}>
             <Link
