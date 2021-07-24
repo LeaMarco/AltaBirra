@@ -51,6 +51,7 @@ export default function EditPost() {
   //hacer destructuring de generic y specific
   async function despachadora(data, image) {
     let save = await dispatch(createPost(transformer(data, image)))
+
     if (save["status"] === 200) {
       MySwal.fire({
         position: 'center',
@@ -81,11 +82,11 @@ export default function EditPost() {
     event.preventDefault();
     const formData = new FormData()
     formData.append('image', file)
-    let response = await axios.post("http://localhost:3001/upload", formData)
-    setImage('http://localhost:3001/upload/' + response.data.filename);
+    let response = await axios.post(`${process.env.REACT_APP_HOST_BACKEND}/upload`, formData)
+    setImage(`${process.env.REACT_APP_HOST_BACKEND}/upload/` + response.data.filename);
   }
 
- 
+
 
 
   const { register, handleSubmit, reset, watch } = useForm({});
@@ -138,7 +139,7 @@ export default function EditPost() {
             <div className={styles.row4}>
               <div className={styles.genericType}>
                 <label>Generic Type:  </label>
-                <select {...register("beer.genericType")}  required >
+                <select {...register("beer.genericType")} required >
                   {generic && generic.map(value => (
                     <option key={value} value={value}>
                       {value}
@@ -148,7 +149,7 @@ export default function EditPost() {
               </div>
               <div className={styles.specificType}>
                 <label>Specific Type:  </label>
-                <select {...register("beer.specificType")}  required >
+                <select {...register("beer.specificType")} required >
                   {specific && specific.map(value => (
                     <option key={value} value={value}>
                       {value}
@@ -166,7 +167,7 @@ export default function EditPost() {
             <h3>Post Info</h3>
             <div className={styles.postrow1}>
               <div className={styles.container}>
-                <input {...register("infoPost.stock")} type="number" min="1" autoComplete="off" className={styles.input}  required />
+                <input {...register("infoPost.stock")} type="number" min="1" autoComplete="off" className={styles.input} required />
                 <label>Stock *</label>
                 <span className={styles.focusBorder}></span>
               </div>
@@ -210,7 +211,7 @@ export default function EditPost() {
           <div >
             <label htmlFor="file">Upload File:</label>
             <input
-            className={styles.imageInput}
+              className={styles.imageInput}
               type="file" id="file"
               accept=".jpg"
               multiple

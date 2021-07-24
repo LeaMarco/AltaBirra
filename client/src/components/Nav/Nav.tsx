@@ -9,13 +9,18 @@ import Login from "../Login/Login";
 import Register from "../Register/Register";
 import axios from "axios";
 import FavoritesTab from "../FavoriteTab/FavoriteTab";
+import { useEffect } from "react";
 import { ModalFavorites } from "../FavoriteTab/ModalFavorites/Modal.component";
+import { useLayoutEffect } from "react";
+import { validationHeadersGenerator } from "../../validationHeadersGenerator";
 
 interface Autocomplete {
   title: string;
 }
 
 export default function Nav() {
+
+
   const [isEnterOpen, setEnterOpen] = useState<boolean>(false);
   const toogleEnter = () => setEnterOpen(!isEnterOpen);
   const [isRegisterOpen, setRegisterOpen] = useState<boolean>(false);
@@ -33,6 +38,24 @@ export default function Nav() {
   const toogleAuth = () => setAuth(!isAuth);
 
 
+
+  useLayoutEffect(() => {
+
+    if (localStorage.length) {
+      axios.get(`${process.env.REACT_APP_HOST_BACKEND}/auth/autoLogin`, {
+        headers: validationHeadersGenerator()
+      }).then(e => {
+        toogleAuth()
+      }).catch(e => { console.log("ERROR EN AA", e) })
+    }
+
+  }
+    , [])
+  //////////////////Fin autenticacion automatica//////////////////////////////////////////
+
+
+
+
   function handleSubmit(event) {
     event.preventDefault();
     handleSearch(searchInput);
@@ -40,7 +63,7 @@ export default function Nav() {
 
   async function handleChange(event) {
     setSearchInput(event.target.value);
-    let temp = await axios.get("http://localhost:3001/autocomplete", {
+    let temp = await axios.get(`${process.env.REACT_APP_HOST_BACKEND}/autocomplete`, {
       params: { search: event.target.value },
     });
     setAutocomplete(temp.data);
@@ -154,27 +177,36 @@ export default function Nav() {
               <Register closeModal={toogleRegister} toogleEnter={toogleEnter} toogleRegister={toogleRegister} />
             </Modal>
 
-            {/* <div className={style.buttonsRight}> */}
-            <Link to="/panel" style={{ textDecoration: "none" }}>
-              <button className={style.buttonEnter}>Panel</button>
-            </Link>
 
-            {
-              isAuth ?
-                <button className={style.buttonEnter} style={{ borderRadius: "30px", backgroundColor: "forestgreen" }} >
-                  Bienvenido!!
-                </button>
-                :
-                <div className={style.buttonsRightEnter}>
-                  <button className={style.buttonEnter} onClick={toogleEnter}>
-                    Entrar
-                  </button>
-                  <button className={style.buttonEnter} onClick={toogleRegister}>
-                    Registrarme
-                  </button>
-                </div>
 
-            }
+            <div className={style.buttonsRight}>
+              <Link to="/panel">
+                <button className={style.buttonEnter}>Panel</button>
+              </Link>
+
+              {
+                isAuth ?
+                  <>
+                    <button className={style.buttonEnter} style={{ borderRadius: "30px", backgroundColor: "forestgreen" }} >
+                      Bienvenido!!
+                    </button>
+
+                    <button className={style.buttonEnter} style={{ borderRadius: "30px", backgroundColor: "red" }} onClick={() => { localStorage.clear(); toogleAuth() }} >
+                      Cerras cesion
+                    </button>
+                  </>
+                  :
+                  <div className={style.buttonsRightEnter}>
+                    <button className={style.buttonEnter} onClick={toogleEnter}>
+                      Entrar
+                    </button>
+                    <button className={style.buttonEnter} onClick={toogleRegister}>
+                      Registrarme
+                    </button>
+                  </div>
+
+              }
+            </div>
           </div>
           // </div>
         )}

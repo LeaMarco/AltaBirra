@@ -17,7 +17,7 @@ app.use('/', express.static(path.join(__dirname, '/')));
 
 app.use(
 	cors({
-		origin: "http://localhost:3000",
+		origin: process.env.HOST_FRONT,
 		credentials: false,
 		methods: ['GET', 'POST', 'OPTIONS', 'PUT', 'DELETE'],
 		allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept'],

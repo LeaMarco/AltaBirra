@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { Dispatch } from 'redux';
+import { validationHeadersGenerator } from '../validationHeadersGenerator';
+
 // import { GET_BEERS } from './typesName';
 //traermne mis actionsTypes
 
@@ -214,8 +216,6 @@ export interface SetQuerySearchAction {
 	payload: QueryTypes;
 }
 
-const URL = 'http://localhost:3001';
-
 export function searchedPosts(query) {
 	return async function (dispatch: Dispatch) {
 		const response = await axios.get<Post[]>(`${URL}/post`, { params: query })
@@ -264,11 +264,11 @@ export interface Actionrara {
 
 
 
-const url = 'http://localhost:3001/beers';
-const urlpost = 'http://localhost:3001/post';
-const urledit = 'http://localhost:3001/edit';
-const urlspecific = 'http://localhost:3001/specificTypes';
-const urlgeneric = 'http://localhost:3001/genericTypes';
+const url = `${process.env.REACT_APP_HOST_BACKEND}/beers`;
+const urlpost = `${process.env.REACT_APP_HOST_BACKEND}/post`;
+const urledit = `${process.env.REACT_APP_HOST_BACKEND}/edit`;
+const urlspecific = `${process.env.REACT_APP_HOST_BACKEND}/specificTypes`;
+const urlgeneric = `${process.env.REACT_APP_HOST_BACKEND}/genericTypes`;
 
 
 export const searchTypes = () => {
@@ -281,7 +281,9 @@ export const searchTypes = () => {
 
 export const createPost = (data) => {
 	return async (dispatch: Dispatch) => {
-		const response = await axios.post<PostValues>(urlpost, { params: data });
+		console.log("entre createpostasd")
+		console.log(validationHeadersGenerator())
+		const response = await axios.post<PostValues>(urlpost, { params: data }, { headers: validationHeadersGenerator() });
 		return response;
 		// dispatch<Actionrara>({
 		// 	type: ActionTypes.createPost,
@@ -323,7 +325,7 @@ export interface UsersPremiumAction {
 
 export const loadUsersPremium = () => {
 	return (dispatch: Dispatch) => {
-		return axios.get<UserPremium[]>('http://localhost:3001/beer/premium')
+		return axios.get<UserPremium[]>(`${process.env.REACT_APP_HOST_BACKEND}/beer/premium`)
 			.then(response => {
 				dispatch<UsersPremiumAction>({
 					type: ActionTypes.loadUserPremium,
@@ -337,9 +339,7 @@ export const loadUsersPremium = () => {
 // export type Action = FetchUsersAction;
 export type ActionUsersPremium = UsersPremiumAction;
 
-
-const urlDetail = 'http://localhost:3001/detailBeer'
-// const urlDetail = 'https://altabirra.herokuapp.com/detailBeer'
+const urlDetail = `${process.env.REACT_APP_HOST_BACKEND}/detailBeer`
 
 export const getDetail = (id) => {
 	return async (dispatch: Dispatch) => {
@@ -367,7 +367,7 @@ export interface delPostInCartAction {
 
 export const getCart = (id) => {
 	return async (dispatch: Dispatch) => {
-		const response = await axios.get<cart[]>(`http://localhost:3001/cart/${id}`)
+		const response = await axios.get<cart[]>(`${process.env.REACT_APP_HOST_BACKEND}/cart/${id}`)
 		dispatch<getCartAction>({
 			type: ActionTypes.getCart,
 			payload: response.data,
@@ -376,8 +376,7 @@ export const getCart = (id) => {
 }
 
 
-const urladdtocart = 'http://localhost:3001/addToCart';
-
+const urladdtocart = `${process.env.REACT_APP_HOST_BACKEND}/addToCart`;
 // export const addToCart = (data) => {
 //     return async (dispatch: Dispatch) => {
 //         const response = await axios.put<PostValues>(urladdtocart, { params: data });

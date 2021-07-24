@@ -26,7 +26,6 @@
   margin-top: 15px;
   width: 96%;
   padding: 0;
-  
 }
 
 .RegisterInputs::placeholder {
@@ -51,11 +50,11 @@
 }
 
 .imgSm {
-  transition: .1s;
-  }
-  .imgSm:hover{
-    filter: brightness(1.2);
-    }
+  transition: 0.1s;
+}
+.imgSm:hover {
+  filter: brightness(1.2);
+}
 
 #btnRegister {
   border-radius: 30px;
@@ -68,5 +67,3 @@
   margin-top: 1em;
   margin-bottom: 1em;
 }
-
-

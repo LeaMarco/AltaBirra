@@ -29,7 +29,7 @@
     "react-redux": "^7.2.4",
     "react-responsive-carousel": "^3.2.20",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.3",
+    "react-scripts": "^4.0.3",
     "react-social-icons": "^5.5.1",
     "redux-thunk": "^2.3.0",
     "sass": "^1.35.2",

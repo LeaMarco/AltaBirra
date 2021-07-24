@@ -53,8 +53,8 @@ export default function EditPost() {
     event.preventDefault();
     const formData = new FormData()
     formData.append('image', file)
-    let response = await axios.post("http://localhost:3001/upload", formData)
-    setImage('http://localhost:3001/upload/' + response.data.filename);
+    let response = await axios.post(`${process.env.REACT_APP_HOST_BACKEND}/upload`, formData)
+    setImage(`${process.env.REACT_APP_HOST_BACKEND}/upload/` + response.data.filename);
   }
 
 
@@ -238,7 +238,7 @@ export default function EditPost() {
           <div >
             <label htmlFor="file">Upload File:</label>
             <input
-            className={styles.imageInput}
+              className={styles.imageInput}
               type="file" id="file"
               accept=".jpg"
               multiple

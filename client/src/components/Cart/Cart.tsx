@@ -68,7 +68,7 @@ function Cart() {
   );
 }
 
-const urldeleteallcart = "http://localhost:3001/deleteAllCart";
+const urldeleteallcart = `${process.env.REACT_APP_HOST_BACKEND}/deleteAllCart`;
 async function deleteAllCart(data) {
   const response = await axios.delete<cart[]>(urldeleteallcart, { data: { data } });
   return response;

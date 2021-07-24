@@ -60,7 +60,7 @@ export function Compra() {
     }
 
     async function merpa(data) {
-        const response = await axios.post("http://localhost:3001/checkout", { data: { data } });
+        const response = await axios.post(`${process.env.REACT_APP_HOST_BACKEND}/checkout`, { data: { data } });
         return response.data.id;
     }
 

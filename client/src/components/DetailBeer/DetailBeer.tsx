@@ -37,7 +37,7 @@ export default function DetailBeer() {
 	}, [dispatch]);
 
 	const addToCart = async () => {
-		const response = await axios.put(`http://localhost:3001/addToCart`, { params: { "username": "TestUser", "postId": parseInt(id), "quantity": cantidad } })
+		const response = await axios.put(`${process.env.REACT_APP_HOST_BACKEND}/addToCart`, { params: { "username": "TestUser", "postId": parseInt(id), "quantity": cantidad } })
 		return (response.data)
 	}
 
