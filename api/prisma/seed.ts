@@ -11,6 +11,8 @@ async function main() {
   const user = await prisma.role.create({ data: { name: "USER" } });
   const admin = await prisma.role.create({ data: { name: "ADMIN" } });
 
+
+
   // COUNTABLE
   // await prisma.countable.create({
   //   data: {

@@ -27,6 +27,7 @@
     "react-icons": "^4.2.0",
     "react-modal": "^3.14.3",
     "react-redux": "^7.2.4",
+    "react-responsive-carousel": "^3.2.20",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-social-icons": "^5.5.1",

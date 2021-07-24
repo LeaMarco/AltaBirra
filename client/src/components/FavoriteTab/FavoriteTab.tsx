@@ -6,12 +6,14 @@ import { useEffect } from "react";
 import { getDetail, getFavoritePosts, Post } from "../../actions";
 import { useHistory } from "react-router-dom";
 import { RootState } from "../../reducers";
+import { Carousel } from 'react-responsive-carousel';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 interface Favorites {
 	post: Post;
 }
 
-export default function FavoritesTab() {
+export default function FavoritesTab({ closeModal }) {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const favoritePosts: Favorites[] = useSelector((state: RootState) => state.favoritePosts);
@@ -22,8 +24,9 @@ export default function FavoritesTab() {
 	}
 
 	async function goToDetail(id) {
-		await dispatch(getDetail(id))
-		history.push(`/detailBeer/${id}`)
+		await dispatch(getDetail(id));
+		history.push(`/detailBeer/${id}`);
+		closeModal();
 	}
 
 	useEffect(() => {
@@ -31,21 +34,21 @@ export default function FavoritesTab() {
 	}, [dispatch]);
 
 	return (
-		<div style={{ backgroundColor: "white", border: "1px solid black", width: "10vw" }}>
+		<Carousel className={Style.carousel} showStatus={false} showIndicators={false}>
 			{
 				favoritePosts?.map(post => {
 					return (
-						<div style={{ border: "1px solid black", display: "flex", flexDirection: "column" }}>
-							<button onClick={() => removeFavorite(post.post.id)} className={Style.unfav}> ❤ </button>
-							<button onClick={() => goToDetail(post.post.id)} style={{ margin: 0 }}> <div>
+						<div className={Style.card}>
+							<button onClick={() => removeFavorite(post.post.id)} className={Style.unfav}> 💔 </button>
+							<button onClick={() => goToDetail(post.post.id)} style={{ margin: 0, border: "none", cursor: "pointer" }}> <div>
 								<h5> {post.post.title} </h5>
-								<img src={post.post.image} height="50vh" />
+								<img src={post.post.image} height="150vh" />
 								<h5> $ {post.post.countable.price} </h5>
 							</div> </button>
 						</div>
 					)
 				})
 			}
-		</div>
+		</Carousel>
 	)
 }

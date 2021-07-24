@@ -9,6 +9,7 @@ import Login from "../Login/Login";
 import Register from "../Register/Register";
 import axios from "axios";
 import FavoritesTab from "../FavoriteTab/FavoriteTab";
+import { ModalFavorites } from "../FavoriteTab/ModalFavorites/Modal.component";
 
 interface Autocomplete {
   title: string;
@@ -133,62 +134,49 @@ export default function Nav() {
           </div>
         ) : (
           <div className={style.buttonsRight}>
-            {/* <Link
-              to="/login"
-              className={style.buttonEnter}
-              onClick={() => setRegister(!register)}
-            >
-              Entrar
-            </Link> */}
-            <Modal isOpen={showFavorites} handleClose={toogleFavorites}>
-              <FavoritesTab />
-            </Modal>
-            <button onClick={toogleFavorites} className={style.buttonFavorites}>
-              <img className={style.buttonImg} src="https://image.flaticon.com/icons/png/512/126/126482.png" alt="Cart" />
+            <ModalFavorites isOpen={showFavorites} handleClose={toogleFavorites}>
+              <FavoritesTab closeModal={toogleFavorites} />
+            </ModalFavorites>
 
+            <button onClick={toogleFavorites} className={style.buttonFavorites}>
+              <img className={style.buttonImg} src="https://image.flaticon.com/icons/png/512/1077/1077035.png" alt="Favorites" height="1vh" />
             </button>
-            <Link
-              to="/cart/1" ////////FALTA METER EL ID DE USER
-              className={style.buttonCart}
-            >
+
+            <Link to="/cart/1" className={style.buttonCart}>
               <img className={style.buttonImg} src="https://image.flaticon.com/icons/png/512/3144/3144456.png" alt="Cart" />
             </Link>
-
-
 
             <Modal isOpen={isEnterOpen} handleClose={toogleEnter}>
               <Login closeModal={toogleEnter} toogleAuth={toogleAuth} />
             </Modal>
 
-
-
             <Modal isOpen={isRegisterOpen} handleClose={toogleRegister}>
               <Register closeModal={toogleRegister} toogleEnter={toogleEnter} toogleRegister={toogleRegister} />
             </Modal>
 
-            <div className={style.buttonsRight}>
-              <Link to="/panel">
-                <button className={style.buttonEnter}>Panel</button>
-              </Link>
+            {/* <div className={style.buttonsRight}> */}
+            <Link to="/panel" style={{ textDecoration: "none" }}>
+              <button className={style.buttonEnter}>Panel</button>
+            </Link>
 
-              {
-                isAuth ?
-                  <button className={style.buttonEnter} style={{ borderRadius: "30px", backgroundColor: "forestgreen" }} >
-                    Bienvenido!!
+            {
+              isAuth ?
+                <button className={style.buttonEnter} style={{ borderRadius: "30px", backgroundColor: "forestgreen" }} >
+                  Bienvenido!!
+                </button>
+                :
+                <div className={style.buttonsRightEnter}>
+                  <button className={style.buttonEnter} onClick={toogleEnter}>
+                    Entrar
                   </button>
-                  :
-                  <div className={style.buttonsRightEnter}>
-                    <button className={style.buttonEnter} onClick={toogleEnter}>
-                      Entrar
-                    </button>
-                    <button className={style.buttonEnter} onClick={toogleRegister}>
-                      Registrarme
-                    </button>
-                  </div>
+                  <button className={style.buttonEnter} onClick={toogleRegister}>
+                    Registrarme
+                  </button>
+                </div>
 
-              }
-            </div>
+            }
           </div>
+          // </div>
         )}
       </div>
     </div>
