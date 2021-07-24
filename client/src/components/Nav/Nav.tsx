@@ -38,7 +38,7 @@ export default function Nav() {
   const toogleAuth = () => setAuth(!isAuth);
 
 
-
+  ////////////////////AUTENTICACION AUTOMATICA//////////////////////////////////////////////////
   useLayoutEffect(() => {
 
     if (localStorage.length) {
