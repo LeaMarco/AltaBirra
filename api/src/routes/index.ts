@@ -28,7 +28,6 @@ import { tokenValidation } from '../autentication/libs/verifyToken';
 
 const router = Router();
 
-
 router.use("/auth/", autentication)//autenticacion de usuarios
 router.use("/register", register);//registro de usuarios
 router.use("/beer", beers);//trae los posts para el home
@@ -37,22 +36,23 @@ router.use("/specificTypes", specificType);
 router.use("/genericTypes", genericType);
 router.use("/autocomplete", autoComplete);//autocompletar el search
 router.use("/detailBeer", detail);//ruta detalle de post
+
 router.use("/post", tokenValidation, createPost);//crea un nuevo post
 router.use("/transaction", tokenValidation, transaction);// escribe una transaccion
-router.use("/cart", tokenValidation, cart);//es un put
-router.use("/addToCart", tokenValidation, addToCart);//agrega posts al carrito
-router.use("/cart", tokenValidation, getCart);//devuelve el carrito de un usuario en particular con sus posts, es un GET! 
-router.use("/edit", tokenValidation, editPost);
-router.use("/delete", tokenValidation, deletePost);
-router.use("/removeToCart", tokenValidation, removePost);
-router.use("/deleteAllCart", tokenValidation, deleteAllCart);
-router.use("/addFavorite", tokenValidation, addFavorite);
-router.use("/getFavorites", tokenValidation, getFavorites);
-router.use("/checkout", tokenValidation, mercadoPago);//ruta de pago, genera el boton de mercado libre segun los datos que se le pasaron del front
-router.use("/removeFavorite", tokenValidation, removeFavorite);//
-router.use("/ratePost", tokenValidation, ratePost);//
-router.use("/sellHistory", tokenValidation, sellHistory);//
-router.use("/buyHistory", tokenValidation, buyHistory);//
+router.use("/cart", /* tokenValidation, */ cart);//es un put
+router.use("/addToCart", /* tokenValidation, */ addToCart);//agrega posts al carrito
+router.use("/cart", /* tokenValidation, */ getCart);//devuelve el carrito de un usuario en particular con sus posts, es un GET! 
+router.use("/edit", /* tokenValidation, */ editPost);
+router.use("/delete", /* tokenValidation, */ deletePost);
+router.use("/removeToCart", /* tokenValidation, */ removePost);
+router.use("/deleteAllCart", /* tokenValidation, */ deleteAllCart);
+router.use("/addFavorite", /* tokenValidation, */ addFavorite);
+router.use("/getFavorites", /* tokenValidation, */ getFavorites);
+router.use("/checkout", /* tokenValidation, */ mercadoPago);//ruta de pago, genera el boton de mercado libre segun los datos que se le pasaron del front
+router.use("/removeFavorite", /* tokenValidation, */ removeFavorite);//
+router.use("/ratePost", /* tokenValidation, */ ratePost);//
+router.use("/sellHistory", /* tokenValidation, */ sellHistory);//
+router.use("/buyHistory", /* tokenValidation, */ buyHistory);//
 
 
 export default router;
