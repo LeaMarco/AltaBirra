@@ -7,6 +7,7 @@ import transaction from "./transaction";
 import cart from "./addToCart";
 import getCart from "./getCart";
 import editPost from "./editPost";
+import upload from "./upload";
 import deletePost from "./deletePost";
 import removePost from "./removeToCart";
 import specificType from "./getSpecificTypes"
@@ -30,6 +31,7 @@ const router = Router();
 router.use("/auth/", autentication)
 router.use("/register", register);
 router.use("/beer", beers);
+router.use("/upload", upload);
 router.use("/post", createPost);
 router.use("/post", getSearchedPost);
 router.use("/transaction", transaction);

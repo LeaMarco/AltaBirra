@@ -21,6 +21,8 @@ router.get("/:id", async (req: Request, res: Response) => {
             review: true
         }
     })
+    let dateNow= Date.now()
+    inf_beer && inf_beer.countable.expireDate.getTime()> dateNow? inf_beer?.countable.expireDate : inf_beer? inf_beer.countable.discount=0:null
     res.send(inf_beer)
 })
 

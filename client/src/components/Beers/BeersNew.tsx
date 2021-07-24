@@ -3,47 +3,37 @@ import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect } from "react";
 import { loadUsersPremium } from "../../actions";
 import './beers.css';
+import axios from "axios";
+import { useState } from "react";
 
-const BeersNew = () => {
+const Beers = () => {
   const dispatch = useDispatch();
+  const [news, setNews]:any=useState()
+  async function searchNews() {
+    const response = await axios.get<PostValues>("http://localhost:3001/beer/news");
+    setNews(response.data)
+    return response;
+  }
+
 
   useEffect(() => {
-    dispatch(loadUsersPremium());
+   searchNews();
   }, [dispatch]);
-     
-  const usersPremium = useSelector((state) => state["usersPremium"]);
-  
-  // const data = {
-  //   id: usersPremium.id,
-  //   image: 'IMAGEN',
-  //   name: 'Cerveza IPA',
-  //   ibu: 'ibu',
-  //   abv: 'abv'
-  // }
 
-  // id: number;
-	// username: string;
-	// email: string;
-	// name: string;
-	// password: string;
-	// premium: boolean;
-	// roleId: number;
-	// cartId: number
-  const firstRandomBeer= Math.ceil(Math.random()*6)
+  
   return (
     <div className="containerBeersPremium">
-
       <h1 id="titulo">Las nuevas!</h1>
       <div className="beers">
       {
-        typeof usersPremium === "object" 
-        ? usersPremium.slice(firstRandomBeer, firstRandomBeer+5).map((userPremium) => (
+        Array.isArray(news)?
+         news.map((userPremium) => (
           
           <Beer
             key={userPremium.id}
             id={userPremium.id}
             image={userPremium.image}
-            title={userPremium.beer.name}
+            title={userPremium.title}
             ibu={userPremium.beer.ibu}
             abv={userPremium.beer.abv}
             discount={userPremium.countable.discount}
@@ -57,4 +47,35 @@ const BeersNew = () => {
   );
 };
 
-export default BeersNew;
+export default Beers;
+
+
+
+
+interface PostValues {
+	beer: {
+		abv: number;
+		og: number;
+		ibu: number;
+		calories: number;
+		dryHop: boolean;
+		volume: number;
+		genericType: string;
+		specificType: string;
+	};
+	infoPost: {
+		title: string;
+		description: string;
+		image: string;
+		stock: number;
+		rating: number;
+		shipping: boolean;
+		visibility: boolean;
+		username: string;
+	};
+	countable: {
+		price: number;
+		discount: number;
+	};
+	date: Date;
+};

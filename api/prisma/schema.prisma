@@ -97,7 +97,6 @@ model PostsOnCart {
 
 model Beer {
     id       Int      @id @default(autoincrement())
-    name     String
     abv      Int
     og       Int?
     ibu      Int
@@ -176,4 +175,12 @@ model Review {
     userId Int
     user   User @relation(fields: [userId], references: [id])
     @@unique([userId, postId])
+}
+
+model image_upload{
+    id Int @id @default(autoincrement())
+    filename String 
+    filepath String
+    mimetype String
+    size BigInt 
 }

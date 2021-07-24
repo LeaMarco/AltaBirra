@@ -3,6 +3,8 @@ import { useParams, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getCart, cart, PostValues } from "../../actions";
 import axios from "axios";
+import style from './PostInCart.module.css';
+import Swal from "sweetalert2";
 
 export function PostinCart({
 	postId,
@@ -22,36 +24,60 @@ export function PostinCart({
 		addToCart({ postId, quantity, username: "TestUser" });
 	}, [quantity]);
 
-	async function despachadora() {
+	async function deleteItem() {
 		await removeToCart({ username, postId, cartIdparsed });
 		dispatch(getCart(cartIdparsed));
+	}
+	async function despachadora() {
+		Swal.fire({
+			title: '¿Seguro de borrar el item?',
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Borrar'
+		}).then((result) => {
+			if (result.isConfirmed) {
+				deleteItem()
+				Swal.fire(
+					'¡Borrado!',
+					'¡Se borro el item del carrito!',
+					'success'
+				)
+			}
+		})
+
 	}
 	//estado local con amount
 	//handle submit ejecuta action para cambiar amount en db
 	return (
-		<div>
-			<Link to={`/DetailBeer/${postId}`}>
-				<li>
-					<h1>{postTitle}</h1>
-					<span>{description}</span>
-				</li>
+		<div className={style.itemCarrito}>
+			<Link className={style.Link} to={`/DetailBeer/${postId}`}>
+				<div className={style.titleContainer}>
+					<h1 className={style.title}>{postTitle}</h1>
+					<span>{description.slice(0, 50)}...</span>
+				</div>
 			</Link>
-			<button onClick={(e) => setQuantity(quantity + 1)}>➕</button>
-			<p>Amount: {quantity}</p>
-			<p>{countable.price * quantity}</p>
-			<p>{countable.discount}</p>
-			<button onClick={(e) => quantity > 1 ? setQuantity(quantity - 1) : alert("Del piso no paso")
-			}
-			>
-				➖
-			</button>
-			<button
-				onClick={(e) => {
-					despachadora();
-				}}
-			>
-				❌
-			</button>
+			<div className={style.modifyContainer}>
+				<button onClick={(e) => setQuantity(quantity + 1)}>➕</button>
+				<p>Cantidad: {quantity}</p>
+				{/* <p>{countable.discount}</p> */}
+				<button onClick={(e) => quantity > 1 ? setQuantity(quantity - 1) : alert("Del piso no paso")
+				}
+				>
+					➖
+				</button>
+			</div>
+			<div className={style.priceAndDelete}>
+				<p className={style.amount}>${countable.price * quantity}</p>
+				<button className={style.deletebutton}
+					onClick={(e) => {
+						despachadora();
+					}}
+				>
+					Eliminar
+				</button>
+			</div>
 		</div>
 	);
 }

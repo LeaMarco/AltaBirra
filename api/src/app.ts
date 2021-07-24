@@ -4,6 +4,7 @@ import morgan from 'morgan';
 import cors from 'cors';
 import routes from './routes';
 import config from './lib/config';
+const path = require('path');
 
 const app: Application = express();
 
@@ -12,8 +13,7 @@ app.use(express.urlencoded({ extended: true, limit: '50mb' })); //middleware
 app.use(express.json({ limit: '50mb' }));
 app.use(cookieParser());
 app.use(morgan('dev'));
-
-
+app.use('/', express.static(path.join(__dirname, '/')));
 
 app.use(
 	cors({

@@ -124,7 +124,6 @@ export default function Nav() {
             >
               Mis Compras
             </Link>
-
             <Link
               to="/"
               className={style.buttonEnter}
