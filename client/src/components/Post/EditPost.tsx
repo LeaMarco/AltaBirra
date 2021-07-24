@@ -235,17 +235,18 @@ export default function EditPost() {
                 <input {...register("countable.expireDate")} type="date" />
               </div> : <p>Sin oferta? ratón</p>}
           </div>
-          <div className={styles.submitButton}>
-            <input className={styles.postFormSubmitButton} type="submit" />
-          </div>
-          <div className={styles.uploadGroup} >
-            <label htmlFor="file" > Cambiar imagen: &nbsp;</label>
+          <div >
+            <label htmlFor="file">Upload File:</label>
             <input
+            className={styles.imageInput}
               type="file" id="file"
               accept=".jpg"
               multiple
               onChange={imageHandler}
             />
+          </div>
+          <div className={styles.submitButton}>
+            <input className={styles.postFormSubmitButton} type="submit" />
           </div>
         </form>
       </div>

@@ -85,36 +85,11 @@ export default function EditPost() {
     setImage('http://localhost:3001/upload/' + response.data.filename);
   }
 
-  let dataPrevie = {
-    beer: {
-      abv: "99",
-      dryHop: false,
-      genericType: "TIPO GENÉRICO?",
-      ibu: "88",
-      volume: "777",
-      og: "66",
-      specificType: "TIPO ESPECIFICO?",
-      calories: "555",
-    },
-    infoPost: {
-      title: "NOMBRE DE TU CERVEZA",
-      description: "Completá acá con tu descripción",
-      image: image ? image : "https://i.imgur.com/FsGTu6Q.png",
-      stock: 1,
-      shipping: false,
-      visibility: true,
-      username: "testUser",
-    },
-    countable: {
-      price: "999",
-      discount: "5",
-      expireDate: Date.now(),
-    }
-  }
-  const [dataPrevia, setDataPrevia] = useState(dataPrevie)
+ 
 
-  const { register, handleSubmit, reset, watch } = useForm({ defaultValues: dataPrevia });
-  const onSubmit: SubmitHandler<PostValues> = (data) => { despachadora(data, dataPrevie.infoPost.image); reset() };
+
+  const { register, handleSubmit, reset, watch } = useForm({});
+  const onSubmit: SubmitHandler<PostValues> = (data) => { despachadora(data, image); reset() };
 
 
   return (
@@ -163,7 +138,7 @@ export default function EditPost() {
             <div className={styles.row4}>
               <div className={styles.genericType}>
                 <label>Generic Type:  </label>
-                <select {...register("beer.genericType")} >
+                <select {...register("beer.genericType")}  required >
                   {generic && generic.map(value => (
                     <option key={value} value={value}>
                       {value}
@@ -173,7 +148,7 @@ export default function EditPost() {
               </div>
               <div className={styles.specificType}>
                 <label>Specific Type:  </label>
-                <select {...register("beer.specificType")}>
+                <select {...register("beer.specificType")}  required >
                   {specific && specific.map(value => (
                     <option key={value} value={value}>
                       {value}
@@ -191,7 +166,7 @@ export default function EditPost() {
             <h3>Post Info</h3>
             <div className={styles.postrow1}>
               <div className={styles.container}>
-                <input {...register("infoPost.stock")} type="number" min="0" autoComplete="off" className={styles.input} />
+                <input {...register("infoPost.stock")} type="number" min="1" autoComplete="off" className={styles.input}  required />
                 <label>Stock *</label>
                 <span className={styles.focusBorder}></span>
               </div>
@@ -225,17 +200,17 @@ export default function EditPost() {
               <div>
                 <div className={styles.container}>
                   <input {...register("countable.discount")} type="number" min="0" autoComplete="off" className={styles.input} />
-                  <label>Discount *</label>
+                  <label>Discount</label>
                   <span className={styles.focusBorder}></span>
                 </div>
                 <p>Fecha Expiracion del Descuento</p>
                 <input {...register("countable.expireDate")} type="date" />
               </div> : <p>Sin oferta? ratón</p>}
           </div>
-          <div className={styles.imageUpload}>
+          <div >
             <label htmlFor="file">Upload File:</label>
             <input
-              className={styles.imageUploadButton}
+            className={styles.imageInput}
               type="file" id="file"
               accept=".jpg"
               multiple

@@ -20,20 +20,36 @@ interface Favorites {
 }
 
 export default function Preview({ info, image }) {
-	const dispatch = useDispatch();
-	const { id }: any = useParams();
-	const history = useHistory()
-	const MySwal = withReactContent(Swal)
 
 
+	let dataPrevie = {
+		beer: {
+		  abv: "99",
+		  dryHop: false,
+		  genericType: "TIPO GENÉRICO?",
+		  ibu: "88",
+		  volume: "777",
+		  og: "66",
+		  specificType: "TIPO ESPECIFICO?",
+		  calories: "555",
+		},
+		infoPost: {
+		  title: "NOMBRE DE TU CERVEZA",
+		  description: "Acá irá tu descripción",
+		  image: image ? image : "https://i.imgur.com/FsGTu6Q.png",
+		  stock: 1,
+		  shipping: false,
+		  visibility: true,
+		  username: "testUser",
+		},
+		countable: {
+		  price: "999",
+		  discount: "5",
+		  expireDate: Date.now(),
+		}
+	  }
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-		e.stopPropagation();
 
-		await getCart(id)
-		history.push(`/compra/1`); ///////////FALTA CARGAR EL ID DEL USUARIO QUE ESTÉ EN LA PÁGINA
-	};
 
 
 	return info?.beer ? (
@@ -47,26 +63,26 @@ export default function Preview({ info, image }) {
 				<div className={Style.beerDescription}>
 					<div id="post">
 						<div className={Style.Head}>
-							<h1>{info.infoPost.title}</h1>
+							<h1>{info.infoPost.title?info.infoPost.title:dataPrevie.infoPost.title}</h1>
 							<div className={Style.types}>
-								<p>{info.beer.genericType}/</p><p>{info.beer.specificType}</p>
+								<p>{info.beer.genericType?info.beer.genericType:dataPrevie.beer.genericType}/</p><p>{info.beer.specificType?info.beer.specificType:dataPrevie.beer.specificType}</p>
 							</div>
 						</div>
 						<div className={Style.textContent}>
 							<div className={Style.specs}>
-								<p>ibu: {info.beer.ibu}</p>
-								<p>abv: {info.beer.abv}</p>
-								<p>Cal: {info.beer.calories}</p>
+								<p>ibu: {info.beer.ibu?info.beer.ibu:dataPrevie.beer.ibu}</p>
+								<p>abv: {info.beer.abv?info.beer.abv:dataPrevie.beer.abv}</p>
+								<p>Cal: {info.beer.calories?info.beer.calories:dataPrevie.beer.calories}</p>
 							</div>
-							<p>Description: {info.infoPost.description}</p>
+							<p>{info.infoPost.description?info.infoPost.description:dataPrevie.infoPost.description}</p>
 
 							<div className={Style.infoCompra}>
 								<h3>Info De Compra</h3>
 								<div className={Style.buyInfo}>
 									<div className={Style.buttonsPago}>
-										{info.countable.discount !== 0 ?
+										{ info.countable.discount !== 0 && info.countable.discount!== undefined?
 											<p className={Style.originalPrice}> ${(info.countable.price - info.countable.price * (info.countable.discount / 100)).toFixed(2)} </p> : <p className={Style.originalPrice} > ${info.countable.price}</p>}
-										{info.countable.discount !== 0 ?
+										{info.countable.discount !== 0 && info.countable.discount!== undefined?
 											<div className={Style.SecondPrices}>
 												<p className={Style.priceWODiscount}>${info.countable.price}</p>
 												<p className={Style.discount}>{info.countable.discount}%OFF</p>
@@ -74,18 +90,10 @@ export default function Preview({ info, image }) {
 											: null}
 									</div>
 									<div className={Style.buyButtons}>
-										<form onSubmit={handleSubmit} >
-											<button className={Style.buttonComprar} type="submit">Comprar!</button>
-										</form>
-										<button className={Style.addtoCartButton} onClick={async () => {
-											MySwal.fire({
-												position: 'center',
-												icon: 'success',
-												title: "holi",
-												showConfirmButton: false,
-												timer: 1500,
-											})
-										}}>Agregar al Carrito</button>
+										
+											<button className={Style.buttonComprar} >Comprar!</button>
+										
+										<button className={Style.addtoCartButton}>Agregar al Carrito</button>
 									</div>
 								</div>
 							</div>

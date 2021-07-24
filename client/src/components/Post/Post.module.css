@@ -156,20 +156,9 @@ input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width
     cursor: pointer;
 }
 
-.imageUpload{
-    margin-top: 20px;
-}
-.postUploadButton{
-    margin-top: 20px;
-    background-color:tomato;
-    height: 70%;
-    border-radius: 8px;
-    border:none;
-    transition:0.3s;
-    font-size: 15px;
-    font-weight: 100;
-    color:white;
-    cursor: pointer;
+.imageInput{
+    margin-top: 10%;
+    margin-bottom: 5%;
 }
 
 .uploadGroup{
