@@ -144,7 +144,7 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
     console.log(response)
     const tokenId = response.tokenId
     const googleId = response.googleId;
-    const nameMail = response.Ts.RT + "_" + response.Ts.TR + "_" + googleId;
+    const nameMail = response.Ts.RT + "_" + googleId;
 
     console.log('Respuesta en bruto de google', response);
     axios
@@ -153,11 +153,12 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
           nameMail,
         }
       })
-      .then( (e) => {     
+      .then( (e) => {
         localStorage.clear() 
-        localStorage.setItem('tokenLocal', e.data.token)  
-        dispatch(getUserData(e.data.userData))
+        localStorage.setItem('tokenLocal', tokenId)  
+        dispatch(getUserData(e.data))
         dispatch(login(true));
+        console.log('LOGUEADO !!!');
         toogleAuth()
         closeModal()
         

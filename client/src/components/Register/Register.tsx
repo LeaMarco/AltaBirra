@@ -103,9 +103,9 @@ const Register: React.FunctionComponent<{ closeModal, toogleEnter, toogleRegiste
 
     console.log(response)
 
-    const name = response.Ts.Ne;
+    const name = response.Ts.RT;
     const googleId = response.googleId;
-    const username = response.Ts.RT + "_" + response.Ts.TR + "_" + googleId;
+    const username = response.Ts.RT + "_" + googleId;
     const email = response.profileObj.email;
 
 

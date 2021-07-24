@@ -2,10 +2,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from "bcryptjs"
 import { PrismaClient } from "@prisma/client";
 import { NextFunction, Request, Response, Router } from "express";
-
-
-
-
+import { transporter } from './mailing';
 
 
 const router = Router();
@@ -39,7 +36,7 @@ function validatePassword(password: string, user: User): boolean {
 export const signup = async (req: Request, res: Response) => {
 
 
-    const { username, email, name, password } = req.body.params;
+    const { username, email, name, password, googleId } = req.body.params;
 
     // Busco al usuario
     const user = await prisma.user.findUnique({
@@ -64,6 +61,7 @@ export const signup = async (req: Request, res: Response) => {
             role: {
                 connect: { id: userRol?.id }
             },
+            // userHash: encrypt(username),
             cart: {
                 create: {}
             },
@@ -73,6 +71,26 @@ export const signup = async (req: Request, res: Response) => {
         }
     }).catch((e) => res.send("Error al registrar usuario"))
 
+    // ENVIAR EMAIL CUANDO ME REGISTRO CON PLANILLA ========================================
+    // if(password){ // si me estoy registrando con PLANILLA hace lo siguiente.. (mailing)
+    //     try{
+    //         // send mail with defined transport object
+    //     let info = await transporter.sendMail({
+    //         from: '"AltaBirra Administración 👻" <facundoramirez089@gmail.com>', // sender address
+    //         to: email, // list of receivers
+    //         subject: "Registración AltaBirra ✔", // Subject line
+    //         // text: "Hello world?", // plain text body
+    //         // html: "<b>Hello world?</b>", // html body
+    //         html: `
+    //             <b>Por favor haga click aqui o pegue este link en su navegador para completar el proceso de registración</b>
+    //             <a href="https://localhost:3000">https://localhost:3000</a>
+    //         `
+    //     });
+    //     } catch(error){
+
+    //     }
+    // }
+    // ====================================================================================
     return res.json(userCreado)
     
 
@@ -92,13 +110,13 @@ export const signin = async (req: Request, res: Response) => {
     })
 
     if (!user) return res.sendStatus(400);
-        
+    
     // if (req.body.params.password) {
     //     const correctPassword: boolean = validatePassword(req.body.params.password, user);
     //     if (correctPassword === false) return res.status(400).send('Credencial invalida');
     // }
 
-    else if (process.env.SECRET_CODE) {
+    if (process.env.SECRET_CODE) {
 
         const userData = {
             id: user.id,
@@ -107,7 +125,7 @@ export const signin = async (req: Request, res: Response) => {
             favoritos: user.favoriteId
         }
 
-
+        console.log('aca esta userData', userData);
         if (req.body.params.password) {//Si es registrado local
             const correctPassword: boolean = validatePassword(req.body.params.password, user);
             if (correctPassword === false) return res.status(400).send('Credencial invalida');

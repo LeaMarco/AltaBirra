@@ -70,7 +70,7 @@ export default function Nav() {
     let tokenLocal = localStorage.tokenLocal
     if (tokenLocal) {
       
-      axios.get('http://localhost:3001/auth/localSignIn', {
+      axios.get(`${process.env.REACT_APP_HOST_BACKEND}/auth/localSignIn`, {
         headers: {
           authToken: tokenLocal
         }
