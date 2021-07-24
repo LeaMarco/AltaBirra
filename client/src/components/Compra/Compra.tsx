@@ -5,8 +5,7 @@ import { cart, getCart } from "../../actions";
 import { RootState } from "../../reducers/index";
 import axios from 'axios';
 import { PostsCompra } from "./PostsCompra";
-
-
+import style from './Compra.module.css';
 
 export function Compra() {
     const dispatch = useDispatch();
@@ -14,7 +13,7 @@ export function Compra() {
     const carts: any = useSelector((state: RootState) => state.cart);
     const [merpastate, setMerpa] = useState("");
     useScript(merpastate)
-    
+
     useEffect(() => {
         dispatch(getCart(id));
     }, []);
@@ -24,19 +23,19 @@ export function Compra() {
     }, [id]);
 
     return (
-        <div>
-            <ul>
-                {Array.isArray(carts) ? (
+        <div className={style.compraContainer}>
+            <div className={style.compras}>
+                {Array.isArray(carts) && carts.length > 0 ? (
                     carts.map((post) => (
-                        <div>
+                        <div className={style.compra}>
                             <PostsCompra username={post.cart?.userId.username} cartId={id} postId={post.post.id} postTitle={post.post.title} description={post.post.description} amount={post.amount} countable={post.post.countable} />
                         </div>
                     ))
                 ) : (
-                    <p>No hay posts</p>
+                    <p>¡No hay items para pagar!</p>
                 )
                 }
-            </ul>
+            </div>
             <div id="button-checkout"></div>
             <Link to={`/cart/${id}`}>Volver para atras</Link>
         </div >
@@ -61,7 +60,7 @@ export function Compra() {
     }
 
     async function merpa(data) {
-        const response = await axios.post("http://localhost:3001/checkout", { data: { data } });
+        const response = await axios.post(`${process.env.REACT_APP_HOST_BACKEND}/checkout`, { data: { data } });
         return response.data.id;
     }
 

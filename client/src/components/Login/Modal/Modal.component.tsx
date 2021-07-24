@@ -1,7 +1,7 @@
 import React from "react";
 import { Portal, PortalTarget } from "../Portal/Portal.component";
 
-import "./Modal.component.css";
+import "./Modal.component.module.css";
 
 interface ModalProps {
   isOpen: boolean;

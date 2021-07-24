@@ -3,59 +3,79 @@ import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect } from "react";
 import { loadUsersPremium } from "../../actions";
 import './beers.css';
+import axios from "axios";
+import { useState } from "react";
 
-const BeersVot = () => {
+const Beers = () => {
   const dispatch = useDispatch();
+  const [news, setNews]: any = useState()
+  async function searchNews() {
+    const response = await axios.get<PostValues>(`${process.env.REACT_APP_HOST_BACKEND}/beer/ranked`);
+    setNews(response.data)
+    return response;
+  }
+
 
   useEffect(() => {
-    dispatch(loadUsersPremium());
+    searchNews();
   }, [dispatch]);
-     
-  const usersPremium = useSelector((state) => state["usersPremium"]);
-  
-  // const data = {
-  //   id: usersPremium.id,
-  //   image: 'IMAGEN',
-  //   name: 'Cerveza IPA',
-  //   ibu: 'ibu',
-  //   abv: 'abv'
-  // }
 
-  // id: number;
-	// username: string;
-	// email: string;
-	// name: string;
-	// password: string;
-	// premium: boolean;
-	// roleId: number;
-	// cartId: number
-  const firstRandomBeer= Math.ceil(Math.random()*6)
-  
+
   return (
     <div className="containerBeersPremium">
-
-      <h1 id="titulo">Las mas votadas</h1>
+      <h1 id="titulo">Las más votadas!</h1>
       <div className="beers">
-      {
-        typeof usersPremium === "object" 
-        ? usersPremium.slice(firstRandomBeer, firstRandomBeer+5).map((userPremium) => (
-          
-          <Beer
-            key={userPremium.id}
-            id={userPremium.id}
-            image={userPremium.image}
-            title={userPremium.beer.name}
-            ibu={userPremium.beer.ibu}
-            abv={userPremium.beer.abv}
-            discount={userPremium.countable.discount}
-            price={userPremium.countable.price}
-            rating={userPremium.rating}
-          /> ))
-        : <h1>Cargando...</h1>
-      }
+        {
+          Array.isArray(news) ?
+            news.map((userPremium) => (
+
+              <Beer
+                key={userPremium.id}
+                id={userPremium.id}
+                image={userPremium.image}
+                title={userPremium.title}
+                ibu={userPremium.beer.ibu}
+                abv={userPremium.beer.abv}
+                discount={userPremium.countable.discount}
+                price={userPremium.countable.price}
+                rating={userPremium.rating}
+              />))
+            : <h1>Cargando...</h1>
+        }
       </div>
     </div>
   );
 };
 
-export default BeersVot;
+export default Beers;
+
+
+
+
+interface PostValues {
+  beer: {
+    abv: number;
+    og: number;
+    ibu: number;
+    calories: number;
+    dryHop: boolean;
+    volume: number;
+    genericType: string;
+    specificType: string;
+  };
+  infoPost: {
+    title: string;
+    description: string;
+    image: string;
+    stock: number;
+    rating: number;
+    shipping: boolean;
+    visibility: boolean;
+    username: string;
+  };
+  countable: {
+    price: number;
+    discount: number;
+  };
+  date: Date;
+};

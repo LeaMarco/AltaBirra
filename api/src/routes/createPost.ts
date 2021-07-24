@@ -1,12 +1,15 @@
 import { PrismaClient } from "@prisma/client";
 import { NextFunction, Request, Response, Router } from "express";
 import { LabeledStatement } from "typescript";
+import { findUserWithAnyTokenBabe } from "../autentication/controllers/auth.controller";
+
+
+
 
 const router = Router();
 const prisma = new PrismaClient();
 
 interface Beer {
-  name: string;
   abv: number;
   og: number;
   ibu: number;
@@ -31,11 +34,17 @@ interface InfoPost {
 interface Countable {
   price: number;
   discount: number;
+  expireDate: Date;
 }
 
 router.post("/", async (req: Request, res: Response, next: NextFunction) => {
+
+  // const user = await findUserWithAnyTokenBabe(req, prisma)
+
+  // console.log("user", user)
+  // console.log("patams", req.body.params)
+
   const {
-    name,
     abv,
     og,
     ibu,
@@ -45,7 +54,7 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
     genericType,
     specificType,
   }: Beer = req.body.params.beer;
-
+  console.log(req.body.params, "DATACOPY")
   const {
     title,
     description,
@@ -57,12 +66,18 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
     username,
   }: InfoPost = req.body.params.infoPost;
 
-  const price: number = +req.body.params.countable.price;
-  const discount: number = +req.body.params.countable.discount;
+  const {
+    price,
+    discount,
+    expireDate
+  }: Countable = req.body.params.countable
 
   const user = await prisma.user.findUnique({ where: { username: username } });
   const beerGenericType = await prisma.genericType.findUnique({ where: { type: genericType } });
   const beerSpecificType = await prisma.specificType.findUnique({ where: { type: specificType } });
+  console.log("beerGenericType", beerGenericType)
+  console.log("beerSpecificType", beerSpecificType)
+
 
   await prisma.post.create({
     data: {
@@ -78,7 +93,6 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
       },
       beer: {
         create: {
-          name,
           abv,
           og,
           ibu,
@@ -97,7 +111,7 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
         create: {
           price,
           discount,
-          expireDate: new Date()
+          expireDate,
         }
       }
     },

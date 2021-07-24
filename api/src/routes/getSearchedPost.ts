@@ -120,6 +120,8 @@ router.get('/', async (req: Request, res: Response, next: NextFunction) => {
 		},
 		orderBy: orderTemp
 	})
+    let dateNow= Date.now()
+	posts.map(post=> post && post.countable.expireDate.getTime()> dateNow? post?.countable.expireDate : post? post.countable.discount=0:null)
 	res.json(posts);
 })
 

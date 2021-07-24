@@ -35,7 +35,6 @@ interface Post {
 
 interface Beer {
 	id: number;
-	name: string;
 	abv: number;
 	og: number | null;
 	ibu: number;
@@ -51,6 +50,7 @@ interface Results {
 }
 
 router.get("/", async (req: Request, res: Response, next: NextFunction) => {
+
 	const sellerId: number = Number(req.query.userId);
 	const history: Algo[] = await prisma.transaction.findMany({
 		where: {

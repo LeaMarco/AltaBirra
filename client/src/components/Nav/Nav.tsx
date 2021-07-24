@@ -12,12 +12,13 @@ import FavoritesTab from "../FavoriteTab/FavoriteTab";
 import { token } from "morgan";
 import { getUserData, login } from '../../actions/index'
 import swal from 'sweetalert';
-
+import { ModalFavorites } from "../FavoriteTab/ModalFavorites/Modal.component";
+import { useLayoutEffect } from "react";
+import { validationHeadersGenerator } from "../../validationHeadersGenerator";
 
 interface Autocomplete {
   title: string;
 }
-let once = true
 
 export default function Nav() {
   
@@ -45,9 +46,24 @@ export default function Nav() {
   const [isAuth, setAuth] = useState<boolean>(false);
   const toogleAuth = () => setAuth(!isAuth);
 
+  const stateWelcome = useSelector((state) => state["welcome"]);
 
+  useEffect(() => {
+    // NO TOCAR
+    
+  }, [stateWelcome]);
 
+  useLayoutEffect(() => {
+    if (localStorage.length) {
+      axios.get(`${process.env.REACT_APP_HOST_BACKEND}/auth/autoLogin`, {
+        headers: validationHeadersGenerator()
+      }).then(e => {
+        toogleAuth()
+      }).catch(e => { console.log("ERROR EN AA", e) })
+    }
 
+  }
+    , [])
   ///////////////////AUTENTICACION AUTOMATICA/////////////////////////////////////////
   useEffect(() => {
 
@@ -72,13 +88,10 @@ export default function Nav() {
 
   },[])
 
-  const stateWelcome = useSelector((state) => state["welcome"]);
-
-  useEffect(() => {
-    // NO TOCAR
-    
-  }, [stateWelcome]);
+  
   //////////////////autenticacion automatica//////////////////////////////////////////
+    
+  //////////////////Fin autenticacion automatica//////////////////////////////////////////
 
 
 
@@ -90,7 +103,7 @@ export default function Nav() {
 
   async function handleChange(event) {
     setSearchInput(event.target.value);
-    let temp = await axios.get("http://localhost:3001/autocomplete", {
+    let temp = await axios.get(`${process.env.REACT_APP_HOST_BACKEND}/autocomplete`, {
       params: { search: event.target.value },
     });
     setAutocomplete(temp.data);
@@ -193,7 +206,6 @@ export default function Nav() {
             >
               Mis Compras
             </Link>
-
             <Link
               to="/"
               className={style.buttonEnter}
@@ -204,34 +216,21 @@ export default function Nav() {
           </div>
         ) : (
           <div className={style.buttonsRight}>
-            {/* <Link
-              to="/login"
-              className={style.buttonEnter}
-              onClick={() => setRegister(!register)}
-            >
-              Entrar
-            </Link> */}
-            <Modal isOpen={showFavorites} handleClose={toogleFavorites}>
-              <FavoritesTab />
-            </Modal>
-            <button onClick={toogleFavorites} className={style.buttonFavorites}>
-              <img className={style.buttonImg} src="https://image.flaticon.com/icons/png/512/126/126482.png" alt="Cart" />
+            <ModalFavorites isOpen={showFavorites} handleClose={toogleFavorites}>
+              <FavoritesTab closeModal={toogleFavorites} />
+            </ModalFavorites>
 
+            <button onClick={toogleFavorites} className={style.buttonFavorites}>
+              <img className={style.buttonImg} src="https://image.flaticon.com/icons/png/512/1077/1077035.png" alt="Favorites" height="1vh" />
             </button>
-            <Link
-              to="/cart/1" ////////FALTA METER EL ID DE USER
-              className={style.buttonCart}
-            >
+
+            <Link to="/cart/1" className={style.buttonCart}>
               <img className={style.buttonImg} src="https://image.flaticon.com/icons/png/512/3144/3144456.png" alt="Cart" />
             </Link>
-
-
 
             <Modal isOpen={isEnterOpen} handleClose={toogleEnter}>
               <Login closeModal={toogleEnter} toogleAuth={toogleAuth} />
             </Modal>
-
-
 
             <Modal isOpen={isRegisterOpen} handleClose={toogleRegister}>
               <Register closeModal={toogleRegister} toogleEnter={toogleEnter} toogleRegister={toogleRegister} />
@@ -257,6 +256,7 @@ export default function Nav() {
               }
             </div>
           </div>
+          // </div>
         )}
       </div>
       <div>

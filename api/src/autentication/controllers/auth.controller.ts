@@ -38,10 +38,8 @@ function validatePassword(password: string, user: User): boolean {
 
 export const signup = async (req: Request, res: Response) => {
 
-    // console.log(req)
 
     const { username, email, name, password } = req.body.params;
-    // console.log("asddsa", username, email, name, password)
 
     // Busco al usuario
     const user = await prisma.user.findUnique({
@@ -87,7 +85,6 @@ export const signin = async (req: Request, res: Response) => {
 
     // const infoToken = req.body.infoToken
 
-    console.log(req.body, "infotoken")
     const user = await prisma.user.findUnique({
         where: {
             username: req.body.params.nameMail
@@ -96,12 +93,13 @@ export const signin = async (req: Request, res: Response) => {
 
     if (!user) return res.sendStatus(400);
         
-    if (req.body.params.password) {
-        const correctPassword: boolean = validatePassword(req.body.params.password, user);
-        if (correctPassword === false) return res.status(400).send('Credencial invalida');
-    }
+    // if (req.body.params.password) {
+    //     const correctPassword: boolean = validatePassword(req.body.params.password, user);
+    //     if (correctPassword === false) return res.status(400).send('Credencial invalida');
+    // }
 
-    if (process.env.SECRET_CODE) {        
+    else if (process.env.SECRET_CODE) {
+
         const userData = {
             id: user.id,
             nombre: user.name,
@@ -110,18 +108,28 @@ export const signin = async (req: Request, res: Response) => {
         }
 
 
-        const token: string = jwt.sign({ id: user.id, adminRole: false }, process.env.SECRET_CODE, { expiresIn: 60 * 60 * 24 })
-        res.json({ token, userData })
-    }
-    else {
-        
-        res.status(500).send("CONTRASEÑA PARA GENERAR TOKENS AUSENTE EN VARIABLES DE ENTORNO DEL SERVER!")
+        if (req.body.params.password) {//Si es registrado local
+            const correctPassword: boolean = validatePassword(req.body.params.password, user);
+            if (correctPassword === false) return res.status(400).send('Credencial invalida');
+
+            const token: string = jwt.sign({ id: user.id, adminRole: false }, process.env.SECRET_CODE, { expiresIn: 60 * 60 * 24 })
+            res.json({ token, userData })
+        }
+        else {//Si es registrado social
+            res.json(userData)
+        }
+
     }
     
 
-};
+    else {
+        res.status(500).send("CONTRASEÑA PARA GENERAR TOKENS AUSENTE EN VARIABLES DE ENTORNO DEL SERVER!")
+    }
+}
 
 
+
+//DEPRECADO HASTA NUEVO AVISO
 export const localSignIn = async (req: Request, res: Response) => {
 
     const { id } = req.body.infoToken
@@ -136,20 +144,15 @@ export const localSignIn = async (req: Request, res: Response) => {
 
     else {
 
-        if (process.env.SECRET_CODE) {
-
-            const userData = {
-                id: user.id,
-                nombre: user.name,
-                premium: user.premium,
-                favoritos: user.favoriteId
-            }
-
-            res.json(userData)
+        const userData = {
+            id: user.id,
+            nombre: user.name,
+            premium: user.premium,
+            favoritos: user.favoriteId
         }
-        else {
-            res.status(500).send("CONTRASEÑA PARA GENERAR TOKENS AUSENTE EN VARIABLES DE ENTORNO DEL SERVER!")
-        }
+
+        res.json(userData)
+
     }
 
 };
@@ -168,7 +171,7 @@ interface payload {
 
 export const profile = async (req: Request, res: Response) => {
 
-    res.send("Ho,a soy profiel")
+    res.sendStatus(207)
 
 
     /*  const token = req.header('authToken');
@@ -186,6 +189,70 @@ export const profile = async (req: Request, res: Response) => {
          res.send("Bienvenido a tu perfil!!!!");
      } */
 };
+
+
+//DEPRECADO HASTA NUEVO AVISO
+export const socialSignIn = async (req: Request, res: Response) => {
+
+    const email = req.query.email?.toString()//esto lo envia google! solo mail!
+    const username = req.query.userName?.toString()//esto lo envia facebook, solo username! (porque es lo que devuelven los token)
+
+    const user = await prisma.user.findUnique({
+        where: {
+            email,
+            username
+        }
+    })
+
+    if (!user) return res.sendStatus(400);
+
+    else {
+        const userData = {
+            id: user.id,
+            nombre: user.name,
+            premium: user.premium,
+            favoritos: user.favoriteId
+        }
+        res.json(userData)
+    }
+}
+
+////////////////////////////////////FUNCION DE USO GENERAL////////////////////////////////////
+export async function findUserWithAnyTokenBabe(req: Request, prisma: PrismaClient) {
+
+    const tokenPackage = req.body.tokenPackage //todo lo que tenga el  token
+    const uniqueSearchLabel = tokenPackage.uniqueSearchLabel //Puede ser username, email o id, dependiendo si viene de facebook, google o local respectivamente.
+    const uniqueSearchValue = tokenPackage[uniqueSearchLabel] //el valor que esta en el dato unique
+
+    const user = await prisma.user.findUnique({
+        where: {
+            [uniqueSearchLabel]: uniqueSearchValue //siempre envia un solo dato unique, y poniendolo asi lo busca de forma correcta sea lo que sea
+        }
+    })
+    return user
+}
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+export const autoLogin = async function (req: Request, res: Response) {
+
+    const user = await findUserWithAnyTokenBabe(req, prisma)
+
+    /* const tokenPackage = req.body.tokenPackage //todo lo que tenga el  token
+    const uniqueSearchLabel = tokenPackage.uniqueSearchLabel //Puede ser username, email o id, dependiendo si viene de facebook, google o local respectivamente.
+    const uniqueSearchValue = tokenPackage[uniqueSearchLabel] //el valor que esta en el dato unique
+
+    const user = await prisma.user.findUnique({
+        where: {
+            [uniqueSearchLabel]: uniqueSearchValue //siempre envia un solo dato unique, y poniendolo asi lo busca de forma correcta sea lo que sea
+        }
+    }) */
+
+
+    //console.log(user)
+    if (!user) return res.sendStatus(400)
+    else return res.sendStatus(200)
+}
 
 
 
