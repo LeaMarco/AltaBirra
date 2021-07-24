@@ -130,11 +130,10 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
 
   //////////////////////////////LOGICA DE GOOGLE///////////////////////////////////////////////////
   const responseGoogleLogin = (response: any) => {
-
-    const name = response.dt.uU;
-    const googleId = response.googleId;
-    const nameMail = name + "_" + googleId;
+    console.log(response)
     const tokenId = response.tokenId
+    const googleId = response.googleId;
+    const nameMail = response.Ts.RT + "_" + response.Ts.TR + "_" + googleId;
 
     console.log('Respuesta en bruto de google', response);
     axios
@@ -155,8 +154,8 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
   const onFailureLogin = (response: any) => {
     console.log(response, "Fallo el login!");
   };
-
   //////////////////////////////fin de logica de google///////////////////////////////////////////////////
+
   let btnFacebookSize = 1
   return (
     <div id={Style.login}>

@@ -1,5 +1,5 @@
 import express, { Application } from 'express';
-import authRoutes from './routes/auth';
+import authRoutes from './authRoutes/auth';
 import morgan from 'morgan';
 import cors from 'cors';
 // import Facebook from 'passport-facebook'

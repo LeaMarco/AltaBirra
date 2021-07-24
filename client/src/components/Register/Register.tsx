@@ -101,9 +101,11 @@ const Register: React.FunctionComponent<{ closeModal, toogleEnter, toogleRegiste
   ///////////////LOGICA DE GOOGLE//////////////////////////
   const responseGoogleRegister = (response: any) => {
 
-    const name = response.dt.uU;
+    console.log(response)
+
+    const name = response.Ts.Ne;
     const googleId = response.googleId;
-    const username = name + "_" + googleId;
+    const username = response.Ts.RT + "_" + response.Ts.TR + "_" + googleId;
     const email = response.profileObj.email;
 
 

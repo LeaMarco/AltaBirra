@@ -19,6 +19,9 @@ export const tokenValidation = async (
     const uniqueSearchLabel = req.header("uniqueSearchLabel");
     const token = req.header("token");
     /////////////////////////////////////////////////////////
+    console.log(tokenType,
+        uniqueSearchLabel,
+        token)
 
     if (!token) return res.status(401).json("Acces denied (falta el token!)");
     else if (!process.env.SECRET_CODE) return res.sendStatus(500);
@@ -67,7 +70,7 @@ export const tokenValidation = async (
                     const facebookId = res.data.id;
 
                     const username = name.replace(/ /g, "_") + "_" + facebookId;
-                    console.log(username, uniqueSearchLabel)
+                    //console.log(username, uniqueSearchLabel)
 
 
                     req.body = {
@@ -87,7 +90,7 @@ export const tokenValidation = async (
 
 ///////////////////////////////////////
 
-//  console.log(req.body.tokenPackage,"here")
+//console.log(req.body.tokenPackage,"here")
 //  if(uniqueSearchLabel) console.log(req.body.tokenPackage[uniqueSearchLabel])
 
 /*    else if (tokenGoogle) {
@@ -95,10 +98,10 @@ export const tokenValidation = async (
             .then((res) => {
               axios.get("http://localhost:3001/auth/socialSignIn", { params: { email: res.data.email } })
                 .then((e) => {
-                  console.log(e, "auto autentificado de GOOGLE exitoso")
+                  //console.log(e, "auto autentificado de GOOGLE exitoso")
                   toogleAuth()
                 })
-                .catch(e => console.log(e))
+                .catch(e => //console.log(e))
             })
         }
       .then((res) => {

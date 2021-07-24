@@ -12,6 +12,7 @@ import FavoritesTab from "../FavoriteTab/FavoriteTab";
 import { useEffect } from "react";
 import { ModalFavorites } from "../FavoriteTab/ModalFavorites/Modal.component";
 import { useLayoutEffect } from "react";
+import { validationHeadersGenerator } from "../../validationHeadersGenerator";
 
 interface Autocomplete {
   title: string;
@@ -37,50 +38,20 @@ export default function Nav() {
   const toogleAuth = () => setAuth(!isAuth);
 
 
+
   useLayoutEffect(() => {
 
-    const { tokenFacebook, tokenLocal, tokenGoogle } = localStorage
-
-    const uniqueSearchLabel =
-      tokenFacebook ? "username"
-        :
-        tokenLocal ? "id"
-          :
-          tokenGoogle ? "email"
-            : null
-
-    const tokenType =
-      tokenFacebook ? "tokenFacebook"
-        :
-        tokenLocal ? "tokenLocal"
-          :
-          tokenGoogle ? "tokenGoogle"
-            : null
-
-    const token =
-      tokenFacebook ? tokenFacebook
-        :
-        tokenLocal ? tokenLocal
-          :
-          tokenGoogle ? tokenGoogle
-            : null
-
-    if (tokenFacebook || tokenLocal || tokenGoogle) {
-
+    if (localStorage.length) {
       axios.get(`http://localhost:3001/auth/autoLogin`, {
-        headers: {
-          tokenType, //type de token
-          uniqueSearchLabel, //label unica para buscar en el where
-          token//el token propiamente dicho}
-        }
+        headers: validationHeadersGenerator()
       }).then(e => {
         toogleAuth()
       }).catch(e => { console.log("ERROR EN AA", e) })
-
     }
+
   }
     , [])
-  //////////////////fin autenticacion automatica//////////////////////////////////////////
+  //////////////////Fin autenticacion automatica//////////////////////////////////////////
 
 
 

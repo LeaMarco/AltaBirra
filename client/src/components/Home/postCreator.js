@@ -1,5 +1,6 @@
 import axios from "axios"
 
+
 export default async (amount) => {
 
     let CERVEZAS_ROJAS = [
@@ -79,6 +80,7 @@ export default async (amount) => {
 
         let infoToPost = { beer, infoPost, countable }
 
+        //no enviar header de validacion en esta ruta de desarrollo que hace llegar al limite de request del api de validacion de token de facebook(y no se si de google tambien pero me imagino que si)
         await axios.post(`${window.env.HOST_BACKEND}/post`, { params: infoToPost })
     } return (`TERMINE`)
 

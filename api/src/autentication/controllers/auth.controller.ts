@@ -123,7 +123,7 @@ export const signin = async (req: Request, res: Response) => {
 
 
 
-
+//DEPRECADO HASTA NUEVO AVISO
 export const localSignIn = async (req: Request, res: Response) => {
 
 
@@ -167,7 +167,7 @@ interface payload {
 
 export const profile = async (req: Request, res: Response) => {
 
-    res.send("Ho,a soy profiel")
+    res.sendStatus(207)
 
 
     /*  const token = req.header('authToken');
@@ -186,6 +186,8 @@ export const profile = async (req: Request, res: Response) => {
      } */
 };
 
+
+//DEPRECADO HASTA NUEVO AVISO
 export const socialSignIn = async (req: Request, res: Response) => {
 
     const email = req.query.email?.toString()//esto lo envia google! solo mail!
@@ -211,8 +213,10 @@ export const socialSignIn = async (req: Request, res: Response) => {
     }
 }
 
-export const autoLogin = async (req: Request, res: Response) => {
-    const tokenPackage = req.body.tokenPackage //todo lo que tenga el token
+////////////////////////////////////FUNCION DE USO GENERAL////////////////////////////////////
+export async function findUserWithAnyTokenBabe(req: Request, prisma: PrismaClient) {
+
+    const tokenPackage = req.body.tokenPackage //todo lo que tenga el  token
     const uniqueSearchLabel = tokenPackage.uniqueSearchLabel //Puede ser username, email o id, dependiendo si viene de facebook, google o local respectivamente.
     const uniqueSearchValue = tokenPackage[uniqueSearchLabel] //el valor que esta en el dato unique
 
@@ -221,10 +225,32 @@ export const autoLogin = async (req: Request, res: Response) => {
             [uniqueSearchLabel]: uniqueSearchValue //siempre envia un solo dato unique, y poniendolo asi lo busca de forma correcta sea lo que sea
         }
     })
-    console.log(user)
+    return user
+}
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+export const autoLogin = async function (req: Request, res: Response) {
+
+    const user = await findUserWithAnyTokenBabe(req, prisma)
+
+    /* const tokenPackage = req.body.tokenPackage //todo lo que tenga el  token
+    const uniqueSearchLabel = tokenPackage.uniqueSearchLabel //Puede ser username, email o id, dependiendo si viene de facebook, google o local respectivamente.
+    const uniqueSearchValue = tokenPackage[uniqueSearchLabel] //el valor que esta en el dato unique
+
+    const user = await prisma.user.findUnique({
+        where: {
+            [uniqueSearchLabel]: uniqueSearchValue //siempre envia un solo dato unique, y poniendolo asi lo busca de forma correcta sea lo que sea
+        }
+    }) */
+
+
+    //console.log(user)
     if (!user) return res.sendStatus(400)
     else return res.sendStatus(200)
 }
+
+
 
 export const wipe = async (req: Request, res: Response) => {
     await prisma.transaction.deleteMany({})

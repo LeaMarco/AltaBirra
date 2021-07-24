@@ -1,6 +1,8 @@
 import { PrismaClient } from "@prisma/client";
 import { NextFunction, Request, Response, Router } from "express";
 import { LabeledStatement } from "typescript";
+import { findUserWithAnyTokenBabe } from "../autentication/controllers/auth.controller";
+
 
 const router = Router();
 const prisma = new PrismaClient();
@@ -34,8 +36,11 @@ interface Countable {
 }
 
 router.post("/", async (req: Request, res: Response, next: NextFunction) => {
-  const id = 1
-  // const id = req.body.infoToken.id
+
+  const user = await findUserWithAnyTokenBabe(req, prisma)
+
+  console.log("user", user)
+  console.log("patams", req.body.params)
 
   const {
     name,
@@ -63,9 +68,12 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
   const price: number = +req.body.params.countable.price;
   const discount: number = +req.body.params.countable.discount;
 
-  const user = await prisma.user.findUnique({ where: { id: id } });
+  // const user = await prisma.user.findUnique({ where: { id: id } });
   const beerGenericType = await prisma.genericType.findUnique({ where: { type: genericType } });
   const beerSpecificType = await prisma.specificType.findUnique({ where: { type: specificType } });
+  console.log("beerGenericType", beerGenericType)
+  console.log("beerSpecificType", beerSpecificType)
+
 
   await prisma.post.create({
     data: {

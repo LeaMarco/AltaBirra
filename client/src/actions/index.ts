@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { Dispatch } from 'redux';
+import { validationHeadersGenerator } from '../validationHeadersGenerator';
+
 // import { GET_BEERS } from './typesName';
 //traermne mis actionsTypes
 
@@ -250,10 +252,11 @@ export const searchTypes = () => {
 	};
 };
 
-const tokenlocal = localStorage.tokenLocal
 export const createPost = (data) => {
 	return async (dispatch: Dispatch) => {
-		const response = await axios.post<PostValues>(urlpost, { params: data, headers: { authToken: tokenlocal } });
+		console.log("entre createpostasd")
+		console.log(validationHeadersGenerator())
+		const response = await axios.post<PostValues>(urlpost, { params: data }, { headers: validationHeadersGenerator() });
 		return response;
 		// dispatch<Actionrara>({
 		// 	type: ActionTypes.createPost,
