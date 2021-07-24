@@ -47,7 +47,6 @@ export enum ActionTypes {
 
 export interface PostValues {
 	beer: {
-		name: string;
 		abv: number;
 		og: number;
 		ibu: number;
@@ -74,9 +73,8 @@ export interface PostValues {
 	date: Date;
 };
 
-export interface EditValues {
+export interface EditValues { ///////CREO QUE NO SE USA
 	beer: {
-		name: string;
 		abv: number;
 		og: number;
 		ibu: number;
@@ -101,6 +99,37 @@ export interface EditValues {
 		discount: number;
 	};
 	postId: number;
+};
+
+
+export interface EditPostInterface {
+	beer: {
+		name: string;
+		abv: string;
+		og: string;
+		ibu: string;
+		calories: string;
+		dryHop: string;
+		volume: string;
+		genericType: string;
+		specificType: string;
+	};
+	infoPost: {
+		title: string;
+		description: string;
+		image: string;
+		stock: string;
+		rating: string;
+		shipping: string;
+		visibility: string;
+		username: string;
+	};
+	countable: {
+		price: string;
+		discount: string;
+	};
+	postId: string;
+	date: string;
 };
 
 
@@ -187,8 +216,6 @@ export interface SetQuerySearchAction {
 	payload: QueryTypes;
 }
 
-const URL = `${window.env.HOST_BACKEND}`;
-
 export function searchedPosts(query) {
 	return async function (dispatch: Dispatch) {
 		const response = await axios.get<Post[]>(`${URL}/post`, { params: query })
@@ -237,11 +264,11 @@ export interface Actionrara {
 
 
 
-const url = `${window.env.HOST_BACKEND}/beers`;
-const urlpost = `${window.env.HOST_BACKEND}/post`;
-const urledit = `${window.env.HOST_BACKEND}/edit`;
-const urlspecific = `${window.env.HOST_BACKEND}/specificTypes`;
-const urlgeneric = `${window.env.HOST_BACKEND}/genericTypes`;
+const url = `${process.env.REACT_APP_HOST_BACKEND}/beers`;
+const urlpost = `${process.env.REACT_APP_HOST_BACKEND}/post`;
+const urledit = `${process.env.REACT_APP_HOST_BACKEND}/edit`;
+const urlspecific = `${process.env.REACT_APP_HOST_BACKEND}/specificTypes`;
+const urlgeneric = `${process.env.REACT_APP_HOST_BACKEND}/genericTypes`;
 
 
 export const searchTypes = () => {
@@ -298,7 +325,7 @@ export interface UsersPremiumAction {
 
 export const loadUsersPremium = () => {
 	return (dispatch: Dispatch) => {
-		return axios.get<UserPremium[]>(`${window.env.HOST_BACKEND}/beer/premium`)
+		return axios.get<UserPremium[]>(`${process.env.REACT_APP_HOST_BACKEND}/beer/premium`)
 			.then(response => {
 				dispatch<UsersPremiumAction>({
 					type: ActionTypes.loadUserPremium,
@@ -312,7 +339,7 @@ export const loadUsersPremium = () => {
 // export type Action = FetchUsersAction;
 export type ActionUsersPremium = UsersPremiumAction;
 
-const urlDetail = `${window.env.HOST_BACKEND}/detailBeer`
+const urlDetail = `${process.env.REACT_APP_HOST_BACKEND}/detailBeer`
 
 export const getDetail = (id) => {
 	return async (dispatch: Dispatch) => {
@@ -340,7 +367,7 @@ export interface delPostInCartAction {
 
 export const getCart = (id) => {
 	return async (dispatch: Dispatch) => {
-		const response = await axios.get<cart[]>(`${window.env.HOST_BACKEND}/cart/${id}`)
+		const response = await axios.get<cart[]>(`${process.env.REACT_APP_HOST_BACKEND}/cart/${id}`)
 		dispatch<getCartAction>({
 			type: ActionTypes.getCart,
 			payload: response.data,
@@ -349,8 +376,7 @@ export const getCart = (id) => {
 }
 
 
-const urladdtocart = `${window.env.HOST_BACKEND}/addToCart`;
-
+const urladdtocart = `${process.env.REACT_APP_HOST_BACKEND}/addToCart`;
 // export const addToCart = (data) => {
 //     return async (dispatch: Dispatch) => {
 //         const response = await axios.put<PostValues>(urladdtocart, { params: data });

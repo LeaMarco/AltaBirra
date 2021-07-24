@@ -36,7 +36,7 @@ const Card = ({
   };
 
   async function addToFavorite() {
-    await axios.post(`${window.env.HOST_BACKEND}/addFavorite`, {
+    await axios.post(`${process.env.REACT_APP_HOST_BACKEND}/addFavorite`, {
       data: { username: `TestUser`, postId: id },
     });
     dispatch(getFavoritePosts("TestUser"));
@@ -44,7 +44,7 @@ const Card = ({
   }
 
   async function removeFavorite() {
-    await axios.delete(`${window.env.HOST_BACKEND}/removeFavorite`, {
+    await axios.delete(`${process.env.REACT_APP_HOST_BACKEND}/removeFavorite`, {
       data: { username: `TestUser`, postId: id },
     });
     dispatch(getFavoritePosts("TestUser"));

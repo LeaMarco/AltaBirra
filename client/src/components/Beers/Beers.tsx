@@ -12,23 +12,6 @@ const Beers = () => {
   }, [dispatch]);
 
   const usersPremium = useSelector((state) => state["usersPremium"]);
-  // const data = {
-  //   id: usersPremium.id,
-  //   image: 'IMAGEN',
-  //   name: 'Cerveza IPA',
-  //   ibu: 'ibu',
-  //   abv: 'abv'
-  // }
-
-  // id: number;
-	// username: string;
-	// email: string;
-	// name: string;
-	// password: string;
-	// premium: boolean;
-	// roleId: number;
-	// cartId: number
-  const firstRandomBeer= Math.ceil(Math.random()*6)
   
   return (
     <div className="containerBeersPremium">
@@ -36,14 +19,14 @@ const Beers = () => {
       <div className="beers">
       {
         typeof usersPremium === "object" 
-        ? usersPremium.slice(firstRandomBeer, firstRandomBeer+5).map((userPremium) => (
+        ? usersPremium.map((userPremium) => (
           
 
           <Beer
             key={userPremium.id}
             id={userPremium.id}
             image={userPremium.image}
-            title={userPremium.beer.name}
+            title={userPremium.title}
             ibu={userPremium.beer.ibu}
             abv={userPremium.beer.abv}
             discount={userPremium.countable.discount}

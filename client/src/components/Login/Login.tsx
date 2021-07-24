@@ -72,7 +72,7 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
     console.log(postObj);
 
     axios
-      .post(`${window.env.HOST_BACKEND}/auth/signin/`, { params: postObj })
+      .post(`${process.env.REACT_APP_HOST_BACKEND}/auth/signin/`, { params: postObj })
       .then((e: any) => {
         console.log('Logueado!!!', e.data)
         localStorage.clear()
@@ -110,7 +110,7 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
     const facebookId = response.id;
     const nameMail = name.replaceAll(" ", "_") + "_" + facebookId;
 
-    axios.post(`${window.env.HOST_BACKEND}/auth/signin`, {
+    axios.post(`${process.env.REACT_APP_HOST_BACKEND}/auth/signin`, {
       params: {
         nameMail,
       }
@@ -137,7 +137,7 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
 
     console.log('Respuesta en bruto de google', response);
     axios
-      .post(`${window.env.HOST_BACKEND}/auth/signin`, {
+      .post(`${process.env.REACT_APP_HOST_BACKEND}/auth/signin`, {
         params: {
           nameMail,
         }

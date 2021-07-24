@@ -19,7 +19,7 @@ export default function FavoritesTab({ closeModal }) {
 	const favoritePosts: Favorites[] = useSelector((state: RootState) => state.favoritePosts);
 
 	async function removeFavorite(id) {
-		await axios.delete(`${window.env.HOST_BACKEND}/removeFavorite`, { data: { username: `TestUser`, postId: id } });
+		await axios.delete(`${process.env.REACT_APP_HOST_BACKEND}/removeFavorite`, { data: { username: `TestUser`, postId: id } });
 		dispatch(getFavoritePosts(`TestUser`));
 		dispatch(getFavoritePosts(`TestUser`));
 	}

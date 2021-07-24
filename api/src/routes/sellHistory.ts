@@ -35,7 +35,6 @@ interface Post {
 
 interface Beer {
 	id: number;
-	name: string;
 	abv: number;
 	og: number | null;
 	ibu: number;

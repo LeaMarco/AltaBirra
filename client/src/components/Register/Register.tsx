@@ -111,7 +111,7 @@ const Register: React.FunctionComponent<{ closeModal, toogleEnter, toogleRegiste
 
     //
     axios
-      .post(`${window.env.HOST_BACKEND}/auth/signup`, {
+      .post(`${process.env.REACT_APP_HOST_BACKEND}/auth/signup`, {
         params: {
           username,
           email,
@@ -145,7 +145,7 @@ const Register: React.FunctionComponent<{ closeModal, toogleEnter, toogleRegiste
     const username = name.replaceAll(" ", "_") + "_" + facebookId;
     const email = response.email;
 
-    axios.post(`${window.env.HOST_BACKEND}/auth/signup`, {
+    axios.post(`${process.env.REACT_APP_HOST_BACKEND}/auth/signup`, {
       params: {
         username,
         email,
@@ -190,7 +190,7 @@ const Register: React.FunctionComponent<{ closeModal, toogleEnter, toogleRegiste
     console.log(postObj)
 
     axios
-      .post(`${window.env.HOST_BACKEND}/auth/signup/`, { params: postObj })
+      .post(`${process.env.REACT_APP_HOST_BACKEND}/auth/signup/`, { params: postObj })
       .then(async (e: any) => {
         console.log("Bienvenido !")
         closeModal()

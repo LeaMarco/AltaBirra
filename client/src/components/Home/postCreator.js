@@ -29,6 +29,7 @@ export default async (amount) => {
         "http://4.bp.blogspot.com/-mjO2LSepfvs/VRGugOUmHII/AAAAAAAAHlY/omrj-CAf0aw/s1600/f1219-califa-rubia-p.jpg",
         "https://vgb.com.ar/tienda/wp-content/uploads/2020/05/Brunnen-Lager-Bier-Cerveza-Artesanal-Rubia-365-cc-2.jpg?v1620308524",
         "https://espumadecerveza.es/wp-content/uploads/2016/08/karl-strauss-mosaic-session-ale-set.jpg",
+        "http://cdn.shopify.com/s/files/1/0895/3560/products/Blonde_Can_Rebrand_4x_6c8e3b4a-28bf-4dd5-98aa-04750e041339_1024x.png?v=1606856086",
         "https://sentipatagonia.com.ar/wp-content/uploads/2020/09/PHOTO-2020-08-21-13-12-57.jpg",
     ]
     let CERVEZAS_NEGRAS = [
@@ -52,7 +53,6 @@ export default async (amount) => {
     for (let i = 0; i < amount; i++) {
 
         let beer = {
-            "name": beerName[Math.floor(Math.random() * (beerName.length))],
             "abv": 2 + Math.floor(Math.random() * 15),
             "og": Math.floor(Math.random() * 200),
             "ibu": 15 + Math.floor(Math.random() * 80),
@@ -64,7 +64,7 @@ export default async (amount) => {
         }
 
         let infoPost = {
-            "title": beer.name,
+            "title": beerName[Math.floor(Math.random() * (beerName.length))],
             "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus dolores ut consectetur nostrum doloremque numquam labore voluptate quos consequatur enim architecto, laboriosam hic quasi provident cumque reprehenderit aspernatur reiciendis ullam?",
             "image": beer.genericType === "Rubia" ? CERVEZAS_RUBIAS[Math.floor(Math.random() * (CERVEZAS_RUBIAS.length))] : beer.genericType === "Negra" ? CERVEZAS_NEGRAS[Math.floor(Math.random() * (CERVEZAS_NEGRAS.length))] : CERVEZAS_ROJAS[Math.floor(Math.random() * (CERVEZAS_ROJAS.length))],
             "rating": Math.ceil(Math.random() * 5),
@@ -74,14 +74,14 @@ export default async (amount) => {
             "username": usernames[Math.floor(Math.random() * usernames.length)]
         }
         let countable = {
-            "price": (Math.random() * 200 + 75).toFixed(2),
+            "price": +(Math.random() * 200 + 75).toFixed(2),
             "discount": Math.random() > 0.5 ? 0 : Math.floor(Math.random() * 25)
         }
 
         let infoToPost = { beer, infoPost, countable }
 
-        //no enviar header de validacion en esta ruta de desarrollo que hace llegar al limite de request del api de validacion de token de facebook(y no se si de google tambien pero me imagino que si)
-        await axios.post(`${window.env.HOST_BACKEND}/post`, { params: infoToPost })
+        console.log(infoToPost)
+        await axios.post(`${process.env.REACT_APP_HOST_BACKEND}/post`, { params: infoToPost })
     } return (`TERMINE`)
 
 }

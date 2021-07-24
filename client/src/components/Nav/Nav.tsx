@@ -42,7 +42,7 @@ export default function Nav() {
   useLayoutEffect(() => {
 
     if (localStorage.length) {
-      axios.get(`http://localhost:3001/auth/autoLogin`, {
+      axios.get(`${process.env.REACT_APP_HOST_BACKEND}/auth/autoLogin`, {
         headers: validationHeadersGenerator()
       }).then(e => {
         toogleAuth()
@@ -63,7 +63,7 @@ export default function Nav() {
 
   async function handleChange(event) {
     setSearchInput(event.target.value);
-    let temp = await axios.get(`${window.env.HOST_BACKEND}/autocomplete`, {
+    let temp = await axios.get(`${process.env.REACT_APP_HOST_BACKEND}/autocomplete`, {
       params: { search: event.target.value },
     });
     setAutocomplete(temp.data);
@@ -147,7 +147,6 @@ export default function Nav() {
             >
               Mis Compras
             </Link>
-
             <Link
               to="/"
               className={style.buttonEnter}
