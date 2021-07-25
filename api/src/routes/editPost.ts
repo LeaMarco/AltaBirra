@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { NextFunction, Request, Response, Router } from "express";
 import { LabeledStatement } from "typescript";
+import { findUserWithAnyTokenBabe } from "../autentication/controllers/auth.controller";
 
 const router = Router();
 const prisma = new PrismaClient();
@@ -55,15 +56,15 @@ router.put("/", async (req: Request, res: Response, next: NextFunction) => {
     username,
   }: InfoPost = req.body.params.infoPost;
 
-  
+
   const {
     price,
     discount,
     expireDate
-  } : Countable = req.body.params.countable
+  }: Countable = req.body.params.countable
 
   const postId: number = req.body.params.postId
-  const user = await prisma.user.findUnique({ where: { username: username } });
+  const user = await findUserWithAnyTokenBabe(req, prisma)
   const beerGenericType = await prisma.genericType.findUnique({
     where: { type: genericType }
   });

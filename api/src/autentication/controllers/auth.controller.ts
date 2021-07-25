@@ -48,13 +48,10 @@ export const signup = async (req: Request, res: Response) => {
         }
     })
 
-    //Si existe le digo que se loguee
-    if (user) return res.sendStatus(409)
-
-    else { //busco el rol (no hace falta podria pasarle el numero y listo)
+    if (!user) { //Si el usuario NO existe
         const userRol = await prisma.role.findUnique({ where: { name: "USER" } })
 
-        //Creo el usuario (porque paso el else sin entrar en el return)
+        //Creo el usuario
         const userCreado = await prisma.user.create({
             data: {
                 username,
@@ -71,10 +68,24 @@ export const signup = async (req: Request, res: Response) => {
                     create: {}
                 }
             }
-        }).catch((e) => res.send("Error al registrar usuario"))
+        }).catch((e) => res.send("Error al registrar al usuario"))
 
         return res.json(userCreado)
     }
+    else if (user.activeCount) return res.sendStatus(409)//Si existe y tiene la cuenta activada, rebota y lo manda a loguearse
+
+    else if (user.activeCount === false) {//Si existe en base de datos, pero tiene la cuenta desactivada
+
+        await prisma.user.update({
+            where: {
+                id: user.id
+            }, data: { activeCount: true }//Se la activa!
+        }).catch(() => res.status(500).send("Error inesperado: se encontro al usuario en base de datos pero no se pudo reactivar su cuenta"))
+
+        return res.sendStatus(200)
+    }
+
+    res.status(500).send("Error inesperado")
 
 };
 
@@ -91,7 +102,7 @@ export const signin = async (req: Request, res: Response) => {
         }
     })
 
-    if (!user) return res.sendStatus(400);
+    if (!user || user.activeCount === false) return res.sendStatus(400);
 
     else if (process.env.SECRET_CODE) {
 
@@ -213,7 +224,27 @@ export const socialSignIn = async (req: Request, res: Response) => {
     }
 }
 
-////////////////////////////////////FUNCION DE USO GENERAL////////////////////////////////////
+/**
+ * 
+@example •Como usarla
+ const user = await findUserWithAnyTokenBabe(req, prisma)
+
+•Funcion trasbambalains
+async function findUserWithAnyTokenBabe(req: Request, prisma: PrismaClient) {
+
+    const tokenPackage = req.body.tokenPackage //todo lo que tenga el  token
+    const uniqueSearchLabel = tokenPackage.uniqueSearchLabel //Puede ser username, email o id, dependiendo si viene de facebook, google o local respectivamente.
+    const uniqueSearchValue = tokenPackage[uniqueSearchLabel] //el valor que esta en el dato unique
+
+    const user = await prisma.user.findUnique({
+        where: {
+            [uniqueSearchLabel]: uniqueSearchValue //siempre envia un solo dato unique, y poniendolo asi lo busca de forma correcta sea lo que sea
+        }
+    })
+    return user
+}
+@author Ezequiel Aguilera. Racoon City, 1998. Comienzos del último Octubre.
+*/
 export async function findUserWithAnyTokenBabe(req: Request, prisma: PrismaClient) {
 
     const tokenPackage = req.body.tokenPackage //todo lo que tenga el  token
