@@ -7,6 +7,7 @@ import { PostinCart } from "../postInCart/PostInCart";
 import axios from 'axios';
 import Swal from "sweetalert2";
 import styles from './Cart.module.css';
+import { validationHeadersGenerator } from "../../validationHeadersGenerator";
 
 function Cart() {
   const dispatch = useDispatch();
@@ -70,7 +71,9 @@ function Cart() {
 
 const urldeleteallcart = `${process.env.REACT_APP_HOST_BACKEND}/deleteAllCart`;
 async function deleteAllCart(data) {
-  const response = await axios.delete<cart[]>(urldeleteallcart, { data: { data } });
+
+  //☢ Posible error aca, documentacion ambigua sobre pasaje de headers por axios.delete -Ezequiel, Raccon City 1997.
+  const response = await axios.delete<cart[]>(urldeleteallcart, { headers: validationHeadersGenerator(), data: { data } });
   return response;
 }
 

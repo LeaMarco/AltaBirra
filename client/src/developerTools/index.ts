@@ -5,7 +5,6 @@ interface IdeveloperTools {
     showMargins?: boolean;
 }
 
-console.log(21321)
 export const developerTools = function ({ consoleInfo, showMargins }: IdeveloperTools) {
 
     if (consoleInfo) {

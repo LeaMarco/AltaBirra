@@ -5,6 +5,7 @@ import { getCart, cart, PostValues } from "../../actions";
 import axios from "axios";
 import style from './PostInCart.module.css';
 import Swal from "sweetalert2";
+import { validationHeadersGenerator } from "../../validationHeadersGenerator";
 
 export function PostinCart({
 	postId,
@@ -83,15 +84,14 @@ export function PostinCart({
 }
 
 export default PostinCart;
-
 const urladdtocart = `${process.env.REACT_APP_HOST_BACKEND}/cart`;
 async function addToCart(data: any) {
-	const response = await axios.put<PostValues>(urladdtocart, { params: data });
+	const response = await axios.put<PostValues>(urladdtocart, { params: data }, { headers: validationHeadersGenerator() });
 	return response;
 }
 
 const urlremovetocart = `${process.env.REACT_APP_HOST_BACKEND}/removeToCart`;
 async function removeToCart(data) {
-	const response = await axios.delete<cart[]>(urlremovetocart, { data: data });
+	const response = await axios.delete<cart[]>(urlremovetocart, { headers: validationHeadersGenerator(), data: data });
 	return response;
 }

@@ -15,7 +15,8 @@ axios.get(`http://localhost:3001/auth/autoLogin`, {
 
 @example POST EXAMPLE
     const response = await axios.post<PostValues>(urlpost, { params: data }, { headers: validationHeadersGenerator() });
-
+@example PATCH EXAMPLE
+    axios.patch(`${process.env.REACT_APP_HOST_BACKEND}/desactivateAccount`, null, { headers: validationHeadersGenerator() })
 /////////////////////////////////////////////////////////////////////////////////////
 Luego de enviar a validar esto desde el FRONT, en el API solo se debe intermediar el tokenValidation en app.ts, y si se quiere usar un usuario usar la funcion findUserWithAnyTokenBabe en cada ruta de la forma que sigue
 
@@ -80,6 +81,7 @@ export function validationHeadersGenerator() {
   */
 export function validationHeadersGenerator() {
 
+  if (localStorage.length > 1) { return "ERROR EN LOCALSTORAGE, HAY MAS DE UN TOKEN!" }
   const { tokenFacebook, tokenLocal, tokenGoogle } = localStorage
 
   const uniqueSearchLabel =

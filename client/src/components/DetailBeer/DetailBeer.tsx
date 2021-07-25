@@ -16,6 +16,7 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import Beer from "../Beer/Beer";
 import { card } from "mercadopago";
+import { validationHeadersGenerator } from "../../validationHeadersGenerator";
 
 interface Favorites {
 	post: Post;
@@ -37,7 +38,7 @@ export default function DetailBeer() {
 	}, [dispatch]);
 
 	const addToCart = async () => {
-		const response = await axios.put(`${process.env.REACT_APP_HOST_BACKEND}/addToCart`, { params: { "username": "TestUser", "postId": parseInt(id), "quantity": cantidad } })
+		const response = await axios.put(`${process.env.REACT_APP_HOST_BACKEND}/addToCart`, { params: { "username": "TestUser", "postId": parseInt(id), "quantity": cantidad } }, { headers: validationHeadersGenerator() })
 		return (response.data)
 	}
 

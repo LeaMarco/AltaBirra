@@ -5,6 +5,7 @@ import { getDetail, getFavoritePosts, Post } from "../../actions";
 import Style from "./Card.module.css";
 import axios from "axios";
 import { RootState } from "../../reducers";
+import { validationHeadersGenerator } from "../../validationHeadersGenerator";
 
 interface Favorites {
   post: Post;
@@ -38,13 +39,14 @@ const Card = ({
   async function addToFavorite() {
     await axios.post(`${process.env.REACT_APP_HOST_BACKEND}/addFavorite`, {
       data: { username: `TestUser`, postId: id },
-    });
+    }, { headers: validationHeadersGenerator() });
     dispatch(getFavoritePosts("TestUser"));
     setIsFavorite(true);
   }
 
   async function removeFavorite() {
     await axios.delete(`${process.env.REACT_APP_HOST_BACKEND}/removeFavorite`, {
+      headers: validationHeadersGenerator(),
       data: { username: `TestUser`, postId: id },
     });
     dispatch(getFavoritePosts("TestUser"));

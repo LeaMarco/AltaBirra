@@ -296,7 +296,7 @@ export const createPost = (data) => {
 
 export const editPost = (data) => {
 	return async (dispatch: Dispatch) => {
-		const response = await axios.put<EditValues>(urledit, { params: data });
+		const response = await axios.put<EditValues>(urledit, { params: data }, { headers: validationHeadersGenerator() });
 		return response;
 	};
 }
@@ -367,7 +367,7 @@ export interface delPostInCartAction {
 
 export const getCart = (id) => {
 	return async (dispatch: Dispatch) => {
-		const response = await axios.get<cart[]>(`${process.env.REACT_APP_HOST_BACKEND}/cart/${id}`)
+		const response = await axios.get<cart[]>(`${process.env.REACT_APP_HOST_BACKEND}/cart/${id}`, { headers: validationHeadersGenerator() })
 		dispatch<getCartAction>({
 			type: ActionTypes.getCart,
 			payload: response.data,
@@ -379,14 +379,14 @@ export const getCart = (id) => {
 const urladdtocart = `${process.env.REACT_APP_HOST_BACKEND}/addToCart`;
 // export const addToCart = (data) => {
 //     return async (dispatch: Dispatch) => {
-//         const response = await axios.put<PostValues>(urladdtocart, { params: data });
+//         const response = await axios.put<PostValues>(urladdtocart, { params: data }, {/*AGREGADO POR SI SE USA EN EL FUTURO headers:validationHeadersGenerator() */});
 //         return response;
 //     };
 // };
 
 export function getFavoritePosts(username) {
 	return async function (dispatch: Dispatch) {
-		const response = await axios.get<Post[]>(`${URL}/getFavorites`, { params: { username } });
+		const response = await axios.get<Post[]>(`${URL}/getFavorites`, { params: { username }, headers: validationHeadersGenerator() });
 		dispatch<getPostsAction>({
 			type: "GET_FAVORITE_POSTS",
 			payload: response.data

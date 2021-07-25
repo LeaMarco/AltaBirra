@@ -52,9 +52,9 @@ model User {
     premium  Boolean @default(false)
 
     activeCount Boolean @default(true)
+    //☢ 👆 NUEVA COLUMNA A USER NECESARIA PARA EL BOTON DE UNREGISTER . -Eze
 
     ///relacion de muchos a uno con TABLA ROLE
-    //☢ agregue cosas condicionales para poder generar usuarios sin que joda
     roleId        Int
     role          Role          @relation(fields: [roleId], references: [id])
     cartId        Int
