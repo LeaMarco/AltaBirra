@@ -8,7 +8,6 @@ const prisma = new PrismaClient();
 interface Cart {
     data: number;
 }
-
 router.delete("/", async (req: Request, res: Response, next: NextFunction) => {
     const data: number = req.body.data;
     // const user = await prisma.user.findUnique({ where: { username: username } });

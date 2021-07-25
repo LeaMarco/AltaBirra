@@ -15,10 +15,12 @@ function Cart() {
   const carts: any = useSelector((state: RootState) => state.cart);
   const [merpastate, setMerpa] = useState("");
 
-
+  console.log(carts)
+  debugger
   let cartIdparsed = parseInt(id, 10);
 
   useEffect(() => {
+    debugger
     dispatch(getCart(id));
   }, []);
 

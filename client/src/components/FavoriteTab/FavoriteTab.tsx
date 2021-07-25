@@ -15,17 +15,18 @@ interface Favorites {
 }
 
 export default function FavoritesTab({ closeModal }) {
+
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const favoritePosts: Favorites[] = useSelector((state: RootState) => state.favoritePosts);
 
 	async function removeFavorite(id) {
 		await axios.delete(`${process.env.REACT_APP_HOST_BACKEND}/removeFavorite`, { headers: validationHeadersGenerator(), data: { username: `TestUser`, postId: id } });
-		dispatch(getFavoritePosts(`TestUser`));
+		dispatch(getFavoritePosts(`TestUser`)); //Porque 2 dispatch ahhhhAHH. -Eze
 		dispatch(getFavoritePosts(`TestUser`));
 	}
 
-	async function goToDetail(id) {
+	async function goToDetail(id) { //Deprecado por el modal? -Eze
 		await dispatch(getDetail(id));
 		history.push(`/detailBeer/${id}`);
 		closeModal();

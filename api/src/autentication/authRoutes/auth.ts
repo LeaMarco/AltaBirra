@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { signup, signin, profile, wipe, localSignIn, socialSignIn, autoLogin } from '../controllers/auth.controller';
 import { tokenValidation } from '../libs/verifyToken';
+import { PrismaClient } from "@prisma/client"; //AUTOPOST_ONLY_DEVELOPMENT_ROUTE
 const router: Router = Router();
 
 
@@ -13,4 +14,12 @@ router.get('/autoLogin', tokenValidation, autoLogin);
 // router.get('/profile', tokenValidation, profile);
 
 
+
+
 export default router;
+
+
+
+
+
+

@@ -37,6 +37,8 @@ const Card = ({
   };
 
   async function addToFavorite() {
+
+
     await axios.post(`${process.env.REACT_APP_HOST_BACKEND}/addFavorite`, {
       data: { username: `TestUser`, postId: id },
     }, { headers: validationHeadersGenerator() });
@@ -62,6 +64,7 @@ const Card = ({
     <div className={Style.containerBack}>
       <div className={Style.container}>
         {isFavorite ? (
+          //☢ Bug en agregar/remover de favoritos: al refrescar la pagina se rompe si queres agregar la misma. -Eze
           <button onClick={removeFavorite} className={Style.unfav}>
             {" "}
             ❤{" "}

@@ -218,7 +218,7 @@ export interface SetQuerySearchAction {
 
 export function searchedPosts(query) {
 	return async function (dispatch: Dispatch) {
-		const response = await axios.get<Post[]>(`${URL}/post`, { params: query })
+		const response = await axios.get<Post[]>(`${process.env.REACT_APP_HOST_BACKEND}/post`, { params: query })
 		dispatch<getPostsAction>({
 			type: "GET_SEARCHED_POST",
 			payload: response.data
@@ -386,7 +386,7 @@ const urladdtocart = `${process.env.REACT_APP_HOST_BACKEND}/addToCart`;
 
 export function getFavoritePosts(username) {
 	return async function (dispatch: Dispatch) {
-		const response = await axios.get<Post[]>(`${URL}/getFavorites`, { params: { username }, headers: validationHeadersGenerator() });
+		const response = await axios.get<Post[]>(`${process.env.REACT_APP_HOST_BACKEND}/getFavorites`, { params: { username }, headers: validationHeadersGenerator() });
 		dispatch<getPostsAction>({
 			type: "GET_FAVORITE_POSTS",
 			payload: response.data
@@ -396,7 +396,7 @@ export function getFavoritePosts(username) {
 
 export function getHistory(type, userId) {
 	return async function (dispatch: Dispatch) {
-		const response = await axios.get(`${URL}/${type}History`, { params: { userId } });
+		const response = await axios.get(`${process.env.REACT_APP_HOST_BACKEND}/${type}History`, { params: { userId } });
 		dispatch({
 			type: "GET_HISTORY",
 			payload: response.data

@@ -24,8 +24,9 @@ import sellHistory from "./sellHistory";
 import addToCart from './addToCart';
 import autentication from "../autentication/authRoutes/auth"
 import buyHistory from "./buyHistory";
+import AUTOPOST_ONLY_DEVELOPMENT_ROUTE from "./AUTOPOST_ONLY_DEVELOPMENT_ROUTE";
 import { tokenValidation } from '../autentication/libs/verifyToken';
-
+import getMultiplePostByIds from './getMultiplePostByIds'
 import desactivateAccount from '../autentication/controllers/desactivateAccount'
 
 const router = Router();
@@ -38,10 +39,12 @@ router.use("/specificTypes", specificType);
 router.use("/genericTypes", genericType);
 router.use("/autocomplete", autoComplete);//autocompletar el search
 router.use("/detailBeer", detail);//ruta detalle de post
+router.use("/detail", detail);//ruta detalle de post
 
+router.use('/AUTOPOST_ONLY_DEVELOPMENT_ROUTE', AUTOPOST_ONLY_DEVELOPMENT_ROUTE)//asociado al boton de posts automatico, pero sin verificacion para que no colapse la validacion de token por terceros
 
+router.use("/getMultiplePostByIds", getMultiplePostByIds);//
 router.use("/desactivateAccount", tokenValidation, desactivateAccount)//PATCH
-
 router.use("/post", tokenValidation, createPost);//crea un nuevo post
 router.use("/transaction", tokenValidation, transaction);// escribe una transaccion
 router.use("/cart", tokenValidation, cart);//es un put/

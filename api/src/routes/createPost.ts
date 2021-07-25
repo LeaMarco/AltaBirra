@@ -39,7 +39,6 @@ interface Countable {
 
 router.post("/", async (req: Request, res: Response, next: NextFunction) => {
 
-  // const user = await findUserWithAnyTokenBabe(req, prisma)
 
   // console.log("user", user)
   // console.log("patams", req.body.params)

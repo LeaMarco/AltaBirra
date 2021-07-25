@@ -130,7 +130,7 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
 
   //////////////////////////////LOGICA DE GOOGLE///////////////////////////////////////////////////
   const responseGoogleLogin = (response: any) => {
-    console.log(response)
+    console.log("google response", response)
     const tokenId = response.tokenId
     const googleId = response.googleId;
     const nameMail = response.Ts.RT + "_" + response.Ts.TR + "_" + googleId;
@@ -152,7 +152,7 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
       .catch((error) => console.log('No te pudiste loguear con Google!'))
   }
   const onFailureLogin = (response: any) => {
-    console.log(response, "Fallo el login!");
+    console.log("Fallo el login!", response,);
   };
   //////////////////////////////fin de logica de google///////////////////////////////////////////////////
 
