@@ -2,9 +2,9 @@
     background-color: rgb(255, 255, 255);
     display: flex;
     flex-direction: column;
-    width: 14.5vw;
+    width: 30rem;
+    max-width: 30rem;
     height: 18vw;
-    margin: 1.5vw;
     font-weight: bold;
     text-decoration: none;
     color: black;
@@ -12,39 +12,35 @@
     transition: transform 500ms, filter 1000ms;
     border-radius: 1rem;
   }
-  
-  
-  
+
   .info{
     border-bottom-left-radius: 1rem;
     border-bottom-right-radius: 1rem;
     height: 6vw;
     background-image: radial-gradient(circle at center center, rgb(64,65,67),rgb(36,32,33));
   }
-  
-  
+
 
   .description{
     color: white;
     font-weight: 400;
     height: 8rem;
   }
-  
+
   .container:hover {
     transform: scale(1.03);
   filter: brightness(1.1);
   box-shadow: 0px 10px 25px 5px rgba(0, 0, 0, 0.288);
   transition: 600ms;
   }
-  
+
   .image {
     margin-top: 0.5rem;
     max-width: 100%;
     height: 11vw;
     border-radius: 0.5rem;
   }
-  
-  
+
   .title{
     position: absolute;
     margin-top: -0.5rem;
@@ -62,7 +58,7 @@
     justify-content: center;
     flex-direction: column;
   }
-  
+
   .props > div {
     display: flex;
     justify-content: space-evenly;

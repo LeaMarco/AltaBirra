@@ -8,13 +8,15 @@
     margin-top: 50px;
     margin-bottom: 50px;
     width: 95%;
+    max-width: 95%;
     /* background-image: radial-gradient(circle at center center, rgba(14,13,13, 0.15) 0%, rgba(14,13,13, 0.15) 77%,transparent 77%, transparent 100%),linear-gradient(90deg, rgb(128,130,125),rgb(128,130,125)); background-size: 32px 32px; */
     background-image: radial-gradient(circle at center center, rgba(82,80,80, 0.15) 0%, rgba(82,80,80, 0.15) 42%,transparent 42%, transparent 100%),linear-gradient(90deg, rgb(167,165,165),rgb(167,165,165)); background-size: 7px 7px;
 }
 
 .beers{
     display: flex;
-    justify-content: space-around;
+    max-width: 95%;
+    /* justify-content: space-around; */
     margin-top: 15px;
     margin-bottom: 15px;
 }
