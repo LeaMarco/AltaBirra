@@ -25,6 +25,7 @@ import addToCart from './addToCart';
 import autentication from "../autentication/authRoutes/auth"
 import buyHistory from "./buyHistory";
 import viewHistory from "./viewHistory";
+import transactionState from "./transactionState";
 import { tokenValidation } from '../autentication/libs/verifyToken';
 
 const router = Router();
@@ -55,6 +56,7 @@ router.use("/ratePost", /* tokenValidation, */ ratePost);//
 router.use("/sellHistory", /* tokenValidation, */ sellHistory);//
 router.use("/buyHistory", /* tokenValidation, */ buyHistory);//
 router.use("/viewHistory", /* tokenValidation, */ viewHistory);//
+router.use("/transactionState", /* tokenValidation, */ transactionState);//
 
 
 export default router;

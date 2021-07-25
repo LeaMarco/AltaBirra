@@ -67,10 +67,18 @@ model User {
     review        Review[]
 }
 
+enum State {
+    Procesando
+    Cancelada
+    Completa
+}
+
 model Transaction {
     id        Int      @id @default(autoincrement())
     price     Float
     createdAt DateTime @default(now())
+    state     State    @default(Procesando)
+    quantity  Int
 
     /////relacion de muchos (transacciones) a uno (usuario)
     buyerId Int
@@ -143,7 +151,6 @@ model SpecificType {
     type        String @unique
     description String
     group       Group
-
 
     beerId        Beer[]
     genericTypeId Int

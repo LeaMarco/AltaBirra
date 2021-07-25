@@ -394,9 +394,9 @@ export function getFavoritePosts(username) {
 	}
 }
 
-export function getHistory(type, userId) {
+export function getHistory(type, filter, userId) {
 	return async function (dispatch: Dispatch) {
-		const response = await axios.get(`${process.env.REACT_APP_HOST_BACKEND}/${type}History`, { params: { userId } });
+		const response = await axios.get(`${process.env.REACT_APP_HOST_BACKEND}/${type}History`, { params: { userId, filter } });
 		dispatch({
 			type: "GET_HISTORY",
 			payload: response.data

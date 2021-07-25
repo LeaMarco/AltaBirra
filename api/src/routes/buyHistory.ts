@@ -1,20 +1,15 @@
-import { PrismaClient } from "@prisma/client";
+import { Prisma, PrismaClient } from "@prisma/client";
 import { NextFunction, Request, Response, Router } from "express";
 
 const router = Router();
 const prisma = new PrismaClient();
 
-interface Algo {
-	price: number;
-	createdAt: Date;
-	post: Post;
-}
-
 interface History {
+	state: string,
+	quantity: number,
 	price: number;
 	createdAt: Date;
 	post: Post;
-	count: number;
 }
 
 interface Post {
@@ -45,31 +40,21 @@ interface Beer {
 	specificTypeId: number;
 }
 
-interface Results {
-	[key: string]: History;
-}
-
 router.get("/", async (req: Request, res: Response, next: NextFunction) => {
 	const buyerId: number = Number(req.query.userId);
-	const history: Algo[] = await prisma.transaction.findMany({
+	const { filter }: any = req.query;
+	const history: History[] = await prisma.transaction.findMany({
 		where: {
-			buyerId
+			buyerId,
+			state: filter
 		},
-		select: {
-			price: true,
-			createdAt: true,
+		include: {
 			post: {
-				include: {
-					beer: true
-				}
+				include: { beer: true }
 			}
 		}
 	})
-	const posts: Results = {};
-	history.map((post: Algo) => {
-		!posts.hasOwnProperty(post.post.id) ? posts[post.post.id] = { ...post, count: 1 } : posts[post.post.id].count += 1;
-	})
-	res.send(Object.values(posts));
+	res.send(history);
 });
 
 export default router;

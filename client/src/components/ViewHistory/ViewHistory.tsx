@@ -13,7 +13,7 @@ export default function ViewHistory() {
 	const history = useSelector((state: RootState) => state.history);
 
 	useEffect(() => {
-		dispatch(getHistory("view", userId));
+		dispatch(getHistory("view", undefined, userId));
 	}, [dispatch])
 
 	function deleteConfirm() {
@@ -33,7 +33,7 @@ export default function ViewHistory() {
 					'¡Se limpió tu historial!',
 					'success'
 				)
-				dispatch(getHistory("view", userId));
+				dispatch(getHistory("view", undefined, userId));
 			}
 		})
 	}
