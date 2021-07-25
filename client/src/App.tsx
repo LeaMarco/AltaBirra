@@ -18,6 +18,7 @@ import UserPanel from "./components/UserPanel/UserPanel";
 import BuyHistory from "./components/BuyHistory/BuyHistory";
 import SellHistory from "./components/SellHistory/SellHistory";
 import E_Unauthorized from "./components/E_Unauthorized/E_Unauthorized";
+import Admin from "./components/Admin/Admin";
 
 function App() {
 
@@ -41,6 +42,8 @@ function App() {
       <Route exact path="/calificar/:id" component={Rate} />
 
       <Route exact path="/E_Unauthorized" component={E_Unauthorized} />
+
+      <Route exact path="/admin" component={Admin} />
 
     </div>
   );

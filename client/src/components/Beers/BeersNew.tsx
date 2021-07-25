@@ -5,6 +5,8 @@ import { loadUsersPremium } from "../../actions";
 import './beers.css';
 import axios from "axios";
 import { useState } from "react";
+import dotenv from "dotenv";
+
 
 const Beers = () => {
   const dispatch = useDispatch();

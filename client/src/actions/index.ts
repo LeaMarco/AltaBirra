@@ -275,7 +275,8 @@ export const searchTypes = () => {
 	return async (dispatch: Dispatch) => {
 		const genericTypes = await axios.get<Array<string>>(urlgeneric);
 		const specificTypes = await axios.get<Array<string>>(urlspecific);
-		return [genericTypes.data, specificTypes.data]
+		const groupTypes = await axios.get<Array<string>>(`${process.env.REACT_APP_HOST_BACKEND}/groupTypes`);
+		return [genericTypes.data, specificTypes.data, groupTypes.data]
 	};
 };
 

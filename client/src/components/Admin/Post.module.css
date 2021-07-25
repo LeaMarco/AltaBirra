@@ -1,0 +1,166 @@
+.mainContainer{
+    height: 50rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.postForm{
+    display: flex;
+    flex-direction: column;
+    width: 40em;
+    height: 40rem;
+    align-items: center;
+    justify-content:center;
+    text-align: center;
+    border: 1px solid tomato;
+    border-radius: 20px;
+    overflow-y: scroll;
+    scroll-behavior:smooth;
+}
+
+.container{display: flex; align-items:center;flex-direction: column; float: left; width: 12.75rem; margin: 20px 3%; position: relative;}
+:focus{outline: none;}
+.input{border: 0; border-bottom: 1px solid #ccc; background-color: transparent;}
+.input ~ .focusBorder{position: absolute; bottom: 0; left: 50%; width: 0; height: 2px; background-color: tomato; transition: 0.4s;}
+.input:focus ~ .focusBorder,
+.input:valid ~ .focusBorder{width: 100%; transition: 0.4s; left: 0;} .input ~ label{position: absolute; left: 0; width: 100%; top: -15px; color: rgb(61, 61, 61); transition: 0.3s; z-index: -1; letter-spacing: 0.5px;}
+.input ~ label{position: absolute; left: 0; width: 100%; top: -15px; color: rgb(61, 61, 61); transition: 0.3s; z-index: -1; letter-spacing: 0.5px;}
+.input:focus ~ label, .input:valid ~ label{top: -18px; font-size: 12px; color: tomato; transition: 0.3s;}
+
+
+input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width: 100%; box-sizing: border-box; letter-spacing: 1px;}
+
+.postFormSubmitButton{
+    margin-bottom:30px;
+    width:20em;
+    background:rgb(92, 221, 135);
+}
+.postFormBeer{
+    margin-top: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.postFormBeer input{
+    height: 2em;
+    width:15em;
+}
+.postFormInfoPost{
+    margin-top: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+}
+.postrow1{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width:32em;
+}
+.InfoPostCheckboxes{
+    display: flex;
+    flex-direction: row;
+    margin-top: 5px;
+}
+
+.postFormInfoPost input{
+    height: 2em;
+    width:5em;
+}
+.postFormInfoPost textarea{
+    margin-top: 5px;
+    height: 5em;
+    width:40em;
+}
+
+.postFormCountable{
+    margin-top: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.postFormCountable input{
+    height: 2em;
+    width:15em;
+}
+
+.beerCheckbox{
+    display:flex;
+    justify-content:space-around;
+    align-items: center;
+}
+
+.checkbox{
+    transform: scale(0.8);
+}
+
+.checkboxDiscount{
+    margin-top: 2%;
+    transform: scale(1.8);
+}
+
+.row1{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width:29em;
+}
+.row2{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width:29em;
+}
+.row3{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width:29em;
+}
+.row4{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width:29em;
+    margin-bottom: 5%;
+}
+
+.countablerow{
+    margin-top: 5px;
+    display: flex;
+    align-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-self: center;
+    width:29em;
+}
+
+.postFormSubmitButton{
+    margin-top: 20px;
+    background-color:tomato;
+    height: 3em;
+    border-radius: 8px;
+    border:none;
+    transition:0.3s;
+    font-size: 18px;
+    font-weight: 900;
+    color:white;
+}
+.postFormSubmitButton:hover{
+    background-color:rgb(142, 216, 142);
+    cursor: pointer;
+}
+
+.imageInput{
+    margin-top: 10%;
+    margin-bottom: 5%;
+}
+
+.uploadGroup{
+    padding-bottom: 5%;
+}
