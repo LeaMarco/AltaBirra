@@ -15,10 +15,13 @@
 
 .beers{
     display: flex;
-    max-width: 95%;
-    /* justify-content: space-around; */
+    align-items: center;
+    justify-content:space-between;
+    max-width: 100%;
+    /* min-width: 50px; */
     margin-top: 15px;
     margin-bottom: 15px;
+    overflow: hidden;
 }
 
 #titulo{
