@@ -6,6 +6,11 @@ export default function UserPanel() {
 	return (
 		<div className={Style.container}>
 			<h2> TestUser </h2>
+			<Link to="/historialVistos" className={Style.subcontainer}>
+				<div >
+					Vistos recientemente
+				</div>
+			</Link>
 			<Link to="/historialCompras" className={Style.subcontainer}>
 				<div >
 					Historial de compras

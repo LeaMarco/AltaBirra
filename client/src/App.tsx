@@ -18,6 +18,7 @@ import UserPanel from "./components/UserPanel/UserPanel";
 import BuyHistory from "./components/BuyHistory/BuyHistory";
 import SellHistory from "./components/SellHistory/SellHistory";
 import E_Unauthorized from "./components/E_Unauthorized/E_Unauthorized";
+import ViewsHistory from "./components/ViewHistory/ViewHistory";
 
 function App() {
 
@@ -37,6 +38,7 @@ function App() {
       <Route exact path="/compra/:id" component={Compra} />
       <Route exact path="/panel" component={UserPanel} />
       <Route exact path="/historialCompras" component={BuyHistory} />
+      <Route exact path="/historialVistos" component={ViewsHistory} />
       <Route exact path="/historialVentas" component={SellHistory} />
       <Route exact path="/calificar/:id" component={Rate} />
 

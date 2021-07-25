@@ -33,7 +33,8 @@ export default function DetailBeer() {
 	const MySwal = withReactContent(Swal);
 
 	useEffect(() => {
-		dispatch(getDetail(id))
+		dispatch(getDetail(id));
+		axios.post(`${process.env.REACT_APP_HOST_BACKEND}/viewHistory`, { data: { username: "TestUser", postId: id } });
 	}, [dispatch]);
 
 	const addToCart = async () => {

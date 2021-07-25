@@ -30,6 +30,7 @@ model Post {
 
     carts     PostsOnCart[]
     favorites PostsOnFavorites[]
+    views     PostsOnViews[]
 
     transactionId Transaction[]
 
@@ -59,6 +60,8 @@ model User {
     cart          Cart          @relation(fields: [cartId], references: [id])
     favoriteId    Int
     favorite      Favorite      @relation(fields: [favoriteId], references: [id])
+    viewsId       Int
+    views         Views         @relation(fields: [viewsId], references: [id])
     postId        Post[]
     transactionId Transaction[]
     review        Review[]
@@ -93,6 +96,22 @@ model PostsOnCart {
     cart   Cart @relation(fields: [cartId], references: [id])
 
     @@id([cartId, postId])
+}
+
+model Views {
+    id Int @id @default(autoincrement())
+
+    userId User?
+    posts  PostsOnViews[]
+}
+
+model PostsOnViews {
+    postId  Int
+    post    Post  @relation(fields: [postId], references: [id])
+    viewsId Int
+    views   Views @relation(fields: [viewsId], references: [id])
+
+    @@id([viewsId, postId])
 }
 
 model Beer {
@@ -177,10 +196,10 @@ model Review {
     @@unique([userId, postId])
 }
 
-model image_upload{
-    id Int @id @default(autoincrement())
-    filename String 
+model image_upload {
+    id       Int    @id @default(autoincrement())
+    filename String
     filepath String
     mimetype String
-    size BigInt 
+    size     BigInt
 }
