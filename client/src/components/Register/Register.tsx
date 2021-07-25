@@ -120,6 +120,7 @@ const Register: React.FunctionComponent<{ closeModal, toogleEnter, toogleRegiste
         },
       })
       .then((e: any) => {
+        console.log('ACA ESTA LA E DE GOOGLE', e)
         console.log("Bienvenido !")
         closeModal()
       }).catch((e) => {
@@ -185,13 +186,10 @@ const Register: React.FunctionComponent<{ closeModal, toogleEnter, toogleRegiste
       name: `${data.names} ${data.lastNames}`,
     };
 
-
-    console.log(e)
-    console.log(postObj)
-
     axios
       .post(`${process.env.REACT_APP_HOST_BACKEND}/auth/signup/`, { params: postObj })
       .then(async (e: any) => {
+        console.log('ACA ESTA LA E', e)
         console.log("Bienvenido !")
         closeModal()
       }).catch((e) => {

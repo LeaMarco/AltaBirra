@@ -34,8 +34,7 @@ function validatePassword(password: string, user: User): boolean {
 
 
 export const signup = async (req: Request, res: Response) => {
-
-
+    
     const { username, email, name, password, googleId } = req.body.params;
 
     // Busco al usuario
@@ -47,13 +46,15 @@ export const signup = async (req: Request, res: Response) => {
     
     //Si existe le digo que se loguee
     if (user) return res.sendStatus(409)
-         
+
     //busco el rol (no hace falta podria pasarle el numero y listo)
     const userRol = await prisma.role.findUnique({ where: { name: "USER" } })
     
     let usuarioHash = encryptPassword(username);
     usuarioHash = usuarioHash.replace('/','');
+    usuarioHash = usuarioHash.replace('.','');
     //Creo el usuario (porque paso el else sin entrar en el return)
+        
     const userCreado = await prisma.user.create({
         data: {
             username,
@@ -70,7 +71,7 @@ export const signup = async (req: Request, res: Response) => {
             favorite: {
                 create: {}
             },
-            verify: password ? false : true
+            verify: password ? false:true
         }
     }).catch((e) => res.send("Error al registrar usuario"))
 
@@ -79,7 +80,7 @@ export const signup = async (req: Request, res: Response) => {
         try{
             // send mail with defined transport object
         let info = await transporter.sendMail({
-            from: '"AltaBirra Administración 👻" <facundoramirez089@gmail.com>', // sender address
+            from: '"AltaBirra Administración 🍻" <facundoramirez089@gmail.com>', // sender address
             to: email, // list of receivers
             subject: "Registración AltaBirra ✔", // Subject line
             // text: "Hello world?", // plain text body
@@ -96,10 +97,11 @@ export const signup = async (req: Request, res: Response) => {
             `
         });
         } catch(error){
-
+            console.log('Error al enviar el email');
         }
     }
     // ====================================================================================
+    
     return res.json(userCreado)
     
 
