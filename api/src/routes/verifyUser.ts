@@ -24,7 +24,7 @@ router.get('/verifyUser', async(req: Request, res: Response, next: NextFunction)
             }
         })
 
-        return res.send(userV);
+        return res.json({match, userV});
     }
 
     return res.send('NO SE ENCONTRO EL USERHASH');
