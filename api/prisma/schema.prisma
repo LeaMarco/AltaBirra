@@ -51,7 +51,7 @@ model User {
     password String
     premium  Boolean @default(false)
     verify   Boolean @default(false)
-    userHash String  @unique
+    userHash String  @unique @default("userHash")
 
     ///relacion de muchos a uno con TABLA ROLE
     //☢ agregue cosas condicionales para poder generar usuarios sin que joda

@@ -50,7 +50,9 @@ export const signup = async (req: Request, res: Response) => {
          
     //busco el rol (no hace falta podria pasarle el numero y listo)
     const userRol = await prisma.role.findUnique({ where: { name: "USER" } })
-
+    
+    let usuarioHash = encryptPassword(username);
+    usuarioHash = usuarioHash.replace('/','');
     //Creo el usuario (porque paso el else sin entrar en el return)
     const userCreado = await prisma.user.create({
         data: {
@@ -61,35 +63,42 @@ export const signup = async (req: Request, res: Response) => {
             role: {
                 connect: { id: userRol?.id }
             },
-            // userHash: encrypt(username),
+            userHash: usuarioHash,
             cart: {
                 create: {}
             },
             favorite: {
                 create: {}
-            }
+            },
+            verify: password ? false : true
         }
     }).catch((e) => res.send("Error al registrar usuario"))
 
     // ENVIAR EMAIL CUANDO ME REGISTRO CON PLANILLA ========================================
-    // if(password){ // si me estoy registrando con PLANILLA hace lo siguiente.. (mailing)
-    //     try{
-    //         // send mail with defined transport object
-    //     let info = await transporter.sendMail({
-    //         from: '"AltaBirra Administración 👻" <facundoramirez089@gmail.com>', // sender address
-    //         to: email, // list of receivers
-    //         subject: "Registración AltaBirra ✔", // Subject line
-    //         // text: "Hello world?", // plain text body
-    //         // html: "<b>Hello world?</b>", // html body
-    //         html: `
-    //             <b>Por favor haga click aqui o pegue este link en su navegador para completar el proceso de registración</b>
-    //             <a href="https://localhost:3000">https://localhost:3000</a>
-    //         `
-    //     });
-    //     } catch(error){
+    if(password){ // si me estoy registrando con PLANILLA hace lo siguiente.. (mailing)
+        try{
+            // send mail with defined transport object
+        let info = await transporter.sendMail({
+            from: '"AltaBirra Administración 👻" <facundoramirez089@gmail.com>', // sender address
+            to: email, // list of receivers
+            subject: "Registración AltaBirra ✔", // Subject line
+            // text: "Hello world?", // plain text body
+            // html: "<b>Hello world?</b>", // html body
+            html: `
+                <h1>BIENVENIDO A ALTABIRRA !!!</h1>
+                <h3>Por favor haga click en el siguiente enlace o pegue el mismo en su navegador para completar el proceso de registración</h3>
+                <br/>
+                <br/>
+                <span>ENLACE ===> </span><a href="https://localhost:3000/verificarUsuario/${usuarioHash}">Click aquí para verificar cuenta</a>
+                <br/>
+                <br/>
+                Atte. El equipo de AltaBirra.
+            `
+        });
+        } catch(error){
 
-    //     }
-    // }
+        }
+    }
     // ====================================================================================
     return res.json(userCreado)
     
@@ -115,6 +124,7 @@ export const signin = async (req: Request, res: Response) => {
     //     const correctPassword: boolean = validatePassword(req.body.params.password, user);
     //     if (correctPassword === false) return res.status(400).send('Credencial invalida');
     // }
+    if (!user.verify) return res.status(401).send('Usuario no verificado');
 
     if (process.env.SECRET_CODE) {
 
