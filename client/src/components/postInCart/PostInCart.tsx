@@ -3,6 +3,9 @@ import { useParams, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getCart, cart, PostValues } from "../../actions";
 import axios from "axios";
+import style from './PostInCart.module.css';
+import Swal from "sweetalert2";
+import { validationHeadersGenerator } from "../../validationHeadersGenerator";
 
 export function PostinCart({
 	postId,
@@ -12,60 +15,111 @@ export function PostinCart({
 	countable,
 	cartId,
 	username,
+	deleteGuestItem = (postIdDelete: number) => console.log("deleteGuestItem no pasada, porque no hace falta")
 }) {
+	const hasToken = Object.keys(localStorage).join().includes("token")
 	const [quantity, setQuantity] = useState(amount);
+	const [guestCartQuantity, setGuestCartQuantity] = useState()
 
 	const dispatch = useDispatch();
 	let cartIdparsed = parseInt(cartId, 10);
+
+	function guestCartHandleQuantity(direction: 1 | -1) {
+		let localStorageParse = JSON.parse(localStorage.guestsItemsInCart)
+		localStorageParse[postId] = localStorageParse[postId] + direction
+		localStorage.setItem("guestsItemsInCart", JSON.stringify(localStorageParse))
+	}
 
 	useEffect(() => {
 		addToCart({ postId, quantity, username: "TestUser" });
 	}, [quantity]);
 
+	async function deleteItem() {
+		if (hasToken) {
+			await removeToCart({ username, postId, cartIdparsed });
+			dispatch(getCart(cartIdparsed))
+		}
+		else {
+			console.log("entre", postId)
+			deleteGuestItem(postId)
+		}
+	}
+
 	async function despachadora() {
-		await removeToCart({ username, postId, cartIdparsed });
-		dispatch(getCart(cartIdparsed));
+		Swal.fire({
+			title: '¿Seguro de borrar el item?',
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Borrar'
+		}).then((result) => {
+			if (result.isConfirmed) {
+				deleteItem()
+				Swal.fire(
+					'¡Borrado!',
+					'¡Se borro el item del carrito!',
+					'success'
+				)
+			}
+		})
+
 	}
 	//estado local con amount
 	//handle submit ejecuta action para cambiar amount en db
 	return (
-		<div>
-			<Link to={`/DetailBeer/${postId}`}>
-				<li>
-					<h1>{postTitle}</h1>
-					<span>{description}</span>
-				</li>
+		<div className={style.itemCarrito}>
+			<Link className={style.Link} to={`/DetailBeer/${postId}`}>
+				<div className={style.titleContainer}>
+					<h1 className={style.title}>{postTitle}</h1>
+					<span>{description.slice(0, 50)}...</span>
+				</div>
 			</Link>
-			<button onClick={(e) => setQuantity(quantity + 1)}>➕</button>
-			<p>Amount: {quantity}</p>
-			<p>{countable.price * quantity}</p>
-			<p>{countable.discount}</p>
-			<button onClick={(e) => quantity > 1 ? setQuantity(quantity - 1) : alert("Del piso no paso")
-			}
-			>
-				➖
-			</button>
-			<button
-				onClick={(e) => {
-					despachadora();
-				}}
-			>
-				❌
-			</button>
+			<div className={style.modifyContainer}>
+				<button onClick={(e) => {
+
+					setQuantity(quantity + 1)
+					guestCartHandleQuantity(+1)
+
+				}}>➕</button>
+				<p>Cantidad: {quantity}</p>
+				{/* <p>{countable.discount}</p> */}
+				<button onClick={(e) => {
+					if (quantity <= 1) alert("Del piso no paso")
+					else {
+						guestCartHandleQuantity(-1)
+						setQuantity(quantity - 1)
+					}
+
+				}
+				}
+				>
+					➖
+				</button>
+			</div>
+			<div className={style.priceAndDelete}>
+				<p className={style.amount}>${countable.price * quantity}</p>
+				<button className={style.deletebutton}
+					onClick={(e) => {
+						despachadora();
+					}}
+				>
+					Eliminar
+				</button>
+			</div>
 		</div>
 	);
 }
 
 export default PostinCart;
-
-const urladdtocart = "https://altabirra.herokuapp.com/cart";
+const urladdtocart = `${process.env.REACT_APP_HOST_BACKEND}/cart`;
 async function addToCart(data: any) {
-	const response = await axios.put<PostValues>(urladdtocart, { params: data });
+	const response = await axios.put<PostValues>(urladdtocart, { params: data }, { headers: validationHeadersGenerator() });
 	return response;
 }
 
-const urlremovetocart = "https://altabirra.herokuapp.com/removeToCart";
+const urlremovetocart = `${process.env.REACT_APP_HOST_BACKEND}/removeToCart`;
 async function removeToCart(data) {
-	const response = await axios.delete<cart[]>(urlremovetocart, { data: data });
+	const response = await axios.delete<cart[]>(urlremovetocart, { headers: validationHeadersGenerator(), data: data });
 	return response;
 }

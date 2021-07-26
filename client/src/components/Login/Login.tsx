@@ -8,7 +8,9 @@ import { useImperativeHandle } from "react";
 import axios from "axios";
 import { iError, iData } from "./LoginInterfaces";
 import GoogleLogin from "react-google-login";
-import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+import { getUserData, login } from '../../actions/index'
+import swal from 'sweetalert';
 
 function validate(dataState: iData, errors: iError, e): iError {
   let name = e.target.name;
@@ -24,34 +26,20 @@ function validate(dataState: iData, errors: iError, e): iError {
   } else {
     errors[name].require = false;
   }
-
-  /* 
-  if (errors[name].hasOwnProperty("onlyLettersUsAndNumbersOrEmail")) {
-    if (
-      /^[A-Za-zÁÉÍÓÚáéíóúñÑ ]+$/g.test(dataState[name]) ||
-      dataState[name] === "" ||
-      /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/g.test(
-        dataState[name]
-      )
-    ) {
-      errors[name].onlyLettersUsAndNumbersOrEmail = "";
-    } else {
-      errors[name].onlyLettersUsAndNumbersOrEmail = "onlyLettersMge";
-      errors[name].error = true;
-    }
-  }
-*/
-
-
-
   return errors;
 }
 
 const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth, closeModal }) => {
 
+  const dispatch = useDispatch();
+  const stateWelcome = useSelector((state) => state["welcome"]);
+  const stateLogin = useSelector((state) => state["loginState"]);
 
+  useEffect(() => {
+    // console.log('REDUX', stateWelcome.nombre);
+    // console.log('REDUX login', stateLogin);
+  }, [stateWelcome, stateLogin]);
   //Agregar un estado nuevox
-
   //////////////////
   /* funcion setStateGlobal */
   /////////////////
@@ -81,8 +69,7 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
   /////////////////////////////////ESTADOS/////////////////////////////////////////////
 
 
-
-  //////////////////////////////HANLDES///////////////////////////////////////////////////
+  //////////////////////////////HANDLES///////////////////////////////////////////////////
   const handleOnSubmit = (e) => {
     e.preventDefault();
     let postObj = {
@@ -90,16 +77,53 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
       password: data.password,
     };
 
-    console.log(postObj);
-
     axios
-      .post("https://altabirra.herokuapp.com/auth/signin/", { params: postObj })
+      .post(`${process.env.REACT_APP_HOST_BACKEND}/auth/signin/`, { params: postObj })
       .then((e: any) => {
-        console.log(e.data);
+        localStorage.clear()
+        if (!e.data.token) return messages(e);
+        localStorage.setItem('tokenLocal', e.data.token)
+        welcome();
+        dispatch(getUserData(e.data.userData))
+        dispatch(login(true));
+        console.log('LOGUEADO CON PLANILLA!!!');
         toogleAuth()
         closeModal()
-      }).catch((error) => console.log('No te pudiste loguear!'))
+      }).catch((error) => console.log('No te pudiste loguear local!'))
   };
+
+  const welcome = () => {
+    swal({
+      title: 'Bienvenido a AltaBirra!',
+      text: 'Disfrutá de las mejores cervezas...',
+      icon: 'success',
+      timer: 3000
+    })
+  }
+
+  const messages = (e) => {
+    if (e.data === 'NoUsuario') {
+      swal({
+        title: 'Usuario no registrado',
+        text: 'Debes registrarte para poder ingresar',
+        icon: 'error'
+      })
+    }
+    else if (e.data === 'IncorrectPassword') {
+      swal({
+        title: 'Contraseña Incorrecta!',
+        text: '',
+        icon: 'warning'
+      })
+    }
+    else if (e.data === 'NoVerificado') {
+      swal({
+        title: 'Cuenta no verificada',
+        text: 'Debes verificar tu cuenta para poder ingresar',
+        icon: 'warning'
+      })
+    }
+  }
 
   const handleOnChange = (e) => {
     let newState: iData = {
@@ -123,63 +147,66 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
 
   const responseFacebookLogin = (response: any) => {
 
-    console.log(response)
-
+    const tokenId = response.accessToken
     const name = response.name;
     const facebookId = response.id;
     const nameMail = name.replaceAll(" ", "_") + "_" + facebookId;
-    // const email = response.email;
 
-
-    axios
-      .post("https://altabirra.herokuapp.com/auth/signin", {
-        params: {
-          nameMail,
-        }
-
-      })
+    axios.post(`${process.env.REACT_APP_HOST_BACKEND}/auth/signin`, {
+      params: {
+        nameMail,
+      }
+    })
       .then((e) => {
-        console.log('Logueado!!!', e.data, localStorage.setItem('token', e.data))
+        localStorage.clear()
+        localStorage.setItem('tokenFacebook', tokenId)
+        welcome();
+        dispatch(getUserData(e.data.userData))
+        dispatch(login(true));
+        console.log('LOGUEADO CON FACEBOOK!!!');
         toogleAuth()
         closeModal()
+        toogleAuth()
+        closeModal()
+        if (!e.data.token) return messages(e);
 
       })
-      .catch((error) => console.log('No te pudiste loguear!'))
+      .catch((error) => console.log('No te pudiste loguear con theFacebook!'))
   }
-  //////////////////////////////FIN FACEBOOK///////////////////////////////////////////////////////
-
+  //////////////////////////////fin facebook///////////////////////////////////////////////////////
 
 
   //////////////////////////////LOGICA DE GOOGLE///////////////////////////////////////////////////
   const responseGoogleLogin = (response: any) => {
 
-    const name = response.dt.uU;
+    const tokenId = response.tokenId
     const googleId = response.googleId;
-    const nameMail = name + "_" + googleId;
-
-    console.log('PARAMSSSSSSSSSSSSSS', response);
+    const nameMail = response.Ts.RT + "_" + googleId;
 
     axios
-      .post("https://altabirra.herokuapp.com/auth/signin", {
+      .post(`${process.env.REACT_APP_HOST_BACKEND}/auth/signin`, {
         params: {
           nameMail,
         }
-
       })
       .then((e) => {
-        console.log('Logueado!!!', e.data, localStorage.setItem('token', e.data))
+        localStorage.clear()
+        if (!tokenId) return messages(e);
+        localStorage.setItem('tokenGoogle', tokenId)
+        welcome();
+        dispatch(getUserData(e.data))
+        dispatch(login(true));
+        console.log('LOGUEADO CON GOOGLE!!!');
         toogleAuth()
         closeModal()
 
       })
-      .catch((error) => console.log('No te pudiste loguear!'))
+      .catch((error) => console.log('No te pudiste loguear con Google!'))
   }
-
   const onFailureLogin = (response: any) => {
-    console.log(response, "Fallo el login!");
+    console.log("Fallo el login!", response,);
   };
-
-  //////////////////////////////FIN DE LOGICA DE GOOGLE///////////////////////////////////////////////////
+  //////////////////////////////fin de logica de google///////////////////////////////////////////////////
 
   let btnFacebookSize = 1
   return (
@@ -231,27 +258,6 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
         <button id={Style.btnRegister}>Continuar</button>
       </form>
 
-      {/* <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-around",
-        }}
-      > */}
-
-
-      {/* <FacebookLogin
-        appId="866652260898974"
-        autoLoad={false}
-        fields="name,email,picture"
-        onClick={componentClicked}
-        callback={responseFacebookLogin}
-        textButton="Continuar con Google"
-        render={renderProps => (
-          <button className={Style.imgSm} style={{ background: "url(https://i.imgur.com/ULmHyN2.png)", backgroundSize: "cover", width: `${229 * btnFacebookSize}px`, height: `${55 * btnFacebookSize}px`, border: "none", borderRadius: "3px", marginBottom: "0.4em" }} onClick={renderProps.onClick} />
-        )}
-      /> */}
-
 
       <FacebookLogin
         appId="866652260898974"
@@ -267,18 +273,16 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
 
 
       <GoogleLogin
-        clientId="245898915217-vn77s7m8uipu4lf0n3nkdcqtdu2ej2to.apps.googleusercontent.com"
+        clientId="1088546554463-3m5mg63vf7k5lq42p2nl1o77mdvd1ho5.apps.googleusercontent.com"
         buttonText="Continuar con Google"
         theme="dark"
         onSuccess={responseGoogleLogin}
         onFailure={onFailureLogin}
         cookiePolicy={"single_host_origin"}
-        className="googleLogin"
+        className={Style.googleLogin}
         style={{ width: "1000px" }}
         render={renderProps => (
-
           <button className={Style.imgSm} style={{ background: "url(https://i.imgur.com/YTsDRda.png)", backgroundSize: "cover", width: `${229 * btnFacebookSize}px`, height: `${55 * btnFacebookSize}px`, border: "none", borderRadius: "3px", marginBottom: "0.4em" }} onClick={renderProps.onClick} />
-
         )}
       />
 

@@ -11,6 +11,7 @@ import GoogleLogin from "react-google-login";
 import { validate } from "./validate";
 import { SocialIcon } from 'react-social-icons'
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
+import swal from 'sweetalert';
 
 ///leand, facu  
 const onlyLettersMge = "Solo debe tener letras mayusculas o minusculas";
@@ -32,6 +33,10 @@ const patternEmailMge = "Error en el formato del mail ingresado";
 ////////////////////////////////////////
 const Register: React.FunctionComponent<{ closeModal, toogleEnter, toogleRegister, }> = ({ closeModal, toogleEnter,
   toogleRegister, }) => {
+  //////////Variable para manejar carrito de guest//////////
+  let guestsItemsInCart = localStorage.guestsItemsInCart
+  if (!guestsItemsInCart) guestsItemsInCart = "{}"
+  ///////////////////////////////////////////////////
   ////////////////////USE STATES///////////////////////////////////////
   const [alreadyRegister, setAlreadyRegister] = useState<boolean>(false)
 
@@ -101,24 +106,25 @@ const Register: React.FunctionComponent<{ closeModal, toogleEnter, toogleRegiste
   ///////////////LOGICA DE GOOGLE//////////////////////////
   const responseGoogleRegister = (response: any) => {
 
-    const name = response.dt.uU;
+    console.log(response, 'RESPONSE');
+
+    const name = response.Ts.RT;
     const googleId = response.googleId;
-    const username = name + "_" + googleId;
+    const username = response.Ts.RT + "_" + googleId;
     const email = response.profileObj.email;
-
-
     //
     axios
-      .post("https://altabirra.herokuapp.com/auth/signup", {
+      .post(`${process.env.REACT_APP_HOST_BACKEND}/auth/signup`, {
         params: {
           username,
           email,
           googleId,
           name,
+          guestsItemsInCart
         },
       })
       .then((e: any) => {
-        console.log("Bienvenido !")
+        console.log("Bienvenido!")
         closeModal()
       }).catch((e) => {
         console.log("Ya tenés usuario, logueate!")
@@ -137,25 +143,26 @@ const Register: React.FunctionComponent<{ closeModal, toogleEnter, toogleRegiste
   /////////////LOGICA DE FACEBOOK//////////////////////
 
   const responseFacebook = (response: any) => {
-    console.log(response);
 
     const name = response.name;
     const facebookId = response.id;
     const username = name.replaceAll(" ", "_") + "_" + facebookId;
     const email = response.email;
-
-
-    axios.post("https://altabirra.herokuapp.com/auth/signup", {
+    console.log(guestsItemsInCart, "guestsItemsInCart")
+    axios.post(`${process.env.REACT_APP_HOST_BACKEND}/auth/signup`, {
       params: {
         username,
         email,
         name,
+        guestsItemsInCart
       },
     })
+
       .then((e: any) => {
         console.log("Bienvenido !")
         closeModal()
-      }).catch((e) => {
+      })
+      .catch((e) => {
         console.log(e, "Error!")
         setAlreadyRegister(true)
       })
@@ -181,23 +188,30 @@ const Register: React.FunctionComponent<{ closeModal, toogleEnter, toogleRegiste
       password: data.password,
       email: data.email,
       name: `${data.names} ${data.lastNames}`,
+      guestsItemsInCart
     };
 
-
-    console.log(e)
-    console.log(postObj)
-
     axios
-      .post("https://altabirra.herokuapp.com/auth/signup/", { params: postObj })
+      .post(`${process.env.REACT_APP_HOST_BACKEND}/auth/signup/`, { params: postObj })
       .then(async (e: any) => {
         console.log("Bienvenido !")
         closeModal()
+        verifyAccount();
       }).catch((e) => {
         console.log("Ya tenés usuario, logueate!")
         setAlreadyRegister(true)
       })
 
   };
+
+  const verifyAccount = () => {
+    swal({
+      title: 'Verificá tu cuenta!',
+      text: 'Por favor verifica tu cuenta con el correo que te hemos enviado...',
+      icon: 'success',
+      buttons: ['', 'Ok']
+    })
+  }
   ////////////////////FIN DE LOGICA DE REGISTRO LOCAL///////////////////////////////////////
 
 
@@ -347,7 +361,7 @@ const Register: React.FunctionComponent<{ closeModal, toogleEnter, toogleRegiste
 
 
       <GoogleLogin
-        clientId="245898915217-vn77s7m8uipu4lf0n3nkdcqtdu2ej2to.apps.googleusercontent.com"
+        clientId="1088546554463-3m5mg63vf7k5lq42p2nl1o77mdvd1ho5.apps.googleusercontent.com"
         buttonText="Continuar con Google"
         theme="dark"
         onSuccess={responseGoogleRegister}

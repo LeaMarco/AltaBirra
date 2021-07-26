@@ -1,0 +1,21 @@
+.mainContainer{
+    display:flex;
+    flex-direction: column;
+}
+.panelTitle{
+    font-weight: 800;
+    font-size: 18px;
+    width: 50%;
+    margin-top: 15%;
+    margin-left: 1%;
+    transform: skew(-11deg, 0deg);
+    background-color: tomato;
+}
+
+.menuButton{
+    font-size: 15px;
+    font-weight: 800;
+    color: gray;
+    margin-top: 10%;
+    text-decoration: none;
+}

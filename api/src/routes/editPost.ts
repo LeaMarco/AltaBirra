@@ -1,12 +1,12 @@
 import { PrismaClient } from "@prisma/client";
 import { NextFunction, Request, Response, Router } from "express";
 import { LabeledStatement } from "typescript";
+import { findUserWithAnyTokenBabe } from "../autentication/controllers/auth.controller";
 
 const router = Router();
 const prisma = new PrismaClient();
 
 interface Beer {
-  name: string;
   abv: number;
   og: number;
   ibu: number;
@@ -30,12 +30,12 @@ interface InfoPost {
 interface Countable {
   price: number;
   discount: number;
+  expireDate: Date;
 }
 
 
 router.put("/", async (req: Request, res: Response, next: NextFunction) => {
   const {
-    name,
     abv,
     og,
     ibu,
@@ -56,10 +56,15 @@ router.put("/", async (req: Request, res: Response, next: NextFunction) => {
     username,
   }: InfoPost = req.body.params.infoPost;
 
-  const { price, discount }: Countable = req.body.params.countable;
+
+  const {
+    price,
+    discount,
+    expireDate
+  }: Countable = req.body.params.countable
 
   const postId: number = req.body.params.postId
-  const user = await prisma.user.findUnique({ where: { username: username } });
+  const user = await findUserWithAnyTokenBabe(req, prisma)
   const beerGenericType = await prisma.genericType.findUnique({
     where: { type: genericType }
   });
@@ -81,7 +86,6 @@ router.put("/", async (req: Request, res: Response, next: NextFunction) => {
       },
       beer: {
         create: {
-          name,
           abv,
           og,
           ibu,
@@ -100,7 +104,7 @@ router.put("/", async (req: Request, res: Response, next: NextFunction) => {
         create: {
           price,
           discount,
-          expireDate: new Date()
+          expireDate,
         }
       }
     },

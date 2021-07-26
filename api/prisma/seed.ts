@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import { encryptPassword } from "../src/autentication/controllers/auth.controller";
 
 const prisma = new PrismaClient();
 
@@ -11,15 +12,6 @@ async function main() {
   const user = await prisma.role.create({ data: { name: "USER" } });
   const admin = await prisma.role.create({ data: { name: "ADMIN" } });
 
-  // COUNTABLE
-  // await prisma.countable.create({
-  //   data: {
-  //     price: 4,
-  //     discount: 3,
-  //     expireDate: add(new Date(), {hours: -3, seconds: 300})
-  //   }
-  // })
-
 
   //USER-ADMIN
   await prisma.user.create({
@@ -27,7 +19,7 @@ async function main() {
       username: "TestUser",
       email: "TestUser@email.com",
       name: "Test User",
-      password: "TestUserPassword",
+      password: encryptPassword("TestUserPassword"),
       role: {
         connect: { id: user.id }
       },
@@ -36,7 +28,11 @@ async function main() {
       },
       favorite: {
         create: {}
-      }
+      },
+      views: {
+        create: {}
+      },
+      userHash: 'asdasdasdas'
     },
   });
 
@@ -46,7 +42,7 @@ async function main() {
       username: "TestAdmin",
       email: "TestAdmin@email.com",
       name: "Test Admin",
-      password: "TestAdminPassword",
+      password: encryptPassword("TestAdminPassword"),
       role: {
         connect: { id: admin.id }
       },
@@ -55,7 +51,11 @@ async function main() {
       },
       favorite: {
         create: {}
-      }
+      },
+      views: {
+        create: {}
+      },
+      userHash: 'asd'
     },
   });
 
@@ -65,7 +65,7 @@ async function main() {
       username: "TestPremium",
       email: "TestPremium@email.com",
       name: "Test Premium",
-      password: "TestPremiumPassword",
+      password: encryptPassword("TestPremiumPassword"),
       role: {
         connect: { id: admin.id }
       },
@@ -75,7 +75,11 @@ async function main() {
       premium: true,
       favorite: {
         create: {}
-      }
+      },
+      views: {
+        create: {}
+      },
+      userHash: 'asdddd'
     },
   });
 

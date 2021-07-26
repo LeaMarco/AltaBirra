@@ -27,4 +27,4 @@ async function RandomItems(howMany: number) {
   return arraySixBeers
 }
 
-RandomItems(5).then(res => console.log(res))
+RandomItems(5).then(res => console.log("aca"))

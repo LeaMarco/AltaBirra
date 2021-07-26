@@ -30,6 +30,7 @@ model Post {
 
     carts     PostsOnCart[]
     favorites PostsOnFavorites[]
+    views     PostsOnViews[]
 
     transactionId Transaction[]
 
@@ -50,24 +51,38 @@ model User {
     name     String
     password String
     premium  Boolean @default(false)
+    verify   Boolean @default(false)
+    userHash String  @unique
+
+    activeCount Boolean @default(true)
+    //☢ 👆 NUEVA COLUMNA A USER NECESARIA PARA EL BOTON DE UNREGISTER . -Eze
 
     ///relacion de muchos a uno con TABLA ROLE
-    //☢ agregue cosas condicionales para poder generar usuarios sin que joda
     roleId        Int
     role          Role          @relation(fields: [roleId], references: [id])
     cartId        Int
     cart          Cart          @relation(fields: [cartId], references: [id])
     favoriteId    Int
     favorite      Favorite      @relation(fields: [favoriteId], references: [id])
+    viewsId       Int
+    views         Views         @relation(fields: [viewsId], references: [id])
     postId        Post[]
     transactionId Transaction[]
     review        Review[]
+}
+
+enum State {
+    Procesando
+    Cancelada
+    Completa
 }
 
 model Transaction {
     id        Int      @id @default(autoincrement())
     price     Float
     createdAt DateTime @default(now())
+    state     State    @default(Procesando)
+    quantity  Int
 
     /////relacion de muchos (transacciones) a uno (usuario)
     buyerId Int
@@ -95,9 +110,24 @@ model PostsOnCart {
     @@id([cartId, postId])
 }
 
+model Views {
+    id Int @id @default(autoincrement())
+
+    userId User?
+    posts  PostsOnViews[]
+}
+
+model PostsOnViews {
+    postId  Int
+    post    Post  @relation(fields: [postId], references: [id])
+    viewsId Int
+    views   Views @relation(fields: [viewsId], references: [id])
+
+    @@id([viewsId, postId])
+}
+
 model Beer {
     id       Int      @id @default(autoincrement())
-    name     String
     abv      Int
     og       Int?
     ibu      Int
@@ -125,7 +155,6 @@ model SpecificType {
     type        String @unique
     description String
     group       Group
-
 
     beerId        Beer[]
     genericTypeId Int
@@ -176,4 +205,12 @@ model Review {
     userId Int
     user   User @relation(fields: [userId], references: [id])
     @@unique([userId, postId])
+}
+
+model image_upload {
+    id       Int    @id @default(autoincrement())
+    filename String
+    filepath String
+    mimetype String
+    size     BigInt
 }

@@ -1,11 +1,12 @@
 import { combineReducers } from 'redux';
 import { Post } from '../actions/index';
 import { getHistoryReducer, postsFavoritesReducer, postsSearchQueryReducer, postsSearchReducer } from './posts';
-import { usersPremium } from './users';
+import { usersPremium, userData, login } from './users';
 import { UserPremium } from '../actions/index';
 import { detailReducer } from './detail';
 import { cartReducer } from './cart';
 import { cart } from '../actions/index';
+
 
 export interface StoreState {
 
@@ -20,7 +21,9 @@ export const rootReducer = combineReducers({
 	detailPosts: detailReducer,
 	cart: cartReducer,
 	favoritePosts: postsFavoritesReducer,
-	history: getHistoryReducer
+	history: getHistoryReducer,
+	welcome: userData,
+	loginState: login
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

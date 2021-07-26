@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getCart, cart, PostValues } from "../../actions";
 import axios from "axios";
+import style from './PostsCompra.module.css';
 
 export function PostsCompra({
     postId,
@@ -17,14 +18,13 @@ export function PostsCompra({
     //estado local con amount
     //handle submit ejecuta action para cambiar amount en db
     return (
-        <div>
-            <li>
-                <h1>{postTitle}</h1>
-                <span>{description}</span>
-            </li>
-            <p>Amount: {amount}</p>
+        <div className={style.itemCarrito}>
+            <div>
+                <h1 className={style.title}>{postTitle}</h1>
+                <span>{description.slice(0, 50)}...</span>
+            </div>
+            <p>Cantidad: {amount}</p>
             <p>{countable.price * amount}</p>
-            <p>{countable.discount}</p>
         </div>
     );
 }

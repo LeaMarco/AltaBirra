@@ -1,0 +1,43 @@
+.containerVerify{
+	background-color: black;
+	color: white;
+}
+
+.containerVerify .verify{
+	position: absolute;
+	width: 100%;
+	background-image: url("../../img/verify2.jpg");
+	background-size: cover;
+	height: 100%;
+}
+
+.containerVerify .verifyLogo{
+	width: 100%;
+	height: 100%;
+}
+
+.containerVerify h1{
+	position: relative;
+	top: 40px;
+	margin: 0px auto;
+	color: white;
+	background-color: #F49E51;;
+	border: 1px solid F49E51;
+	border-radius: 20px;	
+	width: 400px;
+	font-size: 25px;
+	padding: 8px;
+}
+
+
+.containerVerify .link{
+	color: black;
+	font-weight: bold;
+}
+
+
+.containerVerify .link:hover{
+	cursor: pointer;
+	text-shadow: 1px 1px 5px white;
+}
+

@@ -1,0 +1,30 @@
+[1mdiff --git a/client/src/components/Post/EditPost.tsx b/client/src/components/Post/EditPost.tsx[m
+[1mindex ce0ec34..4ad2193 100644[m
+[1m--- a/client/src/components/Post/EditPost.tsx[m
+[1m+++ b/client/src/components/Post/EditPost.tsx[m
+[36m@@ -9,6 +9,7 @@[m [mimport styles from './Post.module.css';[m
+ import Swal from 'sweetalert2';[m
+ import withReactContent from 'sweetalert2-react-content';[m
+ import { useParams } from "react-router-dom";[m
+[32m+[m[32mimport Preview from "./Preview"[m
+ [m
+ //TIENE QUE TOMAR COMO PARAMETRO EL ID DEL POST QUE SE SELECCIONA Y RENDERIZAR EL COMPONENTE DETALLE PASANDOLE ESE ID.[m
+ export default function EditPost() {[m
+[36m@@ -67,6 +68,8 @@[m [mconst { register, handleSubmit,reset} = useForm<PostValues>();[m
+ const onSubmit: SubmitHandler<PostValues> = (data) => {despachadora(data,postId); reset()};[m
+ [m
+ return ([m
+[32m+[m[32m  <div>[m
+[32m+[m
+   <form className={styles.postForm} onSubmit={handleSubmit(onSubmit)}>[m
+       <section className={styles.postFormBeer}>[m
+         <h3 id={styles["beerh2"]}> Beer</h3>[m
+[36m@@ -187,6 +190,8 @@[m [mreturn ([m
+       <input className={styles.postFormSubmitButton} type="submit" />[m
+     </div>[m
+   </form>[m
+[32m+[m[32m  <Preview/>[m
+[32m+[m[32m  </div>[m
+ );[m
+ }[m
+ [m

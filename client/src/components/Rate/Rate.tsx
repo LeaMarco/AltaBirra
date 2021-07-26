@@ -3,6 +3,7 @@ import { useState } from "react";
 import Style from "./Rate.module.css";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { validationHeadersGenerator } from "../../validationHeadersGenerator";
 
 export default function Rate() {
 	const [beer, setBeer] = useState<number>(1);
@@ -15,7 +16,7 @@ export default function Rate() {
 
 	async function handleSubmit(event) {
 		event.preventDefault();
-		await axios.put("https://altabirra.herokuapp.com/ratePost", { data: { postId: 252, userId: 2, rating: beer, comment: mensaje } });
+		await axios.put(`${process.env.REACT_APP_HOST_BACKEND}/ratePost`, { data: { postId: 252, userId: 2, rating: beer, comment: mensaje } }, { headers: validationHeadersGenerator() });
 		let button = document.getElementById(`${event.target.name}Button`);
 		if (button) button.style.visibility = "hidden";
 	}

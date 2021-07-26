@@ -4,6 +4,7 @@ import mercadopago = require("mercadopago");
 import { MercadoPago } from "mercadopago/interface";
 import { CreatePreferencePayload } from "mercadopago/models/preferences/create-payload.model";
 import { title } from "process";
+import { findUserWithAnyTokenBabe } from "../autentication/controllers/auth.controller";
 
 const router = Router();
 const prisma = new PrismaClient();
@@ -19,7 +20,8 @@ interface item {
 }
 
 
-router.post("/", (req: Request, res: Response) => {
+router.post("/", async (req: Request, res: Response) => { //☢La hice async para poner el await -Eze
+    const user = await findUserWithAnyTokenBabe(req, prisma)//Dejo el user por si acaso -Eze
     const { data }: any = req.body
     mercadopago.configurations.setAccessToken("TEST-6705724658801749-071415-219e5d5e25d43808d51486e102a0e9ed-30499530");
 
