@@ -52,6 +52,9 @@ export const signup = async (req: Request, res: Response) => {
     
     let usuarioHash = encryptPassword(username);
     usuarioHash = usuarioHash.replace('/','');
+    usuarioHash = usuarioHash.replace('/','');
+    usuarioHash = usuarioHash.replace('/','');
+    usuarioHash = usuarioHash.replace('/','');
     usuarioHash = usuarioHash.replace('.','');
     //Creo el usuario (porque paso el else sin entrar en el return)
         
@@ -87,7 +90,7 @@ export const signup = async (req: Request, res: Response) => {
             // html: "<b>Hello world?</b>", // html body
             html: `
                 <h1>BIENVENIDO A ALTABIRRA !!!</h1>
-                <h3>Por favor haga click en el siguiente enlace o pegue el mismo en su navegador para completar el proceso de registración</h3>
+                <h3>Por favor haga click en el siguiente enlace para completar el proceso de registración</h3>
                 <br/>
                 <br/>
                 <span>ENLACE ===> </span><a href="https://localhost:3000/verificarUsuario/${usuarioHash}">Click aquí para verificar cuenta</a>
@@ -120,14 +123,13 @@ export const signin = async (req: Request, res: Response) => {
         }
     })
 
-    if (!user) return res.sendStatus(400);
+    if (!user) return res.send('NoUsuario');
     
     // if (req.body.params.password) {
     //     const correctPassword: boolean = validatePassword(req.body.params.password, user);
     //     if (correctPassword === false) return res.status(400).send('Credencial invalida');
     // }
-    if (!user.verify) return res.status(401).send('Usuario no verificado');
-
+    
     if (process.env.SECRET_CODE) {
 
         const userData = {
@@ -136,11 +138,13 @@ export const signin = async (req: Request, res: Response) => {
             premium: user.premium,
             favoritos: user.favoriteId
         }
-
-        console.log('aca esta userData', userData);
+        
         if (req.body.params.password) {//Si es registrado local
             const correctPassword: boolean = validatePassword(req.body.params.password, user);
-            if (correctPassword === false) return res.status(400).send('Credencial invalida');
+            if (correctPassword === false) {
+                return res.send('IncorrectPassword');
+            }
+            else if (!user.verify) return res.send('NoVerificado');
 
             const token: string = jwt.sign({ id: user.id, adminRole: false }, process.env.SECRET_CODE, { expiresIn: 60 * 60 * 24 })
             res.json({ token, userData })
@@ -150,6 +154,7 @@ export const signin = async (req: Request, res: Response) => {
         }
 
     }
+    
     
 
     else {

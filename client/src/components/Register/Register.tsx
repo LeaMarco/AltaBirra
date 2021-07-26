@@ -11,6 +11,7 @@ import GoogleLogin from "react-google-login";
 import { validate } from "./validate";
 import { SocialIcon } from 'react-social-icons'
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
+import swal from 'sweetalert';
 
 ///leand, facu  
 const onlyLettersMge = "Solo debe tener letras mayusculas o minusculas";
@@ -189,15 +190,24 @@ const Register: React.FunctionComponent<{ closeModal, toogleEnter, toogleRegiste
     axios
       .post(`${process.env.REACT_APP_HOST_BACKEND}/auth/signup/`, { params: postObj })
       .then(async (e: any) => {
-        console.log('ACA ESTA LA E', e)
         console.log("Bienvenido !")
         closeModal()
+        verifyAccount();
       }).catch((e) => {
         console.log("Ya tenés usuario, logueate!")
         setAlreadyRegister(true)
       })
 
   };
+
+  const verifyAccount = () => {
+    swal({
+      title: 'Verificá tu cuenta!',
+      text: 'Por favor verifica tu cuenta con el correo que te hemos enviado...',
+      icon: 'success',
+      buttons: ['','Ok']
+    })
+  }
   ////////////////////FIN DE LOGICA DE REGISTRO LOCAL///////////////////////////////////////
 
 

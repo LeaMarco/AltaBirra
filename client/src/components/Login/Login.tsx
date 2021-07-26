@@ -10,6 +10,7 @@ import { iError, iData } from "./LoginInterfaces";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import { getUserData, login } from '../../actions/index'
+import swal from 'sweetalert';
 
 function validate(dataState: iData, errors: iError, e): iError {
   let name = e.target.name;
@@ -82,13 +83,49 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
       .post(`${process.env.REACT_APP_HOST_BACKEND}/auth/signin/`, { params: postObj })
       .then((e: any) => {
         localStorage.clear()
-        console.log('Logueado!!!', e.data, localStorage.setItem('tokenLocal', e.data.token))
+        if(!e.data.token) return messages(e);
+        localStorage.setItem('tokenLocal', e.data.token)
+        welcome();
         dispatch(getUserData(e.data.userData))
         dispatch(login(true));
+        console.log('LOGUEADO CON PLANILLA!!!');
         toogleAuth()
         closeModal()
       }).catch((error) => console.log('No te pudiste loguear local!'))
   };
+
+  const welcome = () => {
+    swal({
+      title: 'Bienvenido a AltaBirra!',
+      text: 'Disfrutá de las mejores cervezas...',
+      icon: 'success',
+      timer: 3000
+    })
+  }
+
+  const messages = (e) => {
+    if(e.data === 'NoUsuario'){      
+      swal({
+        title: 'Usuario no registrado',
+        text: 'Debes registrarte para poder ingresar',
+        icon: 'error'
+      })
+    }
+    else if(e.data === 'IncorrectPassword'){
+      swal({
+        title: 'Contraseña Incorrecta!',
+        text: '',
+        icon: 'warning'
+      })
+    }
+    else if(e.data === 'NoVerificado') {      
+      swal({
+        title: 'Cuenta no verificada',
+        text: 'Debes verificar tu cuenta para poder ingresar',
+        icon: 'warning'
+      })
+    }    
+  }
 
   const handleOnChange = (e) => {
     let newState: iData = {
@@ -111,8 +148,7 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
   }
 
   const responseFacebookLogin = (response: any) => {
-
-    console.log("Respuesta Facebook", response)
+    
     const tokenId = response.accessToken
     const name = response.name;
     const facebookId = response.id;
@@ -125,9 +161,12 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
     })
       .then((e) => {
         localStorage.clear()
+        if(!e.data.token) return messages(e);
         localStorage.setItem('tokenFacebook', tokenId)
+        welcome();
         dispatch(getUserData(e.data.userData))
         dispatch(login(true));
+        console.log('LOGUEADO CON FACEBOOK!!!');
         toogleAuth()
         closeModal()
         toogleAuth()
@@ -141,12 +180,11 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
 
   //////////////////////////////LOGICA DE GOOGLE///////////////////////////////////////////////////
   const responseGoogleLogin = (response: any) => {
-    console.log(response)
+    
     const tokenId = response.tokenId
     const googleId = response.googleId;
     const nameMail = response.Ts.RT + "_" + googleId;
-
-    console.log('Respuesta en bruto de google', response);
+    
     axios
       .post(`${process.env.REACT_APP_HOST_BACKEND}/auth/signin`, {
         params: {
@@ -154,11 +192,13 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
         }
       })
       .then( (e) => {
-        localStorage.clear() 
-        localStorage.setItem('tokenLocal', tokenId)  
+        localStorage.clear()
+        if(!tokenId) return messages(e);
+        localStorage.setItem('tokenLocal', tokenId)
+        welcome();
         dispatch(getUserData(e.data))
         dispatch(login(true));
-        console.log('LOGUEADO !!!');
+        console.log('LOGUEADO CON GOOGLE!!!');
         toogleAuth()
         closeModal()
         
