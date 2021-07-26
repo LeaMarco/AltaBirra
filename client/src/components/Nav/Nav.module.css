@@ -17,6 +17,7 @@
 
 .fourColumn{
   display: flex;
+  align-items: center;
 }
 
 .welcome{
@@ -27,28 +28,23 @@
   background-color: black;
   color: white;  
   font-weight: bold;
-  position: relative;
-  top: 25px;
-  left: -60px;
   padding: 10px;
   border: 2px solid white;
   box-shadow: 0px 0px 6px white;
+  height: fit-content;
 }
 
 .closeSesion{
   border: 1px solid red;
-  background-color: red;
-  border-radius: 30px;
-  border: 1px solid white;
-  position: relative;
-  top: 25px;
-  width: 80px;
-  left: -15px;
-  justify-content: center;
-  align-self: center;
-  padding: 5px;
-  font-size: 10px;
-  font-weight: bold;
+    background-color: red;
+    border-radius: 30px;
+    border: 1px solid white;
+    width: 80px;
+    justify-content: center;
+    align-self: center;
+    padding: 10px;
+    font-size: 10px;
+    font-weight: bold;
 }
 
 .closeSesion:hover{
