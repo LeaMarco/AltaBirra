@@ -137,7 +137,7 @@ export const signup = async (req: Request, res: Response) => {
                 <h3>Por favor haga click en el siguiente enlace para completar el proceso de registración</h3>
                 <br/>
                 <br/>
-                <span>ENLACE ===> </span><a href="http://localhost:3000/verificarUsuario/${usuarioHash}">Click aquí para verificar cuenta</a>
+                <span>ENLACE ===> </span><a href="https://alta-birra.vercel.app/verificarUsuario/${usuarioHash}">Click aquí para verificar cuenta</a>
                 <br/>
                 <br/>
                 Atte. El equipo de AltaBirra.
