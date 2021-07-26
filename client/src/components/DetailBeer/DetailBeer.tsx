@@ -52,6 +52,12 @@ export default function DetailBeer() {
 	return info?.beer ? (
 		<div className={Style.detailContainer}>
 			<div className={Style.detailViewContainer}>
+				<div className={Style.Head}>
+					<h1>{info.title}</h1>
+					<div className={Style.types}>
+						<p>{info.beer.genericType.type} / </p><p>&nbsp;{info.beer.specificType.type}</p>
+					</div>
+				</div>
 				<div className={Style.detailView}>
 					<div className={Style.imageSection}>
 						<img src={info.image} alt="La imagen no esta disponible" />
@@ -80,12 +86,6 @@ export default function DetailBeer() {
 					</div>
 					<div className={Style.beerDescription}>
 						<div id="post">
-							<div className={Style.Head}>
-								<h1>{info.title}</h1>
-								<div className={Style.types}>
-									<p>{info.beer.genericType.type} / </p><p>&nbsp;{info.beer.specificType.type}</p>
-								</div>
-							</div>
 							<div className={Style.textContent}>
 								<h3>Información de la Cerveza</h3>
 								<div className={Style.specs}>
