@@ -37,19 +37,23 @@ router.post("/", async (req: Request, res: Response) => {
     res.send("Tipo específico agregado con éxito")
 })
 
+
 router.get("/", async (req: Request, res: Response) => {
-    let inf_beer = await prisma.specificType.findMany()
-    let types= inf_beer.map(beer=>beer.type)
-    res.send(types)
+    const type: string | undefined= req.query.type?.toString()
+    let bigUsers = await prisma.user.findMany({
+      })
+      let users= bigUsers.map(user=> user.username)
+    res.send(users)
 })
 
 router.get("/detail", async (req: Request, res: Response) => {
-    const type: string | undefined= req.query.type?.toString()
-    let detail = await prisma.specificType.findUnique({
-        where: { type: type },
-        include: {genericType : true}
-      })
-    res.send(detail)
+  const username: string | undefined= req.query.username?.toString()
+
+  let detail = await prisma.user.findUnique({
+    where: { username: username },
+    include:{ role:true}
+  })
+  res.send(detail)
 })
 
 export default router;

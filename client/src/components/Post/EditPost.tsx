@@ -20,7 +20,6 @@ export default function EditPost() {
   const [generic, setGeneric] = useState([]);
   const [specific, setSpecific] = useState([]);
   const [image, setImage] = useState("");
-  console.log(image, "IMAGE STATE")
   const info: any = useSelector((state: RootState) => state.detailPosts);
   const [estado, setEstado] = useState({ "checked": true });
 

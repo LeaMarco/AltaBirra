@@ -1,51 +1,42 @@
-import { useEffect, useState } from "react";
 import { useForm, SubmitHandler} from "react-hook-form";
-import {PostValues, searchTypes } from "../../actions";
-import { useDispatch} from "react-redux";
-import { Dispatch } from "redux";
+import { PostValues} from "../../actions";
 import styles from './Post.module.css';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
+import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { Dispatch } from "redux";
+import { searchTypes } from "../../actions";
+
 
 import axios from 'axios';
 
-function EditSpecificTypes() {
-  const [generic, setGeneric] = useState([]);
-  const [specific, setSpecific] = useState([]);
-  const [specificDetail, setSpecificDetail]:any = useState();
-
-console.log(specificDetail, "DETALLES EN EL ESTADO")
-
-  const MySwal = withReactContent(Swal)
+function CreateGenericTypes() {
   const dispatch = useDispatch<Dispatch<any>>();
 
-
-  async function getSpecificDetail(name:string) {
-    const details = await axios.get(`${process.env.REACT_APP_HOST_BACKEND}/specificTypes/detail`, {params:{type:name}});
-    setSpecificDetail(details.data)
-    return details;
-  }
-
-  async function editSpecificType(data:any) {
-    data.typeToChange = specificDetail.type
-    console.log(data, "DATA DEL FORM");
-    await axios.put(`${process.env.REACT_APP_HOST_BACKEND}/specificTypes`, { params: data });
-    const newValues= await getSpecificDetail(data.type)
-    setSpecificDetail(newValues.data)
-    return newValues;
-  }
+  const [generic, setGeneric] = useState([]);
+  let group=["ALE","LAGER","LAMBIC","OTRA"]
 
 
   async function getBeerTypes() {
     let respuesta = await dispatch(searchTypes())
     setGeneric(respuesta[0])
-    setSpecific(respuesta[1])
+  }
+  useEffect(() => {
+    getBeerTypes();
+  }, [])
+
+
+  const MySwal = withReactContent(Swal)
+
+  async function createSpecificType(data:any) {
+    console.log(data, "DATA DEL FORM");
+    let response= await axios.post(`${process.env.REACT_APP_HOST_BACKEND}/specificTypes`, { params: data });
+    return response;
   }
 
-  let group=["ALE","LAGER","LAMBIC","OTRA"]
-
   async function despachadora(data) {
-    let save = await editSpecificType(data)
+    let save = await createSpecificType(data)
     if (save["status"] === 200) {
       MySwal.fire({
         position: 'center',
@@ -54,9 +45,6 @@ console.log(specificDetail, "DETALLES EN EL ESTADO")
         showConfirmButton: false,
         timer: 1500,
       })
-      setSpecificDetail({})
-      getBeerTypes()
-
     } else {
       MySwal.fire({
         position: 'center',
@@ -68,40 +56,14 @@ console.log(specificDetail, "DETALLES EN EL ESTADO")
     }
   }
 
-  useEffect(() => {
-    getBeerTypes();
-  }, [dispatch])
-
-  let dataPrevia
-  if (specificDetail) {
-    dataPrevia = {
-      type: specificDetail.type,
-      description: specificDetail.description,
-      group: specificDetail.group,
-      genericType: specificDetail.genericType?.type,
-    };
-  }
-
-  useEffect(() => {
-    reset(dataPrevia);
-  }, [specificDetail])
-console.log(dataPrevia, "DATA PREVIA")
-console.log(specificDetail, "DETALLES GENERICO")
-
-
-
-  const { register, handleSubmit, reset } = useForm({ defaultValues : dataPrevia });
+  const { register, handleSubmit, reset } = useForm({ });
   const onSubmit: SubmitHandler<PostValues> = (data) => { despachadora(data); reset() };
   
-  return generic.length>0 && specific.length>0 ?(
+  return (
     <div className={styles.mainContainer}>
-    <h1 className={styles.componentTitle}>Editar tipos especificos:  </h1>
+    <h1 className={styles.componentTitle}>Crear tipo específico:  </h1>
     <div className={styles.listContainer}>
               <div className={styles.specificType}>
-                  {specific.map(value => (
-                    <div className={styles.GenericTypeCard}>
-                    <h3>{value}   </h3>
-                      {dataPrevia!==undefined && dataPrevia.genericType!==undefined && specificDetail!==undefined && specificDetail.type === value? 
                                 <form className={styles.postForm} onSubmit={handleSubmit(onSubmit)}>
                                         <div className={styles.container} id={styles["beer"]}>
                                             <input {...register("type")} autoComplete="off" className={styles.input} required />
@@ -134,19 +96,15 @@ console.log(specificDetail, "DETALLES GENERICO")
                                             </select>
                                         </div>
                                         <div className={styles.submitButtonsContainer}>
-                                            <button className={styles.postFormSubmitButton} type="submit">Editar</button>
-                                            <button className={styles.postFormSubmitButton} onClick={()=>setSpecificDetail({})}>Cancelar</button>
+                                            <button className={styles.postFormSubmitButton} type="submit">Crear</button>
+                                            <button className={styles.postFormSubmitButton} onClick={()=>reset()}>Cancelar</button>
                                         </div>
                                 </form>
-                                  :
-                                  <button className={styles.postEditButton} onClick={()=>getSpecificDetail(value)}>Editar</button>
-                                }
+                                  
                     </div>
-                  ))}
               </div>       
     </div>
-    </div>
-  ): (<h1>Cargando...</h1>);
+  )
 };
 
-export default EditSpecificTypes
+export default CreateGenericTypes

@@ -99,6 +99,8 @@ export default function DetailBeer() {
 								</div>
 								<div className={Style.infoCompra}>
 									<h3>Información De Compra</h3>
+									
+									{info.stock===0? <div className={Style.soldout}>NO HAY STOCK</div>:
 									<div className={Style.buyInfo}>
 										<div className={Style.buyButtons}>
 											<form onSubmit={handleSubmit} >
@@ -124,7 +126,7 @@ export default function DetailBeer() {
 												</div>
 												: null}
 										</div>
-									</div>
+									</div>}
 								</div>
 								<div className={Style.share}>
 									Compartir

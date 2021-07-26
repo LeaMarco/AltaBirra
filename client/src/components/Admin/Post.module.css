@@ -1,24 +1,45 @@
 .mainContainer{
-    height: 50rem;
+    width: 50%;
+    margin-left: 25%;
+    margin-top: 2%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    color: black;
+}
+
+.adminContainer{
+    align-self: center;
+    margin-top: 2%;
+    display: flex;
+    height: 80%;
+    width: 80%;
+    justify-content: space-evenly;
+}
+.listContainer{
+    margin-top: 2%;
+    height: 80%;
+    width: 100%;
+    align-self: center;
     display: flex;
     justify-content: center;
-    align-items: center;
+    overflow-y: scroll;
+    scroll-behavior:smooth;
 }
 .postForm{
     display: flex;
+    margin-left: 5%;
     flex-direction: column;
-    width: 40em;
-    height: 40rem;
+    width: 90%;
     align-items: center;
     justify-content:center;
     text-align: center;
     border: 1px solid tomato;
     border-radius: 20px;
-    overflow-y: scroll;
-    scroll-behavior:smooth;
+    background-color: white;
 }
 
-.container{display: flex; align-items:center;flex-direction: column; float: left; width: 12.75rem; margin: 20px 3%; position: relative;}
+.container{display: flex; align-items:center;flex-direction: column; float: left; width: 80%; margin: 20px 3%; position: relative;}
 :focus{outline: none;}
 .input{border: 0; border-bottom: 1px solid #ccc; background-color: transparent;}
 .input ~ .focusBorder{position: absolute; bottom: 0; left: 50%; width: 0; height: 2px; background-color: tomato; transition: 0.4s;}
@@ -32,8 +53,22 @@ input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width
 
 .postFormSubmitButton{
     margin-bottom:30px;
-    width:20em;
+    width:30%;
     background:rgb(92, 221, 135);
+}
+
+.textarea{
+    width: 100%;
+    align-content: center;
+    font-size: 16px
+}
+
+
+
+.submitButtonsContainer{
+    width: 80%;
+    display: flex;
+    justify-content: space-around;
 }
 .postFormBeer{
     margin-top: 70%;
@@ -44,7 +79,7 @@ input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width
 }
 .postFormBeer input{
     height: 2em;
-    width:15em;
+    width:100%;
 }
 .postFormInfoPost{
     margin-top: 1em;
@@ -140,10 +175,24 @@ input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width
     width:29em;
 }
 
-.postFormSubmitButton{
+.postEditButton{
     margin-top: 20px;
     background-color:tomato;
-    height: 3em;
+    height: 2rem;
+    border-radius: 8px;
+    border:none;
+    transition:0.3s;
+    font-size: 13px;
+    font-weight: 900;
+    color:white;  
+    cursor: pointer;
+}
+
+.postFormSubmitButton{
+    width: 40%;
+    margin-top: 20px;
+    background-color:tomato;
+    height: 2rem;
     border-radius: 8px;
     border:none;
     transition:0.3s;
@@ -163,4 +212,25 @@ input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width
 
 .uploadGroup{
     padding-bottom: 5%;
+}
+
+.specificType{
+    margin-top: 5%;
+    width: 100%;
+}
+
+.GenericTypeCard{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    font-size: 14px;
+    margin-top: 5%;
+    padding-bottom: 5%;
+    border-radius: 20px;
+}
+
+.componentTitle{
+    color: white;
+    font-size: 18px;
 }

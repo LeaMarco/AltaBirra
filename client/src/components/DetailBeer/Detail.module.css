@@ -291,3 +291,11 @@
 .portalstyle{
     background-color:red;
 }
+
+.soldout{
+    font-size: 20px;
+    font-weight: 800;
+    color: tomato;
+    margin-top: 15%;
+    transform: rotate(15deg);
+}

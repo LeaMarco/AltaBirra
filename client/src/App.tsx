@@ -43,7 +43,7 @@ function App() {
 
       <Route exact path="/E_Unauthorized" component={E_Unauthorized} />
 
-      <Route exact path="/admin" component={Admin} />
+      <Route path="/admin" component={Admin} />
 
     </div>
   );

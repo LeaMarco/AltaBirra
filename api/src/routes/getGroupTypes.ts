@@ -5,26 +5,23 @@ const router = Router();
 const prisma = new PrismaClient();
 
 router.put("/", async (req: Request, res: Response) => {
-  console.log(req.body.params, "bodyyyy")
-  const {typeToChange, type, description} = req.body.params    
-  console.log(type, "TYPE")
-	const originalType = await prisma.genericType.findUnique({ where: { type: typeToChange } });
+    const {typeToChange, name, description} = req.body.data     
       await prisma.genericType.update({
         where: { type: typeToChange },
         data: {
-              type: type?type:originalType?.type,
-              description: description?description:originalType?.description,
-              },
+         type: name,
+         description
+        },
       }).catch((error) => res.status(500).send(error));
       res.status(200).send('Tipo genérico editado con exito');
     });
 
 
 router.post("/", async (req: Request, res: Response) => {
-    const {type, description} = req.body.params
+    const {name, description} = req.body.data
     await prisma.genericType.create({
         data: {
-          type: type,
+          type: name,
           description
         },
       }).catch((error) => res.status(500).send(error));
@@ -33,15 +30,18 @@ router.post("/", async (req: Request, res: Response) => {
 
 router.get("/", async (req: Request, res: Response) => {
     let inf_beer = await prisma.genericType.findMany()
+    await prisma.$queryRaw
     let types= inf_beer.map(beer=> beer.type)
     res.send(types)
 })
 
 router.get("/detail", async (req: Request, res: Response) => {
+  console.log(typeof(req.query.type), "bodyyyy")
     const type: string | undefined= req.query.type?.toString()
     let detail = await prisma.genericType.findUnique({
         where: { type: type }
       })
+      console.log(detail, "DETAILLL")
     res.send(detail)
 })
 

@@ -11,6 +11,7 @@ import upload from "./upload";
 import deletePost from "./deletePost";
 import removePost from "./removeToCart";
 import specificType from "./getSpecificTypes"
+import groupType from "./getGroupTypes"
 import genericType from "./getGenericTypes"
 import autoComplete from "./autocomplete";
 import detail from "./detail"
@@ -24,6 +25,8 @@ import sellHistory from "./sellHistory";
 import addToCart from './addToCart';
 import autentication from "../autentication/authRoutes/auth"
 import buyHistory from "./buyHistory";
+import editUsers from "./EditUsers";
+
 import { tokenValidation } from '../autentication/libs/verifyToken';
 
 const router = Router();
@@ -34,6 +37,7 @@ router.use("/register", register);//registro de usuarios
 router.use("/beer", beers);//trae los posts para el home
 router.use("/post", getSearchedPost);//devuelve post buscados
 router.use("/specificTypes", specificType);
+router.use("/groupTypes", groupType);
 router.use("/genericTypes", genericType);
 router.use("/autocomplete", autoComplete);//autocompletar el search
 router.use("/detailBeer", detail);//ruta detalle de post
@@ -53,6 +57,8 @@ router.use("/removeFavorite", /* tokenValidation, */ removeFavorite);//
 router.use("/ratePost", /* tokenValidation, */ ratePost);//
 router.use("/sellHistory", /* tokenValidation, */ sellHistory);//
 router.use("/buyHistory", /* tokenValidation, */ buyHistory);//
+router.use("/editUsers", /* tokenValidation, */ editUsers);//
+
 
 
 export default router;

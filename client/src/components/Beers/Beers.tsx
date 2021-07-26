@@ -18,9 +18,8 @@ const Beers = () => {
       <h1 id="titulo">Las recomendadas de Alta Birra</h1>
       <div className="beers">
       {
-        typeof usersPremium === "object" 
-        ? usersPremium.map((userPremium) => (
-          
+          Array.isArray(usersPremium) ?
+          usersPremium.map((userPremium) => (
 
           <Beer
             key={userPremium.id}

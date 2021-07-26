@@ -1,51 +1,42 @@
-import { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { useForm, SubmitHandler} from "react-hook-form";
-import {PostValues, searchTypes } from "../../actions";
-import { useDispatch} from "react-redux";
+import {  PostValues } from "../../actions";
+import { useDispatch } from "react-redux";
 import { Dispatch } from "redux";
 import styles from './Post.module.css';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
-
 import axios from 'axios';
 
-function EditSpecificTypes() {
-  const [generic, setGeneric] = useState([]);
-  const [specific, setSpecific] = useState([]);
-  const [specificDetail, setSpecificDetail]:any = useState();
+function EditUsers() {
+  const [users, setUsers]:any = useState([]);
+  const [userDetail, setUserDetail]:any = useState([]);
+  
 
-console.log(specificDetail, "DETALLES EN EL ESTADO")
+console.log(userDetail, "USUARIOSSS")
 
   const MySwal = withReactContent(Swal)
   const dispatch = useDispatch<Dispatch<any>>();
 
+  async function getUsers() {
+    let users = await axios.get(`${process.env.REACT_APP_HOST_BACKEND}/editUsers`)
+    console.log("pasó por get users", users)
+    setUsers(users.data)
+  }
 
-  async function getSpecificDetail(name:string) {
-    const details = await axios.get(`${process.env.REACT_APP_HOST_BACKEND}/specificTypes/detail`, {params:{type:name}});
-    setSpecificDetail(details.data)
+  async function editUser(data){
+
+  }
+
+  
+  async function getUserDetail(name:string) {
+    const details = await axios.get(`${process.env.REACT_APP_HOST_BACKEND}/editUsers/detail`, {params:{username:name}});
+    setUserDetail(details.data)
     return details;
   }
 
-  async function editSpecificType(data:any) {
-    data.typeToChange = specificDetail.type
-    console.log(data, "DATA DEL FORM");
-    await axios.put(`${process.env.REACT_APP_HOST_BACKEND}/specificTypes`, { params: data });
-    const newValues= await getSpecificDetail(data.type)
-    setSpecificDetail(newValues.data)
-    return newValues;
-  }
-
-
-  async function getBeerTypes() {
-    let respuesta = await dispatch(searchTypes())
-    setGeneric(respuesta[0])
-    setSpecific(respuesta[1])
-  }
-
-  let group=["ALE","LAGER","LAMBIC","OTRA"]
-
   async function despachadora(data) {
-    let save = await editSpecificType(data)
+    let save = await editUser(data)
     if (save["status"] === 200) {
       MySwal.fire({
         position: 'center',
@@ -54,9 +45,7 @@ console.log(specificDetail, "DETALLES EN EL ESTADO")
         showConfirmButton: false,
         timer: 1500,
       })
-      setSpecificDetail({})
-      getBeerTypes()
-
+      getUsers()
     } else {
       MySwal.fire({
         position: 'center',
@@ -67,43 +56,24 @@ console.log(specificDetail, "DETALLES EN EL ESTADO")
       })
     }
   }
-
   useEffect(() => {
-    getBeerTypes();
+    getUsers();
   }, [dispatch])
 
-  let dataPrevia
-  if (specificDetail) {
-    dataPrevia = {
-      type: specificDetail.type,
-      description: specificDetail.description,
-      group: specificDetail.group,
-      genericType: specificDetail.genericType?.type,
-    };
-  }
-
-  useEffect(() => {
-    reset(dataPrevia);
-  }, [specificDetail])
-console.log(dataPrevia, "DATA PREVIA")
-console.log(specificDetail, "DETALLES GENERICO")
-
-
-
-  const { register, handleSubmit, reset } = useForm({ defaultValues : dataPrevia });
+  const { register, handleSubmit, reset } = useForm({ });
   const onSubmit: SubmitHandler<PostValues> = (data) => { despachadora(data); reset() };
   
-  return generic.length>0 && specific.length>0 ?(
+  return users.length>0?(
     <div className={styles.mainContainer}>
     <h1 className={styles.componentTitle}>Editar tipos especificos:  </h1>
     <div className={styles.listContainer}>
               <div className={styles.specificType}>
-                  {specific.map(value => (
+                  {users.map(user => (
                     <div className={styles.GenericTypeCard}>
-                    <h3>{value}   </h3>
-                      {dataPrevia!==undefined && dataPrevia.genericType!==undefined && specificDetail!==undefined && specificDetail.type === value? 
+                    <h3>{user}   </h3>
+                      {user === userDetail.username? 
                                 <form className={styles.postForm} onSubmit={handleSubmit(onSubmit)}>
-                                        <div className={styles.container} id={styles["beer"]}>
+                                        {/* <div className={styles.container} id={styles["beer"]}>
                                             <input {...register("type")} autoComplete="off" className={styles.input} required />
                                             <label>Type name *</label>
                                             <span className={styles.focusBorder}></span>
@@ -132,14 +102,14 @@ console.log(specificDetail, "DETALLES GENERICO")
                                                     </option>
                                                 ))}
                                             </select>
-                                        </div>
+                                        </div> */}
                                         <div className={styles.submitButtonsContainer}>
                                             <button className={styles.postFormSubmitButton} type="submit">Editar</button>
-                                            <button className={styles.postFormSubmitButton} onClick={()=>setSpecificDetail({})}>Cancelar</button>
+                                            <button className={styles.postFormSubmitButton} onClick={()=>setUserDetail({})}>Cancelar</button>
                                         </div>
                                 </form>
                                   :
-                                  <button className={styles.postEditButton} onClick={()=>getSpecificDetail(value)}>Editar</button>
+                                  <button className={styles.postEditButton} onClick={()=>getUserDetail(user)}>Editar</button>
                                 }
                     </div>
                   ))}
@@ -149,4 +119,4 @@ console.log(specificDetail, "DETALLES GENERICO")
   ): (<h1>Cargando...</h1>);
 };
 
-export default EditSpecificTypes
+export default EditUsers
