@@ -15,12 +15,12 @@ app.set('port', 3001);
 app.use(express.json());
 // middlewares
 app.use(morgan('dev'));
-app.use(cors())
+// app.use(cors())
 
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', "*"); //**cambio** */ update to match the domain you will make the request from//aca habia un 3000!
-    next();
-});
+// app.use((req, res, next) => {
+//     res.header('Access-Control-Allow-Origin', "*"); //**cambio** */ update to match the domain you will make the request from//aca habia un 3000!
+//     next();
+// });
 
 // routes
 app.use('/auth', authRoutes);
