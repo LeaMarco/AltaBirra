@@ -15,15 +15,18 @@ app.use(cookieParser());
 app.use(morgan('dev'));
 app.use('/', express.static(path.join(__dirname, '/')));
 
-// app.use(
-// 	cors({
-// 		origin: process.env.HOST_FRONT,
-// 		credentials: false,
-// 		methods: ['GET', 'POST', 'OPTIONS', 'PUT', 'DELETE'],
-// 		allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept'],
-// 	})
-// );
-
+app.use(
+	cors({
+		origin: process.env.HOST_FRONT,
+		credentials: false,
+		methods: ['GET', 'POST', 'OPTIONS', 'PUT', 'DELETE'],
+		allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept'],
+	})
+);
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', process.env.HOST_FRONT); //**cambio** */ update to match the domain you will make the request from//aca habia un 3000!
+    next();
+});
 app.use("/", routes);
 
 interface error {
