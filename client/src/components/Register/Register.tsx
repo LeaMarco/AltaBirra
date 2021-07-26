@@ -209,7 +209,7 @@ const Register: React.FunctionComponent<{ closeModal, toogleEnter, toogleRegiste
       title: 'Verificá tu cuenta!',
       text: 'Por favor verifica tu cuenta con el correo que te hemos enviado...',
       icon: 'success',
-      buttons: ['','Ok']
+      buttons: ['', 'Ok']
     })
   }
   ////////////////////FIN DE LOGICA DE REGISTRO LOCAL///////////////////////////////////////

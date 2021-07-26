@@ -21,10 +21,10 @@ interface Autocomplete {
 }
 
 export default function Nav() {
-  
-  
 
-  
+
+
+
   ///////////////////AUTENTICACION AUTOMATICA/////////////////////////////////////////
 
 
@@ -61,7 +61,7 @@ export default function Nav() {
   }
     , [])
   ///////////////////AUTENTICACION AUTOMATICA/////////////////////////////////////////
-  useEffect(() => {
+  /* useEffect(() => {
 
     let tokenLocal = localStorage.tokenLocal
     if (tokenLocal) {
@@ -82,11 +82,11 @@ export default function Nav() {
         .catch((error) => console.log(error, 'No te pudiste loguear de forma local automatica!'))
     }
 
-  },[])
+  },[]) */
 
-  
+
   //////////////////autenticacion automatica//////////////////////////////////////////
-    
+
   //////////////////Fin autenticacion automatica//////////////////////////////////////////
 
 
@@ -118,7 +118,7 @@ export default function Nav() {
     setSearchInput("");
   }
 
-  function close(){
+  function close() {
     swal({
       title: "Cerrar sesión",
       text: "¿Desea cerrar sesión?",
@@ -126,15 +126,15 @@ export default function Nav() {
       buttons: ["No", "Si"]
       // timer: 2000,
     }).then(response => {
-      if(response){
-        swal({title: 'Adiós, vuelve pronto!', text: 'Suerte!', icon: "success", timer: 3000, buttons: ['']})
+      if (response) {
+        swal({ title: 'Adiós, vuelve pronto!', text: 'Suerte!', icon: "success", timer: 3000, buttons: [''] })
         setTimeout(() => {
           localStorage.clear();
-          window.location.href = 'https://localhost:3000';  
+          window.location.href = 'https://localhost:3000';
         }, 2900);
-        
+
       }
-    })    
+    })
   }
 
   return (
@@ -231,7 +231,7 @@ export default function Nav() {
             <Modal isOpen={isRegisterOpen} handleClose={toogleRegister}>
               <Register closeModal={toogleRegister} toogleEnter={toogleEnter} toogleRegister={toogleRegister} />
             </Modal>
-          
+
             <div className={style.buttonsRight}>
               <Link className={style.textDecoration} to="/panel">
                 <button className={style.buttonEnter}>Panel</button>
@@ -239,7 +239,7 @@ export default function Nav() {
 
               {
                 !isAuth ?
-                  
+
                   <div className={style.buttonsRightEnter}>
                     <button className={style.buttonEnter} onClick={toogleEnter}>
                       Entrar
@@ -259,17 +259,17 @@ export default function Nav() {
 
         {
           isAuth ?
-              (              
+            (
               <div className={style.fourColumn}>
                 <span className={style.welcome} >
                   Bienvenido {stateWelcome.nombre}
                 </span>
-                <button className={style.closeSesion} onClick={ close }>
+                <button className={style.closeSesion} onClick={close}>
                   Cerrar sesión
                 </button>
               </div>
-              )
-              : null
+            )
+            : null
         }
       </div>
 
