@@ -40,45 +40,45 @@ Si queres ver como es la funcion, mantene apretado CONTROL y hace hover sobre el
   */
 export function validationHeadersGenerator() {
 
-  if (localStorage.length > 1) { return "ERROR EN LOCALSTORAGE, HAY MAS DE UN TOKEN!" }
-  const { tokenFacebook, tokenLocal, tokenGoogle } = localStorage
+  if (Object.keys(localStorage).join().includes("token")) {
+    const { tokenFacebook, tokenLocal, tokenGoogle } = localStorage
 
-  const uniqueSearchLabel =
-    tokenFacebook ? "username"
-      :
-      tokenLocal ? "id"
+    const uniqueSearchLabel =
+      tokenFacebook ? "username"
         :
-        tokenGoogle ? "email"
-          : null
+        tokenLocal ? "id"
+          :
+          tokenGoogle ? "email"
+            : null
 
-  const tokenType =
-    tokenFacebook ? "tokenFacebook"
-      :
-      tokenLocal ? "tokenLocal"
+    const tokenType =
+      tokenFacebook ? "tokenFacebook"
         :
-        tokenGoogle ? "tokenGoogle"
-          : null
+        tokenLocal ? "tokenLocal"
+          :
+          tokenGoogle ? "tokenGoogle"
+            : null
 
-  const token =
-    tokenFacebook ? tokenFacebook
-      :
-      tokenLocal ? tokenLocal
+    const token =
+      tokenFacebook ? tokenFacebook
         :
-        tokenGoogle ? tokenGoogle
-          : null
+        tokenLocal ? tokenLocal
+          :
+          tokenGoogle ? tokenGoogle
+            : null
 
-  const validationHeaders = {
-    tokenType, //type de token
-    uniqueSearchLabel, //label unica para buscar en el where
-    token//el token propiamente dicho}
-  }
+    const validationHeaders = {
+      tokenType, //type de token
+      uniqueSearchLabel, //label unica para buscar en el where
+      token//el token propiamente dicho}
+    }
 
-  if (tokenFacebook || tokenLocal || tokenGoogle) {
 
     return validationHeaders
-
   }
+
   else return {}
+
 }
 
 

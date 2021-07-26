@@ -60,6 +60,8 @@ const Card = ({
     return str.substr(0, str.lastIndexOf(separator, maxLen));
   }
 
+
+
   return (
     <div className={Style.containerBack}>
       <div className={Style.container}>

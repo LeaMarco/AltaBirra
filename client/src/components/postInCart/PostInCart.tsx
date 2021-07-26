@@ -15,20 +15,36 @@ export function PostinCart({
 	countable,
 	cartId,
 	username,
+	deleteGuestItem = (postIdDelete: number) => console.log("deleteGuestItem no pasada, porque no hace falta")
 }) {
+	const hasToken = Object.keys(localStorage).join().includes("token")
 	const [quantity, setQuantity] = useState(amount);
+	const [guestCartQuantity, setGuestCartQuantity] = useState()
 
 	const dispatch = useDispatch();
 	let cartIdparsed = parseInt(cartId, 10);
+
+	function guestCartHandleQuantity(direction: 1 | -1) {
+		let localStorageParse = JSON.parse(localStorage.guestsItemsInCart)
+		localStorageParse[postId] = localStorageParse[postId] + direction
+		localStorage.setItem("guestsItemsInCart", JSON.stringify(localStorageParse))
+	}
 
 	useEffect(() => {
 		addToCart({ postId, quantity, username: "TestUser" });
 	}, [quantity]);
 
 	async function deleteItem() {
-		await removeToCart({ username, postId, cartIdparsed });
-		dispatch(getCart(cartIdparsed));
+		if (hasToken) {
+			await removeToCart({ username, postId, cartIdparsed });
+			dispatch(getCart(cartIdparsed))
+		}
+		else {
+			console.log("entre", postId)
+			deleteGuestItem(postId)
+		}
 	}
+
 	async function despachadora() {
 		Swal.fire({
 			title: '¿Seguro de borrar el item?',
@@ -60,10 +76,22 @@ export function PostinCart({
 				</div>
 			</Link>
 			<div className={style.modifyContainer}>
-				<button onClick={(e) => setQuantity(quantity + 1)}>➕</button>
+				<button onClick={(e) => {
+
+					setQuantity(quantity + 1)
+					guestCartHandleQuantity(+1)
+
+				}}>➕</button>
 				<p>Cantidad: {quantity}</p>
 				{/* <p>{countable.discount}</p> */}
-				<button onClick={(e) => quantity > 1 ? setQuantity(quantity - 1) : alert("Del piso no paso")
+				<button onClick={(e) => {
+					if (quantity <= 1) alert("Del piso no paso")
+					else {
+						guestCartHandleQuantity(-1)
+						setQuantity(quantity - 1)
+					}
+
+				}
 				}
 				>
 					➖

@@ -37,10 +37,10 @@ function validatePassword(password: string, user: User): boolean {
 
 
 export const signup = async (req: Request, res: Response) => {
-
-
     const { username, email, name, password } = req.body.params;
-
+    let guestsItemsInCart = JSON.parse(req.body.params.guestsItemsInCart)
+    // let guestsItemsInCart = req.body.params.guestsItemsInCart
+    console.log("guestsItemsInCart", guestsItemsInCart, "guestsItemsInCart")
     // Busco al usuario
     const user = await prisma.user.findUnique({
         where: {
@@ -48,7 +48,17 @@ export const signup = async (req: Request, res: Response) => {
         }
     })
 
-    if (!user) { //Si el usuario NO existe
+    //Conversor obj a array, formateado para crear filas de postsOnCart
+    let postsOnCartArray = []
+    for (let i in guestsItemsInCart) {
+        postsOnCartArray.push({ postId: parseInt(i), amount: guestsItemsInCart[i] })
+    }//////////////////////////////////////////////////////////////////
+
+    console.log(postsOnCartArray)
+
+
+    if (!user) {
+        //Si el usuario NO existe
         const userRol = await prisma.role.findUnique({ where: { name: "USER" } })
 
         //Creo el usuario
@@ -62,7 +72,13 @@ export const signup = async (req: Request, res: Response) => {
                     connect: { id: userRol?.id }
                 },
                 cart: {
-                    create: {}
+                    create: {
+                        posts: {
+                            createMany: {
+                                data: postsOnCartArray
+                            }
+                        }
+                    }
                 },
                 favorite: {
                     create: {}
@@ -72,20 +88,21 @@ export const signup = async (req: Request, res: Response) => {
 
         return res.json(userCreado)
     }
+
     else if (user.activeCount) return res.sendStatus(409)//Si existe y tiene la cuenta activada, rebota y lo manda a loguearse
 
-    else if (user.activeCount === false) {//Si existe en base de datos, pero tiene la cuenta desactivada
+    else if (user.activeCount === false) {//1) Si existe en base de datos, pero tiene la cuenta desactivada
 
         await prisma.user.update({
             where: {
                 id: user.id
-            }, data: { activeCount: true }//Se la activa!
+            }, data: { activeCount: true }//2) Se la activa!
         }).catch(() => res.status(500).send("Error inesperado: se encontro al usuario en base de datos pero no se pudo reactivar su cuenta"))
 
         return res.sendStatus(200)
     }
 
-    res.status(500).send("Error inesperado")
+    res.status(500).send("Error inesperado: llame a batman")
 
 };
 

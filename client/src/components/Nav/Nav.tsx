@@ -40,8 +40,7 @@ export default function Nav() {
 
   ////////////////////AUTENTICACION AUTOMATICA//////////////////////////////////////////////////
   useLayoutEffect(() => {
-
-    if (localStorage.length) {
+    if (Object.keys(localStorage).join().includes("token")) {
       axios.get(`${process.env.REACT_APP_HOST_BACKEND}/auth/autoLogin`, {
         headers: validationHeadersGenerator()
       }).then(e => {
