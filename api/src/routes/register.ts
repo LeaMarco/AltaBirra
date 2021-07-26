@@ -21,6 +21,9 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
       },
       favorite: {
         create: {}
+      },
+      views: {
+        create: {}
       }
     }
   }).catch((e) => res.send("Error (usuario ya creado?)"))

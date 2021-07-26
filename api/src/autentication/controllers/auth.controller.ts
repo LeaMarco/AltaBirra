@@ -69,6 +69,9 @@ export const signup = async (req: Request, res: Response) => {
                 },
                 favorite: {
                     create: {}
+                },
+                views: {
+                    create: {}
                 }
             }
         }).catch((e) => res.send("Error al registrar usuario"))

@@ -28,6 +28,9 @@ async function main() {
       },
       favorite: {
         create: {}
+      },
+      views: {
+        create: {}
       }
     },
   });
@@ -46,6 +49,9 @@ async function main() {
         create: {}
       },
       favorite: {
+        create: {}
+      },
+      views: {
         create: {}
       }
     },
@@ -66,6 +72,9 @@ async function main() {
       },
       premium: true,
       favorite: {
+        create: {}
+      },
+      views: {
         create: {}
       }
     },

@@ -4,14 +4,10 @@
 	margin: 5vh 10vw;
 }
 
-.filter {
-	margin: 2vh 0;
-}
-
 .subcontainer {
 	margin: 1vh 2vw;
 	padding: 2rem;
-	width: 100%;
+	width: fit-content;
 	margin: auto;
 }
 

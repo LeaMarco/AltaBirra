@@ -27,6 +27,8 @@ import autentication from "../autentication/authRoutes/auth"
 import buyHistory from "./buyHistory";
 import editUsers from "./EditUsers";
 
+import viewHistory from "./viewHistory";
+import transactionState from "./transactionState";
 import { tokenValidation } from '../autentication/libs/verifyToken';
 
 const router = Router();
@@ -59,6 +61,8 @@ router.use("/sellHistory", /* tokenValidation, */ sellHistory);//
 router.use("/buyHistory", /* tokenValidation, */ buyHistory);//
 router.use("/editUsers", /* tokenValidation, */ editUsers);//
 
+router.use("/viewHistory", /* tokenValidation, */ viewHistory);//
+router.use("/transactionState", /* tokenValidation, */ transactionState);//
 
 
 export default router;

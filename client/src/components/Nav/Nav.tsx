@@ -185,7 +185,7 @@ export default function Nav() {
 
 
             <div className={style.buttonsRight}>
-              <Link to="/panel">
+              <Link to="/panel" style={{ textDecoration: "none" }}>
                 <button className={style.buttonEnter}>Panel</button>
               </Link>
 
