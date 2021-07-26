@@ -91,7 +91,7 @@ export default function DetailBeer() {
 								<div className={Style.specs}>
 									<p>IBU <br />{info.beer.ibu}%</p>
 									<p>ABV <br />{info.beer.abv}%</p>
-									<p>CAL <br />{info.beer.calories}%</p>
+									<p>CAL <br />{info.beer.calories}</p>
 								</div>
 								<div className={Style.infoBeer}>
 									<p>Description: {info.description}</p>
