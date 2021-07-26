@@ -21,8 +21,8 @@
     align-content:center; */
     border-bottom-left-radius: 1rem;
     border-bottom-right-radius: 1rem;
-    height: 15vh;
-    min-height: 15vh;
+    /* height: 1%; */
+    min-height: 16vh;
     background-image: radial-gradient(circle at center center, rgb(64,65,67),rgb(36,32,33));
     margin-bottom: 5px;
   }
@@ -60,7 +60,7 @@
     background-color: #F49E51;
     padding: 0.3rem;
     font-size: 1.1rem;
-    max-width: 13vw;
+    max-width: 98%;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -143,8 +143,8 @@
 
   .stars{
     align-self: center;
-    position: absolute;
-    margin-top: 2.3rem;
+    position: relative;
+    /* margin-top: 2.3rem; */
 
   }
 

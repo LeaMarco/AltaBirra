@@ -39,7 +39,6 @@ const Beer = ({ id, image, title, ibu, abv, discount, price, rating }) => {
 									</div>
 								</div>
 								<div className={Style.countables}>
-									<p className={Style.stars}> {"⭐".repeat(rating)} </p>
 									{discount !== 0 ? (
 										<div className={Style.countable}>
 											<p className={Style.price}> ${(price - price * (discount / 100)).toFixed(2)} </p>
@@ -53,6 +52,7 @@ const Beer = ({ id, image, title, ibu, abv, discount, price, rating }) => {
 											<p className={Style.price}>${price}</p>
 										</div>
 									}
+									<p className={Style.stars}> {"⭐".repeat(rating)} </p>
 								</div>
 							</div>
 						</div>

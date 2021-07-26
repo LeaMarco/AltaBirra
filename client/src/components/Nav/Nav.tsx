@@ -9,12 +9,14 @@ import Login from "../Login/Login";
 import Register from "../Register/Register";
 import axios from "axios";
 import FavoritesTab from "../FavoriteTab/FavoriteTab";
-
+// import OffCanvas from 'react-aria-offcanvas';
+import { FaBars, FaSearch } from "react-icons/fa";
 interface Autocomplete {
   title: string;
 }
 
 export default function Nav() {
+  const [navbarOpen, setNavbarOpen] = useState(false)
   const [isEnterOpen, setEnterOpen] = useState<boolean>(false);
   const toogleEnter = () => setEnterOpen(!isEnterOpen);
   const [isRegisterOpen, setRegisterOpen] = useState<boolean>(false);
@@ -57,7 +59,9 @@ export default function Nav() {
     history.push(`/search`);
     setSearchInput("");
   }
-
+  const handleToggle = () => {
+    setNavbarOpen(!navbarOpen)
+  }
   return (
     <div className={style.NavBar}>
       <div className={style.LogoContainer}>
@@ -109,13 +113,6 @@ export default function Nav() {
         </div>
       </div>
       <div className={style.ButtonsNavBar}>
-        <label className={style.label} htmlFor="toggle">&#9776;</label>
-        <input type="checkbox" id={style.toggle} />
-        <div className={style.manu}>
-          <span className={style.bar}>Opcion1</span>
-          <span className={style.bar}>Opcion2</span>
-          <span className={style.bar}>Opcion3</span>
-        </div>
         {register ? (
           <div className={style.buttonsRight}>
             <Link
@@ -140,10 +137,6 @@ export default function Nav() {
               Salir
             </Link>
           </div>
-
-
-
-
         ) : (
           <div className={style.buttonsRight}>
             {/* <Link
@@ -189,9 +182,17 @@ export default function Nav() {
                   </button>
                 </div>
             }
-          </div>
+          </div >
         )}
+      </div >
+      <div className={style.mobileIcons}>
+        <div className={style.searchFa}>
+          <FaSearch />
+        </div>
+        <div className={style.hamburger}>
+          <FaBars />
+        </div>
       </div>
-    </div>
+    </div >
   );
 }

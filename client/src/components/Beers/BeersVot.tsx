@@ -16,13 +16,17 @@ const Beers = () => {
       items: 5
     },
     tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2
+      breakpoint: { max: 1024, min: 768 },
+      items: 3
     },
     mobile: {
+      breakpoint: { max: 768, min: 464 },
+      items: 2
+    },
+    smallMobile: {
       breakpoint: { max: 464, min: 0 },
       items: 1
-    }
+    },
   };
   const dispatch = useDispatch();
   const [news, setNews]: any = useState()
