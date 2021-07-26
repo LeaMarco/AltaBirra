@@ -14,13 +14,14 @@ import { ModalFavorites } from "../FavoriteTab/ModalFavorites/Modal.component";
 import { useLayoutEffect } from "react";
 import { validationHeadersGenerator } from "../../validationHeadersGenerator";
 
+// import OffCanvas from 'react-aria-offcanvas';
+import { FaBars, FaSearch } from "react-icons/fa";
 interface Autocomplete {
   title: string;
 }
 
 export default function Nav() {
-
-
+  const [navbarOpen, setNavbarOpen] = useState(false)
   const [isEnterOpen, setEnterOpen] = useState<boolean>(false);
   const toogleEnter = () => setEnterOpen(!isEnterOpen);
   const [isRegisterOpen, setRegisterOpen] = useState<boolean>(false);
@@ -81,13 +82,17 @@ export default function Nav() {
     history.push(`/search`);
     setSearchInput("");
   }
-
+  const handleToggle = () => {
+    setNavbarOpen(!navbarOpen)
+  }
   return (
     <div className={style.NavBar}>
-      <Link to="/">
-        <img src={logo} className={style.logo}></img>
-      </Link>
-      <div>
+      <div className={style.LogoContainer}>
+        <Link to="/">
+          <img src={logo} className={style.logo}></img>
+        </Link>
+      </div>
+      <div className={style.SearchBarContainer}>
         <div className={style.searchBar}>
           <form
             onSubmit={(event) => handleSubmit(event)}
@@ -130,7 +135,7 @@ export default function Nav() {
           </Link>
         </div>
       </div>
-      <div>
+      <div className={style.ButtonsNavBar}>
         {register ? (
           <div className={style.buttonsRight}>
             <Link
@@ -210,7 +215,15 @@ export default function Nav() {
           </div>
           // </div>
         )}
+      </div >
+      <div className={style.mobileIcons}>
+        <div className={style.searchFa}>
+          <FaSearch />
+        </div>
+        <div className={style.hamburger}>
+          <FaBars />
+        </div>
       </div>
-    </div>
+    </div >
   );
 }

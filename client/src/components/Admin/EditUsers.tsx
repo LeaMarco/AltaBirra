@@ -13,14 +13,11 @@ function EditUsers() {
   const [userDetail, setUserDetail]:any = useState([]);
   
 
-console.log(userDetail, "USUARIOSSS")
-
   const MySwal = withReactContent(Swal)
   const dispatch = useDispatch<Dispatch<any>>();
 
   async function getUsers() {
     let users = await axios.get(`${process.env.REACT_APP_HOST_BACKEND}/editUsers`)
-    console.log("pasó por get users", users)
     setUsers(users.data)
   }
 

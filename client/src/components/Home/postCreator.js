@@ -80,7 +80,6 @@ export default async (amount) => {
 
         let infoToPost = { beer, infoPost, countable }
 
-        console.log(infoToPost)
         await axios.post(`${process.env.REACT_APP_HOST_BACKEND}/post`, { params: infoToPost })
     } return (`TERMINE`)
 

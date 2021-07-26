@@ -39,11 +39,6 @@ interface Countable {
 
 router.post("/", async (req: Request, res: Response, next: NextFunction) => {
 
-  // const user = await findUserWithAnyTokenBabe(req, prisma)
-
-  // console.log("user", user)
-  // console.log("patams", req.body.params)
-
   const {
     abv,
     og,
@@ -54,7 +49,6 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
     genericType,
     specificType,
   }: Beer = req.body.params.beer;
-  console.log(req.body.params, "DATACOPY")
   const {
     title,
     description,
@@ -75,8 +69,6 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
   const user = await prisma.user.findUnique({ where: { username: username } });
   const beerGenericType = await prisma.genericType.findUnique({ where: { type: genericType } });
   const beerSpecificType = await prisma.specificType.findUnique({ where: { type: specificType } });
-  console.log("beerGenericType", beerGenericType)
-  console.log("beerSpecificType", beerSpecificType)
 
 
   await prisma.post.create({

@@ -75,7 +75,6 @@ export default function EditPost() {
 
   const handleFileChange = (event) => {
     setFile(event.target.files);
-    console.log(file)
   }
   async function imageHandler(event) {
     const file = event.target.files[0];

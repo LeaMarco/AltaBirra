@@ -282,15 +282,8 @@ export const searchTypes = () => {
 
 export const createPost = (data) => {
 	return async (dispatch: Dispatch) => {
-		console.log("entre createpostasd")
-		console.log(validationHeadersGenerator())
 		const response = await axios.post<PostValues>(urlpost, { params: data }, { headers: validationHeadersGenerator() });
 		return response;
-		// dispatch<Actionrara>({
-		// 	type: ActionTypes.createPost,
-		// 	payload: response.data,
-		// });
-		//Hace falta dispatchear algo aca?, no creo rey
 	};
 };
 
@@ -303,7 +296,6 @@ export const editPost = (data) => {
 }
 
 export type PostAction = CreatePostAction;
-// export type UserAction = FetchUsersAction;
 export type ActionAll = Actionrara;
 
 // FACU: function "loadUsersPremium" e interface UserPremium

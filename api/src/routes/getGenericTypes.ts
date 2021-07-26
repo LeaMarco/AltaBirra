@@ -5,9 +5,7 @@ const router = Router();
 const prisma = new PrismaClient();
 
 router.put("/", async (req: Request, res: Response) => {
-  console.log(req.body.params, "bodyyyy")
   const {typeToChange, type, description} = req.body.params    
-  console.log(type, "TYPE")
 	const originalType = await prisma.genericType.findUnique({ where: { type: typeToChange } });
       await prisma.genericType.update({
         where: { type: typeToChange },

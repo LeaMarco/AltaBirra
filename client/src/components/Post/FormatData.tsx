@@ -10,9 +10,7 @@ export default function transformer(Info, image) {
   datacopy.infoPost.rating = 5
   datacopy.infoPost.stock = parseInt(datacopy.infoPost.stock, 10)
   datacopy.infoPost.username = "TestUser"
-  console.log(datacopy.infoPost.image, "imagen de la info antes")
   if(image) {datacopy.infoPost.image=image}
-  console.log(datacopy.infoPost.image, "imagen de la info después")
 
   //countables
   datacopy.countable.price = parseFloat(datacopy.countable.price)

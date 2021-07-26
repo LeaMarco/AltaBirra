@@ -61,7 +61,6 @@
 
 .logo {
   height: 7vh;
-  margin-left: 5vw;
   margin-top: 3vh;
   filter: invert(100%);
 }
@@ -188,10 +187,71 @@
   color: grey;
 }
 
-
-.buttons{
-margin-left: -2.2rem;}
-
 .buttonsRightEnter{
   display: flex;
+  justify-content: space-around;
 }
+
+.SearchBarContainer{
+  display:flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-evenly;
+  min-width: 21.375rem;
+}
+.searchFa{
+  display:none;
+}
+.mobileIcons{
+  display:flex;
+
+}
+@media only screen and (max-width:768px){
+  .searchFa{
+    /* display: block; */
+    /* position: absolute; */
+    /* transform:translate(-100%,60%); */
+    font-size:1.8rem;
+    cursor:pointer;
+    color:#fff;
+  }
+  .SearchBarContainer{
+    display: none;
+  }
+}
+
+.ButtonsNavBar{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* flex-wrap: wrap; */
+  justify-content: space-evenly;
+}
+.hamburger{
+  display:none;
+}
+
+@media only screen and (max-width:1024px){
+  .ButtonsNavBar{
+    display: none;
+  }
+  .hamburger{
+      display: block;
+      position: absolute;
+      top: 0;
+      right:0;
+      transform:translate(-100%,60%);
+      font-size:1.8rem;
+      cursor:pointer;
+      color:#fff;
+  }
+}
+
+.buttonsRight {
+  display: flex;
+  justify-content: flex-start;
+  align-content: center;
+  flex-wrap: wrap;
+  height: 3rem;
+}
+

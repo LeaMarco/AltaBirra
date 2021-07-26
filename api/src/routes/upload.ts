@@ -43,7 +43,6 @@ const imageUpload = multer({
     ),
 });
 router.post('/',  imageUpload.single('image'), (req: any, res: Response) => {
-    // console.log(req.file, "REQ FILEE")
     const { filename, mimetype, size } = req.file;
     const filepath = req.file?.path;
     db.insert({

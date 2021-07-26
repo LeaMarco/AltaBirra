@@ -23,7 +23,6 @@ function EditGenericTypes() {
   }
 
   async function editGenericType(data:any) {
-    console.log(data, "DATA DEL FORM");
     await axios.put(`${process.env.REACT_APP_HOST_BACKEND}/genericTypes`, { params: data });
     const newValues= await getGenericDetail(data.type)
     getGenericDetail(newValues.data)
@@ -43,7 +42,7 @@ function EditGenericTypes() {
       MySwal.fire({
         position: 'center',
         icon: 'success',
-        title: 'Post modificado con Exito!',
+        title: 'Tipo modificado con Exito!',
         showConfirmButton: false,
         timer: 1500,
       })
@@ -53,7 +52,7 @@ function EditGenericTypes() {
       MySwal.fire({
         position: 'center',
         icon: 'error',
-        title: 'No se ha podido modificar el Post :( Intenta nuevamente!',
+        title: 'No se ha podido modificar el tipo :( Intenta nuevamente!',
         showConfirmButton: false,
         timer: 1500,
       })

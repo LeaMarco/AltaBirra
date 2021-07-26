@@ -30,7 +30,6 @@ function CreateGenericTypes() {
   const MySwal = withReactContent(Swal)
 
   async function createSpecificType(data:any) {
-    console.log(data, "DATA DEL FORM");
     let response= await axios.post(`${process.env.REACT_APP_HOST_BACKEND}/specificTypes`, { params: data });
     return response;
   }
@@ -41,7 +40,7 @@ function CreateGenericTypes() {
       MySwal.fire({
         position: 'center',
         icon: 'success',
-        title: 'Post modificado con Exito!',
+        title: 'Tipo creado con Exito!',
         showConfirmButton: false,
         timer: 1500,
       })
@@ -49,7 +48,7 @@ function CreateGenericTypes() {
       MySwal.fire({
         position: 'center',
         icon: 'error',
-        title: 'No se ha podido modificar el Post :( Intenta nuevamente!',
+        title: 'No se ha podido crear el tipo :( Intenta nuevamente!',
         showConfirmButton: false,
         timer: 1500,
       })

@@ -245,7 +245,6 @@ export const autoLogin = async function (req: Request, res: Response) {
     }) */
 
 
-    //console.log(user)
     if (!user) return res.sendStatus(400)
     else return res.sendStatus(200)
 }

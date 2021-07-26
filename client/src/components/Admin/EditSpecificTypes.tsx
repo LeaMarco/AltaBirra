@@ -14,7 +14,6 @@ function EditSpecificTypes() {
   const [specific, setSpecific] = useState([]);
   const [specificDetail, setSpecificDetail]:any = useState();
 
-console.log(specificDetail, "DETALLES EN EL ESTADO")
 
   const MySwal = withReactContent(Swal)
   const dispatch = useDispatch<Dispatch<any>>();
@@ -28,7 +27,6 @@ console.log(specificDetail, "DETALLES EN EL ESTADO")
 
   async function editSpecificType(data:any) {
     data.typeToChange = specificDetail.type
-    console.log(data, "DATA DEL FORM");
     await axios.put(`${process.env.REACT_APP_HOST_BACKEND}/specificTypes`, { params: data });
     const newValues= await getSpecificDetail(data.type)
     setSpecificDetail(newValues.data)
@@ -50,7 +48,7 @@ console.log(specificDetail, "DETALLES EN EL ESTADO")
       MySwal.fire({
         position: 'center',
         icon: 'success',
-        title: 'Post modificado con Exito!',
+        title: 'Tipo modificado con Exito!',
         showConfirmButton: false,
         timer: 1500,
       })
@@ -61,7 +59,7 @@ console.log(specificDetail, "DETALLES EN EL ESTADO")
       MySwal.fire({
         position: 'center',
         icon: 'error',
-        title: 'No se ha podido modificar el Post :( Intenta nuevamente!',
+        title: 'No se ha podido modificar el tipo :( Intenta nuevamente!',
         showConfirmButton: false,
         timer: 1500,
       })
@@ -85,8 +83,6 @@ console.log(specificDetail, "DETALLES EN EL ESTADO")
   useEffect(() => {
     reset(dataPrevia);
   }, [specificDetail])
-console.log(dataPrevia, "DATA PREVIA")
-console.log(specificDetail, "DETALLES GENERICO")
 
 
 

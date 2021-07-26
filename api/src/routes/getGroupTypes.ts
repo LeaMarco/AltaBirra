@@ -36,12 +36,10 @@ router.get("/", async (req: Request, res: Response) => {
 })
 
 router.get("/detail", async (req: Request, res: Response) => {
-  console.log(typeof(req.query.type), "bodyyyy")
     const type: string | undefined= req.query.type?.toString()
     let detail = await prisma.genericType.findUnique({
         where: { type: type }
       })
-      console.log(detail, "DETAILLL")
     res.send(detail)
 })
 
