@@ -43,6 +43,8 @@ export enum ActionTypes {
 	getDetail,
 	getCart,
 	delPostInCart,
+	ActionUserDataType,
+	ActionLoginTypes
 }
 
 export interface PostValues {
@@ -290,7 +292,7 @@ export const createPost = (data) => {
 
 export const editPost = (data) => {
 	return async (dispatch: Dispatch) => {
-		const response = await axios.put<EditValues>(urledit, { params: data });
+		const response = await axios.put<EditValues>(urledit, { params: data }, { headers: validationHeadersGenerator() });
 		return response;
 	};
 }
@@ -360,7 +362,7 @@ export interface delPostInCartAction {
 
 export const getCart = (id) => {
 	return async (dispatch: Dispatch) => {
-		const response = await axios.get<cart[]>(`${process.env.REACT_APP_HOST_BACKEND}/cart/${id}`)
+		const response = await axios.get<cart[]>(`${process.env.REACT_APP_HOST_BACKEND}/cart/${id}`, { headers: validationHeadersGenerator() })
 		dispatch<getCartAction>({
 			type: ActionTypes.getCart,
 			payload: response.data,
@@ -372,14 +374,14 @@ export const getCart = (id) => {
 const urladdtocart = `${process.env.REACT_APP_HOST_BACKEND}/addToCart`;
 // export const addToCart = (data) => {
 //     return async (dispatch: Dispatch) => {
-//         const response = await axios.put<PostValues>(urladdtocart, { params: data });
+//         const response = await axios.put<PostValues>(urladdtocart, { params: data }, {/*AGREGADO POR SI SE USA EN EL FUTURO headers:validationHeadersGenerator() */});
 //         return response;
 //     };
 // };
 
 export function getFavoritePosts(username) {
 	return async function (dispatch: Dispatch) {
-		const response = await axios.get<Post[]>(`${process.env.REACT_APP_HOST_BACKEND}/getFavorites`, { params: { username } });
+		const response = await axios.get<Post[]>(`${process.env.REACT_APP_HOST_BACKEND}/getFavorites`, { params: { username }, headers: validationHeadersGenerator() });
 		dispatch<getPostsAction>({
 			type: "GET_FAVORITE_POSTS",
 			payload: response.data
@@ -389,10 +391,83 @@ export function getFavoritePosts(username) {
 
 export function getHistory(type, filter, userId) {
 	return async function (dispatch: Dispatch) {
-		const response = await axios.get(`${process.env.REACT_APP_HOST_BACKEND}/${type}History`, { params: { userId, filter } });
+		const response = await axios.get(`${process.env.REACT_APP_HOST_BACKEND}/${type}History`, { headers: validationHeadersGenerator(), params: { userId, filter } });
 		dispatch({
 			type: "GET_HISTORY",
 			payload: response.data
 		})
 	}
 }
+
+// USER DATA ================================
+export interface iuserData {
+	id: number,
+	nombre: string,
+	premium: boolean,
+	favoritos: number
+}
+
+export interface ActionUserData {
+	type: ActionTypes.ActionUserDataType;
+	payload: iuserData;
+}
+
+export const getUserData = (user: iuserData) => {
+	return <ActionUserData> {
+		type: ActionTypes.ActionUserDataType,
+		payload: user
+	}
+}
+
+// Login True or False
+export interface ActionLoginType {
+	type: ActionTypes.ActionLoginTypes;
+	payload: boolean;
+}
+
+export const login = (login: boolean) => {
+	return <ActionLoginType> {
+		type: ActionTypes.ActionLoginTypes,
+		payload: login
+	}
+}
+
+export type ActionLoginTypes = ActionLoginType;
+
+
+// export interface UserPremium {
+// 	id: number;
+// 	username: string;
+// 	email: string;
+// 	name: string;
+// 	password: string;
+// 	premium: boolean;
+// 	roleId: number;
+// 	cartId: number
+// }
+
+// export interface UsersPremiumAction {
+// 	type: ActionTypes.loadUserPremium;
+// 	payload: UserPremium[];
+// }
+
+// export const loadUsersPremium = () => {
+// 	return (dispatch: Dispatch) => {
+// 		return axios.get<UserPremium[]>('http://localhost:3001/beer/premium')
+// 			.then(response => {
+// 				dispatch<UsersPremiumAction>({
+// 					type: ActionTypes.loadUserPremium,
+// 					payload: response.data,
+// 				});
+// 			})
+// 			.catch(error => console.error('No se pudieron obtener las cervezas premium'))
+// 	}
+
+
+// welcomeUser
+// const userData = {
+// 	id: user.id,
+// 	nombre: user.name,
+// 	premium: user.premium,
+// 	favoritos: user.favoriteId
+// }

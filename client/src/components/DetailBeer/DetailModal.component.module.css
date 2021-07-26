@@ -43,16 +43,16 @@
   border: 2px solid rgb(153, 153, 153);
 }
 .modal__content button {
-  width:5rem;
-  height:2rem;
+  width: 5rem;
+  height: 2rem;
   margin-top: 1rem;
   margin-bottom: 1rem;
   border-radius: 10px;
-  border:none;
-  background-color:#F49E51;
-  font-size:20px;
-  font-weight:300 ;
-  color:white;
+  border: none;
+  background-color: #f49e51;
+  font-size: 20px;
+  font-weight: 300;
+  color: white;
 }
 
 @keyframes spanScale {

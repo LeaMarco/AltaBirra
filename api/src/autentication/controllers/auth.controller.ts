@@ -2,10 +2,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from "bcryptjs"
 import { PrismaClient } from "@prisma/client";
 import { NextFunction, Request, Response, Router } from "express";
-
-
-
-
+import { transporter } from './mailing';
 
 
 const router = Router();
@@ -37,47 +34,122 @@ function validatePassword(password: string, user: User): boolean {
 
 
 export const signup = async (req: Request, res: Response) => {
+    let usuarioHash;
+    let user;
 
+    const { username, email, name, password, googleId } = req.body.params;
+    
+    usuarioHash = encryptPassword(username);
+    usuarioHash = usuarioHash.replace('/','');
+    usuarioHash = usuarioHash.replace('/','');
+    usuarioHash = usuarioHash.replace('/','');
+    usuarioHash = usuarioHash.replace('/','');
+    usuarioHash = usuarioHash.replace('.','');
+    
+    let guestsItemsInCart = JSON.parse(req.body.params.guestsItemsInCart)
+    // let guestsItemsInCart = req.body.params.guestsItemsInCart
+    //console.log("guestsItemsInCart", guestsItemsInCart, "guestsItemsInCart")
 
-    const { username, email, name, password } = req.body.params;
+    //Conversor obj a array, formateado para crear filas de postsOnCart
+    let postsOnCartArray = []
+    for (let i in guestsItemsInCart) {
+        postsOnCartArray.push({ postId: parseInt(i), amount: guestsItemsInCart[i] })
+    }//////////////////////////////////////////////////////////////////
 
+    
     // Busco al usuario
-    const user = await prisma.user.findUnique({
+    user = await prisma.user.findUnique({
         where: {
-            username
+            username,
         }
     })
-
+    
     //Si existe le digo que se loguee
-    if (user) return res.sendStatus(409)
+    if (user) {
 
-    else { //busco el rol (no hace falta podria pasarle el numero y listo)
-        const userRol = await prisma.role.findUnique({ where: { name: "USER" } })
+        if (user.activeCount) return res.sendStatus(409)//Si existe y tiene la cuenta activada, rebota y lo manda a loguearse
 
-        //Creo el usuario (porque paso el else sin entrar en el return)
-        const userCreado = await prisma.user.create({
-            data: {
-                username,
-                email,
-                name,
-                password: password ? encryptPassword(password) : "socialPassword",
-                role: {
-                    connect: { id: userRol?.id }
-                },
-                cart: {
-                    create: {}
-                },
-                favorite: {
-                    create: {}
-                },
-                views: {
-                    create: {}
-                }
-            }
-        }).catch((e) => res.send("Error al registrar usuario"))
+        else if (user.activeCount === false) {//1) Si existe en base de datos, pero tiene la cuenta desactivada
 
-        return res.json(userCreado)
+        await prisma.user.update({
+            where: {
+                id: user.id
+            }, data: { activeCount: true, userHash: usuarioHash }//2) Se la activa!
+        }).catch(() => res.status(500).send("Error inesperado: se encontro al usuario en base de datos pero no se pudo reactivar su cuenta"))
+        
+        }
     }
+    else{ // SI EL USUARIO NO EXISTE
+
+    //busco el rol 
+    const userRol = await prisma.role.findUnique({ where: { name: "USER" } })
+    
+    
+    //Creo el usuario (porque paso el else sin entrar en el return)
+        
+    user = await prisma.user.create({
+        data: {
+            username,
+            email,
+            name,
+            password: password ? encryptPassword(password) : "socialPassword",
+            role: {
+                connect: { id: userRol?.id }
+            },
+            userHash: usuarioHash,
+            cart: {
+                    create: {
+                        posts: {
+                            createMany: {
+                                data: postsOnCartArray
+                            }
+                        }
+                    }
+                },
+            favorite: {
+                create: {}
+            },
+            views: {
+                create: {}
+            },
+            verify: password ? false:true
+        }
+    }).catch((e) => res.send("Error al registrar usuario"))
+
+    
+    // ====================================================================================
+    
+    
+    } // CIERRA EL ELSE
+
+    // ENVIAR EMAIL CUANDO ME REGISTRO CON PLANILLA ========================================
+    if(password){ // si me estoy registrando con PLANILLA hace lo siguiente.. (mailing)
+        try{
+            // send mail with defined transport object
+        let info = await transporter.sendMail({
+            from: '"AltaBirra Administración 🍻" <facundoramirez089@gmail.com>', // sender address
+            to: email, // list of receivers
+            subject: "Registración AltaBirra ✔", // Subject line
+            // text: "Hello world?", // plain text body
+            // html: "<b>Hello world?</b>", // html body
+            html: `
+                <h1>BIENVENIDO A ALTABIRRA !!!</h1>
+                <h3>Por favor haga click en el siguiente enlace para completar el proceso de registración</h3>
+                <br/>
+                <br/>
+                <span>ENLACE ===> </span><a href="https://localhost:3000/verificarUsuario/${usuarioHash}">Click aquí para verificar cuenta</a>
+                <br/>
+                <br/>
+                Atte. El equipo de AltaBirra.
+            `
+        });
+        } catch(error){
+            console.log('Error al enviar el email');
+        }
+    }
+    
+    return res.json(user)
+    // res.status(500).send("Error inesperado: llame a batman")
 
 };
 
@@ -94,7 +166,7 @@ export const signin = async (req: Request, res: Response) => {
         }
     })
 
-    if (!user) return res.sendStatus(400);
+    if (!user || user.activeCount === false) return res.status(400).send('NoUsuario');
 
     else if (process.env.SECRET_CODE) {
 
@@ -104,11 +176,13 @@ export const signin = async (req: Request, res: Response) => {
             premium: user.premium,
             favoritos: user.favoriteId
         }
-
-
+        
         if (req.body.params.password) {//Si es registrado local
             const correctPassword: boolean = validatePassword(req.body.params.password, user);
-            if (correctPassword === false) return res.status(400).send('Credencial invalida');
+            if (correctPassword === false) {
+                return res.send('IncorrectPassword');
+            }
+            else if (!user.verify) return res.send('NoVerificado');
 
             const token: string = jwt.sign({ id: user.id, adminRole: false }, process.env.SECRET_CODE, { expiresIn: 60 * 60 * 24 })
             res.json({ token, userData })
@@ -118,6 +192,8 @@ export const signin = async (req: Request, res: Response) => {
         }
 
     }
+    
+    
 
     else {
         res.status(500).send("CONTRASEÑA PARA GENERAR TOKENS AUSENTE EN VARIABLES DE ENTORNO DEL SERVER!")
@@ -129,10 +205,8 @@ export const signin = async (req: Request, res: Response) => {
 //DEPRECADO HASTA NUEVO AVISO
 export const localSignIn = async (req: Request, res: Response) => {
 
-
     const { id } = req.body.infoToken
-
-
+   
     const user = await prisma.user.findUnique({
         where: {
             id: id
@@ -216,7 +290,27 @@ export const socialSignIn = async (req: Request, res: Response) => {
     }
 }
 
-////////////////////////////////////FUNCION DE USO GENERAL////////////////////////////////////
+/**
+ * 
+@example •Como usarla
+ const user = await findUserWithAnyTokenBabe(req, prisma)
+
+•Funcion trasbambalains
+async function findUserWithAnyTokenBabe(req: Request, prisma: PrismaClient) {
+
+    const tokenPackage = req.body.tokenPackage //todo lo que tenga el  token
+    const uniqueSearchLabel = tokenPackage.uniqueSearchLabel //Puede ser username, email o id, dependiendo si viene de facebook, google o local respectivamente.
+    const uniqueSearchValue = tokenPackage[uniqueSearchLabel] //el valor que esta en el dato unique
+
+    const user = await prisma.user.findUnique({
+        where: {
+            [uniqueSearchLabel]: uniqueSearchValue //siempre envia un solo dato unique, y poniendolo asi lo busca de forma correcta sea lo que sea
+        }
+    })
+    return user
+}
+@author Ezequiel Aguilera. Racoon City, 1998. Comienzos del último Octubre.
+*/
 export async function findUserWithAnyTokenBabe(req: Request, prisma: PrismaClient) {
 
     const tokenPackage = req.body.tokenPackage //todo lo que tenga el  token

@@ -1,11 +1,15 @@
 import { PrismaClient } from "@prisma/client";
 import { NextFunction, Request, Response, Router } from "express";
+import { findUserWithAnyTokenBabe } from "../autentication/controllers/auth.controller";
 
 const router = Router();
 const prisma = new PrismaClient();
 
 router.get("/:id", async (req: Request, res: Response) => {
-    let id = parseInt(req.params.id)
+    // let id = parseInt(req.params.id)
+    const user = await findUserWithAnyTokenBabe(req, prisma)
+    let id = user?.id
+
     const cart = await prisma.postsOnCart.findMany({
         where: {
             cartId: id,
@@ -17,14 +21,14 @@ router.get("/:id", async (req: Request, res: Response) => {
                     countable: true,
                 }
             },
-            cart:{
+            cart: {
                 include: {
-                    userId:true
+                    userId: true
                 }
             }
         }
     }).catch((error) => res.status(500).send(error));
     res.status(200).send(cart)
-    
+
 })
 export default router;

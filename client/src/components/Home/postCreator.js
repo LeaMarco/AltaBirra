@@ -80,7 +80,10 @@ export default async (amount) => {
 
         let infoToPost = { beer, infoPost, countable }
 
-        await axios.post(`${process.env.REACT_APP_HOST_BACKEND}/post`, { params: infoToPost })
+        console.log(infoToPost)
+        await axios.post(`${process.env.REACT_APP_HOST_BACKEND}/AUTOPOST_ONLY_DEVELOPMENT_ROUTE`, { params: infoToPost })
+
+
     } return (`TERMINE`)
 
 }

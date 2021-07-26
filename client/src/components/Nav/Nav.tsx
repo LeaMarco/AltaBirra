@@ -1,15 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import style from "./Nav.module.css";
 import logo from "./AltaBirra.svg";
 import { Link, useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { searchedPosts, setTitleSearch } from "../../actions";
 import { Modal } from "../Login/Modal/Modal.component";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import axios from "axios";
 import FavoritesTab from "../FavoriteTab/FavoriteTab";
-import { useEffect } from "react";
+import { token } from "morgan";
+import { getUserData, login } from '../../actions/index'
+import swal from 'sweetalert';
 import { ModalFavorites } from "../FavoriteTab/ModalFavorites/Modal.component";
 import { useLayoutEffect } from "react";
 import { validationHeadersGenerator } from "../../validationHeadersGenerator";
@@ -38,11 +40,11 @@ export default function Nav() {
   const [isAuth, setAuth] = useState<boolean>(false);
   const toogleAuth = () => setAuth(!isAuth);
 
+  const stateWelcome = useSelector((state) => state["welcome"]);
 
-
+  ////////////////////AUTENTICACION AUTOMATICA//////////////////////////////////////////////////
   useLayoutEffect(() => {
-
-    if (localStorage.length) {
+    if (Object.keys(localStorage).join().includes("token")) {
       axios.get(`${process.env.REACT_APP_HOST_BACKEND}/auth/autoLogin`, {
         headers: validationHeadersGenerator()
       }).then(e => {
@@ -52,6 +54,33 @@ export default function Nav() {
 
   }
     , [])
+  ///////////////////AUTENTICACION AUTOMATICA/////////////////////////////////////////
+  /* useEffect(() => {
+
+    let tokenLocal = localStorage.tokenLocal
+    if (tokenLocal) {
+      
+      axios.get(`${process.env.REACT_APP_HOST_BACKEND}/auth/localSignIn`, {
+        headers: {
+          authToken: tokenLocal
+        }
+      })
+        .then((e) => {
+          dispatch(getUserData(e.data))
+          dispatch(login(true));
+          
+          toogleAuth()
+          console.log('Logueado automatico con token local EXITOSO!')
+        })
+
+        .catch((error) => console.log(error, 'No te pudiste loguear de forma local automatica!'))
+    }
+
+  },[]) */
+
+
+  //////////////////autenticacion automatica//////////////////////////////////////////
+
   //////////////////Fin autenticacion automatica//////////////////////////////////////////
 
 
@@ -85,6 +114,26 @@ export default function Nav() {
   const handleToggle = () => {
     setNavbarOpen(!navbarOpen)
   }
+
+  function close() {
+    swal({
+      title: "Cerrar sesión",
+      text: "¿Desea cerrar sesión?",
+      icon: "error",
+      buttons: ["No", "Si"]
+      // timer: 2000,
+    }).then(response => {
+      if (response) {
+        swal({ title: 'Adiós, vuelve pronto!', text: 'Suerte!', icon: "success", timer: 3000, buttons: [''] })
+        setTimeout(() => {
+          localStorage.clear();
+          window.location.href = 'https://localhost:3000';
+        }, 2900);
+
+      }
+    })
+  }
+
   return (
     <div className={style.NavBar}>
       <div className={style.LogoContainer}>
@@ -182,25 +231,14 @@ export default function Nav() {
               <Register closeModal={toogleRegister} toogleEnter={toogleEnter} toogleRegister={toogleRegister} />
             </Modal>
 
-
-
             <div className={style.buttonsRight}>
-              <Link to="/panel" style={{ textDecoration: "none" }}>
+              <Link className={style.textDecoration} to="/panel">
                 <button className={style.buttonEnter}>Panel</button>
               </Link>
 
               {
-                isAuth ?
-                  <>
-                    <button className={style.buttonEnter} style={{ borderRadius: "30px", backgroundColor: "forestgreen" }} >
-                      Bienvenido!!
-                    </button>
+                !isAuth ?
 
-                    <button className={style.buttonEnter} style={{ borderRadius: "30px", backgroundColor: "red" }} onClick={() => { localStorage.clear(); toogleAuth() }} >
-                      Cerras cesion
-                    </button>
-                  </>
-                  :
                   <div className={style.buttonsRightEnter}>
                     <button className={style.buttonEnter} onClick={toogleEnter}>
                       Entrar
@@ -209,7 +247,7 @@ export default function Nav() {
                       Registrarme
                     </button>
                   </div>
-
+                  : null
               }
             </div>
           </div>
@@ -224,6 +262,26 @@ export default function Nav() {
           <FaBars />
         </div>
       </div>
-    </div >
+      <div>
+
+        {
+          isAuth ?
+            (
+              <div className={style.fourColumn}>
+                <span className={style.welcome} >
+                  Bienvenido {stateWelcome.nombre}
+                </span>
+                <button className={style.closeSesion} onClick={close}>
+                  Cerrar sesión
+                </button>
+              </div>
+            )
+            : null
+        }
+      </div>
+
+
+
+    </div>
   );
 }

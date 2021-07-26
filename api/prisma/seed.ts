@@ -31,7 +31,8 @@ async function main() {
       },
       views: {
         create: {}
-      }
+      },
+      userHash: 'asdasdasdas'
     },
   });
 
@@ -53,7 +54,8 @@ async function main() {
       },
       views: {
         create: {}
-      }
+      },
+      userHash: 'asd'
     },
   });
 
@@ -76,7 +78,8 @@ async function main() {
       },
       views: {
         create: {}
-      }
+      },
+      userHash: 'asdddd'
     },
   });
 

@@ -66,7 +66,8 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
     expireDate
   }: Countable = req.body.params.countable
 
-  const user = await prisma.user.findUnique({ where: { username: username } });
+  // const user = await prisma.user.findUnique({ where: { username: username } });
+  const user = await findUserWithAnyTokenBabe(req, prisma)
   const beerGenericType = await prisma.genericType.findUnique({ where: { type: genericType } });
   const beerSpecificType = await prisma.specificType.findUnique({ where: { type: specificType } });
 
