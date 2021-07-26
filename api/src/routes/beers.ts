@@ -23,39 +23,39 @@ interface OrderPosts {
 
 
 
-router.post("/", async (req: Request, res: Response, next: NextFunction) => {
-  const {
-    abv,
-    og,
-    ibu,
-    calories,
-    dryHop,
-    volume,
-    genericType,
-    specificType,
-  }: Body = req.body;
+// router.post("/", async (req: Request, res: Response, next: NextFunction) => {
+//   const {
+//     abv,
+//     og,
+//     ibu,
+//     calories,
+//     dryHop,
+//     volume,
+//     genericType,
+//     specificType,
+//   }: Body = req.body;
 
-  const beerGenericType = await prisma.genericType.findUnique({ where: { type: genericType } });
-  const beerSpecificType = await prisma.specificType.findUnique({ where: { type: specificType } });
+//   const beerGenericType = await prisma.genericType.findUnique({ where: { type: genericType } });
+//   const beerSpecificType = await prisma.specificType.findUnique({ where: { type: specificType } });
 
-  await prisma.beer.create({
-    data: {
-      abv,
-      og,
-      ibu,
-      calories,
-      dryHop,
-      volume,
-      genericType: {
-        connect: { id: beerGenericType?.id },
-      },
-      specificType: {
-        connect: { id: beerSpecificType?.id },
-      },
-    },
-  }).catch(error => (console.log(error)))
-  res.send("creado");
-});
+//   await prisma.beer.create({
+//     data: {
+//       abv,
+//       og,
+//       ibu,
+//       calories,
+//       dryHop,
+//       volume,
+//       genericType: {
+//         connect: { id: beerGenericType?.id },
+//       },
+//       specificType: {
+//         connect: { id: beerSpecificType?.id },
+//       },
+//     },
+//   }).catch(error => (console.log(error)))
+//   res.send("creado");
+// });
 
 
 // HECHO POR FACU: ruta creada para obtener las cervezas "Premium"
