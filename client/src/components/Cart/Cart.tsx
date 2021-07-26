@@ -119,13 +119,20 @@ function Cart() {
       <div>
         {
           haveToken && Array.isArray(cartsRegisterUser) && cartsRegisterUser.length > 0 ?
-            <Link className={styles.Link} to={`/compra/${id}`}>Comprar</Link>
+
+            <div> <Link className={styles.Link} to={`/compra/${id}`}>Comprar</Link>
+              <button className={styles.deleteButton} onClick={(e) => deleteConfirm(cartIdparsed)}> Limpiar carrito</button>
+            </div>
+
             :
             !haveToken && Array.isArray(cartsGuestUser) && cartsGuestUser?.length > 0 ?
-              <button onClick={() => alert("Debe ingresar primero!")} className={styles.Link} >Comprar</button>
-              : "null"
+              <div>
+                <button onClick={() => alert("Debe ingresar primero!")} className={styles.Link} >Comprar</button>
+                <button className={styles.deleteButton} onClick={(e) => deleteConfirm(cartIdparsed)}> Limpiar carrito</button>
+              </div>
+              : ""
+
         }
-        <button className={styles.deleteButton} onClick={(e) => deleteConfirm(cartIdparsed)}> Limpiar carrito</button>
       </div>
 
     </div >
