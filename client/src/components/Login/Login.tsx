@@ -206,7 +206,7 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
       .catch((error) => console.log('No te pudiste loguear con Google!'))
   }
   const onFailureLogin = (response: any) => {
-    console.log(response, "Fallo el login!");
+    console.log("Fallo el login!", response,);
   };
   //////////////////////////////fin de logica de google///////////////////////////////////////////////////
 

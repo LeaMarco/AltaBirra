@@ -34,31 +34,60 @@ function validatePassword(password: string, user: User): boolean {
 
 
 export const signup = async (req: Request, res: Response) => {
-    
+    let usuarioHash;
+    let user;
+
     const { username, email, name, password, googleId } = req.body.params;
-
-    // Busco al usuario
-    const user = await prisma.user.findUnique({
-        where: {
-            username
-        }
-    })
     
-    //Si existe le digo que se loguee
-    if (user) return res.sendStatus(409)
-
-    //busco el rol (no hace falta podria pasarle el numero y listo)
-    const userRol = await prisma.role.findUnique({ where: { name: "USER" } })
-    
-    let usuarioHash = encryptPassword(username);
+    usuarioHash = encryptPassword(username);
     usuarioHash = usuarioHash.replace('/','');
     usuarioHash = usuarioHash.replace('/','');
     usuarioHash = usuarioHash.replace('/','');
     usuarioHash = usuarioHash.replace('/','');
     usuarioHash = usuarioHash.replace('.','');
+    
+    let guestsItemsInCart = JSON.parse(req.body.params.guestsItemsInCart)
+    // let guestsItemsInCart = req.body.params.guestsItemsInCart
+    //console.log("guestsItemsInCart", guestsItemsInCart, "guestsItemsInCart")
+
+    //Conversor obj a array, formateado para crear filas de postsOnCart
+    let postsOnCartArray = []
+    for (let i in guestsItemsInCart) {
+        postsOnCartArray.push({ postId: parseInt(i), amount: guestsItemsInCart[i] })
+    }//////////////////////////////////////////////////////////////////
+
+    
+    // Busco al usuario
+    user = await prisma.user.findUnique({
+        where: {
+            username,
+        }
+    })
+    
+    //Si existe le digo que se loguee
+    if (user) {
+
+        if (user.activeCount) return res.sendStatus(409)//Si existe y tiene la cuenta activada, rebota y lo manda a loguearse
+
+        else if (user.activeCount === false) {//1) Si existe en base de datos, pero tiene la cuenta desactivada
+
+        await prisma.user.update({
+            where: {
+                id: user.id
+            }, data: { activeCount: true, userHash: usuarioHash }//2) Se la activa!
+        }).catch(() => res.status(500).send("Error inesperado: se encontro al usuario en base de datos pero no se pudo reactivar su cuenta"))
+        
+        }
+    }
+    else{ // SI EL USUARIO NO EXISTE
+
+    //busco el rol 
+    const userRol = await prisma.role.findUnique({ where: { name: "USER" } })
+    
+    
     //Creo el usuario (porque paso el else sin entrar en el return)
         
-    const userCreado = await prisma.user.create({
+    user = await prisma.user.create({
         data: {
             username,
             email,
@@ -69,14 +98,26 @@ export const signup = async (req: Request, res: Response) => {
             },
             userHash: usuarioHash,
             cart: {
-                create: {}
-            },
+                    create: {
+                        posts: {
+                            createMany: {
+                                data: postsOnCartArray
+                            }
+                        }
+                    }
+                },
             favorite: {
                 create: {}
             },
             verify: password ? false:true
         }
     }).catch((e) => res.send("Error al registrar usuario"))
+
+    
+    // ====================================================================================
+    
+    
+    } // CIERRA EL ELSE
 
     // ENVIAR EMAIL CUANDO ME REGISTRO CON PLANILLA ========================================
     if(password){ // si me estoy registrando con PLANILLA hace lo siguiente.. (mailing)
@@ -103,10 +144,9 @@ export const signup = async (req: Request, res: Response) => {
             console.log('Error al enviar el email');
         }
     }
-    // ====================================================================================
     
-    return res.json(userCreado)
-    
+    return res.json(user)
+    // res.status(500).send("Error inesperado: llame a batman")
 
 };
 
@@ -123,14 +163,9 @@ export const signin = async (req: Request, res: Response) => {
         }
     })
 
-    if (!user) return res.send('NoUsuario');
-    
-    // if (req.body.params.password) {
-    //     const correctPassword: boolean = validatePassword(req.body.params.password, user);
-    //     if (correctPassword === false) return res.status(400).send('Credencial invalida');
-    // }
-    
-    if (process.env.SECRET_CODE) {
+    if (!user || user.activeCount === false) return res.status(400).send('NoUsuario');
+
+    else if (process.env.SECRET_CODE) {
 
         const userData = {
             id: user.id,
@@ -252,7 +287,27 @@ export const socialSignIn = async (req: Request, res: Response) => {
     }
 }
 
-////////////////////////////////////FUNCION DE USO GENERAL////////////////////////////////////
+/**
+ * 
+@example •Como usarla
+ const user = await findUserWithAnyTokenBabe(req, prisma)
+
+•Funcion trasbambalains
+async function findUserWithAnyTokenBabe(req: Request, prisma: PrismaClient) {
+
+    const tokenPackage = req.body.tokenPackage //todo lo que tenga el  token
+    const uniqueSearchLabel = tokenPackage.uniqueSearchLabel //Puede ser username, email o id, dependiendo si viene de facebook, google o local respectivamente.
+    const uniqueSearchValue = tokenPackage[uniqueSearchLabel] //el valor que esta en el dato unique
+
+    const user = await prisma.user.findUnique({
+        where: {
+            [uniqueSearchLabel]: uniqueSearchValue //siempre envia un solo dato unique, y poniendolo asi lo busca de forma correcta sea lo que sea
+        }
+    })
+    return user
+}
+@author Ezequiel Aguilera. Racoon City, 1998. Comienzos del último Octubre.
+*/
 export async function findUserWithAnyTokenBabe(req: Request, prisma: PrismaClient) {
 
     const tokenPackage = req.body.tokenPackage //todo lo que tenga el  token

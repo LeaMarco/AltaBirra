@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { NextFunction, Request, Response, Router } from "express";
+import { findUserWithAnyTokenBabe } from "../autentication/controllers/auth.controller";
 
 const router = Router();
 const prisma = new PrismaClient();
@@ -12,7 +13,8 @@ interface Cart {
 
 router.put("/", async (req: Request, res: Response, next: NextFunction) => {
     const { username, postId, quantity }: Cart = req.body.params;
-    const user = await prisma.user.findUnique({ where: { username: username } });
+    // const user = await prisma.user.findUnique({ where: { username: username } });
+    const user = await findUserWithAnyTokenBabe(req, prisma)
     const cart = await prisma.cart.findFirst({ where: { userId: user } });
     const post = await prisma.post.findUnique({ where: { id: postId } });
     if (cart?.id) await prisma.postsOnCart.update({

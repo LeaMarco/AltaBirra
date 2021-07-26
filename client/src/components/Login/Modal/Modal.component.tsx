@@ -1,7 +1,7 @@
 import React from "react";
 import { Portal, PortalTarget } from "../Portal/Portal.component";
 
-import "./Modal.component.module.css";
+import styles from "./Modal.component.module.css";
 
 interface ModalProps {
   isOpen: boolean;
@@ -29,8 +29,8 @@ export const Modal: React.FC<ModalProps> = ({
 
   return isOpen ? (
     <Portal target={PortalTarget.MODAL}>
-      <div ref={outsideRef} className={"modal"} onClick={closeModal}>
-        <div className={"modal__content"}>{children}</div>
+      <div ref={outsideRef} className={styles.modal} onClick={closeModal}>
+        <div className={styles.modal__content}>{children}</div>
       </div>
     </Portal>
   ) : null;

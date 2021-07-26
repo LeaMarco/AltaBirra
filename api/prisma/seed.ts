@@ -28,7 +28,8 @@ async function main() {
       },
       favorite: {
         create: {}
-      }
+      },
+      userHash: 'asdasdasdas'
     },
   });
 
@@ -47,7 +48,8 @@ async function main() {
       },
       favorite: {
         create: {}
-      }
+      },
+      userHash: 'asd'
     },
   });
 
@@ -67,7 +69,8 @@ async function main() {
       premium: true,
       favorite: {
         create: {}
-      }
+      },
+      userHash: 'asdddd'
     },
   });
 

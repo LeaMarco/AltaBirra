@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { NextFunction, Request, Response, Router } from "express";
+import { findUserWithAnyTokenBabe } from "../autentication/controllers/auth.controller";
 
 const router = Router();
 const prisma = new PrismaClient();
@@ -11,7 +12,8 @@ interface Transaction {
 
 router.post("/", async (req: Request, res: Response, next: NextFunction) => {
 	const { username, postId }: Transaction = req.body;
-	const buyer = await prisma.user.findUnique({ where: { username: username } });
+	// const buyer = await prisma.user.findUnique({ where: { username: username } });
+	const buyer = await findUserWithAnyTokenBabe(req, prisma)
 	const post = await prisma.post.findUnique({ where: { id: postId } });
 	const countable = await prisma.countable.findFirst({ where: { postId: post } });
 	await prisma.transaction.create({

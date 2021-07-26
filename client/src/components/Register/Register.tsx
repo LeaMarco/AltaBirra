@@ -33,6 +33,10 @@ const patternEmailMge = "Error en el formato del mail ingresado";
 ////////////////////////////////////////
 const Register: React.FunctionComponent<{ closeModal, toogleEnter, toogleRegister, }> = ({ closeModal, toogleEnter,
   toogleRegister, }) => {
+  //////////Variable para manejar carrito de guest//////////
+  let guestsItemsInCart = localStorage.guestsItemsInCart
+  if (!guestsItemsInCart) guestsItemsInCart = "{}"
+  ///////////////////////////////////////////////////
   ////////////////////USE STATES///////////////////////////////////////
   const [alreadyRegister, setAlreadyRegister] = useState<boolean>(false)
 
@@ -102,14 +106,12 @@ const Register: React.FunctionComponent<{ closeModal, toogleEnter, toogleRegiste
   ///////////////LOGICA DE GOOGLE//////////////////////////
   const responseGoogleRegister = (response: any) => {
 
-    console.log(response)
+    console.log(response, 'RESPONSE');
 
     const name = response.Ts.RT;
     const googleId = response.googleId;
     const username = response.Ts.RT + "_" + googleId;
     const email = response.profileObj.email;
-
-
     //
     axios
       .post(`${process.env.REACT_APP_HOST_BACKEND}/auth/signup`, {
@@ -118,11 +120,11 @@ const Register: React.FunctionComponent<{ closeModal, toogleEnter, toogleRegiste
           email,
           googleId,
           name,
+          guestsItemsInCart
         },
       })
       .then((e: any) => {
-        console.log('ACA ESTA LA E DE GOOGLE', e)
-        console.log("Bienvenido !")
+        console.log("Bienvenido!")
         closeModal()
       }).catch((e) => {
         console.log("Ya tenés usuario, logueate!")
@@ -146,12 +148,13 @@ const Register: React.FunctionComponent<{ closeModal, toogleEnter, toogleRegiste
     const facebookId = response.id;
     const username = name.replaceAll(" ", "_") + "_" + facebookId;
     const email = response.email;
-
+    console.log(guestsItemsInCart, "guestsItemsInCart")
     axios.post(`${process.env.REACT_APP_HOST_BACKEND}/auth/signup`, {
       params: {
         username,
         email,
         name,
+        guestsItemsInCart
       },
     })
 
@@ -185,6 +188,7 @@ const Register: React.FunctionComponent<{ closeModal, toogleEnter, toogleRegiste
       password: data.password,
       email: data.email,
       name: `${data.names} ${data.lastNames}`,
+      guestsItemsInCart
     };
 
     axios

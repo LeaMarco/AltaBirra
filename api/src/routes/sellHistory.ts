@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { NextFunction, Request, Response, Router } from "express";
+import { findUserWithAnyTokenBabe } from "../autentication/controllers/auth.controller";
 
 const router = Router();
 const prisma = new PrismaClient();
@@ -51,7 +52,9 @@ interface Results {
 
 router.get("/", async (req: Request, res: Response, next: NextFunction) => {
 
-	const sellerId: number = Number(req.query.userId);
+	// const sellerId: number = Number(req.query.userId);
+	const user = await findUserWithAnyTokenBabe(req, prisma)
+	const sellerId = user?.id //☢ Sacado el tipo number al sellerId para que no rompa. -Eze
 	const history: Algo[] = await prisma.transaction.findMany({
 		where: {
 			post: {

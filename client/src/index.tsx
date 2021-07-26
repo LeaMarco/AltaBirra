@@ -6,9 +6,6 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux"; //Sirve para proveer el estado global de redux a los componentes de React
 import store from "./store"; //importa la store creada en otro lado
 
-console.log(process.env)
-
-
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

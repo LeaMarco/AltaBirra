@@ -16,12 +16,15 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import Beer from "../Beer/Beer";
 import { card } from "mercadopago";
+import { validationHeadersGenerator } from "../../validationHeadersGenerator";
+import { response } from "express";
 
 interface Favorites {
 	post: Post;
 }
 
 export default function DetailBeer() {
+	const hasToken = Object.keys(localStorage).join().includes("token")
 	const dispatch = useDispatch();
 	const { id }: any = useParams();
 	const info: any = useSelector((state: RootState) => state.detailPosts);
@@ -37,7 +40,7 @@ export default function DetailBeer() {
 	}, [dispatch]);
 
 	const addToCart = async () => {
-		const response = await axios.put(`${process.env.REACT_APP_HOST_BACKEND}/addToCart`, { params: { "username": "TestUser", "postId": parseInt(id), "quantity": cantidad } })
+		const response = await axios.put(`${process.env.REACT_APP_HOST_BACKEND}/addToCart`, { params: { "username": "TestUser", "postId": parseInt(id), "quantity": cantidad } }, { headers: validationHeadersGenerator() })
 		return (response.data)
 	}
 
@@ -46,13 +49,32 @@ export default function DetailBeer() {
 		e.stopPropagation();
 		await addToCart()
 		await getCart(id)
-		history.push(`/compra/1`); ///////////FALTA CARGAR EL ID DEL USUARIO QUE ESTÉ EN LA PÁGINA
+		history.push(`/compra/1`);
 	};
+
+	async function addFavoriteInLocalStorage() {
+
+		if (localStorage.guestsItemsInCart) {
+			const localStorageParse = JSON.parse(localStorage.guestsItemsInCart)
+			/* if (localStorage.guestsItemsInCart[id]) ☢ Si le subis en el carrito, y despues tocas en agregar. Le volves a asignar 1 !!
+				localStorage.setItem("guestsItemsInCart", JSON.stringify({ ...localStorageParse, [id]: ++localStorageParse[id] }))
+
+			else  */localStorage.setItem("guestsItemsInCart", JSON.stringify({ ...localStorageParse, [id]: 1 }))
+		}
+		else localStorage.setItem("guestsItemsInCart", `{"${id}":1}`)
+
+		// localStorage.setItem("guestsItemsInCart", "{'1':2,'3':3}")
+
+		/* e.preventDefault()
+		await axios.get(`${process.env.REACT_APP_HOST_BACKEND}/getMultiplePostByIds`, { params: { guestsItemsInCart: localStorage.guestsItemsInCart } }).then(response => console.log(response.data))
+		console.log(localStorage.guestsItemsInCart) */
+	}
 
 	return info?.beer ? (
 		<div className={Style.detailContainer}>
 			<div className={Style.detailViewContainer}>
 				<div className={Style.detailView}>
+
 					<div className={Style.imageSection}>
 						<img src={info.image} alt="La imagen no esta disponible" />
 						<div className={Style.reviews}>
@@ -105,13 +127,17 @@ export default function DetailBeer() {
 												<button className={Style.buttonComprar} type="submit">¡COMPRAR AHORA!</button>
 											</form>
 											<button className={Style.addtoCartButton} onClick={async () => {
-												MySwal.fire({
-													position: 'center',
-													icon: 'success',
-													title: await addToCart(),
-													showConfirmButton: false,
-													timer: 1500,
-												})
+
+												if (hasToken) {
+													MySwal.fire({
+														position: 'center',
+														icon: 'success',
+														title: await addToCart(),
+														showConfirmButton: false,
+														timer: 1500,
+													})
+												}
+												else addFavoriteInLocalStorage()
 											}}>AGREGAR AL CARRITO</button>
 										</div>
 										<div className={Style.buttonsPago}>

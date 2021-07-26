@@ -51,10 +51,12 @@ model User {
     password String
     premium  Boolean @default(false)
     verify   Boolean @default(false)
-    userHash String  @unique @default("userHash")
+    userHash String  @unique
+
+    activeCount Boolean @default(true)
+    //☢ 👆 NUEVA COLUMNA A USER NECESARIA PARA EL BOTON DE UNREGISTER . -Eze
 
     ///relacion de muchos a uno con TABLA ROLE
-    //☢ agregue cosas condicionales para poder generar usuarios sin que joda
     roleId        Int
     role          Role          @relation(fields: [roleId], references: [id])
     cartId        Int
@@ -179,10 +181,10 @@ model Review {
     @@unique([userId, postId])
 }
 
-model image_upload{
-    id Int @id @default(autoincrement())
-    filename String 
+model image_upload {
+    id       Int    @id @default(autoincrement())
+    filename String
     filepath String
     mimetype String
-    size BigInt 
+    size     BigInt
 }

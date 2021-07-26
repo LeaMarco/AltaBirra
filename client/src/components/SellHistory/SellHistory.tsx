@@ -1,5 +1,8 @@
 import React, { useEffect } from "react";
+// import Style from ".@.module.css";
+//Estaba como arriba lo deje como abajo sino rompia. -Eze
 import Style from "./SellHistory.module.css";
+
 import { useDispatch, useSelector } from "react-redux";
 import { getHistory } from "../../actions";
 import { RootState } from "../../reducers";

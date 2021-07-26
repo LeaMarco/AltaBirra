@@ -6,6 +6,7 @@ import { RootState } from "../../reducers/index";
 import axios from 'axios';
 import { PostsCompra } from "./PostsCompra";
 import style from './Compra.module.css';
+import { validationHeadersGenerator } from "../../validationHeadersGenerator";
 
 export function Compra() {
     const dispatch = useDispatch();
@@ -60,7 +61,7 @@ export function Compra() {
     }
 
     async function merpa(data) {
-        const response = await axios.post(`${process.env.REACT_APP_HOST_BACKEND}/checkout`, { data: { data } });
+        const response = await axios.post(`${process.env.REACT_APP_HOST_BACKEND}/checkout`, { data: { data } }, { headers: validationHeadersGenerator() });
         return response.data.id;
     }
 

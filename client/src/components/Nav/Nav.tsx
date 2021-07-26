@@ -48,13 +48,9 @@ export default function Nav() {
 
   const stateWelcome = useSelector((state) => state["welcome"]);
 
-  useEffect(() => {
-    // NO TOCAR
-    
-  }, [stateWelcome]);
-
+  ////////////////////AUTENTICACION AUTOMATICA//////////////////////////////////////////////////
   useLayoutEffect(() => {
-    if (localStorage.length) {
+    if (Object.keys(localStorage).join().includes("token")) {
       axios.get(`${process.env.REACT_APP_HOST_BACKEND}/auth/autoLogin`, {
         headers: validationHeadersGenerator()
       }).then(e => {
@@ -134,7 +130,7 @@ export default function Nav() {
         swal({title: 'Adiós, vuelve pronto!', text: 'Suerte!', icon: "success", timer: 3000, buttons: ['']})
         setTimeout(() => {
           localStorage.clear();
-          window.location.reload();  
+          window.location.href = 'https://localhost:3000';  
         }, 2900);
         
       }
