@@ -26,7 +26,7 @@ export default function VerifyAccount() {
 	const showAlert = (verify) => {
 		
 		setTimeout(() => {
-			window.location.href = 'http://localhost:3000';	
+			window.location.href = 'https://alta-birra.vercel.app/';	
 		}, 2500);
 
 		if(!verify){

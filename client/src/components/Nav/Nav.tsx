@@ -127,7 +127,7 @@ export default function Nav() {
         swal({ title: 'Adiós, vuelve pronto!', text: 'Suerte!', icon: "success", timer: 3000, buttons: [''] })
         setTimeout(() => {
           localStorage.clear();
-          window.location.href = 'http://localhost:3000';
+          window.location.href = 'https://alta-birra.vercel.app/';
         }, 2900);
 
       }
