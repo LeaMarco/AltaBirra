@@ -9,19 +9,19 @@ const path = require('path');
 const app: Application = express();
 
 app.use(cors())
-// app.use(
-// 	cors({
-// 		origin: true,
-// 		credentials: false,
-// 		methods: ['GET', 'POST', 'OPTIONS', 'PUT', 'DELETE'],
-// 		allowedHeaders: ['Access-Control-Allow-Origin', 'Origin', 'X-Requested-With', 'Content-Type', 'Accept'],
-// 	})
-// );
+app.use(
+	cors({
+		origin: true,
+		credentials: true,
+		methods: ['GET', 'POST', 'OPTIONS', 'PUT', 'DELETE'],
+		allowedHeaders: ['Access-Control-Allow-Origin', 'Origin', 'X-Requested-With', 'Content-Type', 'Accept'],
+	})
+);
 
-// app.use((req, res, next) => {
-// 	res.header('Access-Control-Allow-Origin', "*"); //**cambio** */ update to match the domain you will make the request from//aca habia un 3000!
-// 	next();
-// });
+app.use((req, res, next) => {
+	res.header('Access-Control-Allow-Origin', "*"); //**cambio** */ update to match the domain you will make the request from//aca habia un 3000!
+	next();
+});
 
 app.use(express.urlencoded({ extended: true, limit: '50mb' })); //middleware
 app.use(express.json({ limit: '50mb' }));
