@@ -46,8 +46,6 @@ export default function EditPost() {
 
 
 
-
-
   //hacer destructuring de generic y specific
   async function despachadora(data, image) {
     let save = await dispatch(createPost(transformer(data, image)))
@@ -84,8 +82,6 @@ export default function EditPost() {
     let response = await axios.post("http://localhost:3001/upload", formData)
     setImage('http://localhost:3001/upload/' + response.data.filename);
   }
-
- 
 
 
   const { register, handleSubmit, reset, watch } = useForm({});
@@ -193,7 +189,7 @@ export default function EditPost() {
               </div>
             </div>
           </section>
-          Decuento?
+           <p>Descuento?</p>
           <input name="checked" type="checkbox" checked={estado.checked} onChange={checkboxClick} className={styles.checkboxDiscount} />
           <div>
             {estado.checked ?

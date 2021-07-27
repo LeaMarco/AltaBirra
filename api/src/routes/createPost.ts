@@ -2,8 +2,6 @@ import { PrismaClient } from "@prisma/client";
 import { NextFunction, Request, Response, Router } from "express";
 import { LabeledStatement } from "typescript";
 
-
-
 const router = Router();
 const prisma = new PrismaClient();
 
@@ -23,6 +21,7 @@ interface InfoPost {
   description: string;
   image: string;
   stock: number;
+  pickupdir:string;
   rating: number;
   shipping: boolean;
   visibility: boolean;
@@ -50,6 +49,7 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
   const {
     title,
     description,
+    pickupdir,
     image,
     stock,
     rating,
@@ -73,6 +73,7 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
       title,
       description,
       image,
+      pickupdir,
       stock,
       rating,
       shipping,

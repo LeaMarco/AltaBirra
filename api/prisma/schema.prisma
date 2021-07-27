@@ -12,6 +12,7 @@ model Post {
     id          Int      @id @default(autoincrement())
     title       String
     description String
+    pickupdir   String  @default("none")
     image       String
     rating      Float    @default(0)
     stock       Int
@@ -179,8 +180,8 @@ model Review {
 
 model image_upload{
     id Int @id @default(autoincrement())
-    filename String 
+    filename String
     filepath String
     mimetype String
-    size BigInt 
+    size BigInt
 }

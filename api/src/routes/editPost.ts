@@ -20,6 +20,7 @@ interface InfoPost {
   title: string;
   description: string;
   image: string;
+  pickupdir:string;
   stock: number;
   shipping: boolean;
   visibility: boolean;
@@ -48,13 +49,13 @@ router.put("/", async (req: Request, res: Response, next: NextFunction) => {
   const {
     title,
     description,
+    pickupdir,
     image,
     stock,
     shipping,
     visibility,
     username,
   }: InfoPost = req.body.params.infoPost;
-
   
   const {
     price,
@@ -76,6 +77,7 @@ router.put("/", async (req: Request, res: Response, next: NextFunction) => {
     data: {
       title,
       description,
+      pickupdir,
       image,
       stock,
       shipping,

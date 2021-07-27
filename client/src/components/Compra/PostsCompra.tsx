@@ -24,7 +24,7 @@ export function PostsCompra({
                 <span>{description.slice(0, 50)}...</span>
             </div>
             <p>Cantidad: {amount}</p>
-            <p>{countable.price * amount}</p>
+            <p>Total: ${(countable.price * amount).toFixed(2)}</p>
         </div>
     );
 }
