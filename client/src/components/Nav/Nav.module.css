@@ -81,6 +81,7 @@
   border: none;
   background-color: rgb(122, 122, 122);
   color: black;
+  text-indent: 0.5rem;
 }
 
 .searchInput::placeholder {
@@ -201,8 +202,12 @@
   background-color: lightgray;
   border: 1px solid black;
   border-radius: 0;
-  width: 83%;
-  padding: 0.5rem 1rem;
+  width: 84%;
+  padding: 0.5rem 0.5rem;
+}
+
+.autocomplete > input:hover {
+  filter: brightness(1.1);
 }
 
 .searchInput:focus-within > .autocomplete {

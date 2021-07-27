@@ -48,7 +48,7 @@ export default function BuyHistory() {
 							</div>
 						)
 					})
-					: null
+					: <h2> No hay compras registradas para esta cuenta </h2>
 			}
 		</div >
 	)
