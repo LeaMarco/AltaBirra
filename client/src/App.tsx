@@ -19,6 +19,7 @@ import BuyHistory from "./components/BuyHistory/BuyHistory";
 import SellHistory from "./components/SellHistory/SellHistory";
 import E_Unauthorized from "./components/E_Unauthorized/E_Unauthorized";
 import VerifyAccount from "./components/VerifyAccount/VerifyAccount";
+import Footer from "./components/Footer/Footer";
 
 function App() {
 
@@ -44,7 +45,7 @@ function App() {
       <Route exact path="/E_Unauthorized" component={E_Unauthorized} />
       <Route exact path="/verificarUsuario/:user" component={VerifyAccount} />
 
-
+      <Route path="/" component={Footer} />
     </div>
   );
 }

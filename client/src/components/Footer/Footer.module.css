@@ -1,0 +1,140 @@
+.containerFooter{
+  background-image: repeating-linear-gradient(
+      45deg,
+      rgba(30, 30, 30, 0.1) 0px,
+      rgba(30, 30, 30, 0.1) 2px,
+      transparent 2px,
+      transparent 4px
+    ),
+    linear-gradient(90deg, rgb(43, 43, 43), rgb(43, 43, 43));
+  color: white;
+  height: 100vh;
+}
+
+.containerFooter .footer{
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 0px 20px black inset;
+}
+
+.containerFooter .containerLogo{
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  filter: invert(100%);
+}
+
+.containerFooter .containerLogo img{
+  color: white;
+  width: 250px;
+  align-self: center;
+}
+
+.containerFooter .containerLogo span{
+  color: black;
+  width: 400px;
+  align-self: center;
+}
+
+.containerFooter .descriptionFooter{
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 60px;
+  margin-left: 50px;
+}
+
+
+.containerFooter .descriptionFooter div{
+  width: 23%;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.containerFooter .descriptionFooter .quienesSomos{
+  display: flex;
+  flex-direction: column;
+  text-align: justify;  
+}
+
+.containerFooter .descriptionFooter .quienesSomos span{
+  align-self: center;
+}
+
+
+.containerFooter .descriptionFooter .redes{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.containerFooter .descriptionFooter .redes div{
+  display: flex;
+  align-self: center;
+  margin-left: 0px;
+  width: 100%;
+  justify-content: center;
+}
+
+.containerFooter .descriptionFooter .redes span{
+  align-self: center;
+}
+
+.containerFooter .descriptionFooter .redes h4{
+  margin: 0px;
+  font-size: 30px;
+}
+
+.containerFooter .descriptionFooter .redes .ig,
+.containerFooter .descriptionFooter .redes .fb{
+  margin-top: 20px;
+  margin-left: 5px;
+  
+}
+
+.containerFooter .descriptionFooter .desarrollado{
+  align-self: end;
+  justify-items: end;
+}
+
+.containerFooter .desarrollado{
+  margin-top: 50px;
+  background-color: black;
+  color: white;
+  border: 1px solid black;
+  padding: 3px;
+}
+
+.containerFooter .desarrollado h3{
+  font-size: 15px;
+  margin: 0px;
+}
+
+.containerFooter .descriptionFooter .contactanos{
+  display: flex;
+  flex-direction: column;
+}
+
+.containerFooter .descriptionFooter .contactanos span{
+  align-self: flex-start;
+  margin-left: 18px;
+}
+
+.containerFooter .descriptionFooter .contactanos .contactInfo{
+  display: flex;
+  align-self: flex-start;
+  flex-direction: column;
+}
+
+.containerFooter .descriptionFooter .contactanos .contactInfo .infoWp,
+.containerFooter .descriptionFooter .contactanos .contactInfo .infoGm{
+  display: flex;
+  width: 100%;
+  height: 5vh;
+}
+
+.containerFooter .descriptionFooter .contactanos .contactInfo .infoWp span,
+.containerFooter .descriptionFooter .contactanos .contactInfo .infoGm span{
+  line-height: 58px;
+  margin-left: 5px;
+  font-size: 12px;
+}
