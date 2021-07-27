@@ -235,23 +235,23 @@ export default function Nav() {
               <Register closeModal={toogleRegister} toogleEnter={toogleEnter} toogleRegister={toogleRegister} />
             </Modal>
 
-            <div className={style.buttonsRight}>
-              {
-                !isAuth
-                  ? <div className={style.buttonsRightEnter}>
-                    <button className={style.buttonEnter} onClick={toogleEnter}>
-                      Entrar
-                    </button>
-                    <button className={style.buttonEnter} onClick={toogleRegister}>
-                      Registrarme
-                    </button>
-                  </div>
-                  : <Link className={style.textDecoration} to="/panel">
-                    <button className={style.buttonEnter}>Panel</button>
-                  </Link>
-              }
-            </div>
+            {/* <div className={style.buttonsRight}> */}
+            {
+              !isAuth
+                ? <div className={style.buttonsRightEnter}>
+                  <button className={style.buttonEnter} onClick={toogleEnter}>
+                    Entrar
+                  </button>
+                  <button className={style.buttonEnter} onClick={toogleRegister}>
+                    Registrarme
+                  </button>
+                </div>
+                : <Link className={style.textDecoration} to="/panel">
+                  <button className={style.buttonEnter}>Panel</button>
+                </Link>
+            }
           </div>
+          // </div>
           // </div>
         )}
       </div >
