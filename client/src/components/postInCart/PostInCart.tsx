@@ -69,7 +69,7 @@ export function PostinCart({
 				</button>
 			</div>
 			<div className={style.priceAndDelete}>
-				<p className={style.amount}>${countable.price * quantity}</p>
+				<p className={style.amount}>${(countable.price * quantity).toFixed(2)}</p>
 				<button className={style.deletebutton}
 					onClick={(e) => {
 						despachadora();
