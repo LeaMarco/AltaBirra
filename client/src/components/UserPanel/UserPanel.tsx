@@ -57,7 +57,7 @@ export default function UserPanel() {
 				</div>
 			</Link>
 			<button className={Style.subcontainerNoFuncional} style={{ backgroundColor: "grey" }}> Configuracion de cuenta </button>
-			<button className={Style.subcontainerNoFuncional} onClick={handleDesactivarCuenta}> Desactivar cuenta </button>
+			<button className={Style.subcontainer} onClick={handleDesactivarCuenta}> Desactivar cuenta </button>
 		</div >
 	);
 }
