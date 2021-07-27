@@ -22,8 +22,8 @@ export default function FavoritesTab({ closeModal }) {
 
 	async function removeFavorite(id) {
 		await axios.delete(`${process.env.REACT_APP_HOST_BACKEND}/removeFavorite`, { headers: validationHeadersGenerator(), data: { username: `TestUser`, postId: id } });
-		dispatch(getFavoritePosts(`TestUser`)); //Porque 2 dispatch ahhhhAHH. -Eze
-		dispatch(getFavoritePosts(`TestUser`));
+		dispatch(getFavoritePosts()); //Porque 2 dispatch ahhhhAHH. -Eze
+		dispatch(getFavoritePosts());
 	}
 
 	async function goToDetail(id) { //Deprecado por el modal? -Eze
@@ -33,7 +33,7 @@ export default function FavoritesTab({ closeModal }) {
 	}
 
 	useEffect(() => {
-		dispatch(getFavoritePosts("TestUser"));
+		dispatch(getFavoritePosts());
 	}, [dispatch]);
 
 	return (
@@ -44,9 +44,9 @@ export default function FavoritesTab({ closeModal }) {
 						<div className={Style.card}>
 							<button onClick={() => removeFavorite(post.post.id)} className={Style.unfav}> 💔 </button>
 							<button onClick={() => goToDetail(post.post.id)} style={{ margin: 0, border: "none", cursor: "pointer" }}> <div>
-								<h5> {post.post.title} </h5>
-								<img src={post.post.image} height="150vh" />
-								<h5> $ {post.post.countable.price} </h5>
+								<h3> {post.post.title} </h3>
+								<img src={post.post.image} height="150rem" style={{ borderRadius: "1rem" }} />
+								<h3> $ {post.post.countable.price} </h3>
 							</div> </button>
 						</div>
 					)

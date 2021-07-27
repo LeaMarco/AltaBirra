@@ -37,21 +37,14 @@ const Card = ({
   };
 
   async function addToFavorite() {
-
-
-    await axios.post(`${process.env.REACT_APP_HOST_BACKEND}/addFavorite`, {
-      data: { username: `TestUser`, postId: id },
-    }, { headers: validationHeadersGenerator() });
-    dispatch(getFavoritePosts("TestUser"));
+    await axios.post(`${process.env.REACT_APP_HOST_BACKEND}/addFavorite`, { postId: id }, { headers: validationHeadersGenerator() });
+    dispatch(getFavoritePosts());
     setIsFavorite(true);
   }
 
   async function removeFavorite() {
-    await axios.delete(`${process.env.REACT_APP_HOST_BACKEND}/removeFavorite`, {
-      headers: validationHeadersGenerator(),
-      data: { username: `TestUser`, postId: id },
-    });
-    dispatch(getFavoritePosts("TestUser"));
+    await axios.delete(`${process.env.REACT_APP_HOST_BACKEND}/removeFavorite`, { headers: validationHeadersGenerator(), data: { postId: id } });
+    dispatch(getFavoritePosts());
     setIsFavorite(false);
   }
 
@@ -59,8 +52,6 @@ const Card = ({
     if (str.length <= maxLen) return str;
     return str.substr(0, str.lastIndexOf(separator, maxLen));
   }
-
-
 
   return (
     <div className={Style.containerBack}>

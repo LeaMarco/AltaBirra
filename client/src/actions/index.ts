@@ -379,9 +379,9 @@ const urladdtocart = `${process.env.REACT_APP_HOST_BACKEND}/addToCart`;
 //     };
 // };
 
-export function getFavoritePosts(username) {
+export function getFavoritePosts() {
 	return async function (dispatch: Dispatch) {
-		const response = await axios.get<Post[]>(`${process.env.REACT_APP_HOST_BACKEND}/getFavorites`, { params: { username }, headers: validationHeadersGenerator() });
+		const response = await axios.get<Post[]>(`${process.env.REACT_APP_HOST_BACKEND}/getFavorites`, { headers: validationHeadersGenerator() });
 		dispatch<getPostsAction>({
 			type: "GET_FAVORITE_POSTS",
 			payload: response.data
