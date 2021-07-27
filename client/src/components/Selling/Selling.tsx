@@ -25,8 +25,14 @@ export default function Selling() {
 								<Link to={`/detailBeer/${post.id}`} key={post.id} style={{ textDecoration: "none", color: "black" }}><div className={Style.detail}>
 									<div className={Style.subdetail}>
 										<img src={post.image} alt='' height="150vh" />
-										<h2> {post.title} </h2>
-										<Link to={`/editPost/${post.id}`} style={{ textDecoration: "none", color: "black" }}> Editar Post </Link>
+										<div>
+											<h1> {post.title} </h1>
+											<h4> Precio: ${post.countable.price} </h4>
+											<h4> Stock: {post.stock} </h4>
+											{/* <h4> {post.} </h4>
+											<h4> {post.} </h4> */}
+										</div>
+										<Link to={`/editPost/${post.id}`} className={Style.edit}> Editar Post </Link>
 									</div>
 								</div></Link>
 							</div>

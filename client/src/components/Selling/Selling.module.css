@@ -25,3 +25,18 @@
 	justify-content: space-between;
 	align-items: center;
 }
+
+.edit {
+	text-decoration: none;
+	background-color: lightgrey;
+	color: black; 
+	border: 1px solid black; 
+	padding: 1rem;
+	border-radius: 1rem;
+	transition: 250ms;
+}
+
+.edit:hover {
+	background-color: #F49E51;
+	transform: scale(1.1);
+}
