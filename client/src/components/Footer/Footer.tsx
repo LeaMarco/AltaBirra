@@ -25,19 +25,19 @@ const Footer = () => {
 					<div className={Style.redes}>
 						<span>REDES SOCIALES:</span>
 						<div>
-							<h4 className={Style.ig}><IoLogoInstagram/></h4>
-							<h4 className={Style.fb}><AiOutlineFacebook/></h4>
+							<h4 className={Style.ig}><IoLogoInstagram className={Style.iconIg}/></h4>
+							<h4 className={Style.fb}><AiOutlineFacebook className={Style.iconFb}/></h4>
 						</div>
 					</div>
 					<div className={Style.contactanos}>
 						<span>CONTACTANOS:</span>
 						<div className={Style.contactInfo}>
 							<div className={Style.infoWp}>
-								<h4 className={Style.wp}><ImWhatsapp/></h4>
+								<h4 className={Style.wp}><ImWhatsapp className={Style.iconWp}/></h4>
 								<span>+548476859838</span>
 							</div>
 							<div className={Style.infoGm}>
-								<h4 className={Style.gm}><SiGmail/></h4>
+								<h4 className={Style.gm}><SiGmail className={Style.iconGm}/></h4>
 								<span>altabirra@gmail.com</span>
 							</div>
 						</div>
