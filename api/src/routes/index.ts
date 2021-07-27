@@ -32,8 +32,9 @@ import transactionState from "./transactionState";
 import verifyUser from "./verifyUser";
 import AUTOPOST_ONLY_DEVELOPMENT_ROUTE from "./AUTOPOST_ONLY_DEVELOPMENT_ROUTE";
 import { tokenValidation } from '../autentication/libs/verifyToken';
-import getMultiplePostByIds from './getMultiplePostByIds'
-import desactivateAccount from '../autentication/controllers/desactivateAccount'
+import getMultiplePostByIds from './getMultiplePostByIds';
+import desactivateAccount from '../autentication/controllers/desactivateAccount';
+import sellingPosts from "./sellingPosts";
 
 const router = Router();
 
@@ -73,6 +74,7 @@ router.use("/editUsers", /* tokenValidation, */ editUsers);//
 
 router.use("/viewHistory", /* tokenValidation, */ viewHistory);//
 router.use("/transactionState", /* tokenValidation, */ transactionState);//
+router.use("/sellingPosts", tokenValidation, sellingPosts);
 
 
 export default router;

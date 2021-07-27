@@ -4,10 +4,20 @@ import { Link } from "react-router-dom";
 import { validationHeadersGenerator } from "../../validationHeadersGenerator";
 import Style from "./UserPanel.module.css";
 import { useHistory } from 'react-router-dom';
+import { useSelector } from "react-redux";
+import { RootState } from "../../reducers";
+
+interface User {
+	nombre: string;
+	id: number;
+	premium: boolean;
+	favoritos: number;
+}
 
 
 export default function UserPanel() {
 	const history = useHistory();
+	const user: User = useSelector((state: RootState) => state.welcome);
 
 	function handleDesactivarCuenta(e) {
 		e.preventDefault()
@@ -20,10 +30,15 @@ export default function UserPanel() {
 
 	return (
 		<div className={Style.container}>
-			<h2> TestUser </h2>
+			<h2> {user.nombre} </h2>
 			<Link to="/historialVistos" className={Style.subcontainer}>
 				<div >
 					Vistos recientemente
+				</div>
+			</Link>
+			<Link to="/vendiendo" className={Style.subcontainer}>
+				<div >
+					Posts en venta
 				</div>
 			</Link>
 			<Link to="/historialCompras" className={Style.subcontainer}>

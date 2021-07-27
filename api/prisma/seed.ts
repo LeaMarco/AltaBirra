@@ -19,7 +19,7 @@ async function main() {
       username: "TestUser",
       email: "TestUser@email.com",
       name: "Test User",
-      password: encryptPassword("TestUserPassword"),
+      password: encryptPassword("password"),
       role: {
         connect: { id: user.id }
       },
@@ -32,7 +32,8 @@ async function main() {
       views: {
         create: {}
       },
-      userHash: 'asdasdasdas'
+      userHash: 'asdasdasdas',
+      verify: true
     },
   });
 
@@ -42,7 +43,7 @@ async function main() {
       username: "TestAdmin",
       email: "TestAdmin@email.com",
       name: "Test Admin",
-      password: encryptPassword("TestAdminPassword"),
+      password: encryptPassword("password"),
       role: {
         connect: { id: admin.id }
       },
@@ -55,7 +56,8 @@ async function main() {
       views: {
         create: {}
       },
-      userHash: 'asd'
+      userHash: 'asd',
+      verify: true
     },
   });
 
@@ -65,7 +67,7 @@ async function main() {
       username: "TestPremium",
       email: "TestPremium@email.com",
       name: "Test Premium",
-      password: encryptPassword("TestPremiumPassword"),
+      password: encryptPassword("password"),
       role: {
         connect: { id: admin.id }
       },
@@ -79,7 +81,8 @@ async function main() {
       views: {
         create: {}
       },
-      userHash: 'asdddd'
+      userHash: 'asdddd',
+      verify: true
     },
   });
 

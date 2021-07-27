@@ -70,7 +70,7 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
   const user = await findUserWithAnyTokenBabe(req, prisma)
   const beerGenericType = await prisma.genericType.findUnique({ where: { type: genericType } });
   const beerSpecificType = await prisma.specificType.findUnique({ where: { type: specificType } });
-
+  console.log(req.body.params)
 
   await prisma.post.create({
     data: {

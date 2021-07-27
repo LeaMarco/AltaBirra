@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import style from "./Nav.module.css";
 import logo from "./AltaBirra.svg";
 import { Link, useHistory } from "react-router-dom";
@@ -18,6 +18,7 @@ import { validationHeadersGenerator } from "../../validationHeadersGenerator";
 
 // import OffCanvas from 'react-aria-offcanvas';
 import { FaBars, FaSearch } from "react-icons/fa";
+
 interface Autocomplete {
   title: string;
 }
@@ -35,7 +36,6 @@ export default function Nav() {
   const [searchInput, setSearchInput] = useState<string>("");
   const dispatch = useDispatch();
   const history = useHistory();
-
 
   const [isAuth, setAuth] = useState<boolean>(false);
   const toogleAuth = () => setAuth(!isAuth);
@@ -214,10 +214,14 @@ export default function Nav() {
             <ModalFavorites isOpen={showFavorites} handleClose={toogleFavorites}>
               <FavoritesTab closeModal={toogleFavorites} />
             </ModalFavorites>
+            {
+              isAuth
+                ? <button onClick={toogleFavorites} className={style.buttonFavorites}>
+                  <img className={style.buttonImg} src="https://image.flaticon.com/icons/png/512/1077/1077035.png" alt="Favorites" height="1vh" />
+                </button>
+                : null
+            }
 
-            <button onClick={toogleFavorites} className={style.buttonFavorites}>
-              <img className={style.buttonImg} src="https://image.flaticon.com/icons/png/512/1077/1077035.png" alt="Favorites" height="1vh" />
-            </button>
 
             <Link to="/cart/1" className={style.buttonCart}>
               <img className={style.buttonImg} src="https://image.flaticon.com/icons/png/512/3144/3144456.png" alt="Cart" />
@@ -232,14 +236,9 @@ export default function Nav() {
             </Modal>
 
             <div className={style.buttonsRight}>
-              <Link className={style.textDecoration} to="/panel">
-                <button className={style.buttonEnter}>Panel</button>
-              </Link>
-
               {
-                !isAuth ?
-
-                  <div className={style.buttonsRightEnter}>
+                !isAuth
+                  ? <div className={style.buttonsRightEnter}>
                     <button className={style.buttonEnter} onClick={toogleEnter}>
                       Entrar
                     </button>
@@ -247,7 +246,9 @@ export default function Nav() {
                       Registrarme
                     </button>
                   </div>
-                  : null
+                  : <Link className={style.textDecoration} to="/panel">
+                    <button className={style.buttonEnter}>Panel</button>
+                  </Link>
               }
             </div>
           </div>

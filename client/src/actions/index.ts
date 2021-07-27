@@ -413,7 +413,7 @@ export interface ActionUserData {
 }
 
 export const getUserData = (user: iuserData) => {
-	return <ActionUserData> {
+	return <ActionUserData>{
 		type: ActionTypes.ActionUserDataType,
 		payload: user
 	}
@@ -426,7 +426,7 @@ export interface ActionLoginType {
 }
 
 export const login = (login: boolean) => {
-	return <ActionLoginType> {
+	return <ActionLoginType>{
 		type: ActionTypes.ActionLoginTypes,
 		payload: login
 	}
@@ -471,3 +471,13 @@ export type ActionLoginTypes = ActionLoginType;
 // 	premium: user.premium,
 // 	favoritos: user.favoriteId
 // }
+
+export function getSellingPosts() {
+	return async function (dispatch: Dispatch) {
+		const response = await axios.get(`${process.env.REACT_APP_HOST_BACKEND}/sellingPosts`, { headers: validationHeadersGenerator() });
+		dispatch({
+			type: "GET_SELLING_POSTS",
+			payload: response.data
+		})
+	}
+}

@@ -21,6 +21,7 @@ import E_Unauthorized from "./components/E_Unauthorized/E_Unauthorized";
 import Admin from "./components/Admin/Admin";
 import ViewsHistory from "./components/ViewHistory/ViewHistory";
 import VerifyAccount from "./components/VerifyAccount/VerifyAccount";
+import Selling from "./components/Selling/Selling";
 
 function App() {
 
@@ -43,7 +44,7 @@ function App() {
       <Route exact path="/historialVistos" component={ViewsHistory} />
       <Route exact path="/historialVentas" component={SellHistory} />
       <Route exact path="/calificar/:id" component={Rate} />
-
+      <Route exact path="/vendiendo" component={Selling} />
       <Route exact path="/E_Unauthorized" component={E_Unauthorized} />
       <Route exact path="/verificarUsuario/:user" component={VerifyAccount} />
 
