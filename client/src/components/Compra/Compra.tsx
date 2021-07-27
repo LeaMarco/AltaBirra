@@ -12,17 +12,18 @@ import { FaBars, FaSearch, FaLongArrowAltLeft } from "react-icons/fa";
 export function Compra() {
     const dispatch = useDispatch();
     const { id }: any = useParams();
-    const carts: any = useSelector((state: RootState) => state.cart);
+    let carts: any = useSelector((state: RootState) => state.cart);
     const [merpastate, setMerpa] = useState("");
     useScript(merpastate)
 
     useEffect(() => {
+        carts= null;
         dispatch(getCart(id));
     }, []);
 
     useEffect(() => {
         if (carts) generarboton(carts)
-    }, [id]);
+    }, [carts]);
 
     return (
         <div className={style.compraContainer}>
