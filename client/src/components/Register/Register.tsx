@@ -209,7 +209,19 @@ const Register: React.FunctionComponent<{ closeModal, toogleEnter, toogleRegiste
       title: 'Verificá tu cuenta!',
       text: 'Por favor verifica tu cuenta con el correo que te hemos enviado...',
       icon: 'success',
-      buttons: ['','Ok']
+      buttons: {
+        confirm:{
+          text:'OK'
+          // value: null,
+          // visible: true,
+          // className: 'btn btn-confirm',
+          // closeModal: true
+        // },
+        // cancel: {
+        //   text: 'Cancelar'
+        // }
+        }
+      }      
     })
   }
   ////////////////////FIN DE LOGICA DE REGISTRO LOCAL///////////////////////////////////////

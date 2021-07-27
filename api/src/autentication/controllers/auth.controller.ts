@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from "bcryptjs"
 import { PrismaClient } from "@prisma/client";
 import { NextFunction, Request, Response, Router } from "express";
-import { transporter } from './mailing';
+import { transporter, emailRegistracion } from './mailing';
 
 
 const router = Router();
@@ -120,29 +120,15 @@ export const signup = async (req: Request, res: Response) => {
     } // CIERRA EL ELSE
 
     // ENVIAR EMAIL CUANDO ME REGISTRO CON PLANILLA ========================================
+    // LA FUNCION PARA MANDAR MAIL RECIBE 3 PARAMETROS. SE ENCUENTRA EN "mailing.ts"
+    // LOS 3 PARAMETROS SON:
+    // email: destinatario del mail
+    // titulo: titulo del mail
+    // usuarioHash: es el username hasheado
+    const titulo = "Registración AltaBirra ✔";
+
     if(password){ // si me estoy registrando con PLANILLA hace lo siguiente.. (mailing)
-        try{
-            // send mail with defined transport object
-        let info = await transporter.sendMail({
-            from: '"AltaBirra Administración 🍻" <facundoramirez089@gmail.com>', // sender address
-            to: email, // list of receivers
-            subject: "Registración AltaBirra ✔", // Subject line
-            // text: "Hello world?", // plain text body
-            // html: "<b>Hello world?</b>", // html body
-            html: `
-                <h1>BIENVENIDO A ALTABIRRA !!!</h1>
-                <h3>Por favor haga click en el siguiente enlace para completar el proceso de registración</h3>
-                <br/>
-                <br/>
-                <span>ENLACE ===> </span><a href="https://localhost:3000/verificarUsuario/${usuarioHash}">Click aquí para verificar cuenta</a>
-                <br/>
-                <br/>
-                Atte. El equipo de AltaBirra.
-            `
-        });
-        } catch(error){
-            console.log('Error al enviar el email');
-        }
+        emailRegistracion(email, titulo, usuarioHash);
     }
     
     return res.json(user)

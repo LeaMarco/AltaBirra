@@ -47,7 +47,7 @@ export default function Nav() {
   const toogleAuth = () => setAuth(!isAuth);
 
   const stateWelcome = useSelector((state) => state["welcome"]);
-
+  console.log(stateWelcome, 'ACA ESTOY');
   ////////////////////AUTENTICACION AUTOMATICA//////////////////////////////////////////////////
   useLayoutEffect(() => {
     if (Object.keys(localStorage).join().includes("token")) {

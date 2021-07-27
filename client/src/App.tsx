@@ -45,7 +45,7 @@ function App() {
       <Route exact path="/E_Unauthorized" component={E_Unauthorized} />
       <Route exact path="/verificarUsuario/:user" component={VerifyAccount} />
 
-      <Route path="/" component={Footer} />
+      <Route exact path="/" component={Footer} />
     </div>
   );
 }
