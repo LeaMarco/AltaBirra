@@ -12,6 +12,7 @@ function Cart() {
   const dispatch = useDispatch();
   const { id }: any = useParams();
   const carts: any = useSelector((state: RootState) => state.cart);
+  console.log(carts,"cartasss")
   const [merpastate, setMerpa] = useState("");
 
 
@@ -52,7 +53,7 @@ function Cart() {
       <div className={styles.cart}>
         {Array.isArray(carts) && carts.length > 0 ? (
           carts.map((post) => (
-            <PostinCart username={post.cart?.userId.username} cartId={id} postId={post.post.id} postTitle={post.post.title} description={post.post.description} amount={post.amount} countable={post.post.countable} />
+            <PostinCart pickupdir={post.post.pickupdir} username={post.cart?.userId.username} cartId={id} postId={post.post.id} postTitle={post.post.title} description={post.post.description} amount={post.amount} countable={post.post.countable} />
           ))
         ) : (
           <p className={styles.emptyCart}>¡Mi copa esta vacia y tu carrito también!</p>

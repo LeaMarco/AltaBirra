@@ -30,7 +30,7 @@ export function Compra() {
                 {Array.isArray(carts) && carts.length > 0 ? (
                     carts.map((post) => (
                         <div className={style.compra}>
-                            <PostsCompra username={post.cart?.userId.username} cartId={id} postId={post.post.id} postTitle={post.post.title} description={post.post.description} amount={post.amount} countable={post.post.countable} />
+                            <PostsCompra pickupdir={post.post.pickupdir} username={post.cart?.userId.username} cartId={id} postId={post.post.id} postTitle={post.post.title} description={post.post.description} amount={post.amount} countable={post.post.countable} />
                         </div>
                     ))
                 ) : (
