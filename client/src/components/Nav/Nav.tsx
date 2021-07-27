@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import style from "./Nav.module.css";
 import logo from "./AltaBirra.svg";
@@ -12,11 +12,13 @@ import FavoritesTab from "../FavoriteTab/FavoriteTab";
 // import OffCanvas from 'react-aria-offcanvas';
 import { FaBars, FaSearch } from "react-icons/fa";
 import { RootState } from "../../reducers/index";
+import { getCart } from "../../actions";
 
 
 interface Autocomplete {
   title: string;
 }
+ 
 
 export default function Nav() {
   const carts: any = useSelector((state: RootState) => state.cart);
@@ -33,6 +35,9 @@ export default function Nav() {
   const dispatch = useDispatch();
   const history = useHistory();
 
+ useEffect(() => {
+    dispatch(getCart(1)); //hardcore
+  }, []);
 
   const [isAuth, setAuth] = useState<boolean>(false);
   const toogleAuth = () => setAuth(!isAuth);
