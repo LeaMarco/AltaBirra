@@ -22,6 +22,8 @@ interface Favorites {
 }
 
 export default function DetailBeer() {
+	const carts: any = useSelector((state: RootState) => state.cart);
+	console.log(carts.length, "Cart length")
 	const dispatch = useDispatch();
 	const { id }: any = useParams();
 	const info: any = useSelector((state: RootState) => state.detailPosts);
@@ -38,6 +40,7 @@ export default function DetailBeer() {
 
 	const addToCart = async () => {
 		const response = await axios.put(`http://localhost:3001/addToCart`, { params: { "username": "TestUser", "postId": parseInt(id), "quantity": cantidad } })
+		dispatch(getCart(1));
 		return (response.data)
 	}
 

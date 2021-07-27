@@ -1,8 +1,8 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import style from "./Nav.module.css";
 import logo from "./AltaBirra.svg";
 import { Link, useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { searchedPosts, setTitleSearch } from "../../actions";
 import { Modal } from "../Login/Modal/Modal.component";
 import Login from "../Login/Login";
@@ -11,11 +11,15 @@ import axios from "axios";
 import FavoritesTab from "../FavoriteTab/FavoriteTab";
 // import OffCanvas from 'react-aria-offcanvas';
 import { FaBars, FaSearch } from "react-icons/fa";
+import { RootState } from "../../reducers/index";
+
+
 interface Autocomplete {
   title: string;
 }
 
 export default function Nav() {
+  const carts: any = useSelector((state: RootState) => state.cart);
   const [navbarOpen, setNavbarOpen] = useState(false)
   const [isEnterOpen, setEnterOpen] = useState<boolean>(false);
   const toogleEnter = () => setEnterOpen(!isEnterOpen);
@@ -155,9 +159,8 @@ export default function Nav() {
             <Link
               to="/cart/1" ////////FALTA METER EL ID DE USER
               className={style.buttonCart}
-            >
-              <img className={style.buttonImg} src="https://image.flaticon.com/icons/png/512/3144/3144456.png" alt="Cart" />
-            </Link>
+            ><img className={style.buttonImg} src="https://image.flaticon.com/icons/png/512/3144/3144456.png" alt="Cart" />
+              <span>{carts && carts.length}</span></Link>
             <Modal isOpen={isEnterOpen} handleClose={toogleEnter}>
               <Login closeModal={toogleEnter} toogleAuth={toogleAuth} />
             </Modal>
