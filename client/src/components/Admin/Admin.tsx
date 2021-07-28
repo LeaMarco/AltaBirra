@@ -6,12 +6,13 @@ import AdminPanel from "./AdminPanel";
 import CreateSpecificTypes from './CreateSpecificTypes';
 import CreateGenericTypes from './CreateGenericTypes';
 import EditUsers from './EditUsers';
+import moderatePost from './ModeratePost';
 
 
  function Admin() {
   
   return(
-    <div className={styles.background}>
+    //<div className={styles.background}>
       <div className={styles.adminContainer}>
         <div className={styles.menuContainer}>
           <Route path="/admin" component={AdminPanel} />
@@ -24,11 +25,11 @@ import EditUsers from './EditUsers';
           <Route path="/admin/editGeneric" component={EditGenericTypes} />
 
           <Route path="/admin/editUsers" component={EditUsers} />
-
+          <Route path="/admin/moderatePosts" component={moderatePost} />
 
         </div>
     </div>
-    </div>
+    //</div>
     
   )
 };

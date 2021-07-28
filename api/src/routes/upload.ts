@@ -42,6 +42,7 @@ const imageUpload = multer({
         }
     ),
 });
+
 router.post('/',  imageUpload.single('image'), (req: any, res: Response) => {
     const { filename, mimetype, size } = req.file;
     const filepath = req.file?.path;
@@ -55,6 +56,8 @@ router.post('/',  imageUpload.single('image'), (req: any, res: Response) => {
         .then(() => res.json({ success: true, filename }))
         .catch((error:any) => res.json({success: false,message: 'upload failed',stack: error.stack,}));
 });
+
+
 // Image Get Routes
 router.get('/:filename', (req, res) => {
     const { filename } = req.params;

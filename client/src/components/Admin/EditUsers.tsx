@@ -3,7 +3,7 @@ import { useForm, SubmitHandler} from "react-hook-form";
 import {  PostValues } from "../../actions";
 import { useDispatch } from "react-redux";
 import { Dispatch } from "redux";
-import styles from './Post.module.css';
+import styles from './Users.module.css';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import axios from 'axios';
@@ -11,10 +11,29 @@ import axios from 'axios';
 function EditUsers() {
   const [users, setUsers]:any = useState([]);
   const [userDetail, setUserDetail]:any = useState([]);
-  
-
+  const [currentPage, setCurrentPage]=useState(0)
+  const [search, setSearch]=useState("")
   const MySwal = withReactContent(Swal)
   const dispatch = useDispatch<Dispatch<any>>();
+
+
+  const usersInPage=()=>{
+    if(search.length===0) return users.slice(currentPage,currentPage+20)
+    const filtered = users.filter(user => user.username.includes(search) || user.email.includes(search))
+    return filtered
+}
+const nextUsers=()=>{
+    if(currentPage<users.length-20)
+    setCurrentPage(currentPage+20)
+}
+const previousUsers=()=>{
+    if(currentPage>0)
+    setCurrentPage(currentPage-20)
+}
+const onSearchChange=({target})=>{
+    setCurrentPage(0)
+    setSearch(target.value)
+}
 
   async function getUsers() {
     let users = await axios.get(`${process.env.REACT_APP_HOST_BACKEND}/editUsers`)
@@ -22,23 +41,19 @@ function EditUsers() {
   }
 
   async function editUser(data){
-
-  }
-
-  
-  async function getUserDetail(name:string) {
-    const details = await axios.get(`${process.env.REACT_APP_HOST_BACKEND}/editUsers/detail`, {params:{username:name}});
-    setUserDetail(details.data)
-    return details;
+    let response= await axios.put(`${process.env.REACT_APP_HOST_BACKEND}/editUsers`, {data});
+    setUserDetail({})
+    return response
   }
 
   async function despachadora(data) {
+    data.username=userDetail.username
     let save = await editUser(data)
     if (save["status"] === 200) {
       MySwal.fire({
         position: 'center',
         icon: 'success',
-        title: 'Post modificado con Exito!',
+        title: 'Usuario modificado con Exito!',
         showConfirmButton: false,
         timer: 1500,
       })
@@ -47,7 +62,7 @@ function EditUsers() {
       MySwal.fire({
         position: 'center',
         icon: 'error',
-        title: 'No se ha podido modificar el Post :( Intenta nuevamente!',
+        title: 'No se ha podido modificar el Usuario :( Intenta nuevamente!',
         showConfirmButton: false,
         timer: 1500,
       })
@@ -62,51 +77,64 @@ function EditUsers() {
   
   return users.length>0?(
     <div className={styles.mainContainer}>
-    <h1 className={styles.componentTitle}>Editar tipos especificos:  </h1>
+    <h1 className={styles.componentTitle}>Editar Usuarios:  </h1>
+
     <div className={styles.listContainer}>
+              <div className={styles.TopCard}>
+                    <h3 className={styles.prop} id={styles["id"]}>User Id </h3>
+                    <h3 className={styles.prop} id={styles["username"]}>Username </h3>
+                    <h3 className={styles.prop} id={styles["name"]}>Name </h3>
+                    <h3 className={styles.prop} id={styles["email"]}>e-mail </h3>
+                    <h3 className={styles.prop} id={styles["active"]}>Active</h3>
+                    <h3 className={styles.prop} id={styles["role"]}>Role </h3>
+              </div>
+              <div className={styles.topFilters}>
+                <input type="text" placeholder="      Buscar Usuario por username o e-mail" onChange={onSearchChange} className={styles.searchInput}/>
+              <button onClick={previousUsers} className={styles.postEditButton}>Anteriores</button>
+              <button onClick={nextUsers} className={styles.postEditButton}>Siguientes</button>
+              </div>
               <div className={styles.specificType}>
-                  {users.map(user => (
-                    <div className={styles.GenericTypeCard}>
-                    <h3>{user}   </h3>
-                      {user === userDetail.username? 
-                                <form className={styles.postForm} onSubmit={handleSubmit(onSubmit)}>
-                                        {/* <div className={styles.container} id={styles["beer"]}>
-                                            <input {...register("type")} autoComplete="off" className={styles.input} required />
-                                            <label>Type name *</label>
-                                            <span className={styles.focusBorder}></span>
-                                        </div>
-                                        <div className={styles.container} id={styles["description"]}>
-                                            <textarea {...register("description")} autoComplete="off" className={styles.input} required />
-                                            <label>Type description *</label>
-                                            <span className={styles.focusBorder}></span>
-                                        </div>
-                                        <div className={styles.genericType}>
-                                            <label>Beer group:  </label>
-                                            <select {...register("group")} >
-                                                { group.map(value => (
-                                                    <option key={value} value={value}>
-                                                        {value}
-                                                    </option>
-                                                ))}
+                  {usersInPage().map(user => (
+                    <div>
+                    <div className={styles.UserCard}>
+                    <h3 className={styles.prop} id={styles["id"]}>{user.id} </h3>
+                    <h3 className={styles.prop} id={styles["username"]}>{user.username} </h3>
+                    <h3 className={styles.prop} id={styles["name"]}>{user.name} </h3>
+                    <h3 className={styles.prop} id={styles["email"]}>{user.email} </h3>
+                    <h3 className={styles.prop} id={styles["active"]}>{user.activeCount?"active":"inactive"}</h3>
+                    <h3 className={styles.prop} id={styles["role"]}>{user.role.name}</h3>
+                    {user.username !== userDetail.username?<button className={styles.postEditButton} onClick={()=>setUserDetail({username: user.username})}>Editar</button>:null}
+                    </div>
+                                 
+                    
+                    {user.username === userDetail.username? 
+                                <form className={styles.userForm} onSubmit={handleSubmit(onSubmit)}>
+                                        <div >
+                                            <select {...register("activeCount")} id={styles["Select"]}>
+                                            <option key="activeCount" value="true">
+                                                        Activo
+                                            </option>
+                                            <option key="activeCount" value="false">
+                                                        Inactivo
+                                            </option>
                                             </select>
                                         </div>
-                                        <div className={styles.genericType}>
-                                            <label>Generic Type:  </label>
-                                            <select {...register("genericType")} >
-                                                {generic && generic.map(value => (
-                                                    <option key={value} value={value}>
-                                                        {value}
-                                                    </option>
-                                                ))}
+                                        <div>
+                                            <select {...register("role")} id={styles["Select"]}>
+                                            <option key="role" value="ADMIN">
+                                                        Admin
+                                            </option>
+                                            <option key="role" value="USER">
+                                                        User
+                                            </option>
                                             </select>
-                                        </div> */}
+                                        </div>
                                         <div className={styles.submitButtonsContainer}>
                                             <button className={styles.postFormSubmitButton} type="submit">Editar</button>
                                             <button className={styles.postFormSubmitButton} onClick={()=>setUserDetail({})}>Cancelar</button>
                                         </div>
                                 </form>
-                                  :
-                                  <button className={styles.postEditButton} onClick={()=>getUserDetail(user)}>Editar</button>
+                                  : null
                                 }
                     </div>
                   ))}

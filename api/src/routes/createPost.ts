@@ -4,8 +4,6 @@ import { LabeledStatement } from "typescript";
 import { findUserWithAnyTokenBabe } from "../autentication/controllers/auth.controller";
 
 
-
-
 const router = Router();
 const prisma = new PrismaClient();
 

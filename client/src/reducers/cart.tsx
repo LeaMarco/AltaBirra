@@ -8,7 +8,6 @@ export const cartReducer = (state: post[] = initialState, action: Action) => {
 	switch (action.type) {
 		case ActionTypes.getCart:
 			return [...action.payload]
-
 		default:
 			return state;
 	}

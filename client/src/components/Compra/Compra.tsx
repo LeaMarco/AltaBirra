@@ -17,6 +17,7 @@ export function Compra() {
 
     useEffect(() => {
         dispatch(getCart(id));
+        
     }, []);
 
     useEffect(() => {

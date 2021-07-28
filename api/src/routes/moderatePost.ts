@@ -4,13 +4,13 @@ import { NextFunction, Request, Response, Router } from "express";
 const router = Router();
 const prisma = new PrismaClient();
 
-router.put("/", async (req: Request, res: Response) => {
-  const {activeCount, role, username} = req.body.data
-      await prisma.user.update({
-        where: {username},
+router.patch("/", async (req: Request, res: Response) => {
+    console.log(req.body.data, "soy la dataaaa")
+  const {postId, visibility} = req.body.data
+      await prisma.post.update({
+        where: {id:postId},
         data: {
-            activeCount: activeCount==="true"?true:false,
-            role: {connect:{name:role}}
+            visibility: visibility==="true"?true:false
           },
       }).catch((error) => res.status(500).send(error));
       res.status(200).send('Tipo genérico editado con exito');
@@ -19,9 +19,9 @@ router.put("/", async (req: Request, res: Response) => {
 
 router.get("/", async (req: Request, res: Response) => {
     const type: string | undefined= req.query.type?.toString()
-    let users = await prisma.user.findMany({
-      include: {role:true}})
-    res.send(users)
+    let posts = await prisma.post.findMany({
+      include: {user:true}})
+    res.send(posts)
 })
 
 export default router;
