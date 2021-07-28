@@ -220,7 +220,7 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
           className={`${Style.RegisterInputs} ${errors.password.error ? Style.require : Style.ok
             }`}
           name="nameMail"
-          placeholder=" Correo electronico o nombre de usuario"
+          placeholder=" Usuario"
         />
         <label className={Style.labels}>
           {(() => {
@@ -241,7 +241,7 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
           onChange={handleOnChange}
           name="password"
           value={data.password}
-          placeholder=" Password"
+          placeholder=" Contraseña"
         />
 
 

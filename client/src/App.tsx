@@ -20,8 +20,11 @@ import SellHistory from "./components/SellHistory/SellHistory";
 import E_Unauthorized from "./components/E_Unauthorized/E_Unauthorized";
 import VerifyAccount from "./components/VerifyAccount/VerifyAccount";
 import Footer from "./components/Footer/Footer";
+import NoAuthorized from "./components/NoAuthorized/NoAuthorized";
 
 function App() {
+
+  var token = Object.keys(localStorage).join();
 
   return (
     <div className="App">
@@ -30,7 +33,7 @@ function App() {
       <Route exact path="/" component={Home} />
       <Route exact path="/search" component={Search} />
 
-      <Route exact path="/post" component={Post} />
+      <Route exact path="/post" component={token.includes('token') ? Post:NoAuthorized} />
       <Route exact path="/editpost/:id" component={EditPost} />
       <Route exact path="/detailBeer/:id" component={DetailBeer} />
       <Route exact path="/categories" component={Categories} />
@@ -44,6 +47,8 @@ function App() {
 
       <Route exact path="/E_Unauthorized" component={E_Unauthorized} />
       <Route exact path="/verificarUsuario/:user" component={VerifyAccount} />
+
+      <Route exact path="/noAutorizado" component={NoAuthorized} />
 
       <Route exact path="/" component={Footer} />
     </div>

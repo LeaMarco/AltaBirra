@@ -313,7 +313,7 @@ export async function findUserWithAnyTokenBabe(req: Request, prisma: PrismaClien
 export const autoLogin = async function (req: Request, res: Response) {
 
     const user = await findUserWithAnyTokenBabe(req, prisma)
-
+    
     /* const tokenPackage = req.body.tokenPackage //todo lo que tenga el  token
     const uniqueSearchLabel = tokenPackage.uniqueSearchLabel //Puede ser username, email o id, dependiendo si viene de facebook, google o local respectivamente.
     const uniqueSearchValue = tokenPackage[uniqueSearchLabel] //el valor que esta en el dato unique
@@ -323,11 +323,19 @@ export const autoLogin = async function (req: Request, res: Response) {
             [uniqueSearchLabel]: uniqueSearchValue //siempre envia un solo dato unique, y poniendolo asi lo busca de forma correcta sea lo que sea
         }
     }) */
-
+    
 
     //console.log(user)
     if (!user) return res.sendStatus(400)
-    else return res.sendStatus(200)
+    else {
+        const userData = {
+            id: user.id,
+            nombre: user.name,
+            premium: user.premium,
+            favoritos: user.favoriteId
+        }
+        return res.json(userData);
+    }
 }
 
 

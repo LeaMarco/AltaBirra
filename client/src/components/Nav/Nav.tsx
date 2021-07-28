@@ -54,6 +54,10 @@ export default function Nav() {
       axios.get(`${process.env.REACT_APP_HOST_BACKEND}/auth/autoLogin`, {
         headers: validationHeadersGenerator()
       }).then(e => {
+        console.log('ESTO QUIERO VER', e.data);
+        dispatch(getUserData(e.data))
+        
+        dispatch(login(true));
         toogleAuth()
       }).catch(e => { console.log("ERROR EN AA", e) })
     }
@@ -123,7 +127,7 @@ export default function Nav() {
       title: "Cerrar sesión",
       text: "¿Desea cerrar sesión?",
       icon: "error",
-      buttons: ["No", "Si"]
+      buttons: ["NO", "SI"]
       // timer: 2000,
     }).then(response => {
       if(response){
