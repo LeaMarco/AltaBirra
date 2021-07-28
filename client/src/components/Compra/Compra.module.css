@@ -13,3 +13,8 @@
 .compra{
     align-content: center;
 }
+.emptyCart{
+    margin-top: 50px;
+    height: 10rem;
+    font-size: 50px;
+}

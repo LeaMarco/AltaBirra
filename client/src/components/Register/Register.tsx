@@ -37,6 +37,7 @@ const Register: React.FunctionComponent<{ closeModal, toogleEnter, toogleRegiste
   let guestsItemsInCart = localStorage.guestsItemsInCart
   if (!guestsItemsInCart) guestsItemsInCart = "{}"
   ///////////////////////////////////////////////////
+
   ////////////////////USE STATES///////////////////////////////////////
   const [alreadyRegister, setAlreadyRegister] = useState<boolean>(false)
 
@@ -85,6 +86,7 @@ const Register: React.FunctionComponent<{ closeModal, toogleEnter, toogleRegiste
       segurityLevel: segurityLevels.none,
     },
   });
+
   const handleOnChange = (e) => {
     let newState: iData = {
       ...data,
@@ -125,6 +127,7 @@ const Register: React.FunctionComponent<{ closeModal, toogleEnter, toogleRegiste
       })
       .then((e: any) => {
         console.log("Bienvenido!")
+        renderLogin()
         closeModal()
       }).catch((e) => {
         console.log("Ya tenés usuario, logueate!")
@@ -160,6 +163,7 @@ const Register: React.FunctionComponent<{ closeModal, toogleEnter, toogleRegiste
 
       .then((e: any) => {
         console.log("Bienvenido !")
+        renderLogin()
         closeModal()
       })
       .catch((e) => {
@@ -195,8 +199,9 @@ const Register: React.FunctionComponent<{ closeModal, toogleEnter, toogleRegiste
       .post(`${process.env.REACT_APP_HOST_BACKEND}/auth/signup/`, { params: postObj })
       .then(async (e: any) => {
         console.log("Bienvenido !")
-        closeModal()
         verifyAccount();
+        renderLogin()
+        closeModal()
       }).catch((e) => {
         console.log("Ya tenés usuario, logueate!")
         setAlreadyRegister(true)
@@ -209,7 +214,19 @@ const Register: React.FunctionComponent<{ closeModal, toogleEnter, toogleRegiste
       title: 'Verificá tu cuenta!',
       text: 'Por favor verifica tu cuenta con el correo que te hemos enviado...',
       icon: 'success',
-      buttons: ['', 'Ok']
+      buttons: {
+        confirm:{
+          text:'OK'
+          // value: null,
+          // visible: true,
+          // className: 'btn btn-confirm',
+          // closeModal: true
+        // },
+        // cancel: {
+        //   text: 'Cancelar'
+        // }
+        }
+      }      
     })
   }
   ////////////////////FIN DE LOGICA DE REGISTRO LOCAL///////////////////////////////////////

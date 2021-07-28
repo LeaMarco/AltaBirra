@@ -94,7 +94,7 @@ function EditGenericTypes() {
                                             <label>Type name *</label>
                                             <span className={styles.focusBorder}></span>
                                         </div>
-                                        <div className={styles.container} id={styles["description"]}>
+                                        <div className={styles.container} id={styles["beer"]}>
                                             <textarea {...register("description")} autoComplete="off" className={styles.input} required />
                                             <label>Type description *</label>
                                             <span className={styles.focusBorder}></span>

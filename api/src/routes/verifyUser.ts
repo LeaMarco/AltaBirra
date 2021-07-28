@@ -7,7 +7,7 @@ const prisma = new PrismaClient();
 
 router.get('/verifyUser', async(req: Request, res: Response, next: NextFunction) => {
     const user:string = String(req.headers.user);
-    
+    console.log(user,'ACA ESTA USER');
     const match:any = await prisma.user.findUnique({
         where: {
             userHash: user

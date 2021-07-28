@@ -26,14 +26,17 @@ import addToCart from './addToCart';
 import autentication from "../autentication/authRoutes/auth"
 import buyHistory from "./buyHistory";
 import editUsers from "./editUsers";
+import moderatePost from "./moderatePost";
+import changePassword from "../autentication/controllers/changePassword";
 
 import viewHistory from "./viewHistory";
 import transactionState from "./transactionState";
 import verifyUser from "./verifyUser";
 import AUTOPOST_ONLY_DEVELOPMENT_ROUTE from "./AUTOPOST_ONLY_DEVELOPMENT_ROUTE";
 import { tokenValidation } from '../autentication/libs/verifyToken';
-import getMultiplePostByIds from './getMultiplePostByIds'
-import desactivateAccount from '../autentication/controllers/desactivateAccount'
+import getMultiplePostByIds from './getMultiplePostByIds';
+import desactivateAccount from '../autentication/controllers/desactivateAccount';
+import sellingPosts from "./sellingPosts";
 
 const router = Router();
 
@@ -48,8 +51,12 @@ router.use("/autocomplete", autoComplete);//autocompletar el search
 router.use("/detailBeer", detail);//ruta detalle de post
 router.use("/detail", detail);//ruta detalle de post
 router.use("/verify", verifyUser);//ruta para verificar cuenta
+router.use("/upload", upload);//ruta para verificar cuenta
+
 
 router.use('/AUTOPOST_ONLY_DEVELOPMENT_ROUTE', AUTOPOST_ONLY_DEVELOPMENT_ROUTE)//asociado al boton de posts automatico, pero sin verificacion para que no colapse la validacion de token por terceros
+
+router.use("/changePassword", tokenValidation, changePassword);
 
 router.use("/getMultiplePostByIds", getMultiplePostByIds);//
 router.use("/desactivateAccount", tokenValidation, desactivateAccount)//PATCH
@@ -69,10 +76,13 @@ router.use("/removeFavorite", tokenValidation, removeFavorite);//
 router.use("/ratePost", tokenValidation, ratePost);//
 router.use("/sellHistory", tokenValidation, sellHistory);////**@Ruta sin front */
 router.use("/buyHistory", tokenValidation, buyHistory);///**@Ruta sin front */
+
 router.use("/editUsers", /* tokenValidation, */ editUsers);//
+router.use("/moderatePost", /* tokenValidation, */ moderatePost);//
 
 router.use("/viewHistory", /* tokenValidation, */ viewHistory);//
 router.use("/transactionState", /* tokenValidation, */ transactionState);//
+router.use("/sellingPosts", tokenValidation, sellingPosts);
 
 
 export default router;

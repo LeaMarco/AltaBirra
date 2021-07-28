@@ -66,7 +66,7 @@ export default function SellHistory() {
 							</div>
 						)
 					})
-					: null
+					: <h2> No hay ventas registradas para esta cuenta </h2>
 			}
 		</div>
 	)

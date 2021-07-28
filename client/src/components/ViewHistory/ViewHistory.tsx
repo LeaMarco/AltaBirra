@@ -58,7 +58,7 @@ export default function ViewHistory() {
 							</div>
 						)
 					})
-					: null
+					: <h2> El historial esta vacio </h2>
 			}
 		</div >
 	)

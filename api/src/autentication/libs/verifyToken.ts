@@ -30,11 +30,9 @@ export const tokenValidation = async (
         let tokenData; //VARIABLE GENERAL PARA LOS 3
 
         //////////////TOKEN LOCAL//////////////
-        
+
         if (tokenType === "tokenLocal") {
-            console.log('ENTRE EN TOKEN LOCAL111', token);
             tokenData = jwt.verify(token, process.env.SECRET_CODE) as tokenData;
-            console.log('ENTRE EN TOKEN LOCAL222', token);
             req.body = {
                 ...req.body,
                 tokenPackage: {

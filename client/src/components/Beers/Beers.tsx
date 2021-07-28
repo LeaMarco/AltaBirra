@@ -33,7 +33,6 @@ const Beers = () => {
   }, [dispatch]);
 
   const usersPremium = useSelector((state) => state["usersPremium"]);
-
   return (
     <div className="containerBeersPremium">
       <h1 id="titulo">Las recomendadas de Alta Birra</h1>

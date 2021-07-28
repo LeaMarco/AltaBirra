@@ -5,13 +5,10 @@ const prisma = new PrismaClient();
 
 // A `main` function so that we can use async/await
 async function main() {
-
   ///////////////COSAS PERMANENTES//////////////////
-
   // ROLES
   const user = await prisma.role.create({ data: { name: "USER" } });
   const admin = await prisma.role.create({ data: { name: "ADMIN" } });
-
 
   //USER-ADMIN
   await prisma.user.create({
@@ -19,7 +16,7 @@ async function main() {
       username: "TestUser",
       email: "TestUser@email.com",
       name: "Test User",
-      password: encryptPassword("TestUserPassword"),
+      password: encryptPassword("password"),
       role: {
         connect: { id: user.id }
       },
@@ -32,17 +29,17 @@ async function main() {
       views: {
         create: {}
       },
-      userHash: 'asdasdasdas'
+      userHash: 'asdasdasdas',
+      verify: true
     },
   });
-
 
   await prisma.user.create({
     data: {
       username: "TestAdmin",
       email: "TestAdmin@email.com",
       name: "Test Admin",
-      password: encryptPassword("TestAdminPassword"),
+      password: encryptPassword("password"),
       role: {
         connect: { id: admin.id }
       },
@@ -55,17 +52,17 @@ async function main() {
       views: {
         create: {}
       },
-      userHash: 'asd'
+      userHash: 'asd',
+      verify: true
     },
   });
-
 
   await prisma.user.create({
     data: {
       username: "TestPremium",
       email: "TestPremium@email.com",
       name: "Test Premium",
-      password: encryptPassword("TestPremiumPassword"),
+      password: encryptPassword("password"),
       role: {
         connect: { id: admin.id }
       },
@@ -79,10 +76,10 @@ async function main() {
       views: {
         create: {}
       },
-      userHash: 'asdddd'
+      userHash: 'asdddd',
+      verify: true
     },
   });
-
 
   //TIPOS GENERICOS
   const rubia = await prisma.genericType.create({
@@ -103,7 +100,6 @@ async function main() {
       description: `Para conseguir una cerveza negra y lograr esa oscuridad final hay que tener en cuenta que lo principal para estas es la utilización de maltas tostadas, oscuras.`
     },
   });
-
 
   //☢ Si les sacas las llaves a lo de abajo sos boleta ☢
   //FALTA PONER CUAL ES RUBIA Y TAL

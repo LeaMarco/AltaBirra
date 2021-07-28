@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers/index";
-// import ReactModal from 'react-modal';
 import { Modal } from "./DetailModal.component";
 import {
 	getCart,
@@ -25,6 +24,8 @@ interface Favorites {
 
 export default function DetailBeer() {
 	const hasToken = Object.keys(localStorage).join().includes("token")
+	const carts: any = useSelector((state: RootState) => state.cart);
+	console.log(carts.length, "Cart length")
 	const dispatch = useDispatch();
 	const { id }: any = useParams();
 	const info: any = useSelector((state: RootState) => state.detailPosts);
@@ -42,6 +43,7 @@ export default function DetailBeer() {
 
 	const addToCart = async () => {
 		const response = await axios.put(`${process.env.REACT_APP_HOST_BACKEND}/addToCart`, { params: { "username": "TestUser", "postId": parseInt(id), "quantity": cantidad } }, { headers: validationHeadersGenerator() })
+		dispatch(getCart(1)); ////////////TIENE QUE TRAER EL ID DEL USUARIO QUE ESTÁ CONECTADO
 		return (response.data)
 	}
 
@@ -74,6 +76,12 @@ export default function DetailBeer() {
 	return info?.beer ? (
 		<div className={Style.detailContainer}>
 			<div className={Style.detailViewContainer}>
+				<div className={Style.Head}>
+					<h1>{info.title}</h1>
+					<div className={Style.types}>
+						<p>{info.beer.genericType.type} / </p><p>&nbsp;{info.beer.specificType.type}</p>
+					</div>
+				</div>
 				<div className={Style.detailView}>
 
 					<div className={Style.imageSection}>
@@ -103,12 +111,6 @@ export default function DetailBeer() {
 					</div>
 					<div className={Style.beerDescription}>
 						<div id="post">
-							<div className={Style.Head}>
-								<h1>{info.title}</h1>
-								<div className={Style.types}>
-									<p>{info.beer.genericType.type} / </p><p>&nbsp;{info.beer.specificType.type}</p>
-								</div>
-							</div>
 							<div className={Style.textContent}>
 								<h3>Información de la Cerveza</h3>
 								<div className={Style.specs}>

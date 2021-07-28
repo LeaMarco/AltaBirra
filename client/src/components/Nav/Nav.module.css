@@ -10,7 +10,7 @@
   width: 100%;
   height: 15vh;
   display: grid;
-  grid-template-columns: repeat(3, 1fr) 0.1fr;
+  grid-template-columns: repeat(3, 1fr);
   grid-gap: 10px;
   grid-auto-rows: minmax(100px, auto);
 }
@@ -81,6 +81,7 @@
   border: none;
   background-color: rgb(122, 122, 122);
   color: black;
+  text-indent: 0.5rem;
 }
 
 .searchInput::placeholder {
@@ -192,15 +193,24 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  background-color: lightgray;
+  left: 2vw;
+  background-color: transparent;
 }
 
 .autocomplete > input {
   cursor: pointer;
-  border: none;
+  background-color: lightgray;
+  border: 1px solid black;
+  border-radius: 0;
+  width: 84%;
+  padding: 0.5rem 0.5rem;
 }
 
-.searchInput:hover > .autocomplete {
+.autocomplete > input:hover {
+  filter: brightness(1.1);
+}
+
+.searchInput:focus-within > .autocomplete {
   visibility: visible;
   cursor: pointer;
 }
