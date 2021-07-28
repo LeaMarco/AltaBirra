@@ -17,7 +17,7 @@ export function Compra() {
     useScript(merpastate)
 
     useEffect(() => {
-        carts= null;
+        carts = null;
         dispatch(getCart(id));
     }, []);
 
