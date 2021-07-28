@@ -277,21 +277,15 @@ export const searchTypes = () => {
 	return async (dispatch: Dispatch) => {
 		const genericTypes = await axios.get<Array<string>>(urlgeneric);
 		const specificTypes = await axios.get<Array<string>>(urlspecific);
-		return [genericTypes.data, specificTypes.data]
+		const groupTypes = await axios.get<Array<string>>(`${process.env.REACT_APP_HOST_BACKEND}/groupTypes`);
+		return [genericTypes.data, specificTypes.data, groupTypes.data]
 	};
 };
 
 export const createPost = (data) => {
 	return async (dispatch: Dispatch) => {
-		console.log("entre createpostasd")
-		console.log(validationHeadersGenerator())
 		const response = await axios.post<PostValues>(urlpost, { params: data }, { headers: validationHeadersGenerator() });
 		return response;
-		// dispatch<Actionrara>({
-		// 	type: ActionTypes.createPost,
-		// 	payload: response.data,
-		// });
-		//Hace falta dispatchear algo aca?, no creo rey
 	};
 };
 
@@ -304,7 +298,6 @@ export const editPost = (data) => {
 }
 
 export type PostAction = CreatePostAction;
-// export type UserAction = FetchUsersAction;
 export type ActionAll = Actionrara;
 
 // FACU: function "loadUsersPremium" e interface UserPremium
@@ -396,9 +389,9 @@ export function getFavoritePosts(username) {
 	}
 }
 
-export function getHistory(type, userId) {
+export function getHistory(type, filter, userId) {
 	return async function (dispatch: Dispatch) {
-		const response = await axios.get(`${process.env.REACT_APP_HOST_BACKEND}/${type}History`, { params: { userId } });
+		const response = await axios.get(`${process.env.REACT_APP_HOST_BACKEND}/${type}History`, { headers: validationHeadersGenerator(), params: { userId, filter } });
 		dispatch({
 			type: "GET_HISTORY",
 			payload: response.data

@@ -5,8 +5,30 @@ import { loadUsersPremium } from "../../actions";
 import './beers.css';
 import axios from "axios";
 import { useState } from "react";
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 
 const Beers = () => {
+
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 1920, min: 1024 },
+      items: 5
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 768 },
+      items: 3
+    },
+    mobile: {
+      breakpoint: { max: 768, min: 464 },
+      items: 2
+    },
+    smallMobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1
+    },
+  };
+
   const dispatch = useDispatch();
   const [news, setNews]: any = useState()
   async function searchNews() {
@@ -24,7 +46,7 @@ const Beers = () => {
   return (
     <div className="containerBeersPremium">
       <h1 id="titulo">Las nuevas!</h1>
-      <div className="beers">
+      <Carousel responsive={responsive} className="beers">
         {
           Array.isArray(news) ?
             news.map((userPremium) => (
@@ -42,7 +64,7 @@ const Beers = () => {
               />))
             : <h1>Cargando...</h1>
         }
-      </div>
+      </Carousel>
     </div>
   );
 };

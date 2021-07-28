@@ -1,0 +1,36 @@
+.adminContainer{
+    align-self: center;
+    display: flex;
+    width:80%;
+    height: 90%;
+    background-color:white;
+    margin:2%;
+    color:white;
+    border-radius: 66px;
+    padding:3px;
+    justify-content: center;
+}
+
+.menuContainer{
+    display: flex;
+    flex-direction: column;
+    width: 24.5%;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 6px -2px 64px 0px rgba(0, 0, 0, 0.205) inset;
+    border-bottom-left-radius: 66px;
+    border-top-left-radius: 66px;
+}
+
+.contentContainer{
+    width: 74.5%;
+    border-bottom-right-radius: 66px;
+    border-top-right-radius: 66px;
+    background: radial-gradient(50% 50% at 50% 50%, #404143 0%, #242021 100%);
+}
+
+.background{
+    background-color: gray;
+    display: flex;
+    justify-content: center;
+    height: 85%;
+}

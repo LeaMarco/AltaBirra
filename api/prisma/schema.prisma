@@ -12,6 +12,7 @@ model Post {
     id          Int      @id @default(autoincrement())
     title       String
     description String
+    pickupdir   String  @default("none")
     image       String
     rating      Float    @default(0)
     stock       Int
@@ -30,6 +31,7 @@ model Post {
 
     carts     PostsOnCart[]
     favorites PostsOnFavorites[]
+    views     PostsOnViews[]
 
     transactionId Transaction[]
 
@@ -63,15 +65,25 @@ model User {
     cart          Cart          @relation(fields: [cartId], references: [id])
     favoriteId    Int
     favorite      Favorite      @relation(fields: [favoriteId], references: [id])
+    viewsId       Int
+    views         Views         @relation(fields: [viewsId], references: [id])
     postId        Post[]
     transactionId Transaction[]
     review        Review[]
+}
+
+enum State {
+    Procesando
+    Cancelada
+    Completa
 }
 
 model Transaction {
     id        Int      @id @default(autoincrement())
     price     Float
     createdAt DateTime @default(now())
+    state     State    @default(Procesando)
+    quantity  Int
 
     /////relacion de muchos (transacciones) a uno (usuario)
     buyerId Int
@@ -97,6 +109,22 @@ model PostsOnCart {
     cart   Cart @relation(fields: [cartId], references: [id])
 
     @@id([cartId, postId])
+}
+
+model Views {
+    id Int @id @default(autoincrement())
+
+    userId User?
+    posts  PostsOnViews[]
+}
+
+model PostsOnViews {
+    postId  Int
+    post    Post  @relation(fields: [postId], references: [id])
+    viewsId Int
+    views   Views @relation(fields: [viewsId], references: [id])
+
+    @@id([viewsId, postId])
 }
 
 model Beer {
@@ -128,7 +156,6 @@ model SpecificType {
     type        String @unique
     description String
     group       Group
-
 
     beerId        Beer[]
     genericTypeId Int

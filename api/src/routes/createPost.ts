@@ -4,8 +4,6 @@ import { LabeledStatement } from "typescript";
 import { findUserWithAnyTokenBabe } from "../autentication/controllers/auth.controller";
 
 
-
-
 const router = Router();
 const prisma = new PrismaClient();
 
@@ -25,6 +23,7 @@ interface InfoPost {
   description: string;
   image: string;
   stock: number;
+  pickupdir:string;
   rating: number;
   shipping: boolean;
   visibility: boolean;
@@ -38,11 +37,7 @@ interface Countable {
 }
 
 router.post("/", async (req: Request, res: Response, next: NextFunction) => {
-
-
-  // console.log("user", user)
-  // console.log("patams", req.body.params)
-
+console.log(req.body.params.infoPost, "info posttttt1231231232")
   const {
     abv,
     og,
@@ -53,10 +48,10 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
     genericType,
     specificType,
   }: Beer = req.body.params.beer;
-  console.log(req.body.params, "DATACOPY")
   const {
     title,
     description,
+    pickupdir,
     image,
     stock,
     rating,
@@ -75,8 +70,6 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
   const user = await findUserWithAnyTokenBabe(req, prisma)
   const beerGenericType = await prisma.genericType.findUnique({ where: { type: genericType } });
   const beerSpecificType = await prisma.specificType.findUnique({ where: { type: specificType } });
-  console.log("beerGenericType", beerGenericType)
-  console.log("beerSpecificType", beerSpecificType)
 
 
   await prisma.post.create({
@@ -84,6 +77,7 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
       title,
       description,
       image,
+      pickupdir,
       stock,
       rating,
       shipping,
@@ -110,8 +104,8 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
       countable: {
         create: {
           price,
-          discount,
-          expireDate,
+          discount: discount?discount:0,
+          expireDate: expireDate?expireDate:undefined,
         }
       }
     },

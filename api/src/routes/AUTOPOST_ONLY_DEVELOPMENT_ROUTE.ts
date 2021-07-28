@@ -9,7 +9,6 @@ const prisma = new PrismaClient();
 
 
 const AUTOPOST_ONLY_DEVELOPMENT_ROUTE = router.post("/", async (req: Request, res: Response, next: NextFunction) => {
-    console.log("Entre")
     interface Beer {
         abv: number;
         og: number;
@@ -21,11 +20,13 @@ const AUTOPOST_ONLY_DEVELOPMENT_ROUTE = router.post("/", async (req: Request, re
         specificType: string;
     }
 
+   
     interface InfoPost {
         title: string;
         description: string;
         image: string;
         stock: number;
+        pickupdir:string;
         rating: number;
         shipping: boolean;
         visibility: boolean;
@@ -50,10 +51,10 @@ const AUTOPOST_ONLY_DEVELOPMENT_ROUTE = router.post("/", async (req: Request, re
         genericType,
         specificType,
     }: Beer = req.body.params.beer;
-    console.log(req.body.params, "DATACOPY")
     const {
         title,
         description,
+        pickupdir,
         image,
         stock,
         rating,
@@ -71,8 +72,6 @@ const AUTOPOST_ONLY_DEVELOPMENT_ROUTE = router.post("/", async (req: Request, re
     // const user = await prisma.user.findUnique({ where: { username: username } });
     const beerGenericType = await prisma.genericType.findUnique({ where: { type: genericType } });
     const beerSpecificType = await prisma.specificType.findUnique({ where: { type: specificType } });
-    console.log("beerGenericType", beerGenericType)
-    console.log("beerSpecificType", beerSpecificType)
 
 
     await prisma.post.create({
@@ -80,12 +79,13 @@ const AUTOPOST_ONLY_DEVELOPMENT_ROUTE = router.post("/", async (req: Request, re
             title,
             description,
             image,
+            pickupdir,
             stock,
             rating,
             shipping,
             visibility,
             user: {
-                connect: { id: 1 },
+                connect: { id: 3 },
             },
             beer: {
                 create: {

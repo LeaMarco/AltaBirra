@@ -109,6 +109,9 @@ export const signup = async (req: Request, res: Response) => {
             favorite: {
                 create: {}
             },
+            views: {
+                create: {}
+            },
             verify: password ? false:true
         }
     }).catch((e) => res.send("Error al registrar usuario"))
@@ -325,7 +328,6 @@ export const autoLogin = async function (req: Request, res: Response) {
     }) */
     
 
-    //console.log(user)
     if (!user) return res.sendStatus(400)
     else {
         const userData = {
