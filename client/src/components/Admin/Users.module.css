@@ -182,7 +182,7 @@ input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width
 .postFormSubmitButton{
     margin-bottom:2%;
     width: 60%;
-    background-color:rgb(255, 221, 71);
+    background-color:#F49E51;
     height: 40%;
     border-radius: 8px;
     border:none;
@@ -191,6 +191,27 @@ input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width
     font-weight: 500;
     color:white;
 }
+
+.postDeleteButton{
+    margin-bottom:2%;
+    margin-left: 10%;
+    width: 15%;
+    background-color:tomato;
+    height: 100%;
+    border-radius: 8px;
+    border:none;
+    transition:0.3s;
+    font-size: 15px;
+    font-weight: 500;
+    color:white;
+}
+
+.postDeleteButton:hover{
+    cursor: pointer;
+    font-size: 18px;
+    background-color:rgb(253, 51, 15);
+}
+
 .postFormSubmitButton:hover{
     background-color:rgb(142, 216, 142);
     cursor: pointer;
@@ -297,4 +318,9 @@ width: 10%;
 .searchInput{
     background-color: rgba(255, 255, 255, 0.863);
     border: none
+}
+
+.moderatePostButtons{
+    margin-top: 0.5%;
+    display: flex;
 }

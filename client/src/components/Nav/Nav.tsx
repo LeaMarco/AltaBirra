@@ -173,13 +173,13 @@ export default function Nav() {
           </form>
         </div>
         <div className={style.buttons}>
-          <Link to="/" className={style.button}>
+          <Link to="/search" className={style.button}>
             Ofertas
           </Link>
           <Link to="/categories" className={style.button}>
             Categorías
           </Link>
-          <Link to="/" className={style.button}>
+          <Link to="/post" className={style.button}>
             Vender
           </Link>
         </div>

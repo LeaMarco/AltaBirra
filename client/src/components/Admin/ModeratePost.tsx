@@ -45,6 +45,32 @@ function ModeratePost() {
     return response
   }
 
+  async function deletePost(data){
+    let response= await axios.delete(`${process.env.REACT_APP_HOST_BACKEND}/moderatePost`, {data:{postId:data}});
+    setPostDetail({})
+    getPosts()
+    if (response["status"] === 200) {
+      MySwal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Post eliminado con Exito!',
+        showConfirmButton: false,
+        timer: 1500,
+      })
+      getPosts()
+    } else {
+      MySwal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'No se ha podido eliminar el Post :( Intenta nuevamente!',
+        showConfirmButton: false,
+        timer: 1500,
+      })
+    }
+  }
+
+
+  
   async function despachadora(data) {
     data.postId=postDetail.id
     let save = await editPost(data)
@@ -103,6 +129,9 @@ function ModeratePost() {
                                  
                     
                     {post.id === postDetail.id? 
+                    <div className={styles.moderatePostButtons} >
+                      
+                                  <button className={styles.postDeleteButton} onClick={()=>deletePost(postDetail.id)}>⚠ Eliminar</button>
                                 <form className={styles.userForm} onSubmit={handleSubmit(onSubmit)}>
                                         <div >
                                             <select {...register("visibility")} id={styles["Select"]}>
@@ -119,6 +148,7 @@ function ModeratePost() {
                                             <button className={styles.postFormSubmitButton} onClick={()=>setPostDetail({})}>Cancelar</button>
                                         </div>
                                 </form>
+                    </div>
                                   : null
                                 }
                     </div>
