@@ -16,6 +16,9 @@ import axios from 'axios';
 
 //TIENE QUE TOMAR COMO PARAMETRO EL ID DEL POST QUE SE SELECCIONA Y RENDERIZAR EL COMPONENTE DETALLE PASANDOLE ESE ID.
 export default function EditPost() {
+
+  var token = Object.keys(localStorage).join().includes('token');
+
   const [generic, setGeneric] = useState([]);
   const [specific, setSpecific] = useState([]);
   const [estado, setEstado] = useState({ "checked": true });

@@ -24,7 +24,7 @@ import NoAuthorized from "./components/NoAuthorized/NoAuthorized";
 
 function App() {
 
-  var token = Object.keys(localStorage).join();
+  var token = Object.keys(localStorage).join().includes('token');
 
   return (
     <div className="App">
@@ -33,10 +33,10 @@ function App() {
       <Route exact path="/" component={Home} />
       <Route exact path="/search" component={Search} />
 
-      <Route exact path="/post" component={token.includes('token') ? Post:NoAuthorized} />
-      <Route exact path="/editpost/:id" component={EditPost} />
-      <Route exact path="/detailBeer/:id" component={DetailBeer} />
-      <Route exact path="/categories" component={Categories} />
+      <Route exact path="/post" component={token ? Post:NoAuthorized} />
+      <Route exact path="/editpost/:id" component={token ? EditPost:NoAuthorized} />
+      <Route exact path="/detailBeer/:id" component={token ? DetailBeer:NoAuthorized} />
+      <Route exact path="/categories" component={token ? Categories:NoAuthorized} />
       <Route exact path="/cart/:id" component={Cart} />
 
       <Route exact path="/compra/:id" component={Compra} />

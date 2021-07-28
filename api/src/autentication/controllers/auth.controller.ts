@@ -128,7 +128,7 @@ export const signup = async (req: Request, res: Response) => {
     const titulo = "Registración AltaBirra ✔";
 
     if(password){ // si me estoy registrando con PLANILLA hace lo siguiente.. (mailing)
-        emailRegistracion(email, titulo, usuarioHash);
+        emailRegistracion(email, titulo, usuarioHash, username);
     }
     
     return res.json(user)
