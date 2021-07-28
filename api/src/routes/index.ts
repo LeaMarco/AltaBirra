@@ -26,6 +26,7 @@ import addToCart from './addToCart';
 import autentication from "../autentication/authRoutes/auth"
 import buyHistory from "./buyHistory";
 import editUsers from "./editUsers";
+import moderatePost from "./moderatePost";
 
 import viewHistory from "./viewHistory";
 import transactionState from "./transactionState";
@@ -49,13 +50,15 @@ router.use("/autocomplete", autoComplete);//autocompletar el search
 router.use("/detailBeer", detail);//ruta detalle de post
 router.use("/detail", detail);//ruta detalle de post
 router.use("/verify", verifyUser);//ruta para verificar cuenta
+router.use("/upload", upload);//ruta para verificar cuenta
+
 
 router.use('/AUTOPOST_ONLY_DEVELOPMENT_ROUTE', AUTOPOST_ONLY_DEVELOPMENT_ROUTE)//asociado al boton de posts automatico, pero sin verificacion para que no colapse la validacion de token por terceros
 
 router.use("/getMultiplePostByIds", getMultiplePostByIds);//
 router.use("/desactivateAccount", tokenValidation, desactivateAccount)//PATCH
 router.use("/post", tokenValidation, createPost);//crea un nuevo post
-router.use("/transaction", tokenValidation, transaction);// escribe una transaccion
+router.use("/transaction",tokenValidation, transaction);// escribe una transaccion
 router.use("/cart", tokenValidation, cart);//es un put/
 router.use("/addToCart", tokenValidation, addToCart);//agrega posts al carrito/
 router.use("/cart", tokenValidation, getCart);//devuelve el carrito de un usuario en particular con sus posts, es un GET! 
@@ -70,7 +73,9 @@ router.use("/removeFavorite", tokenValidation, removeFavorite);//
 router.use("/ratePost", tokenValidation, ratePost);//
 router.use("/sellHistory", tokenValidation, sellHistory);////**@Ruta sin front */
 router.use("/buyHistory", tokenValidation, buyHistory);///**@Ruta sin front */
+
 router.use("/editUsers", /* tokenValidation, */ editUsers);//
+router.use("/moderatePost", /* tokenValidation, */ moderatePost);//
 
 router.use("/viewHistory", /* tokenValidation, */ viewHistory);//
 router.use("/transactionState", /* tokenValidation, */ transactionState);//

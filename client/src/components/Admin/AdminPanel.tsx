@@ -18,6 +18,9 @@ function AdminPanel() {
         <Link to="/admin/editGeneric" className={styles.menuButton}>
             Editar Tipos Genéricos 
         </Link>
+        <Link to="/admin/moderatePosts" className={styles.menuButton}>
+            Moderar Posts
+        </Link>
         <Link to="/admin/editUsers" className={styles.menuButton}>
             Editar Usuarios
         </Link>

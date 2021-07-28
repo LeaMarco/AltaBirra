@@ -10,12 +10,10 @@ export default function transformer(Info, image) {
   datacopy.infoPost.rating = 5
   datacopy.infoPost.stock = parseInt(datacopy.infoPost.stock, 10)
   datacopy.infoPost.username = "TestUser"
-  if(image) {datacopy.infoPost.image=image}
+  if(image) {datacopy.infoPost.image=image} else {datacopy.infoPost.image="https://i.imgur.com/FsGTu6Q.png"}
 
   //countables
   datacopy.countable.price = parseFloat(datacopy.countable.price)
-  datacopy.countable.discount = parseInt(datacopy.countable.discount, 10)
-  datacopy.countable.expireDate = new Date(datacopy.countable.expireDate);
   return datacopy
 }
 

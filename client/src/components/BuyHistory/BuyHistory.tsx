@@ -3,18 +3,32 @@ import Style from "./BuyHistory.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getHistory } from "../../actions";
 import { RootState } from "../../reducers";
-import { Link } from "react-router-dom";
+import { Link, useParams, useLocation, useHistory } from "react-router-dom";
 import { useState } from "react";
+import axios from "axios";
+import { validationHeadersGenerator } from "../../validationHeadersGenerator";
 
 export default function BuyHistory() {
 	const userId = 1;
 	const dispatch = useDispatch();
 	const [filter, setFilter] = useState<string | undefined>(undefined);
 	const history = useSelector((state: RootState) => state.history);
+	const search = useLocation().search;
+	const redirect = useHistory();
+
+	let status = new URLSearchParams(search).get("status")
+
 
 	useEffect(() => {
 		dispatch(getHistory("buy", filter, userId));
 	}, [dispatch, filter])
+	
+	if(status === "approved"){
+		status= null		
+		axios.post(`${process.env.REACT_APP_HOST_BACKEND}/transaction`,null, {headers:validationHeadersGenerator()})
+		.then(()=> redirect.push(`/historialCompras`)).catch(()=>(console.log("no se pudo crear la transaccion")))
+	}
+
 
 	return (
 		<div className={Style.container}>

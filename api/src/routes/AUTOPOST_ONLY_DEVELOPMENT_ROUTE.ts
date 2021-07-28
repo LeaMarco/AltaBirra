@@ -20,11 +20,13 @@ const AUTOPOST_ONLY_DEVELOPMENT_ROUTE = router.post("/", async (req: Request, re
         specificType: string;
     }
 
+   
     interface InfoPost {
         title: string;
         description: string;
         image: string;
         stock: number;
+        pickupdir:string;
         rating: number;
         shipping: boolean;
         visibility: boolean;
@@ -52,6 +54,7 @@ const AUTOPOST_ONLY_DEVELOPMENT_ROUTE = router.post("/", async (req: Request, re
     const {
         title,
         description,
+        pickupdir,
         image,
         stock,
         rating,
@@ -76,6 +79,7 @@ const AUTOPOST_ONLY_DEVELOPMENT_ROUTE = router.post("/", async (req: Request, re
             title,
             description,
             image,
+            pickupdir,
             stock,
             rating,
             shipping,

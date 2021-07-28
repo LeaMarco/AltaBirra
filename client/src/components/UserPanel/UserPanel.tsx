@@ -6,6 +6,7 @@ import Style from "./UserPanel.module.css";
 import { useHistory } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducers";
+import { useState } from "react";
 
 interface User {
 	nombre: string;
@@ -18,6 +19,7 @@ interface User {
 export default function UserPanel() {
 	const history = useHistory();
 	const user: User = useSelector((state: RootState) => state.welcome);
+	const [seeAdmin, setSeeAdmin] = useState<boolean>(false)
 
 	function handleDesactivarCuenta(e) {
 		e.preventDefault()
@@ -58,6 +60,11 @@ export default function UserPanel() {
 			</Link>
 			<button className={Style.subcontainerNoFuncional} style={{ backgroundColor: "grey" }}> Configuracion de cuenta </button>
 			<button className={Style.subcontainer} onClick={handleDesactivarCuenta}> Desactivar cuenta </button>
+			<Link to="/admin" className={Style.subcontainer}>
+				<div >
+					Panel de administrador
+				</div>
+			</Link>
 		</div >
 	);
 }

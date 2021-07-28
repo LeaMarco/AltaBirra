@@ -101,13 +101,13 @@ function Cart() {
         {
           haveToken && Array.isArray(cartsRegisterUser) && cartsRegisterUser.length > 0 ? (
             cartsRegisterUser.map((post) => (
-              <PostinCart username={post.cart?.userId.username} cartId={id} postId={post.post.id} postTitle={post.post.title} description={post.post.description} amount={post.amount} countable={post.post.countable} />
+              <PostinCart pickupdir={post.post.pickupdir} username={post.cart?.userId.username} cartId={id} postId={post.post.id} postTitle={post.post.title} description={post.post.description} amount={post.amount} countable={post.post.countable} />
             ))
           )
             :
             !haveToken && Array.isArray(cartsGuestUser) && cartsGuestUser?.length > 0 ? (
               cartsGuestUser.map(item => (
-                <PostinCart username={item.cart?.userId.username} cartId={id} postId={item.post.id} postTitle={item.post.title} description={item.post.description} amount={item.amount} countable={item.post.countable} deleteGuestItem={deleteGuestItem} />
+                <PostinCart pickupdir={item.post.pickupdir} username={item.cart?.userId.username} cartId={id} postId={item.post.id} postTitle={item.post.title} description={item.post.description} amount={item.amount} countable={item.post.countable} deleteGuestItem={deleteGuestItem} />
               ))
             )
               :

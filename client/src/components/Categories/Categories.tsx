@@ -5,6 +5,7 @@ import { searchedPosts, setQuerySearch, setTitleSearch } from "../../actions";
 import Style from "./Categories.module.css";
 
 export default function Categories() {
+
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -13,6 +14,8 @@ export default function Categories() {
     await dispatch(searchedPosts({ title: event.target.value }));
     history.push(`/search`);
   }
+
+  var token = Object.keys(localStorage).join().includes('token');
 
   return (
     <div className={Style.container}>
