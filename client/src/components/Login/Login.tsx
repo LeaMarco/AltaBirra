@@ -12,6 +12,9 @@ import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props
 import { getUserData, login } from '../../actions/index'
 import swal from 'sweetalert';
 
+
+
+
 function validate(dataState: iData, errors: iError, e): iError {
   let name = e.target.name;
 
@@ -31,6 +34,7 @@ function validate(dataState: iData, errors: iError, e): iError {
 
 const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth, closeModal }) => {
 
+
   const dispatch = useDispatch();
   const stateWelcome = useSelector((state) => state["welcome"]);
   const stateLogin = useSelector((state) => state["loginState"]);
@@ -43,6 +47,12 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
   //////////////////
   /* funcion setStateGlobal */
   /////////////////
+
+
+  //////////Variable para manejar carrito de guest//////////
+  let guestsItemsInCart = localStorage.guestsItemsInCart
+  if (!guestsItemsInCart) guestsItemsInCart = "{}"
+  ///////////////////////////////////////////////////
 
 
   /////////////////////////////////ESTADOS/////////////////////////////////////////////
@@ -75,6 +85,7 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
     let postObj = {
       nameMail: data.nameMail,
       password: data.password,
+      guestsItemsInCart
     };
 
     axios
@@ -155,13 +166,14 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
     axios.post(`${process.env.REACT_APP_HOST_BACKEND}/auth/signin`, {
       params: {
         nameMail,
+        guestsItemsInCart
       }
     })
       .then((e) => {
         localStorage.clear()
         localStorage.setItem('tokenFacebook', tokenId)
         welcome();
-        dispatch(getUserData(e.data.userData))
+        dispatch(getUserData(e.data))
         dispatch(login(true));
         console.log('LOGUEADO CON FACEBOOK!!!');
         toogleAuth()
@@ -187,6 +199,7 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
       .post(`${process.env.REACT_APP_HOST_BACKEND}/auth/signin`, {
         params: {
           nameMail,
+          guestsItemsInCart
         }
       })
       .then((e) => {

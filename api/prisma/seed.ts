@@ -5,13 +5,10 @@ const prisma = new PrismaClient();
 
 // A `main` function so that we can use async/await
 async function main() {
-
   ///////////////COSAS PERMANENTES//////////////////
-
   // ROLES
   const user = await prisma.role.create({ data: { name: "USER" } });
   const admin = await prisma.role.create({ data: { name: "ADMIN" } });
-
 
   //USER-ADMIN
   await prisma.user.create({
@@ -37,7 +34,6 @@ async function main() {
     },
   });
 
-
   await prisma.user.create({
     data: {
       username: "TestAdmin",
@@ -60,7 +56,6 @@ async function main() {
       verify: true
     },
   });
-
 
   await prisma.user.create({
     data: {
@@ -86,7 +81,6 @@ async function main() {
     },
   });
 
-
   //TIPOS GENERICOS
   const rubia = await prisma.genericType.create({
     data: {
@@ -106,7 +100,6 @@ async function main() {
       description: `Para conseguir una cerveza negra y lograr esa oscuridad final hay que tener en cuenta que lo principal para estas es la utilización de maltas tostadas, oscuras.`
     },
   });
-
 
   //☢ Si les sacas las llaves a lo de abajo sos boleta ☢
   //FALTA PONER CUAL ES RUBIA Y TAL

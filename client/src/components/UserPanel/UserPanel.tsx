@@ -7,6 +7,8 @@ import { useHistory } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 import { useState } from "react";
+import { ModalChangePassword } from "./ChangePassword/ChangePasswordModal/Modal.component";
+import { ChangePassword } from "./ChangePassword/ChangePasswordComponent/ChangePassword";
 
 interface User {
 	nombre: string;
@@ -16,10 +18,17 @@ interface User {
 }
 
 
+
 export default function UserPanel() {
+
+	const [seeModal, setSeeModal] = useState<boolean>(false)
+	const [showYeahNewPassword, setShowYeahNewPassword] = useState<boolean>(false)
 	const history = useHistory();
 	const user: User = useSelector((state: RootState) => state.welcome);
-	const [seeAdmin, setSeeAdmin] = useState<boolean>(false)
+	const [seeAdmin, setSeeAdmin] = useState<boolean>(false);
+	function toggleSeeModal() {
+		setSeeModal(!seeModal)
+	}
 
 	function handleDesactivarCuenta(e) {
 		e.preventDefault()
@@ -32,7 +41,7 @@ export default function UserPanel() {
 
 	return (
 		<div className={Style.container}>
-			<h2> {user.nombre} </h2>
+			<div id={Style.controlPanel}> Panel de control </div>
 			<Link to="/historialVistos" className={Style.subcontainer}>
 				<div >
 					Vistos recientemente
@@ -58,7 +67,19 @@ export default function UserPanel() {
 					Crear nuevo post
 				</div>
 			</Link>
-			<button className={Style.subcontainerNoFuncional} style={{ backgroundColor: "grey" }}> Configuracion de cuenta </button>
+			{
+				localStorage.tokenLocal
+					? <button onClick={toggleSeeModal} className={Style.subcontainer} > Cambiar contraseña </button>
+					: null
+			}
+			<button className={Style.subcontainer} onClick={handleDesactivarCuenta}> Desactivar cuenta </button>
+			<ModalChangePassword isOpen={seeModal} handleClose={toggleSeeModal} >
+				{
+					showYeahNewPassword
+						? <img src={"https://www.uala.com.mx/assets/images/gif/security.gif"} />
+						: <ChangePassword setYeahNewPassword={setShowYeahNewPassword} toggleSeeModal={toggleSeeModal} />
+				}
+			</ModalChangePassword>
 			<button className={Style.subcontainer} onClick={handleDesactivarCuenta}> Desactivar cuenta </button>
 			<Link to="/admin" className={Style.subcontainer}>
 				<div >

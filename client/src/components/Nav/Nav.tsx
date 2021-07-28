@@ -140,7 +140,6 @@ export default function Nav() {
           localStorage.clear();
           window.location.href = process.env.REACT_APP_HOST_FRONTEND || window.location.href;
         }, 2900);
-
       }
     })
   }

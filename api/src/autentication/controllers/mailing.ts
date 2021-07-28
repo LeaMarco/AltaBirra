@@ -12,43 +12,43 @@ var fs = require('fs');
 
 
 export const transporter = nodemailer.createTransport({
-    
+
     host: "smtp.gmail.com",
     port: 465,
     secure: true, // true for 465, false for other ports
     auth: {
         user: 'ezequielaguilera1993@gmail.com', // generated ethereal user
         pass: 'yvpzgqwndpygfsxf', // generated ethereal password
-    },   
+    },
 });
 
 transporter.verify()
-.then( () => {
-    console.log('Ready for send emails')
-})
+    .then(() => {
+        console.log('Ready for send emails')
+    })
 
 
-export const emailRegistracion = async (email:string, subject:string, usuarioHash:string, username:string) => {
-    try{
+export const emailRegistracion = async (email: string, subject: string, usuarioHash: string, username: string) => {
+    try {
         await transporter.sendMail({
-        from: '"AltaBirra Administración 🍻" <ezequielaguilera1993@gmail.com>', // sender address
-        to: email, // list of receivers
-        subject: subject, // Subject line
-        // text: "Hello world?", // plain text body
-        // html: "<b>Hello world?</b>", // html body
-        html: await mailVerify(usuarioHash, username)
+            from: '"AltaBirra Administración 🍻" <ezequielaguilera1993@gmail.com>', // sender address
+            to: email, // list of receivers
+            subject: subject, // Subject line
+            // text: "Hello world?", // plain text body
+            // html: "<b>Hello world?</b>", // html body
+            html: await mailVerify(usuarioHash, username)
         });
-    } catch(error){
-    console.log('Error al enviar el email');
+    } catch (error) {
+        console.log('Error al enviar el email');
     }
 }
 
 
-export const mailVerify = (userHash:string, usuario:string) => {
-    let template = 
-    // `
-    //     <h1>HOLAAAAAAAAAAAAA</h1>
-    // `
+export const mailVerify = (userHash: string, usuario: string) => {
+    let template =
+        // `
+        //     <h1>HOLAAAAAAAAAAAAA</h1>
+        // `
         // `
         // <img src="https://i.imgur.com/aikAAiU.png" title="source: imgur.com" />
         // <h1>asdas</h1>
@@ -130,7 +130,7 @@ export const mailVerify = (userHash:string, usuario:string) => {
     //     padding-left: 25px;
     //     padding-right: 25px;
     //     padding-bottom: 10px;">
-        
+
     //     <h1 style=
     //         "background-color: #F49E51;
     //         border-radius: 20px;
@@ -148,21 +148,21 @@ export const mailVerify = (userHash:string, usuario:string) => {
     //         font-size: 15px;">
     //         ENLACE ===> 
     //     </span>
-        // <span style=
-        //     "border-radius: 20px;
-        //     background-color: black;
-        //     padding: 10px;
-        //     font-size: 15px;" >
-        //     <a
-        //     style= "color: white;"
-        //     href="https://localhost:3000/verificarUsuario/${userHash}">
-        //         Click aquí para verificar cuenta
-        //     </a>
-        // </span>
-        
-        // <h3 style="margin-top: 100px; text-decoration: underline;">
-        //     Atte. El equipo de AltaBirra. 🍻
-        // </h3>
+    // <span style=
+    //     "border-radius: 20px;
+    //     background-color: black;
+    //     padding: 10px;
+    //     font-size: 15px;" >
+    //     <a
+    //     style= "color: white;"
+    //     href="https://localhost:3000/verificarUsuario/${userHash}">
+    //         Click aquí para verificar cuenta
+    //     </a>
+    // </span>
+
+    // <h3 style="margin-top: 100px; text-decoration: underline;">
+    //     Atte. El equipo de AltaBirra. 🍻
+    // </h3>
     // </div>
     // `
 
