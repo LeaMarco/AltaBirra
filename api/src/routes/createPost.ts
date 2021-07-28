@@ -37,7 +37,7 @@ interface Countable {
 }
 
 router.post("/", async (req: Request, res: Response, next: NextFunction) => {
-
+console.log(req.body.params.infoPost, "info posttttt1231231232")
   const {
     abv,
     og,
@@ -104,8 +104,8 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
       countable: {
         create: {
           price,
-          discount,
-          expireDate,
+          discount: discount?discount:0,
+          expireDate: expireDate?expireDate:undefined,
         }
       }
     },
