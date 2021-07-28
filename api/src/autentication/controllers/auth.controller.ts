@@ -17,20 +17,15 @@ interface User {
 }
 
 
-
-
 export function encryptPassword(password: string): string {
     const salt = bcrypt.genSaltSync(10);
     return bcrypt.hashSync(password, salt);
 };
 
 
-function validatePassword(password: string, user: User): boolean {
+export function validatePassword(password: string, user: User): boolean {
     return bcrypt.compareSync(password, user.password);
 }
-
-
-
 
 
 export const signup = async (req: Request, res: Response) => {
@@ -38,14 +33,14 @@ export const signup = async (req: Request, res: Response) => {
     let user;
 
     const { username, email, name, password, googleId } = req.body.params;
-    
+
     usuarioHash = encryptPassword(username);
-    usuarioHash = usuarioHash.replace('/','');
-    usuarioHash = usuarioHash.replace('/','');
-    usuarioHash = usuarioHash.replace('/','');
-    usuarioHash = usuarioHash.replace('/','');
-    usuarioHash = usuarioHash.replace('.','');
-    
+    usuarioHash = usuarioHash.replace('/', '');
+    usuarioHash = usuarioHash.replace('/', '');
+    usuarioHash = usuarioHash.replace('/', '');
+    usuarioHash = usuarioHash.replace('/', '');
+    usuarioHash = usuarioHash.replace('.', '');
+
     let guestsItemsInCart = JSON.parse(req.body.params.guestsItemsInCart)
     // let guestsItemsInCart = req.body.params.guestsItemsInCart
     //console.log("guestsItemsInCart", guestsItemsInCart, "guestsItemsInCart")
@@ -56,14 +51,14 @@ export const signup = async (req: Request, res: Response) => {
         postsOnCartArray.push({ postId: parseInt(i), amount: guestsItemsInCart[i] })
     }//////////////////////////////////////////////////////////////////
 
-    
+
     // Busco al usuario
     user = await prisma.user.findUnique({
         where: {
             username,
         }
     })
-    
+
     //Si existe le digo que se loguee
     if (user) {
 
@@ -71,33 +66,33 @@ export const signup = async (req: Request, res: Response) => {
 
         else if (user.activeCount === false) {//1) Si existe en base de datos, pero tiene la cuenta desactivada
 
-        await prisma.user.update({
-            where: {
-                id: user.id
-            }, data: { activeCount: true, userHash: usuarioHash }//2) Se la activa!
-        }).catch(() => res.status(500).send("Error inesperado: se encontro al usuario en base de datos pero no se pudo reactivar su cuenta"))
-        
+            await prisma.user.update({
+                where: {
+                    id: user.id
+                }, data: { activeCount: true, userHash: usuarioHash }//2) Se la activa!
+            }).catch(() => res.status(500).send("Error inesperado: se encontro al usuario en base de datos pero no se pudo reactivar su cuenta"))
+
         }
     }
-    else{ // SI EL USUARIO NO EXISTE
+    else { // SI EL USUARIO NO EXISTE
 
-    //busco el rol 
-    const userRol = await prisma.role.findUnique({ where: { name: "USER" } })
-    
-    
-    //Creo el usuario (porque paso el else sin entrar en el return)
-        
-    user = await prisma.user.create({
-        data: {
-            username,
-            email,
-            name,
-            password: password ? encryptPassword(password) : "socialPassword",
-            role: {
-                connect: { id: userRol?.id }
-            },
-            userHash: usuarioHash,
-            cart: {
+        //busco el rol 
+        const userRol = await prisma.role.findUnique({ where: { name: "USER" } })
+
+
+        //Creo el usuario (porque paso el else sin entrar en el return)
+
+        user = await prisma.user.create({
+            data: {
+                username,
+                email,
+                name,
+                password: password ? encryptPassword(password) : "socialPassword",
+                role: {
+                    connect: { id: userRol?.id }
+                },
+                userHash: usuarioHash,
+                cart: {
                     create: {
                         posts: {
                             createMany: {
@@ -106,59 +101,62 @@ export const signup = async (req: Request, res: Response) => {
                         }
                     }
                 },
-            favorite: {
-                create: {}
-            },
-            views: {
-                create: {}
-            },
-            verify: password ? false:true
-        }
-    }).catch((e) => res.send("Error al registrar usuario"))
+                favorite: {
+                    create: {}
+                },
+                views: {
+                    create: {}
+                },
+                verify: password ? false : true
+            }
+        }).catch((e) => res.send("Error al registrar usuario"))
 
-    
-    // ====================================================================================
-    
-    
+
+        // ====================================================================================
+
+
     } // CIERRA EL ELSE
 
     // ENVIAR EMAIL CUANDO ME REGISTRO CON PLANILLA ========================================
-    if(password){ // si me estoy registrando con PLANILLA hace lo siguiente.. (mailing)
-        try{
+    if (password) { // si me estoy registrando con PLANILLA hace lo siguiente.. (mailing)
+        try {
             // send mail with defined transport object
-        let info = await transporter.sendMail({
-            from: '"AltaBirra Administración 🍻" <facundoramirez089@gmail.com>', // sender address
-            to: email, // list of receivers
-            subject: "Registración AltaBirra ✔", // Subject line
-            // text: "Hello world?", // plain text body
-            // html: "<b>Hello world?</b>", // html body
-            html: `
-                <h1>BIENVENIDO A ALTABIRRA !!!</h1>
-                <h3>Por favor haga click en el siguiente enlace para completar el proceso de registración</h3>
-                <br/>
-                <br/>
-                <span>ENLACE ===> </span><a href="http://localhost:3000/verificarUsuario/${usuarioHash}">Click aquí para verificar cuenta</a>
-                <br/>
-                <br/>
-                Atte. El equipo de AltaBirra.
+            let info = await transporter.sendMail({
+                from: '"AltaBirra Administración 🍻" <facundoramirez089@gmail.com>', // sender address
+                to: email, // list of receivers
+                subject: "Registración AltaBirra ✔", // Subject line
+                // text: "Hello world?", // plain text body
+                // html: "<b>Hello world?</b>", // html body
+                html: `
+                <div style=" background-color:#d9d9d9; padding:20px; border-radius:40px" >
+
+                <img width="100%" src="https://i.imgur.com/bB1JUaf.png" style="border-radius:40px" margin= > 
+                
+                <h1>BIENVENID@💝</h1>
+                
+                            <h3>Hace click en el enlace para verificar tu cuenta 🍻</h3>
+                
+                            <a href="http://localhost:3000/verificarUsuario/${usuarioHash}">~Verificar mi cuenta~</a>
+                            <br/>
+                            <br/>
+                            El equipo de AltaBirra. 🍺
+                 
+                  </div>
+              
             `
-        });
-        } catch(error){
+            });
+        } catch (error) {
             console.log('Error al enviar el email');
         }
     }
-    
+
     return res.json(user)
     // res.status(500).send("Error inesperado: llame a batman")
 
 };
 
 
-
-
 export const signin = async (req: Request, res: Response) => {
-
-    // const infoToken = req.body.infoToken
 
     const user = await prisma.user.findUnique({
         where: {
@@ -170,13 +168,28 @@ export const signin = async (req: Request, res: Response) => {
 
     else if (process.env.SECRET_CODE) {
 
+        /////////////Agregado a carritou///////////////
+        let guestsItemsInCart = JSON.parse(req.body.params.guestsItemsInCart)
+        let postsOnCartArray = []
+        for (let i in guestsItemsInCart) {
+            postsOnCartArray.push({ postId: parseInt(i), amount: guestsItemsInCart[i], cartId: user.cartId })
+        }
+        if (postsOnCartArray.length) {
+            let a = await prisma.postsOnCart.createMany(
+                {
+                    data: postsOnCartArray
+                }
+            )
+        }
+        //////////////////////////////////////////////
+
         const userData = {
             id: user.id,
             nombre: user.name,
             premium: user.premium,
             favoritos: user.favoriteId
         }
-        
+
         if (req.body.params.password) {//Si es registrado local
             const correctPassword: boolean = validatePassword(req.body.params.password, user);
             if (correctPassword === false) {
@@ -192,8 +205,6 @@ export const signin = async (req: Request, res: Response) => {
         }
 
     }
-    
-    
 
     else {
         res.status(500).send("CONTRASEÑA PARA GENERAR TOKENS AUSENTE EN VARIABLES DE ENTORNO DEL SERVER!")
@@ -201,12 +212,11 @@ export const signin = async (req: Request, res: Response) => {
 }
 
 
-
 //DEPRECADO HASTA NUEVO AVISO
 export const localSignIn = async (req: Request, res: Response) => {
 
     const { id } = req.body.infoToken
-   
+
     const user = await prisma.user.findUnique({
         where: {
             id: id
@@ -240,13 +250,8 @@ interface payload {
 }
 
 
-
-
 export const profile = async (req: Request, res: Response) => {
-
     res.sendStatus(207)
-
-
     /*  const token = req.header('authToken');
  
      if (!token) return res.status(401).json('Acces denied');

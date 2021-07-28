@@ -1,38 +1,62 @@
-.container  {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-evenly;
-	margin: 4vh 20vw;
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin: auto;
+  width: 40%;
+  border-radius: 0.8em;
+  padding: 0 0;
+  background: radial-gradient(50% 50% at 50% 50%, #555657 0%, #3f3c3d 100%);
+  box-shadow: 0 0 0.5rem 0;
 }
 
+#controlPanel {
+  border-top-left-radius: 0.4em;
+  border-top-right-radius: 0.4em;
+  line-height: 2em;
+  text-align: center;
+  padding: 0px;
+  margin-bottom: 0.1em;
+  font-size: 2em;
+  background: rgb(250, 214, 65);
+  background: linear-gradient(
+    90deg,
+    rgb(250, 213, 65) 0%,
+    rgb(250, 213, 65) 44%,
+    rgb(247, 192, 54) 56%,
+    rgb(247, 192, 54) 100%
+  );
+}
 .subcontainer {
-	margin: auto;
-	margin-bottom: 0.5vh;
-	border: 1px solid black;
-	width: 50%;
-	height: 10vh;
-	text-decoration: none;
-	color: black;
-	transition: 500ms;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	font-size: 20px;
+  margin: auto;
+  margin-bottom: 0.5vh;
+  border: 1px solid black;
+  width: 80%;
+  height: 10vh;
+  text-decoration: none;
+  color: black;
+  transition: 500ms;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  border-radius: 7px;
+  background: radial-gradient(50% 50% at 50% 50%, #cfcfcf 0%, #9b9a9a 100%);
 }
 
 .subcontainer:hover {
-	transform: scale(1.02);
-	box-shadow: 0 0 0.3rem;
+  transform: scale(1.02);
+  box-shadow: 0 0 0.3rem;
 }
 
 .subcontainerNoFuncional {
-	margin: auto;
-	margin-bottom: 0.5vh;
-	border: 1px solid black;
-	width: 50%;
-	height: 10vh;
-	text-decoration: none;
-	color: black;
-	transition: 500ms;
-	font-size: 20px;
+  margin: auto;
+  margin-bottom: 0.5vh;
+  border: 1px solid black;
+  width: 50%;
+  height: 10vh;
+  text-decoration: none;
+  color: black;
+  transition: 500ms;
+  font-size: 20px;
 }

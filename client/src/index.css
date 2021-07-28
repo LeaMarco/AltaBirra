@@ -19,10 +19,6 @@ body {
 /* *:hover {
   border: 1px solid green;
 } */
-input {
-  border-radius: 0.7em;
-}
-
 
 /* width */
 ::-webkit-scrollbar {

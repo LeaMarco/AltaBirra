@@ -26,6 +26,7 @@ import addToCart from './addToCart';
 import autentication from "../autentication/authRoutes/auth"
 import buyHistory from "./buyHistory";
 import editUsers from "./editUsers";
+import changePassword from "../autentication/controllers/changePassword";
 
 import viewHistory from "./viewHistory";
 import transactionState from "./transactionState";
@@ -50,6 +51,8 @@ router.use("/detail", detail);//ruta detalle de post
 router.use("/verify", verifyUser);//ruta para verificar cuenta
 
 router.use('/AUTOPOST_ONLY_DEVELOPMENT_ROUTE', AUTOPOST_ONLY_DEVELOPMENT_ROUTE)//asociado al boton de posts automatico, pero sin verificacion para que no colapse la validacion de token por terceros
+
+router.use("/changePassword", tokenValidation, changePassword);
 
 router.use("/getMultiplePostByIds", getMultiplePostByIds);//
 router.use("/desactivateAccount", tokenValidation, desactivateAccount)//PATCH
