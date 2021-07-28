@@ -110,7 +110,8 @@ const onSearchChange=({target})=>{
                     {user.username === userDetail.username? 
                                 <form className={styles.userForm} onSubmit={handleSubmit(onSubmit)}>
                                         <div >
-                                            <select {...register("activeCount")} id={styles["Select"]}>
+                                            <select {...register("activeCount")} id={styles["Select"]} required>
+                                            <option hidden></option>
                                             <option key="activeCount" value="true">
                                                         Activo
                                             </option>
@@ -120,7 +121,8 @@ const onSearchChange=({target})=>{
                                             </select>
                                         </div>
                                         <div>
-                                            <select {...register("role")} id={styles["Select"]}>
+                                            <select {...register("role")} id={styles["Select"]}required>
+                                            <option hidden></option>
                                             <option key="role" value="ADMIN">
                                                         Admin
                                             </option>

@@ -1,31 +1,36 @@
 .detailContainer{
     display: flex;
     align-items: center;
-    flex-direction: column;
     justify-content: center;
+    flex-direction: column;
     background-color: #A9A9A9;
     width: 100vw;
     height: 100vh;
 }
 .detailViewContainer{
-    width:100rem;
-    background-color:white;
+    display: flex;
+    flex-direction: column;
+    width:80%;
+    height:100%;
     margin:0.5rem;
-    color:white;
+     color:white;
     border-radius: 66px;
     padding:3px;
 }
 .detailView{
     display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
+    /* align-items: center; */
+    /* justify-content: space-around; */
     color:white;
+    background-color:white;
     border-radius: 66px;
+    height: 86%;
     box-shadow: 0.5px 0.5px 30px 21px rgba(0,0,0,0.1) inset;
     -webkit-box-shadow: 0.5px 0.5px 30px 21px rgba(0,0,0,0.1) inset;
     -moz-box-shadow: 0.5px 0.5px 30px 21px rgba(0,0,0,0.1) inset;
 }
+
 
 .priceWODiscount{
     text-decoration:line-through;
@@ -44,11 +49,11 @@
     border-top-left-radius: 66px;
     border-bottom-left-radius: 66px;
     width:35%;
-    height:40rem;
+    height:30%;
 }
 .imageSection img{
     max-width: 100%;
-    max-height: 70%;
+    max-height: 80%;
 }
 .ratingComment p{
     margin: auto;
@@ -73,6 +78,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    width: fit-content;
 }
 .ratingTotal{
     padding-top: 5px;
@@ -94,13 +100,14 @@
     margin:0.5rem 0.5rem 0.5rem 0rem;
     background-color:black;
     width:65%;
-    height: 50rem;
-    max-height: 50rem;
+    min-width: 45%;
+    /* height: 98%; */
+    /* max-height: 50rem; */
+    min-height: 43rem;
     background: radial-gradient(50% 50% at 50% 50%, #404143 0%, #242021 100%);
     border-top-right-radius: 66px;
     border-bottom-right-radius: 66px;
 }
-
 
 .fav {
     border: none;
@@ -115,10 +122,11 @@
 .buttonComprar{
     background-color:#F49E51;
     border:none;
-    width:15rem;
+    width:100%;
+    min-width:13.625rem;
     height:3rem;
     color:white;
-    font-size: 20px;
+    /* font-size: 1.2rem; */
     font-weight:400;
     border-top-right-radius: 10px;
     cursor: pointer;
@@ -126,10 +134,11 @@
 .addtoCartButton{
     background-color:#69C3C4;
     border:none;
-    width:15rem;
+    width:100%;
+    min-width:13.625rem;
     height:3rem;
     color:white;
-    font-size: 20px;
+    /* font-size: 20px; */
     font-weight:400;
     border-bottom-right-radius: 10px;
     cursor: pointer;
@@ -137,11 +146,11 @@
 
 .buyButtons{
     display: flex;
+    width: 49%;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-
 .fav:hover {
     transform: scale(2);
     color: red;
@@ -175,6 +184,7 @@
 }
 
 .Head{
+    position: absolute;
     display:flex;
     flex-direction: column;
     align-items:start;
@@ -213,17 +223,18 @@
 
 .buyInfo{
     display:flex;
+    /* flex-wrap: wrap-reverse; */
     flex-direction: row-reverse;
     align-content: center;
-    width: 37rem;
     justify-content:center;
-    margin-top:1rem;
+    width: fit-content;
+    margin-top:10%;
 }
 
 .socialLinks{
     display: flex;
     align-Items: center;
-    justify-Content: space-between;
+    justify-Content: center;
 }
 .socialLinks a{
     margin:1rem;
@@ -232,7 +243,8 @@
 .buttonsPago{
     display:flex;
     align-content: center;
-    background-color: #515050;
+    width:fit-content;
+    /* background-color: #515050; */
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
 }
@@ -240,8 +252,9 @@
     margin:0;
 }
 .originalPrice{
-    padding-top: 12px;
+    /* padding-top: 12px; */
     font-size:4rem;
+    width:fit-content;
     font-weight: bold;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
@@ -257,11 +270,12 @@
 }
 
 .share{
-    margin-top:3rem;
+    margin-top:5%;
     margin-bottom:-5rem;
 }
 .infoCompra{
-    margin-top: 2rem;
+    /* margin-top: 2rem; */
+    /* width:fit-content; */
 }
 .infoCompra h3{
     margin:0;
@@ -271,8 +285,9 @@
 }
 .infoBeer p {
     min-height:4.2rem;
-    max-height:4.2rem;
-    height:4.2rem;
+    /* max-height:4.2rem; */
+    /* height:4.2%; */
+    height: fit-content;
 }
 .ratingComment{
     display:flex;
@@ -295,4 +310,48 @@
     color: tomato;
     margin-top: 15%;
     transform: rotate(15deg);
+}
+
+@media only screen and (max-width:1024px){
+    .buttonComprar{
+        margin-top: 5px;
+        border-radius: 10px;
+        width:100%;
+        height:3rem;
+    }
+    .addtoCartButton{
+        margin-top: 5px;
+        border-radius: 10px;
+        width:fit-content;
+        height:3rem;
+    }
+    .buttonsPago{
+        width: 50%;
+        margin-top: 5px;
+        border-radius: 10px;
+    }
+    .buyInfo{
+        margin:0;
+        width:30rem;
+        flex-wrap: wrap;
+        flex-direction: column-reverse;
+    }
+    .share{
+        margin:1rem;
+    }
+}
+@media only screen and (max-width:918px){
+    .share{
+        display:none;
+    }
+}
+@media only screen and (max-width:768px){
+    .detailView{
+        flex-direction: column;
+    }
+    .Head{
+        position:relative;
+        display:block;
+        text-align: center;
+    }
 }

@@ -134,7 +134,8 @@ function ModeratePost() {
                                   <button className={styles.postDeleteButton} onClick={()=>deletePost(postDetail.id)}>⚠ Eliminar</button>
                                 <form className={styles.userForm} onSubmit={handleSubmit(onSubmit)}>
                                         <div >
-                                            <select {...register("visibility")} id={styles["Select"]}>
+                                            <select {...register("visibility")} id={styles["Select"]} required>
+                                            <option hidden></option>
                                             <option key="visibility" value="true">
                                                         Activo
                                             </option>

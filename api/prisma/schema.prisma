@@ -12,6 +12,7 @@ model Post {
     id          Int      @id @default(autoincrement())
     title       String
     description String
+    pickupdir   String  @default("none")
     image       String
     rating      Float    @default(0)
     stock       Int

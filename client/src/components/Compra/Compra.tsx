@@ -7,22 +7,25 @@ import axios from 'axios';
 import { PostsCompra } from "./PostsCompra";
 import style from './Compra.module.css';
 import { validationHeadersGenerator } from "../../validationHeadersGenerator";
+import { FaBars, FaSearch, FaLongArrowAltLeft } from "react-icons/fa";
+
 
 export function Compra() {
     const dispatch = useDispatch();
     const { id }: any = useParams();
-    const carts: any = useSelector((state: RootState) => state.cart);
+    let carts: any = useSelector((state: RootState) => state.cart);
     const [merpastate, setMerpa] = useState("");
     useScript(merpastate)
-
+    console.log(carts, "CARRRTSSSSSS")
     useEffect(() => {
+        carts = null;
         dispatch(getCart(id));
         
     }, []);
 
     useEffect(() => {
         if (carts) generarboton(carts)
-    }, [id]);
+    }, [carts]);
 
     return (
         <div className={style.compraContainer}>
@@ -30,16 +33,15 @@ export function Compra() {
                 {Array.isArray(carts) && carts.length > 0 ? (
                     carts.map((post) => (
                         <div className={style.compra}>
-                            <PostsCompra username={post.cart?.userId.username} cartId={id} postId={post.post.id} postTitle={post.post.title} description={post.post.description} amount={post.amount} countable={post.post.countable} />
+                            <PostsCompra pickupdir={post.post.pickupdir} username={post.cart?.userId.username} cartId={id} postId={post.post.id} postTitle={post.post.title} description={post.post.description} amount={post.amount} countable={post.post.countable} />
                         </div>
                     ))
                 ) : (
-                    <p>¡No hay items para pagar!</p>
-                )
-                }
+                    <p className={style.emptyCart}>¡No hay items para pagar!</p>
+                )}
+                {Array.isArray(carts) && carts.length > 0 ? (<div id="button-checkout"></div>) : (null)}
             </div>
-            <div id="button-checkout"></div>
-            <Link to={`/cart/${id}`}>Volver para atras</Link>
+            <Link to={`/cart/${id}`}><FaLongArrowAltLeft />Volver para atras</Link>
         </div >
     )
     async function generarboton(carts) {

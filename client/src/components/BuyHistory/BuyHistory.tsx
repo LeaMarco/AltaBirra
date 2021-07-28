@@ -24,7 +24,7 @@ export default function BuyHistory() {
 	}, [dispatch, filter])
 	
 	if(status === "approved"){
-		status= "false"		
+		status= null		
 		axios.post(`${process.env.REACT_APP_HOST_BACKEND}/transaction`,null, {headers:validationHeadersGenerator()})
 		.then(()=> redirect.push(`/historialCompras`)).catch(()=>(console.log("no se pudo crear la transaccion")))
 	}

@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState,useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import style from "./Nav.module.css";
 import logo from "./AltaBirra.svg";
 import { Link, useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import { searchedPosts, setTitleSearch } from "../../actions";
 import { Modal } from "../Login/Modal/Modal.component";
 import Login from "../Login/Login";
@@ -18,11 +18,17 @@ import { validationHeadersGenerator } from "../../validationHeadersGenerator";
 
 // import OffCanvas from 'react-aria-offcanvas';
 import { FaBars, FaSearch } from "react-icons/fa";
+import { RootState } from "../../reducers/index";
+import { getCart } from "../../actions";
+
+
 interface Autocomplete {
   title: string;
 }
+ 
 
 export default function Nav() {
+  const carts: any = useSelector((state: RootState) => state.cart);
   const [navbarOpen, setNavbarOpen] = useState(false)
   const [isEnterOpen, setEnterOpen] = useState<boolean>(false);
   const toogleEnter = () => setEnterOpen(!isEnterOpen);
@@ -36,6 +42,9 @@ export default function Nav() {
   const dispatch = useDispatch();
   const history = useHistory();
 
+ useEffect(() => {
+    dispatch(getCart(1)); //hardcore
+  }, []);
 
   const [isAuth, setAuth] = useState<boolean>(false);
   const toogleAuth = () => setAuth(!isAuth);
@@ -218,11 +227,11 @@ export default function Nav() {
             <button onClick={toogleFavorites} className={style.buttonFavorites}>
               <img className={style.buttonImg} src="https://image.flaticon.com/icons/png/512/1077/1077035.png" alt="Favorites" height="1vh" />
             </button>
-
-            <Link to="/cart/1" className={style.buttonCart}>
-              <img className={style.buttonImg} src="https://image.flaticon.com/icons/png/512/3144/3144456.png" alt="Cart" />
-            </Link>
-
+            <Link
+              to="/cart/1" ////////FALTA METER EL ID DE USER
+              className={style.buttonCart}
+            ><img className={style.buttonImg} src="https://image.flaticon.com/icons/png/512/3144/3144456.png" alt="Cart" />
+              <span>{carts && carts.length}</span></Link>
             <Modal isOpen={isEnterOpen} handleClose={toogleEnter}>
               <Login closeModal={toogleEnter} toogleAuth={toogleAuth} />
             </Modal>

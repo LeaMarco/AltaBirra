@@ -49,6 +49,7 @@ export default async (amount) => {
     let gtype = ["Rubia", "Roja", "Negra",]
     let stype = ["Amber", "Vino de cebada", "Ale belga", "Ale escocesa", "Duvel", "Porter", "Alt", "Kölsch", "Trappist", "Flanders negra", "Especial", "Cerveza de trigo", "Cerveza blanca", "Pilsner", "Dortumunder", "Viena", "Munich", "Bock", "Rauchbier", "Schwarzbier", "Gueuze", "Faro", "Cerveza de fruta"]
     let usernames = ["TestUser", "TestPremium"]
+    let dirs = ["La pampa 3245, CABA", "Misiones 434, Carapachay", "Cabildo 500, CABA", "Anchorena 1123, CABA", "Calle Falsa 123, Springfield"]
 
     for (let i = 0; i < amount; i++) {
 
@@ -67,6 +68,7 @@ export default async (amount) => {
             "title": beerName[Math.floor(Math.random() * (beerName.length))],
             "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus dolores ut consectetur nostrum doloremque numquam labore voluptate quos consequatur enim architecto, laboriosam hic quasi provident cumque reprehenderit aspernatur reiciendis ullam?",
             "image": beer.genericType === "Rubia" ? CERVEZAS_RUBIAS[Math.floor(Math.random() * (CERVEZAS_RUBIAS.length))] : beer.genericType === "Negra" ? CERVEZAS_NEGRAS[Math.floor(Math.random() * (CERVEZAS_NEGRAS.length))] : CERVEZAS_ROJAS[Math.floor(Math.random() * (CERVEZAS_ROJAS.length))],
+            "pickupdir": dirs[Math.floor(Math.random() * dirs.length)],
             "rating": Math.ceil(Math.random() * 5),
             "stock": Math.floor(Math.random() * 50),
             "shipping": Math.random() > 0.5 ? true : false,
@@ -74,13 +76,13 @@ export default async (amount) => {
             "username": usernames[Math.floor(Math.random() * usernames.length)]
         }
         let countable = {
-            "price": +(Math.random() * 200 + 75).toFixed(2),
+            "price": (+(Math.random() * 200 + 75).toFixed(2)),
             "discount": Math.random() > 0.5 ? 0 : Math.floor(Math.random() * 25)
         }
 
         let infoToPost = { beer, infoPost, countable }
 
-        console.log(infoToPost)
+        console.log(infoToPost, "INFO PARA EL POST!")
         await axios.post(`${process.env.REACT_APP_HOST_BACKEND}/AUTOPOST_ONLY_DEVELOPMENT_ROUTE`, { params: infoToPost })
 
 

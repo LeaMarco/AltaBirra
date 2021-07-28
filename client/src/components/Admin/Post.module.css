@@ -30,13 +30,19 @@
     display: flex;
     margin-left: 5%;
     flex-direction: column;
-    width: 90%;
+    width: 100%;
     align-items: center;
     justify-content:center;
     text-align: center;
     border: 1px solid tomato;
     border-radius: 20px;
     background-color: white;
+}
+.postForm input{
+    width: 100%;
+}
+.postForm textarea{
+    width: 100%;
 }
 
 .container{display: flex; align-items:center;flex-direction: column; float: left; width: 80%; margin: 20px 3%; position: relative;}
@@ -103,12 +109,12 @@ input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width
 
 .postFormInfoPost input{
     height: 2em;
-    width:5em;
+    width:100%;
 }
 .postFormInfoPost textarea{
     margin-top: 5px;
     height: 5em;
-    width:40em;
+    width:100%;
 }
 
 .postFormCountable{
