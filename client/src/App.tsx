@@ -14,12 +14,9 @@ import Rate from "./components/Rate/Rate";
 // import { developerTools } from "./developerTools";
 // import { BeeryButton } from "./components/styled_components";
 // developerTools({ consoleInfo: true });
-import UserPanel from "./components/UserPanel/UserPanel";
-import BuyHistory from "./components/BuyHistory/BuyHistory";
-import SellHistory from "./components/SellHistory/SellHistory";
+import User from "./components/UserPanel/User";
 import E_Unauthorized from "./components/E_Unauthorized/E_Unauthorized";
 import Admin from "./components/Admin/Admin";
-import ViewsHistory from "./components/ViewHistory/ViewHistory";
 import VerifyAccount from "./components/VerifyAccount/VerifyAccount";
 import Selling from "./components/Selling/Selling";
 import Footer from "./components/Footer/Footer";
@@ -43,10 +40,7 @@ function App() {
       <Route exact path="/cart/:id" component={Cart} />
 
       <Route exact path="/compra/:id" component={Compra} />
-      <Route exact path="/panel" component={UserPanel} />
-      <Route exact path="/historialCompras" component={BuyHistory} />
-      <Route exact path="/historialVistos" component={ViewsHistory} />
-      <Route exact path="/historialVentas" component={SellHistory} />
+      <Route path="/panel" component={User} />
       <Route exact path="/calificar/:id" component={Rate} />
       <Route exact path="/vendiendo" component={Selling} />
       <Route exact path="/E_Unauthorized" component={E_Unauthorized} />

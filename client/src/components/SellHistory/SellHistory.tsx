@@ -25,10 +25,11 @@ export default function SellHistory() {
 	}
 
 	return (
-		<div className={Style.container}>
-			<div className={Style.filter}>
+		<div className={Style.mainContainer}>
+			<h2>Historial de Ventas</h2>
+				<div className={Style.filter}>
 				<label> Filtrar por: </label>
-				<select onChange={event => setFilter(event.target.value === "Todas" ? undefined : event.target.value)}>
+				<select className={Style.select} onChange={event => setFilter(event.target.value === "Todas" ? undefined : event.target.value)}>
 					<option> Todas </option>
 					<option> Completa </option>
 					<option> Procesando </option>
@@ -37,7 +38,9 @@ export default function SellHistory() {
 			</div>
 			{
 				history.length
-					? history.map(post => {
+					? <>
+					<div className={Style.cardsContainer}>
+					{history.map(post => {
 						return (
 							<div key={post.post.id} style={{ border: "1px solid black" }} className={Style.subcontainer}>
 								{
@@ -52,20 +55,33 @@ export default function SellHistory() {
 										: null
 								}
 								<Link to={`/detailBeer/${post.post.id}`} key={post.post.id} style={{ textDecoration: "none", color: "black" }}><div className={Style.detail}>
+								<h3 className={Style.title}> {post.post.title} </h3>
 									<div className={Style.subdetail}>
-										<img src={post.post.image} alt='' height="150vh" />
-										<h2> {post.post.title} </h2>
-										<div>
-											<h4> Precio: ${post.price} </h4>
-											<h4> Estado: {post.state} </h4>
-											<h4> Cantidad compradas: {post.quantity} </h4>
-											<h4> Fecha: {post.createdAt} </h4>
+										<div className={Style.imgContainer}>
+											<img src={post.post.image} alt='' className={Style.imgHistory}/>
+										</div>
+										<div className={Style.dataContainer}>
+											<div className={Style.propsContainer}>
+												<h4> IBU: {post.post.beer.ibu} </h4>
+												<h4> ABV: {post.post.beer.abv} </h4>
+											</div> 
+											
+										</div>
+										<div className={Style.CountableContainer}>
+												<h5 className={Style.props}> Fecha: {post.createdAt} </h5>
+												<h5 className={Style.props}> Estado: {post.state} </h5>
+												<h5 className={Style.props}> Cantidad: {post.post.quantity} </h5>
+											<div>
+												<h4> Precio: ${post.post.countable.price} </h4>
+											</div>
 										</div>
 									</div>
 								</div></Link>
 							</div>
 						)
-					})
+					})}
+					</div>
+					</>
 					: <h2> No hay ventas registradas para esta cuenta </h2>
 			}
 		</div>
