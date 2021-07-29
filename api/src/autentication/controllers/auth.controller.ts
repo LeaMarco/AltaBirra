@@ -172,8 +172,9 @@ export const signin = async (req: Request, res: Response) => {
 
 		for (let i in guestsItemsInCart) {
 			const newPostOnCart = { postId: parseInt(i), amount: guestsItemsInCart[i], cartId: user.cartId }
+			/////////////////////////////////////////
 
-
+			console.log(guestsItemsInCart, newPostOnCart)
 
 			await prisma.postsOnCart.upsert({
 				create: {
@@ -186,7 +187,7 @@ export const signin = async (req: Request, res: Response) => {
 								where: {
 									cartId_postId: { cartId: user.cartId, postId: parseInt(i) }
 								}
-							}))?.amount
+							}))?.amount || 0
 				},
 				where: {
 					cartId_postId: { cartId: user.cartId, postId: parseInt(i) }
