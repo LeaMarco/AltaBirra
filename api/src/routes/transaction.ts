@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { NextFunction, Request, Response, Router } from "express";
 import { findUserWithAnyTokenBabe } from "../autentication/controllers/auth.controller";
+import { emailRegistracion } from './transporterMail';
 
 const router = Router();
 const prisma = new PrismaClient();
@@ -29,6 +30,7 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
         },
       })
     );
+    await emailRegistracion(buyer.email, `${buyer.username} gracias por su compra!`, buyer.userHash, buyer.username)
   }
   await prisma.postsOnCart.deleteMany({where: { cartId: buyer?.cartId }})
   res.send("transaccion creada");

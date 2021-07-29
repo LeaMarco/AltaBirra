@@ -85,4 +85,5 @@ router.use("/transactionState", /* tokenValidation, */ transactionState);//
 router.use("/sellingPosts", tokenValidation, sellingPosts);
 
 
+
 export default router;

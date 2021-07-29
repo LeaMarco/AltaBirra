@@ -65,37 +65,7 @@ export default function Nav() {
 
   }
     , [])
-  ///////////////////AUTENTICACION AUTOMATICA/////////////////////////////////////////
-  /* useEffect(() => {
-
-    let tokenLocal = localStorage.tokenLocal
-    if (tokenLocal) {
-      
-      axios.get(`${process.env.REACT_APP_HOST_BACKEND}/auth/localSignIn`, {
-        headers: {
-          authToken: tokenLocal
-        }
-      })
-        .then((e) => {
-          dispatch(getUserData(e.data))
-          dispatch(login(true));
-          
-          toogleAuth()
-          console.log('Logueado automatico con token local EXITOSO!')
-        })
-
-        .catch((error) => console.log(error, 'No te pudiste loguear de forma local automatica!'))
-    }
-
-  },[]) */
-
-
-  //////////////////autenticacion automatica//////////////////////////////////////////
-
-  //////////////////Fin autenticacion automatica//////////////////////////////////////////
-
-
-
+  
 
   function handleSubmit(event) {
     event.preventDefault();
