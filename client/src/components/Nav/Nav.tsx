@@ -24,7 +24,6 @@ interface Autocomplete {
   title: string;
 }
 
-
 export default function Nav() {
   const carts: any = useSelector((state: RootState) => state.cart);
   const [navbarOpen, setNavbarOpen] = useState(false)
@@ -65,7 +64,7 @@ export default function Nav() {
 
   }
     , [])
-  
+
 
   function handleSubmit(event) {
     event.preventDefault();
