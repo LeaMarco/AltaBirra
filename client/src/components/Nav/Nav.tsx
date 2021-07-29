@@ -155,7 +155,7 @@ export default function Nav() {
               Entrar
             </Link> */}
             <Modal isOpen={showFavorites} handleClose={toogleFavorites}>
-              <FavoritesTab />
+              {/* <FavoritesTab /> */}
             </Modal>
             <button onClick={toogleFavorites} className={style.buttonFavorites}>
               <img className={style.buttonImg} src="https://image.flaticon.com/icons/png/512/126/126482.png" alt="Cart" />
@@ -166,7 +166,7 @@ export default function Nav() {
             ><img className={style.buttonImg} src="https://image.flaticon.com/icons/png/512/3144/3144456.png" alt="Cart" />
               <span>{carts && carts.length}</span></Link>
             <Modal isOpen={isEnterOpen} handleClose={toogleEnter}>
-              <Login closeModal={toogleEnter} toogleAuth={toogleAuth} />
+              {/* <Login closeModal={toogleEnter} toogleAuth={toogleAuth} /> */}
             </Modal>
             <Modal isOpen={isRegisterOpen} handleClose={toogleRegister}>
               <Register closeModal={toogleRegister} toogleEnter={toogleEnter} toogleRegister={toogleRegister} />
