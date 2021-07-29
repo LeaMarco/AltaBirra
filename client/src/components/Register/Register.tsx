@@ -183,7 +183,7 @@ const Register: React.FunctionComponent<{ toogleAuth, closeModal, toogleEnter, t
         closeModal()
 
       }).catch((e) => {
-        console.log("Error al registrarte: faq tuvo la culpa")
+        console.log("Error al registrarte: fa q tuvo la culpa")
         setAlreadyRegister(true)
       })
 
@@ -219,11 +219,11 @@ const Register: React.FunctionComponent<{ toogleAuth, closeModal, toogleEnter, t
         // Logica de autologueo luego de register//
         localStorage.clear()
         if (!tokenId) return messages(e);
-        localStorage.setItem('tokenGoogle', tokenId)
+        localStorage.setItem('tokenFacebook', tokenId)
         welcome();
         dispatch(getUserData(e.data))
         dispatch(login(true));
-        console.log('LOGUEADO CON GOOGLE!!!');
+        console.log('LOGUEADO CON FACEBOOK!!!');
         toogleAuth()
         //////////////sacar renderLogin!, agregar esto y poner arriba el token correspondiente segun donde estes parado//////////
         closeModal()

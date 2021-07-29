@@ -518,7 +518,7 @@ enorme, como manzanas, plátanos y moras. Los sabores son muy variados. `,
       const beerSpecificType = await prisma.specificType.findUnique({ where: { type: specificType } });
 
 
-      prisma.post.create({
+      await prisma.post.create({
         data: {
           title,
           description,
@@ -554,11 +554,16 @@ enorme, como manzanas, plátanos y moras. Los sabores son muy variados. `,
             }
           }
         },
-      }).then(e => console.log("Ok!"))
+      })
 
     }
+
+
+    console.log("Autopost hecho, " + amount + " post creados en userName: 'TestPremium', password:'password'")
+
   })()
   /////////////////////////////////////
+
 
   ///AUTO Transaction //////////////////
   for (let i = 0; i < 10; i++) {
@@ -567,7 +572,7 @@ enorme, como manzanas, plátanos y moras. Los sabores son muy variados. `,
         price: 150,
         quantity: 3,
         buyerId: 1,
-        postId: Math.ceil(Math.random() * amount)
+        postId: 1,
       }
     });
 
@@ -589,7 +594,7 @@ enorme, como manzanas, plátanos y moras. Los sabores son muy variados. `,
       }
     });
   }
-  /////////////////////////////////////
+  ///////////////////////////////////
 }
 
 

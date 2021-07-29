@@ -169,17 +169,43 @@ export const signin = async (req: Request, res: Response) => {
 
 		/////////////Agregado a carritou///////////////
 		let guestsItemsInCart = JSON.parse(req.body.params.guestsItemsInCart)
-		let postsOnCartArray = []
+
 		for (let i in guestsItemsInCart) {
-			postsOnCartArray.push({ postId: parseInt(i), amount: guestsItemsInCart[i], cartId: user.cartId })
+			const newPostOnCart = { postId: parseInt(i), amount: guestsItemsInCart[i], cartId: user.cartId }
+
+
+
+			await prisma.postsOnCart.upsert({
+				create: {
+					...newPostOnCart
+				},
+				update: {
+					amount: guestsItemsInCart[i] +
+						(await prisma.postsOnCart.findUnique(
+							{
+								where: {
+									cartId_postId: { cartId: user.cartId, postId: parseInt(i) }
+								}
+							}))?.amount
+				},
+				where: {
+					cartId_postId: { cartId: user.cartId, postId: parseInt(i) }
+				}
+			})
 		}
-		if (postsOnCartArray.length) {
+
+
+
+		/* if (postsOnCartArray.length) {
 			let a = await prisma.postsOnCart.createMany(
 				{
 					data: postsOnCartArray
 				}
 			)
-		}
+		} */
+
+
+
 		//////////////////////////////////////////////
 
 		const userData = {
