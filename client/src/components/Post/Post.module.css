@@ -187,7 +187,7 @@ input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width
     }
     .postForm{
         height:100%;
-        /* width:fit-content; */
+        width:fit-content;
         margin-top: 10rem;
         border:none;
         overflow-y: unset;
