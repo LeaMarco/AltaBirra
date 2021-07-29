@@ -18,7 +18,7 @@ interface User {
 }
 
 function AdminPanel() {
-    
+
 	const [seeModal, setSeeModal] = useState<boolean>(false)
 	const [showYeahNewPassword, setShowYeahNewPassword] = useState<boolean>(false)
 	const history = useHistory();
@@ -37,24 +37,24 @@ function AdminPanel() {
 		})
 	}
 
-  
-  return(
-    <div className={styles.mainContainer}>
-        <div className={styles.panelTitle}>Panel de usuario</div>
-        <Link to="/panel/historialVistos" className={styles.menuButton}>
-					Vistos recientemente
+
+	return (
+		<div className={styles.mainContainer}>
+			<div className={styles.panelTitle}>Panel de usuario</div>
+			<Link to="/panel/historialVistos" className={styles.menuButton}>
+				Vistos recientemente
 			</Link>
 			<Link to="/panel/vendiendo" className={styles.menuButton}>
-					Posts en venta
+				Posts en venta
 			</Link>
 			<Link to="/panel/historialCompras" className={styles.menuButton}>
-					Historial de compras
+				Historial de compras
 			</Link>
 			<Link to="/panel/historialVentas" className={styles.menuButton}>
-					Historial de ventas
+				Historial de ventas
 			</Link>
 			<Link to="/post" className={styles.menuButton}>
-					Crear nuevo post
+				Crear nuevo post
 			</Link>
 			{
 				localStorage.tokenLocal
@@ -70,10 +70,10 @@ function AdminPanel() {
 			</ModalChangePassword>
 			<button className={styles.menuButton} onClick={handleDesactivarCuenta}> Desactivar cuenta </button>
 			<Link to="/admin" className={styles.menuButton}>
-					Panel de administrador
+				Panel de administrador
 			</Link>
-    </div>
-  )
+		</div>
+	)
 };
 
 export default AdminPanel

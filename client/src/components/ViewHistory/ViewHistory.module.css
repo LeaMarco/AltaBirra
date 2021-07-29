@@ -66,16 +66,17 @@
 }
 
 .Button{
-    width: 25%;
-    margin-top: 20px;
-    background-color:tomato;
-    height: 2rem;
-    border-radius: 8px;
-    border:none;
-    transition:0.3s;
-    font-size: 18px;
-    font-weight: 900;
-    color:white;
+	width: 25%;
+	margin-top: 20px;
+	background-color:tomato;
+	height: 2rem;
+	border-radius: 8px;
+	border:none;
+	transition:0.3s;
+	font-size: 18px;
+	font-weight: 900;
+	color:white;
+	margin: 1vh auto;
 }
 
 .Button:hover{
