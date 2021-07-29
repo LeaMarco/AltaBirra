@@ -116,11 +116,15 @@ export default function Nav() {
 
   return (
     <div className={style.NavBar}>
-      <div className={style.LogoContainer}>
+      {/* PRIMER HIJO */}
+      <div className={style.LogoContainer}> 
         <Link to="/">
           <img src={logo} className={style.logo}></img>
         </Link>
       </div>
+      {/* FIN PRIMER HIJO */}
+
+      {/* SEGUNDO HIJO */}
       <div className={style.SearchBarContainer}>
         <div className={style.searchBar}>
           <form
@@ -164,6 +168,9 @@ export default function Nav() {
           </Link>
         </div>
       </div>
+      {/* FIN SEGUNDO HIJO */}
+      
+      {/* TERCER HIJO */}
       <div className={style.ButtonsNavBar}>
         {register ? (
           <div className={style.buttonsRight}>
@@ -225,17 +232,19 @@ export default function Nav() {
                     Registrarme
                   </button>
                 </div>
-                : <div style={{ display: "flex" }}>
-                  {/* <div className={style.fourColumn}> */}
-                  <span className={style.welcome} >
-                    Bienvenido {stateWelcome.nombre}
-                  </span>
+                : <div className={style.thirdColumn}>
+                  {/* <div className={style.fourColumn}> */}                  
                   <Link className={style.textDecoration} to="/panel">
                     <button className={style.buttonEnter}>Panel</button>
                   </Link>
-                  <button className={style.closeSesion} onClick={close}>
-                    Cerrar sesión
-                  </button>
+                  <div className={style.userData}>
+                    <span className={style.welcome} >
+                      Bienvenido {stateWelcome.nombre}
+                    </span>
+                    <button className={style.closeSesion} onClick={close}>
+                      Cerrar sesión
+                    </button>
+                  </div>
                   {/* </div> */}
                 </div>
             }
@@ -253,6 +262,7 @@ export default function Nav() {
           </div>
         </div>
       </div >
+      {/* FIN TERCER HIJO */}
     </div >
   );
 }
