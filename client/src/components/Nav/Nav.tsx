@@ -64,46 +64,6 @@ export default function Nav() {
 
   }
     , [])
-  ///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  //franco trole
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -202,10 +162,7 @@ export default function Nav() {
           </Link>
         </div>
       </div>
-
       <div className={style.ButtonsNavBar}>
-
-
         <div className={style.buttonsRight}>
           <ModalFavorites isOpen={showFavorites} handleClose={toogleFavorites}>
             <FavoritesTab closeModal={toogleFavorites} />
