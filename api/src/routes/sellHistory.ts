@@ -44,12 +44,11 @@ interface Beer {
 router.get("/", async (req: Request, res: Response, next: NextFunction) => {
 	const user = await findUserWithAnyTokenBabe(req, prisma)
 	const { filter }: any = req.query;
-	const sellerId: number = Number(req.query.userId);
 	const history: History[] = await prisma.transaction.findMany({
 		where: {
 			state: filter,
 			post: {
-				is: { userId: user?.id  }
+				is: { userId: user?.id }
 			}
 		},
 		include: {

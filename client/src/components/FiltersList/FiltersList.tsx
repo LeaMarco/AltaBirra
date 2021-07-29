@@ -13,7 +13,7 @@ export default function FiltersList() {
 
   function handleChange({ target }) {
     let temp = target.value === "" ? undefined : target.name === "rating" ? target.value.length : target.value;
-    dispatch(setQuerySearch({ [target.name]: temp }));
+    dispatch(setQuerySearch({ [target.name]: temp, page: 0 }));
   }
 
   function handleSubmit(event) {
@@ -26,6 +26,7 @@ export default function FiltersList() {
     for (let prop in searchQuery) {
       temp[prop] = (prop === "title" || prop === "orderBy") ? searchQuery[prop] : undefined;
     }
+    temp.page = 0;
     dispatch(setQuerySearch(temp));
   }
 
@@ -220,14 +221,15 @@ export default function FiltersList() {
             }
           />
         </div>
-        <div>          <label> Con descuento </label>
+        <div>
+          <label> Con descuento </label>
           <input
             type="checkbox"
             name="hasDiscount"
             onChange={(event) => dispatch(setQuerySearch({ hasDiscount: event.target.checked ? true : undefined }))}
           />
         </div>
-        <input style={{ margin: "2vh auto", width: "5vw" }} type="reset" onClick={resetFilterValues} />
+        <input style={{ margin: "2vh auto", width: "5vw", borderRadius: "0.3rem" }} type="reset" onClick={resetFilterValues} />
       </form>
     </div>
   );

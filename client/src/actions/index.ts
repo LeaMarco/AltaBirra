@@ -211,6 +211,7 @@ export interface QueryTypes {
 	hasShipping?: boolean;
 	hasDiscount?: boolean;
 	orderBy?: string;
+	page?: number;
 }
 
 export interface SetQuerySearchAction {
@@ -389,9 +390,9 @@ export function getFavoritePosts() {
 	}
 }
 
-export function getHistory(type, filter, userId) {
+export function getHistory(type, filter) {
 	return async function (dispatch: Dispatch) {
-		const response = await axios.get(`${process.env.REACT_APP_HOST_BACKEND}/${type}History`, { headers: validationHeadersGenerator(), params: { userId, filter } });
+		const response = await axios.get(`${process.env.REACT_APP_HOST_BACKEND}/${type}History`, { headers: validationHeadersGenerator(), params: { filter } });
 		dispatch({
 			type: "GET_HISTORY",
 			payload: response.data
