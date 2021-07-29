@@ -19,7 +19,7 @@
     scroll-behavior:smooth;
 }
 
-.container{display: flex; align-items:center;flex-direction: column; float: left; width: 12.75rem; margin: 20px 3%; position: relative;}
+.container{display: flex; align-items:center;flex-direction: column; float: left; width: 10.75rem; margin: 20px 3%; position: relative;}
 :focus{outline: none;}
 .input{border: 0; border-bottom: 1px solid #ccc; background-color: transparent;}
 .input ~ .focusBorder{position: absolute; bottom: 0; left: 50%; width: 0; height: 2px; background-color: tomato; transition: 0.4s;}
@@ -46,6 +46,7 @@ input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width
 .postFormBeer input{
     height: 2em;
     width:6em;
+    text-align: center;
 }
 .postFormInfoPost{
     margin-top: 1em;
@@ -106,24 +107,28 @@ input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width
 }
 
 .row1{
+    text-align: center;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     width:29em;
 }
 .row2{
+    text-align: center;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     width:29em;
 }
 .row3{
+    text-align: center;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     width:29em;
 }
 .row4{
+    text-align: center;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -177,9 +182,12 @@ input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width
     .formContainer{
         /* height:100%; */
     }
+    .postFormBeer{
+        margin-top: 40rem;
+    }
     .postForm{
         height:100%;
-        width:fit-content;
+        /* width:fit-content; */
         margin-top: 10rem;
         border:none;
         overflow-y: unset;
@@ -187,5 +195,44 @@ input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width
     .InfoPostCheckboxes{
         max-width: 500px;
 
+    }
+    .row1{
+        flex-direction: column;
+        align-content: center;
+        align-items: stretch;
+        width:20em;
+    }
+    .row2{
+        flex-direction: column;
+        align-content: center;
+        align-items: stretch;
+        width:20em;
+    }
+    .row3{
+        flex-direction: column;
+        align-content: center;
+        align-items: stretch;
+        width:20em;
+    }
+    .row4{
+        align-content: center;
+        align-items: stretch;
+        flex-wrap: nowrap;
+        width:20em;
+    }
+    .container{
+        width:inherit;
+    }
+    .InfoPostCheckboxes{
+        display:flex;
+        flex-direction: column;
+    }
+    .postrow1{
+        width:fit-content;
+    }
+    .container textarea{
+        max-width: 304px;
+        /* min-height: 100px; */
+        resize: none;
     }
 }
