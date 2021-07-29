@@ -36,25 +36,4 @@
     justify-content: center;
     height: 85%;
 }
-@media only screen and (max-width:1024px){
-    .contentContainer{
-        height:100%;
-        width: 100%;
-        border-bottom-right-radius: unset;
-        border-top-right-radius: unset;
-        /* margin-top: 100px; */
-        /* background-color:red; */
-    }
-    .adminContainer{
-        width:100%;
-        flex-direction: column;
-        border-radius: unset;
-        justify-content: unset;
-    }
-    .menuContainer{
-    box-shadow: unset;
-    border-bottom-left-radius: unset;
-    border-top-left-radius: unset;
-    width: inherit;
-    }
-}
+

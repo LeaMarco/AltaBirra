@@ -1,9 +1,12 @@
 .mainContainer{
-    height: 50rem;
+    height: 70%;
+    width: 90%;
+    margin-left: 5%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .postForm{
     display: flex;
     flex-direction: column;
@@ -12,20 +15,20 @@
     align-items: center;
     justify-content:center;
     text-align: center;
-    border: 1px solid tomato;
+    border: 1px solid #69C3C4;
     border-radius: 20px;
     overflow-y: scroll;
     scroll-behavior:smooth;
 }
 
-.container{display: flex; align-items:center;flex-direction: column; float: left; width: 12.75rem; margin: 20px 3%; position: relative;}
+.container{display: flex; align-items:center;flex-direction: column; float: left; width: 10.75rem; margin: 20px 3%; position: relative;}
 :focus{outline: none;}
 .input{border: 0; border-bottom: 1px solid #ccc; background-color: transparent;}
-.input ~ .focusBorder{position: absolute; bottom: 0; left: 50%; width: 0; height: 2px; background-color: tomato; transition: 0.4s;}
+.input ~ .focusBorder{position: absolute; bottom: 0; left: 50%; width: 0; height: 2px; background-color: #69C3C4; transition: 0.4s;}
 .input:focus ~ .focusBorder,
 .input:valid ~ .focusBorder{width: 100%; transition: 0.4s; left: 0;} .input ~ label{position: absolute; left: 0; width: 100%; top: -15px; color: rgb(61, 61, 61); transition: 0.3s; z-index: -1; letter-spacing: 0.5px;}
 .input ~ label{position: absolute; left: 0; width: 100%; top: -15px; color: rgb(61, 61, 61); transition: 0.3s; z-index: -1; letter-spacing: 0.5px;}
-.input:focus ~ label, .input:valid ~ label{top: -18px; font-size: 12px; color: tomato; transition: 0.3s;}
+.input:focus ~ label, .input:valid ~ label{top: -18px; font-size: 12px; color: #69C3C4; transition: 0.3s;}
 
 
 input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width: 100%; box-sizing: border-box; letter-spacing: 1px;}
@@ -36,7 +39,7 @@ input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width
     background:rgb(92, 221, 135);
 }
 .postFormBeer{
-    margin-top: 70%;
+    margin-top: 80%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -44,7 +47,8 @@ input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width
 }
 .postFormBeer input{
     height: 2em;
-    width:15em;
+    width:6em;
+    text-align: center;
 }
 .postFormInfoPost{
     margin-top: 1em;
@@ -58,6 +62,7 @@ input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: space-around;
     width:32em;
 }
 .InfoPostCheckboxes{
@@ -104,24 +109,28 @@ input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width
 }
 
 .row1{
+    text-align: center;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     width:29em;
 }
 .row2{
+    text-align: center;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     width:29em;
 }
 .row3{
+    text-align: center;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     width:29em;
 }
 .row4{
+    text-align: center;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -137,12 +146,12 @@ input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width
     flex-direction: row;
     flex-wrap: wrap;
     align-self: center;
-    width:29em;
+
 }
 
 .postFormSubmitButton{
     margin-top: 20px;
-    background-color:tomato;
+    background-color:#69C3C4;
     height: 3em;
     border-radius: 8px;
     border:none;
@@ -163,4 +172,69 @@ input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width
 
 .uploadGroup{
     padding-bottom: 5%;
+}
+
+@media only screen and (max-width:1024px){
+    .previewComponent{
+        display:none;
+    }
+    .mainContainer{
+        height:100%;
+    }
+    .formContainer{
+        /* height:100%; */
+    }
+    .postFormBeer{
+        margin-top: 40rem;
+    }
+    .postForm{
+        height:100%;
+        width:fit-content;
+        margin-top: 10rem;
+        border:none;
+        overflow-y: unset;
+    }
+    .InfoPostCheckboxes{
+        max-width: 500px;
+
+    }
+    .row1{
+        flex-direction: column;
+        align-content: center;
+        align-items: stretch;
+        width:20em;
+    }
+    .row2{
+        flex-direction: column;
+        align-content: center;
+        align-items: stretch;
+        width:20em;
+    }
+    .row3{
+        flex-direction: column;
+        align-content: center;
+        align-items: stretch;
+        width:20em;
+    }
+    .row4{
+        align-content: center;
+        align-items: stretch;
+        flex-wrap: nowrap;
+        width:20em;
+    }
+    .container{
+        width:inherit;
+    }
+    .InfoPostCheckboxes{
+        display:flex;
+        flex-direction: column;
+    }
+    .postrow1{
+        width:fit-content;
+    }
+    .container textarea{
+        max-width: 304px;
+        /* min-height: 100px; */
+        resize: none;
+    }
 }

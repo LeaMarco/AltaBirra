@@ -15,7 +15,7 @@ export const transporter = nodemailer.createTransport({
 
 transporter.verify()
     .then(() => {
-        console.log('Ready for send emails')
+        console.log('Ready for send emails transporterMail')
     })
 
 
@@ -37,7 +37,7 @@ export const emailRegistracion = async (email: string, subject: string, usuarioH
 
 export const mailVerify = (userHash: string, usuario: string) => {
     let template =
-        
+
         `
         <div>            
             <div style=

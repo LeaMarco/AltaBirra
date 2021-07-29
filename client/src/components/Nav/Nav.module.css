@@ -421,3 +421,8 @@
     margin-right: 0.5rem;
   }
 } */
+/* @media only screen and (max-width:800px){
+  .NavBar {
+    /* position:fixed;
+    overflow-y: auto;
+    z-index: 1000; }}*/

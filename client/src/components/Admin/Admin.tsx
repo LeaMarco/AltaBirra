@@ -12,7 +12,7 @@ import moderatePost from './ModeratePost';
  function Admin() {
   
   return(
-    //<div className={styles.background}>
+    <div className={styles.background}>
       <div className={styles.adminContainer}>
         <div className={styles.menuContainer}>
           <Route path="/admin" component={AdminPanel} />

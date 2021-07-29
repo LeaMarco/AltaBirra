@@ -1,14 +1,14 @@
-import axios from "axios";
-import React from "react";
+import styles from './UserPanel.module.css';
 import { Link } from "react-router-dom";
-import { validationHeadersGenerator } from "../../validationHeadersGenerator";
-import Style from "./UserPanel.module.css";
+import { ModalChangePassword } from "./ChangePassword/ChangePasswordModal/Modal.component";
+import { ChangePassword } from "./ChangePassword/ChangePasswordComponent/ChangePassword";
 import { useHistory } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 import { useState } from "react";
-import { ModalChangePassword } from "./ChangePassword/ChangePasswordModal/Modal.component";
-import { ChangePassword } from "./ChangePassword/ChangePasswordComponent/ChangePassword";
+import axios from 'axios';
+import { validationHeadersGenerator } from "../../validationHeadersGenerator";
+
 
 interface User {
 	nombre: string;
@@ -17,10 +17,8 @@ interface User {
 	favoritos: number;
 }
 
-
-
-export default function UserPanel() {
-
+function AdminPanel() {
+    
 	const [seeModal, setSeeModal] = useState<boolean>(false)
 	const [showYeahNewPassword, setShowYeahNewPassword] = useState<boolean>(false)
 	const history = useHistory();
@@ -39,40 +37,30 @@ export default function UserPanel() {
 		})
 	}
 
-	return (
-		<div className={Style.container}>
-			<div id={Style.controlPanel}> Panel de control </div>
-			<Link to="/historialVistos" className={Style.subcontainer}>
-				<div >
+  
+  return(
+    <div className={styles.mainContainer}>
+        <div className={styles.panelTitle}>Panel de usuario</div>
+        <Link to="/panel/historialVistos" className={styles.menuButton}>
 					Vistos recientemente
-				</div>
 			</Link>
-			<Link to="/vendiendo" className={Style.subcontainer}>
-				<div >
+			<Link to="/panel/vendiendo" className={styles.menuButton}>
 					Posts en venta
-				</div>
 			</Link>
-			<Link to="/historialCompras" className={Style.subcontainer}>
-				<div >
+			<Link to="/panel/historialCompras" className={styles.menuButton}>
 					Historial de compras
-				</div>
 			</Link>
-			<Link to="/historialVentas" className={Style.subcontainer}>
-				<div >
+			<Link to="/panel/historialVentas" className={styles.menuButton}>
 					Historial de ventas
-				</div>
 			</Link>
-			<Link to="/post" className={Style.subcontainer}>
-				<div >
+			<Link to="/post" className={styles.menuButton}>
 					Crear nuevo post
-				</div>
 			</Link>
 			{
 				localStorage.tokenLocal
-					? <button onClick={toggleSeeModal} className={Style.subcontainer} > Cambiar contraseña </button>
+					? <button onClick={toggleSeeModal} className={styles.menuButton} > Cambiar contraseña </button>
 					: null
 			}
-			<button className={Style.subcontainer} onClick={handleDesactivarCuenta}> Desactivar cuenta </button>
 			<ModalChangePassword isOpen={seeModal} handleClose={toggleSeeModal} >
 				{
 					showYeahNewPassword
@@ -80,12 +68,12 @@ export default function UserPanel() {
 						: <ChangePassword setYeahNewPassword={setShowYeahNewPassword} toggleSeeModal={toggleSeeModal} />
 				}
 			</ModalChangePassword>
-			<button className={Style.subcontainer} onClick={handleDesactivarCuenta}> Desactivar cuenta </button>
-			<Link to="/admin" className={Style.subcontainer}>
-				<div >
+			<button className={styles.menuButton} onClick={handleDesactivarCuenta}> Desactivar cuenta </button>
+			<Link to="/admin" className={styles.menuButton}>
 					Panel de administrador
-				</div>
 			</Link>
-		</div >
-	);
-}
+    </div>
+  )
+};
+
+export default AdminPanel

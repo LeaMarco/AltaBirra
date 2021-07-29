@@ -81,7 +81,7 @@ async function main() {
     },
   });
 
- 
+
 
   //TIPOS GENERICOS
   const rubia = await prisma.genericType.create({
@@ -271,7 +271,6 @@ términos cerveza blanca (Weissbier) y cerveza de trigo (Weizenbier).`,
     });
   }////////////////////////////////////////////////////////////////////////////////////////////
 
-
   {// LAGER O FERMENTACION INFERIOR ///////////////////////////////////////////////////////////
     await prisma.specificType.create({
       data: {
@@ -402,16 +401,7 @@ enorme, como manzanas, plátanos y moras. Los sabores son muy variados. `,
 
 
 
-  //   /////////////COSAS DE PRODUCCION////////////////////
-  //   //POSTS
-
-  //   //ADD TO CART
-
-  //   //SIGN-UP OF USER
-
-  //   //TRANSACTION
-  
-  //   //NO HACE FALTA ADD BEER, SE CREA SIEMPRE DESDE POST
+  ////TRANSACTION
   const amount = 300;
   ////////AUTOPOST para faqqqquu////////////////
   await (async () => {
@@ -461,8 +451,11 @@ enorme, como manzanas, plátanos y moras. Los sabores son muy variados. `,
     let gtype = ["Rubia", "Roja", "Negra",]
     let stype = ["Amber", "Vino de cebada", "Ale belga", "Ale escocesa", "Duvel", "Porter", "Alt", "Kölsch", "Trappist", "Flanders negra", "Especial", "Cerveza de trigo", "Cerveza blanca", "Pilsner", "Dortumunder", "Viena", "Munich", "Bock", "Rauchbier", "Schwarzbier", "Gueuze", "Faro", "Cerveza de fruta"]
     let usernames = ["TestUser", "TestPremium"]
+    let comments = ["Horrible", "Mala", "Decente", "Muy buena", "Excelente"]
 
     for (let i = 0; i < amount; i++) {
+
+      let randomRating = Math.ceil(Math.random() * 5);
 
       let beer = {
         "abv": 2 + Math.floor(Math.random() * 15),
@@ -479,7 +472,7 @@ enorme, como manzanas, plátanos y moras. Los sabores son muy variados. `,
         "title": beerName[Math.floor(Math.random() * (beerName.length))],
         "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus dolores ut consectetur nostrum doloremque numquam labore voluptate quos consequatur enim architecto, laboriosam hic quasi provident cumque reprehenderit aspernatur reiciendis ullam?",
         "image": beer.genericType === "Rubia" ? CERVEZAS_RUBIAS[Math.floor(Math.random() * (CERVEZAS_RUBIAS.length))] : beer.genericType === "Negra" ? CERVEZAS_NEGRAS[Math.floor(Math.random() * (CERVEZAS_NEGRAS.length))] : CERVEZAS_ROJAS[Math.floor(Math.random() * (CERVEZAS_ROJAS.length))],
-        "rating": Math.ceil(Math.random() * 5),
+        "rating": randomRating,
         "stock": Math.floor(Math.random() * 50),
         "shipping": Math.random() > 0.5 ? true : false,
         "visibility": true,
@@ -528,7 +521,7 @@ enorme, como manzanas, plátanos y moras. Los sabores son muy variados. `,
       const beerSpecificType = await prisma.specificType.findUnique({ where: { type: specificType } });
 
 
-      prisma.post.create({
+      await prisma.post.create({
         data: {
           title,
           description,
@@ -537,6 +530,13 @@ enorme, como manzanas, plátanos y moras. Los sabores son muy variados. `,
           rating,
           shipping,
           visibility,
+          review: {
+            create: {
+              rating: randomRating,
+              comment: comments[randomRating - 1],
+              userId: 1
+            }
+          },
           user: {
             connect: { id: 3 },
           },
@@ -564,11 +564,16 @@ enorme, como manzanas, plátanos y moras. Los sabores son muy variados. `,
             }
           }
         },
-      }).then(e => console.log("Ok!"))
+      })
 
     }
+
+
+    console.log("Autopost hecho, " + amount + " post creados en userName: 'TestPremium', password:'password'")
+
   })()
   /////////////////////////////////////
+
 
   ///AUTO Transaction //////////////////
   for (let i = 0; i < 10; i++) {
@@ -577,7 +582,7 @@ enorme, como manzanas, plátanos y moras. Los sabores son muy variados. `,
         price: 150,
         quantity: 3,
         buyerId: 1,
-        postId: Math.ceil(Math.random() * amount)
+        postId: 1,
       }
     });
 
@@ -599,7 +604,7 @@ enorme, como manzanas, plátanos y moras. Los sabores son muy variados. `,
       }
     });
   }
-  /////////////////////////////////////
+  ///////////////////////////////////
 }
 
 

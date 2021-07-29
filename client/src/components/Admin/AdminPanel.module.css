@@ -6,6 +6,7 @@
     font-weight: 800;
     font-size: 18px;
     width: 50%;
+    margin-bottom: 10%;
     margin-top: 15%;
     margin-left: 1%;
     transform: skew(-11deg, 0deg);
@@ -18,4 +19,20 @@
     color: gray;
     margin-top: 10%;
     text-decoration: none;
+}
+
+@media only screen and (max-width:1024px){
+    .mainContainer{
+        flex-direction: row;
+    }
+    .panelTitle{
+        display:none;
+    }
+    .menuButton{
+        color: black;
+        margin-top:0;
+        flex-direction: column;
+    }
+
+
 }
