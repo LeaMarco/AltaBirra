@@ -167,7 +167,7 @@ const Register: React.FunctionComponent<{ toogleAuth, closeModal, toogleEnter, t
           guestsItemsInCart
         },
       })
-      .then((e: any) => {
+      .then(async (e: any) => {
 
         // Logica de autologueo luego de register//
         localStorage.clear()
@@ -178,9 +178,12 @@ const Register: React.FunctionComponent<{ toogleAuth, closeModal, toogleEnter, t
         dispatch(login(true));
         console.log('LOGUEADO CON GOOGLE!!!');
         toogleAuth()
+
         //////////////sacar renderLogin!, agregar esto y poner arriba el token correspondiente segun donde estes parado//////////
+        await setTimeout(() => window.location.reload(), 2000) //le da tiempo a que se vea el mensaje
 
         closeModal()
+
 
       }).catch((e) => {
         console.log("Error al registrarte: fa q tuvo la culpa")
@@ -215,17 +218,18 @@ const Register: React.FunctionComponent<{ toogleAuth, closeModal, toogleEnter, t
       },
     })
 
-      .then((e: any) => {
+      .then(async (e: any) => {
         // Logica de autologueo luego de register//
         localStorage.clear()
         if (!tokenId) return messages(e);
         localStorage.setItem('tokenFacebook', tokenId)
-        welcome();
+        welcome()
         dispatch(getUserData(e.data))
         dispatch(login(true));
         console.log('LOGUEADO CON FACEBOOK!!!');
         toogleAuth()
         //////////////sacar renderLogin!, agregar esto y poner arriba el token correspondiente segun donde estes parado//////////
+        await setTimeout(() => window.location.reload(), 2000) //le da tiempo a que se vea el mensaje
         closeModal()
       })
       .catch((e) => {
@@ -263,6 +267,7 @@ const Register: React.FunctionComponent<{ toogleAuth, closeModal, toogleEnter, t
         verifyAccount();
         renderLogin()
         closeModal()
+
       }).catch((e) => {
         console.log("Ya tenés usuario, logueate!")
         setAlreadyRegister(true)
@@ -345,7 +350,7 @@ const Register: React.FunctionComponent<{ toogleAuth, closeModal, toogleEnter, t
           onChange={handleOnChange}
           name="userName"
           value={data.userName}
-          placeholder=" Username"
+          placeholder=" Nombre de usuario"
         />
 
         <label className={Style.labels}>
@@ -388,7 +393,7 @@ const Register: React.FunctionComponent<{ toogleAuth, closeModal, toogleEnter, t
           onChange={handleOnChange}
           name="password"
           value={data.password}
-          placeholder=" Password"
+          placeholder=" Contraseña"
         />
 
         <label className={Style.labels}>

@@ -56,7 +56,6 @@ export default function Nav() {
       }).then(e => {
         // console.log('ESTO QUIERO VER', e.data);
         dispatch(getUserData(e.data))
-
         dispatch(login(true));
         toogleAuth()
       }).catch(e => { console.log("ERROR EN AA", e) })
