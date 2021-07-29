@@ -24,6 +24,10 @@ function AdminPanel() {
         <Link to="/admin/editUsers" className={styles.menuButton}>
             Editar Usuarios
         </Link>
+        <Link to="/panel" className={styles.menuButtonBack}>
+            <img src="https://image.flaticon.com/icons/png/512/93/93634.png" alt="" className={styles.menuButtonBackImg} />
+            <span>Volver al menú de Usuario</span>
+        </Link>
     </div>
   )
 };

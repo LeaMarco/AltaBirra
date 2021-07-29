@@ -81,6 +81,7 @@ export default function EditPost() {
     const formData = new FormData()
     formData.append('image', file)
     let response = await axios.post(`${process.env.REACT_APP_HOST_BACKEND}/upload`, formData)
+    console.log(response, "IMAGEN")
     setImage(`${process.env.REACT_APP_HOST_BACKEND}/upload/` + response.data.filename);
   }
 
