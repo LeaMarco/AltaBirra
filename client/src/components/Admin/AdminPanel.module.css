@@ -20,3 +20,19 @@
     margin-top: 10%;
     text-decoration: none;
 }
+
+@media only screen and (max-width:1024px){
+    .mainContainer{
+        flex-direction: row;
+    }
+    .panelTitle{
+        display:none;
+    }
+    .menuButton{
+        color: black;
+        margin-top:0;
+        flex-direction: column;
+    }
+
+
+}

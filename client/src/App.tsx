@@ -35,7 +35,7 @@ function App() {
 
       <Route exact path="/post" component={token ? Post : NoAuthorized} />
       <Route exact path="/editpost/:id" component={token ? EditPost : NoAuthorized} />
-      <Route exact path="/detailBeer/:id" component={token ? DetailBeer : NoAuthorized} />
+      <Route exact path="/detailBeer/:id" component={DetailBeer} />
       <Route exact path="/categories" component={token ? Categories : NoAuthorized} />
       <Route exact path="/cart/:id" component={Cart} />
 
@@ -48,7 +48,7 @@ function App() {
 
       <Route exact path="/noAutorizado" component={NoAuthorized} />
 
-      <Route path="/admin" component={Admin} />
+      <Route path="/admin" component={token ? Admin : NoAuthorized} />
 
       <Route exact path="/" component={Footer} />
     </div>

@@ -49,7 +49,7 @@ router.use("/groupTypes", groupType);
 router.use("/genericTypes", genericType);
 router.use("/autocomplete", autoComplete);//autocompletar el search
 router.use("/detailBeer", detail);//ruta detalle de post
-router.use("/detail", detail);//ruta detalle de post
+// router.use("/detail", detail);//ruta detalle de post NO SE USA PARECE!
 router.use("/verify", verifyUser);//ruta para verificar cuenta
 router.use("/upload", upload);//ruta para verificar cuenta
 
@@ -83,6 +83,7 @@ router.use("/moderatePost", /* tokenValidation, */ moderatePost);//
 router.use("/viewHistory", /* tokenValidation, */ viewHistory);//
 router.use("/transactionState", /* tokenValidation, */ transactionState);//
 router.use("/sellingPosts", tokenValidation, sellingPosts);
+
 
 
 export default router;

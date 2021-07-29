@@ -166,7 +166,6 @@ export default function EditPost() {
               <div className={styles.genericType}>
                 <label>Generic Type:  </label>
                 <select {...register("beer.genericType")} required >
-                {/* <option hidden></option> */}
                   {generic && generic.map(value => (
                     <option key={value} value={value}>
                       {value}
@@ -177,7 +176,6 @@ export default function EditPost() {
               <div className={styles.specificType}>
                 <label>Specific Type:  </label>
                 <select {...register("beer.specificType")} required>
-                {/* <option hidden></option> */}
                   {specific && specific.map(value => (
                     <option key={value} value={value}>
                       {value}
@@ -205,14 +203,14 @@ export default function EditPost() {
                 <label>Take Away</label>
                 <input name="pickup" checked={estado.pickup} onChange={checkboxClick} type="checkbox" className={styles.checkbox} />
                 <div>
-                    {estado.pickup ?
-                      <div>
-                        <div className={styles.container}>
-                          <input {...register("infoPost.pickupdir")} type="text" autoComplete="off" className={styles.input} />
-                          <label>Direccion y Horarios</label>
-                          <span className={styles.focusBorder}></span>
-                        </div>
-                      </div> : null}
+                  {estado.pickup ?
+                    <div>
+                      <div className={styles.container}>
+                        <input {...register("infoPost.pickupdir")} type="text" autoComplete="off" className={styles.input} />
+                        <label>Direccion y Horarios</label>
+                        <span className={styles.focusBorder}></span>
+                      </div>
+                    </div> : null}
                 </div>
                 <label>Visibility</label>
                 <input {...register("infoPost.visibility")} type="checkbox" className={styles.checkbox} />
@@ -263,7 +261,7 @@ export default function EditPost() {
           </div>
         </form>
       </div>
-      <div ><Preview image={image} info={watch()} /></div>
+      <div className={styles.previewComponent}><Preview image={image} info={watch()} /></div>
     </div>
   ) : (
     <div>

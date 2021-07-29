@@ -5,6 +5,8 @@ import { useDispatch } from 'react-redux';
 import { getDetail } from '../../actions';
 
 const Beer = ({ id, image, title, ibu, abv, discount, price, rating }) => {
+
+
 	const dispatch = useDispatch();
 	const history = useHistory();
 

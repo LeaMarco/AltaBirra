@@ -1,15 +1,6 @@
 var nodemailer = require('nodemailer');
 var fs = require('fs');
 
-// var logo = fs.readdir('./src/img/', (err:any, files:any) => {
-//     if(err){
-//         throw err;
-//     }else{
-//         console.log(files[0]);
-//     }
-
-// });
-
 
 export const transporter = nodemailer.createTransport({
 
@@ -24,7 +15,7 @@ export const transporter = nodemailer.createTransport({
 
 transporter.verify()
     .then(() => {
-        console.log('Ready for send emails mailing')
+        console.log('Ready for send emails transporterMail')
     })
 
 
@@ -46,15 +37,7 @@ export const emailRegistracion = async (email: string, subject: string, usuarioH
 
 export const mailVerify = (userHash: string, usuario: string) => {
     let template =
-        // `
-        //     <h1>HOLAAAAAAAAAAAAA</h1>
-        // `
-        // `
-        // <img src="https://i.imgur.com/aikAAiU.png" title="source: imgur.com" />
-        // <h1>asdas</h1>
-        // <svg width="311" height="69" viewBox="0 0 311 69" fill="none" xmlns="http://www.w3.org/2000/svg">
 
-        // `
         `
         <div>            
             <div style=
@@ -94,9 +77,9 @@ export const mailVerify = (userHash: string, usuario: string) => {
                     border-bottom-left-radius: 20px;
                     border-bottom-right-radius: 20px;"
                 >
-                    <h2>Verifica tu correo electrónico</h2>
-                    <h3>Hola ${usuario}, verifica tu cuenta para tener acceso a nuestro sitio y disfrutar de las mejores cervezas artesanales!</h3>
-                    <h3>¡Haz click en el botón de abajo para unirte a la mayor comunidad cervecera!</h3><br/>
+                    <h2>${usuario} gracias por tu compra!</h2>
+                    <h3>Que disfrutes esta birren!</h3>
+                    <h3>Volvé a elegir mas cervezas haciendo click en el siguiente enlace</h3><br/>
                     <span style=
                         "border-radius: 20px;
                         background-color: green;
@@ -107,8 +90,8 @@ export const mailVerify = (userHash: string, usuario: string) => {
                         font-size: 15px;" >
                         <a
                             style= "color: white; text-decoration: none"
-                            href="https://localhost:3000/verificarUsuario/${userHash}">
-                                CONFIRMAR CORREO
+                            href="https://localhost:3000">
+                                ¡IR A ALTABIRRA!
                         </a>
                     </span>
 
@@ -120,51 +103,6 @@ export const mailVerify = (userHash: string, usuario: string) => {
             </div>
         </div>
         `
-
-
-
-    // `
-    // <div style=
-    //     "background-color: #ccc;
-    //     padding-top: 25px;
-    //     padding-left: 25px;
-    //     padding-right: 25px;
-    //     padding-bottom: 10px;">
-
-    //     <h1 style=
-    //         "background-color: #F49E51;
-    //         border-radius: 20px;
-    //         padding: 10px; padding-left: 12px;
-    //         width: fit-content;
-    //         margin: 0px auto;">
-    //         BIENVENIDO A ALTABIRRA !!! 🍻
-    //     </h1>
-    //     <br/>
-    //     <h2>Por favor haga click en el siguiente enlace para completar el proceso de registración:</h2>
-    //     <br/>
-    //     <span style=
-    //         "font-style: italic;
-    //         font-weight: bold;
-    //         font-size: 15px;">
-    //         ENLACE ===> 
-    //     </span>
-    // <span style=
-    //     "border-radius: 20px;
-    //     background-color: black;
-    //     padding: 10px;
-    //     font-size: 15px;" >
-    //     <a
-    //     style= "color: white;"
-    //     href="https://localhost:3000/verificarUsuario/${userHash}">
-    //         Click aquí para verificar cuenta
-    //     </a>
-    // </span>
-
-    // <h3 style="margin-top: 100px; text-decoration: underline;">
-    //     Atte. El equipo de AltaBirra. 🍻
-    // </h3>
-    // </div>
-    // `
 
     return template;
 
