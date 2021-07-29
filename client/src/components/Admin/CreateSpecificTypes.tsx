@@ -65,18 +65,19 @@ function CreateGenericTypes() {
               <div className={styles.specificType}>
                                 <form className={styles.postForm} onSubmit={handleSubmit(onSubmit)}>
                                         <div className={styles.container} id={styles["beer"]}>
-                                            <input {...register("type")} autoComplete="off" className={styles.input} required />
+                                            <input {...register("type")} autoComplete="off" className={styles.input} required placeholder="Nombre del tipo"/>
                                             <label>Type name *</label>
                                             <span className={styles.focusBorder}></span>
                                         </div>
                                         <div className={styles.container} id={styles["description"]}>
-                                            <textarea {...register("description")} autoComplete="off" className={styles.input} required />
+                                            <textarea {...register("description")} autoComplete="off" className={styles.input} required placeholder="Descripción del tipo"/>
                                             <label>Type description *</label>
                                             <span className={styles.focusBorder}></span>
                                         </div>
                                         <div className={styles.genericType}>
                                             <label>Beer group:  </label>
-                                            <select {...register("group")} >
+                                            <select {...register("group")} required>
+                                                <option hidden></option>
                                                 { group.map(value => (
                                                     <option key={value} value={value}>
                                                         {value}
@@ -86,7 +87,8 @@ function CreateGenericTypes() {
                                         </div>
                                         <div className={styles.genericType}>
                                             <label>Generic Type:  </label>
-                                            <select {...register("genericType")} >
+                                            <select {...register("genericType")} required>
+                                                    <option hidden></option>
                                                 {generic && generic.map(value => (
                                                     <option key={value} value={value}>
                                                         {value}

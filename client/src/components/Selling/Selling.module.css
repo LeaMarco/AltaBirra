@@ -8,6 +8,11 @@
 	margin: 2vh 0;
 }
 
+.select{
+	background-color: white;
+	border: none;
+	padding: 0.3%;
+}
 .subcontainer {
 	margin: 1vh 2vw;
 	padding: 2rem;
@@ -25,18 +30,98 @@
 	justify-content: space-between;
 	align-items: center;
 }
+/* //////////////////////// */
 
-.edit {
-	text-decoration: none;
-	background-color: lightgrey;
-	color: black; 
-	border: 1px solid black; 
-	padding: 1rem;
-	border-radius: 1rem;
-	transition: 250ms;
+.mainContainer{
+	margin-top: 3%;
+	height: 100%;
 }
 
-.edit:hover {
-	background-color: #F49E51;
-	transform: scale(1.1);
+.cardsContainer {
+	display: flex;
+	flex-direction: column;
+	width: 90%;
+	margin-left: 5%;
+	margin-top: 3%;
+	height: 77%;
+	overflow-y: scroll;
+    scroll-behavior:smooth;
+}
+
+.subcontainer {
+	background-color: white;
+	width: 90%;
+	padding: 2rem;
+	margin-top: 2%;
+	border-radius: 0.7rem;
+}
+
+.detail {
+	display: flex;
+	flex-direction: column;
+}
+
+.subdetail {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.imgHistory{
+	max-width: 6rem;
+	max-height: 6rem;
+	border-radius: 10%;
+}
+
+.title{
+	padding-bottom: 2%;
+	font-weight: 800;
+}
+
+.props{
+	margin:1%
+	;
+}
+
+.imgContainer{
+	width: 6rem;
+}
+
+.dataContainer{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 15rem;
+}
+.countableContainer{
+	display: flex;
+	flex-direction: column;
+}
+.propsContainer{
+	display: flex;
+	justify-content: space-evenly;
+	width: 15rem;
+}
+
+.Button{
+    width: 7rem;
+    margin-top: 20px;
+    background-color:#69C3C4;
+    height: 2rem;
+    border-radius: 8px;
+    border:none;
+	text-decoration: none;
+    transition:0.3s;
+    font-size: 18px;
+    font-weight: 600;
+    color:white;
+	padding: 0.5%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.Button:hover{
+	cursor: pointer;
+	filter: brightness(1.15);
 }

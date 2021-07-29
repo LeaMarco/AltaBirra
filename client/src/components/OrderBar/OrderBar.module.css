@@ -1,5 +1,12 @@
 .container {
-	background-color: gray;
+	display: flex;
+	align-items: center;
+	background-color: lightgray;
 	padding: 0.5rem;
 	border: 1px solid black;
+	border-radius: 0.5rem;
+}
+
+.container div {
+	margin-left: 3vw;
 }

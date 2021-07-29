@@ -25,24 +25,23 @@ interface Favorites {
 export default function DetailBeer() {
 	const hasToken = Object.keys(localStorage).join().includes("token")
 	const carts: any = useSelector((state: RootState) => state.cart);
-	console.log(carts.length, "Cart length")
 	const dispatch = useDispatch();
 	const { id }: any = useParams();
 	const info: any = useSelector((state: RootState) => state.detailPosts);
 	const favorites: Favorites[] = useSelector((state: RootState) => state.favoritePosts);
 	const [isFavorite, setIsFavorite] = useState<boolean>(favorites.some(post => post.post.id === Number(id)));
-	const [cantidad, setCantidad] = useState(1);
 	const [modalIsOpen, setModalIsOpen] = useState(false);
 	const history = useHistory();
 	const MySwal = withReactContent(Swal);
+	const isUser = useSelector((state: RootState) => state.loginState);
 
 	useEffect(() => {
 		dispatch(getDetail(id));
-		axios.post(`${process.env.REACT_APP_HOST_BACKEND}/viewHistory`, { data: { username: "TestUser", postId: id } });
+		if (isUser) axios.post(`${process.env.REACT_APP_HOST_BACKEND}/viewHistory`, { data: { postId: id } }, { headers: validationHeadersGenerator() });
 	}, [dispatch]);
 
 	const addToCart = async () => {
-		const response = await axios.put(`${process.env.REACT_APP_HOST_BACKEND}/addToCart`, { params: { "username": "TestUser", "postId": parseInt(id), "quantity": cantidad } }, { headers: validationHeadersGenerator() })
+		const response = await axios.put(`${process.env.REACT_APP_HOST_BACKEND}/addToCart`, { params: { "username": "TestUser", "postId": parseInt(id) } }, { headers: validationHeadersGenerator() })
 		dispatch(getCart(1)); ////////////TIENE QUE TRAER EL ID DEL USUARIO QUE ESTÁ CONECTADO
 		return (response.data)
 	}
@@ -124,38 +123,38 @@ export default function DetailBeer() {
 								</div>
 								<div className={Style.infoCompra}>
 									<h3>Información De Compra</h3>
-									
-									{info.stock===0? <div className={Style.soldout}>NO HAY STOCK</div>:
-									<div className={Style.buyInfo}>
-										<div className={Style.buyButtons}>
-											<form onSubmit={handleSubmit} >
-												<button className={Style.buttonComprar} type="submit">¡COMPRAR AHORA!</button>
-											</form>
-											<button className={Style.addtoCartButton} onClick={async () => {
 
-												if (hasToken) {
-													MySwal.fire({
-														position: 'center',
-														icon: 'success',
-														title: await addToCart(),
-														showConfirmButton: false,
-														timer: 1500,
-													})
-												}
-												else addFavoriteInLocalStorage()
-											}}>AGREGAR AL CARRITO</button>
-										</div>
-										<div className={Style.buttonsPago}>
-											{info.countable.discount !== 0 ?
-												<p className={Style.originalPrice}> ${(info.countable.price - info.countable.price * (info.countable.discount / 100)).toFixed(2)} </p> : <p className={Style.originalPrice}> ${info.countable.price}</p>}
-											{info.countable.discount !== 0 ?
-												<div className={Style.SecondPrices}>
-													<p className={Style.priceWODiscount}>${info.countable.price}</p>
-													<p className={Style.discount}>{info.countable.discount}%OFF</p>
-												</div>
-												: null}
-										</div>
-									</div>}
+									{info.stock === 0 ? <div className={Style.soldout}>NO HAY STOCK</div> :
+										<div className={Style.buyInfo}>
+											<div className={Style.buyButtons}>
+												<form onSubmit={handleSubmit} >
+													<button className={Style.buttonComprar} type="submit">¡COMPRAR AHORA!</button>
+												</form>
+												<button className={Style.addtoCartButton} onClick={async () => {
+
+													if (hasToken) {
+														MySwal.fire({
+															position: 'center',
+															icon: 'success',
+															title: await addToCart(),
+															showConfirmButton: false,
+															timer: 1500,
+														})
+													}
+													else addFavoriteInLocalStorage()
+												}}>AGREGAR AL CARRITO</button>
+											</div>
+											<div className={Style.buttonsPago}>
+												{info.countable.discount !== 0 ?
+													<p className={Style.originalPrice}> ${(info.countable.price - info.countable.price * (info.countable.discount / 100)).toFixed(2)} </p> : <p className={Style.originalPrice}> ${info.countable.price}</p>}
+												{info.countable.discount !== 0 ?
+													<div className={Style.SecondPrices}>
+														<p className={Style.priceWODiscount}>${info.countable.price}</p>
+														<p className={Style.discount}>{info.countable.discount}%OFF</p>
+													</div>
+													: null}
+											</div>
+										</div>}
 								</div>
 								<div className={Style.share}>
 									Compartir

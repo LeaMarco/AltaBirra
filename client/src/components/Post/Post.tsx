@@ -1,17 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { useForm, SubmitHandler, UseFormRegister, Controller } from "react-hook-form";
-import { editPost, EditPostInterface, PostValues } from "../../actions";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useForm, SubmitHandler} from "react-hook-form";
+import { PostValues } from "../../actions";
+import { useDispatch} from "react-redux";
 import { Dispatch } from "redux";
-import { createPost, searchTypes, getDetail } from "../../actions";
-import transformer, { transformEdit } from "./FormatData";
+import { createPost, searchTypes} from "../../actions";
+import transformer from "./FormatData";
 import styles from './Post.module.css';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
-import { useParams } from "react-router-dom";
 import Preview from "./Preview"
-import { RootState } from "../../reducers";
-import Beer from "../Beer/Beer";
 import axios from 'axios';
 
 //TIENE QUE TOMAR COMO PARAMETRO EL ID DEL POST QUE SE SELECCIONA Y RENDERIZAR EL COMPONENTE DETALLE PASANDOLE ESE ID.
@@ -84,13 +81,13 @@ export default function EditPost() {
     const formData = new FormData()
     formData.append('image', file)
     let response = await axios.post(`${process.env.REACT_APP_HOST_BACKEND}/upload`, formData)
+    console.log(response, "IMAGEN")
     setImage(`${process.env.REACT_APP_HOST_BACKEND}/upload/` + response.data.filename);
   }
 
 
   const { register, handleSubmit, reset, watch } = useForm({});
   const onSubmit: SubmitHandler<PostValues> = (data) => { despachadora(data, image); reset() };
-
 
   return (
     <div className={styles.mainContainer}>
@@ -112,7 +109,7 @@ export default function EditPost() {
             </div>
             <div className={styles.row2}>
               <div className={styles.container}>
-                <input {...register("beer.og")} type="number" min="1" autoComplete="off" className={styles.input} />
+                <input {...register("beer.og")} type="number" min="1" autoComplete="off" className={styles.input} required />
                 <label>OG </label>
                 <span className={styles.focusBorder}></span>
               </div>
@@ -124,7 +121,7 @@ export default function EditPost() {
             </div>
             <div className={styles.row3}>
               <div className={styles.container}>
-                <input {...register("beer.calories")} type="number" min="1" autoComplete="off" className={styles.input} />
+                <input {...register("beer.calories")} type="number" min="1" autoComplete="off" className={styles.input} required />
                 <label>Calories</label>
                 <span className={styles.focusBorder}></span>
               </div>
@@ -148,8 +145,8 @@ export default function EditPost() {
               </div>
               <div className={styles.specificType}>
                 <label>Specific Type:  </label>
-                <select {...register("beer.specificType")} required >
-                  <option hidden></option>
+                <select {...register("beer.specificType")} required>
+                <option hidden></option>
                   {specific && specific.map(value => (
                     <option key={value} value={value}>
                       {value}
@@ -167,7 +164,7 @@ export default function EditPost() {
             <h3>Post Info</h3>
             <div className={styles.postrow1}>
               <div className={styles.container}>
-                <input {...register("infoPost.stock")} type="number" min="1" autoComplete="off" className={styles.input} required />
+                <input {...register("infoPost.stock")} type="number" min="0" autoComplete="off" className={styles.input} />
                 <label>Stock *</label>
                 <span className={styles.focusBorder}></span>
               </div>
@@ -212,15 +209,15 @@ export default function EditPost() {
             {estado.discount ?
               <div>
                 <div className={styles.container}>
-                  <input {...register("countable.discount")} type="number" min="0" autoComplete="off" className={styles.input} />
-                  <label>Discount</label>
+                  <input {...register("countable.discount")} type="number" min="0" max="100" autoComplete="off" className={styles.input} />
+                  <label>Discount *</label>
                   <span className={styles.focusBorder}></span>
                 </div>
                 <p>Fecha Expiracion del Descuento</p>
                 <input {...register("countable.expireDate")} type="date" />
               </div> : <p>Sin oferta? ratón</p>}
           </div>
-          <div >
+          <div>
             <label htmlFor="file">Upload File:</label>
             <input
               className={styles.imageInput}

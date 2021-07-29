@@ -6,6 +6,7 @@
     font-weight: 800;
     font-size: 18px;
     width: 50%;
+    margin-bottom: 10%;
     margin-top: 15%;
     margin-left: 1%;
     transform: skew(-11deg, 0deg);
@@ -18,7 +19,37 @@
     color: gray;
     margin-top: 10%;
     text-decoration: none;
+    transition: 400ms ease-in-out;
+
 }
+
+.menuButton:hover{
+    transform: scale(1.05);
+
+}
+.menuButtonBack{
+    font-size: 15px;
+    font-weight: 800;
+    color: gray;
+    margin-top: 40%;
+    text-decoration: none;
+    transition: 400ms ease-in-out;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.menuButtonBackImg{
+    margin-right: 2%;
+    width: 7%;
+    filter: invert() brightness(40%);
+}
+
+
+.menuButtonBack:hover{
+    transform: scale(1.05);
+}
+
 
 @media only screen and (max-width:1024px){
     .mainContainer{
@@ -35,3 +66,4 @@
 
 
 }
+

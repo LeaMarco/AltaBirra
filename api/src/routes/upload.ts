@@ -11,10 +11,14 @@ const db = knex(
     {
         client: 'pg',
         connection: {
-            host: '127.0.0.1',
-            user: 'postgres',
-            password: 'Wycrd123',
-            database: 'beers', //crear tabla en beers y cambiar abajito
+            // host: '127.0.0.1',
+            // user: 'postgres',
+            // password: 'Wycrd123',
+            // database: 'beers', //crear tabla en beers y cambiar abajito
+            host: process.env.HOST,
+            user: process.env.USER,
+            password: process.env.PASSWORD,
+            database: process.env.DATABASE, //crear tabla en beers y cambiar abajito
         },
     }
 );
@@ -55,7 +59,7 @@ router.post('/', imageUpload.single('image'), (req: any, res: Response) => {
     })
         .into('image_upload')
         .then(() => res.json({ success: true, filename }))
-        .catch((error: any) => res.json({ success: false, message: 'upload failed', stack: error.stack, }));
+        .catch((error: any) => res.status(400).json({ success: false, message: 'upload failed', stack: error.stack, }));
 });
 
 

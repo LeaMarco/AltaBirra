@@ -9,7 +9,6 @@ import axios from "axios";
 import { validationHeadersGenerator } from "../../validationHeadersGenerator";
 
 export default function BuyHistory() {
-	const userId = 1;
 	const dispatch = useDispatch();
 	const [filter, setFilter] = useState<string | undefined>(undefined);
 	const history = useSelector((state: RootState) => state.history);
@@ -32,17 +31,16 @@ export default function BuyHistory() {
 	}, [])
 
 	useEffect(() => {
-		dispatch(getHistory("buy", filter, userId));
+		dispatch(getHistory("buy", filter));
 	}, [dispatch, filter])
 
 
-
-
 	return (
-		<div className={Style.container}>
+		<div className={Style.mainContainer}>
+			<h2>Historial de Compras</h2>
 			<div className={Style.filter}>
 				<label> Filtrar por: </label>
-				<select onChange={event => setFilter(event.target.value === "Todas" ? undefined : event.target.value)}>
+				<select className={Style.select} onChange={event => setFilter(event.target.value === "Todas" ? undefined : event.target.value)}>
 					<option> Todas </option>
 					<option> Completa </option>
 					<option> Procesando </option>
@@ -51,25 +49,46 @@ export default function BuyHistory() {
 			</div>
 			{
 				history.length
-					? history.map(post => {
+					? <>
+					<div className={Style.cardsContainer}>
+					{history.map(post => {
 						return (
 							<div key={post.post.id} style={{ border: "1px solid black" }} className={Style.subcontainer}>
-								<Link to={`/calificar/${post.post.id}`} style={{ textDecoration: "none", color: "black", fontWeight: "bold" }}> Calificar </Link>
+								{
+									post.state === "Completa"
+										? <Link to={`/calificar/${post.post.id}`} style={{ textDecoration: "none", color: "black", fontWeight: "bold" }}> Calificar </Link>
+										: null
+								}
 								<Link to={`/detailBeer/${post.post.id}`} key={post.post.id} style={{ textDecoration: "none", color: "black" }}><div className={Style.detail}>
+											<h3 className={Style.title}> {post.post.title} </h3>
 									<div className={Style.subdetail}>
-										<img src={post.post.image} alt='' height="150vh" />
-										<h2> {post.post.title} </h2>
-										<div>
-											<h4> Precio: ${post.price} </h4>
-											<h4> Estado: {post.state} </h4>
-											<h4> Cantidad compradas: {post.quantity} </h4>
-											<h4> Fecha: {post.createdAt} </h4>
+										<div className={Style.imgContainer}>
+											<img src={post.post.image} alt='' className={Style.imgHistory}/>
+										</div>
+										<div className={Style.dataContainer}>
+											<div className={Style.propsContainer}>
+												<h4> IBU: {post.post.beer.ibu} </h4>
+												<h4> ABV: {post.post.beer.abv} </h4>
+											</div> 
+											
+										</div>
+										<div className={Style.CountableContainer}>
+												<h5 className={Style.props}> Fecha: {`${post.createdAt.slice(8, 10)}/${post.createdAt.slice(5, 7)}/${post.createdAt.slice(0, 4)}`} </h5>
+												<h5 className={Style.props}> Estado: {post.state} </h5>
+												<h5 className={Style.props}> Cantidad: {post.quantity} </h5>
+											<div>
+												<h4> Precio: ${post.price} </h4>
+											</div>
 										</div>
 									</div>
 								</div></Link>
+								<Link to={`/calificar/${post.post.id}`} className={Style.Button}> Calificar </Link>
+
 							</div>
 						)
-					})
+					})}
+					</div>
+					</>
 					: <h2> No hay compras registradas para esta cuenta </h2>
 			}
 		</div >
