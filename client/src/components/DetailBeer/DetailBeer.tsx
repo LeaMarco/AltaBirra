@@ -17,6 +17,8 @@ import Beer from "../Beer/Beer";
 import { card } from "mercadopago";
 import { validationHeadersGenerator } from "../../validationHeadersGenerator";
 import { response } from "express";
+import { getTokenSourceMapRange } from "typescript";
+import swal from 'sweetalert';
 
 interface Favorites {
 	post: Post;
@@ -47,12 +49,42 @@ export default function DetailBeer() {
 	}
 
 	const handleSubmit = async (e) => {
+		loguearse();
 		e.preventDefault();
 		e.stopPropagation();
 		await addToCart()
 		await getCart(id)
 		history.push(`/compra/1`);
 	};
+
+	const loguearse = () => {
+		let token = Object.keys(localStorage).join().includes('token');
+		if(!token) {
+			swal({
+				title: "Logueate!",
+				text: "Debes estar logueado para poder comprar!",
+				icon: "warning",
+				buttons: ["VOLVER A PAGINA PRINCIPAL", "OK"]
+				// timer: 2000,
+			  }).then(response => {
+				if (!response) {
+					history.push(`/`);
+
+					// swal({ 
+					// 	title: 'Adiós, vuelve pronto!',
+					// 	text: 'Suerte!',
+					// 	icon: "success",
+					// 	timer: 3000,
+					// 	buttons: ['']
+					// })
+				//   setTimeout(() => {
+				// 	localStorage.clear();
+				// 	window.location.href = process.env.REACT_APP_HOST_FRONTEND || window.location.href;
+				//   }, 2900);
+				}
+			  })
+		}
+	}
 
 	async function addFavoriteInLocalStorage() {
 

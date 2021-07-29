@@ -1,16 +1,28 @@
 .container {
   display: flex;
   justify-content: space-evenly;
+  background-image: repeating-linear-gradient(135deg, rgba(0,0,0, 0.15) 0px, rgba(0,0,0, 0.15) 2px,transparent 2px, transparent 4px),linear-gradient(45deg, rgba(0,0,0, 0.78),rgb(170,170,170));
+  padding: 25px;
+  padding-bottom: 50px;
 }
 
 .subcontainer {
-  height: 85vh;
+  height: 96%;
   width: 100%;
-  background-color: #e0dede;
+  /* background-color: #e0dede; */
+  background-image: linear-gradient(45deg, rgba(187, 187, 187,0.04) 0%, rgba(187, 187, 187,0.04) 50%,rgba(86, 86, 86,0.04) 50%, rgba(86, 86, 86,0.04) 100%),linear-gradient(135deg, rgba(166, 166, 166,0.04) 0%, rgba(166, 166, 166,0.04) 50%,rgba(92, 92, 92,0.04) 50%, rgba(92, 92, 92,0.04) 100%),linear-gradient(90deg, rgba(20,20,20, 0.58),rgba(20,20,20, 0.58)); background-size: 142px 142px;
+  border: 3px solid black;
+  border-radius: 20px;
+  margin: 20px;
+  color: white;
 }
 
 .subcontainer:hover > * {
-  transform: scale(1.1);
+  transform: scale(1.06);
+}
+
+.subcontainer:hover .informacion {
+  margin-top: 40px;
 }
 
 .categoryName {
@@ -21,24 +33,36 @@
   cursor: pointer;
   text-align: center;
   width: fit-content;
-  text-decoration: 2px underline black;
+  /* text-decoration: 2px underline black; */
   background-color: transparent;
-  transition: 2000ms ease-in-out;
+  border-radius: 20px;
+  padding: 5px;
+  background-color: #F49E51;
+  width: 50%;
+  margin-top: 50px;
+  transition: 1000ms ease-in-out;
 }
+
+.categoryName:hover{
+  border: 1px solid black;
+}
+
 h2 {
   transition: 2000ms ease-in-out;
+  text-decoration: underline;
 }
+
 .informacion {
-  transition: 2000ms ease-in-out;
+  transition: 1000ms ease-in-out;
   margin: 2vh 3vw;
   font-size: larger;
   font-weight: 600;
   text-align: justify;
 }
-
+/* 
 .subcontainer + .subcontainer {
   border-left: 1px solid rgb(98, 96, 96);
-}
+} */
 
 * {
   /* border: 1px solid blue; */
