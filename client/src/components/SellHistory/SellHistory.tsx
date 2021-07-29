@@ -43,7 +43,7 @@ export default function SellHistory() {
 			<div className={Style.cardsContainer}>
 				{
 					history.length
-						? history.map(post => {
+						? history?.map(post => {
 							return (
 								<div key={post.createdAt} style={{ border: "1px solid black" }} className={Style.subcontainer}>
 									{

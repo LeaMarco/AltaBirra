@@ -44,26 +44,28 @@ export default function ViewHistory() {
 			<div className={Style.cardsContainer}>
 				{
 					history.length
-						? history.map(post => {
+						? history?.map(post => {
 							return (
 								<div key={post.post.id} style={{ border: "1px solid black" }} className={Style.subcontainer}>
-									<Link to={`/detailBeer/${post.post.id}`} key={post.post.id} style={{ textDecoration: "none", color: "black" }}><div className={Style.detail}>
-										<div className={Style.subdetail}>
-											<div className={Style.imgContainer}>
-												<img src={post.post.image} alt='' className={Style.imgHistory} />
-											</div>
-											<div className={Style.dataContainer}>
-												<h3 className={Style.title}> {post.post.title} </h3>
-												<div className={Style.propsContainer}>
-													<h5 className={Style.props}> IBU: {post.post.beer.ibu} </h5>
-													<h5 className={Style.props}> ABV: {post.post.beer.abv} </h5>
+									<Link to={`/detailBeer/${post.post.id}`} key={post.post.id} style={{ textDecoration: "none", color: "black" }}>
+										<div className={Style.detail}>
+											<div className={Style.subdetail}>
+												<div className={Style.imgContainer}>
+													<img src={post.post.image} alt='' className={Style.imgHistory} />
+												</div>
+												<div className={Style.dataContainer}>
+													<h3 className={Style.title}> {post.post.title} </h3>
+													<div className={Style.propsContainer}>
+														<h5 className={Style.props}> IBU: {post.post.beer.ibu} </h5>
+														<h5 className={Style.props}> ABV: {post.post.beer.abv} </h5>
+													</div>
+												</div>
+												<div>
+													<h4> ${post.post.countable.price} </h4>
 												</div>
 											</div>
-											<div>
-												<h4> ${post.post.countable.price} </h4>
-											</div>
 										</div>
-									</div></Link>
+									</Link>
 								</div>
 							)
 						}).reverse()
