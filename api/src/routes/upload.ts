@@ -13,7 +13,7 @@ const db = knex(
         connection: {
             host: '127.0.0.1',
             user: 'postgres',
-            password: '1234',
+            password: 'Wycrd123',
             database: 'beers', //crear tabla en beers y cambiar abajito
         },
     }
@@ -44,6 +44,7 @@ const imageUpload = multer({
     ),
 });
 router.post('/', imageUpload.single('image'), (req: any, res: Response) => {
+    console.log(req.file,"fileeeeeee")
     const { filename, mimetype, size } = req.file;
     const filepath = req.file?.path;
     db.insert({
