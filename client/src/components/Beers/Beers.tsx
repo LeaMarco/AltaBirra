@@ -37,7 +37,7 @@ const Beers = () => {
   return (
     <div className="containerBeersPremium">
       <h1 id="titulo">Las recomendadas de Alta Birra</h1>
-      <Carousel responsive={responsive} className="beers">
+      <Carousel responsive={responsive} removeArrowOnDeviceType={["tablet", "mobile", "smallMobile"]} className="beers">
         {
           typeof usersPremium === "object"
             ? usersPremium.map((userPremium) => (
