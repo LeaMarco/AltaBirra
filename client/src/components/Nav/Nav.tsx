@@ -15,7 +15,8 @@ import swal from 'sweetalert';
 import { ModalFavorites } from "../FavoriteTab/ModalFavorites/Modal.component";
 import { useLayoutEffect } from "react";
 import { validationHeadersGenerator } from "../../validationHeadersGenerator";
-import { FaBars, FaSearch } from "react-icons/fa";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { RootState } from "../../reducers/index";
 import { getCart } from "../../actions";
 
@@ -25,6 +26,7 @@ interface Autocomplete {
 }
 
 export default function Nav() {
+  const [showMenu, setShowMenu] = useState(false);
   const carts: any = useSelector((state: RootState) => state.cart);
   const [navbarOpen, setNavbarOpen] = useState(false)
   const [isEnterOpen, setEnterOpen] = useState<boolean>(false);
@@ -109,10 +111,82 @@ export default function Nav() {
       }
     })
   }
+  let menu;
+  let menuMask;
+  let searchBar = <div className={style.SearchBarContainerHamgurguer}>
+    <div className={style.searchBarHamburguer}>
+      <form
+        onSubmit={(event) => handleSubmit(event)}
+        className={style.searchInput}
+      >
+        <div className={style.inputContainerHamburguer}>
+          <input
+            placeholder="Buscar"
+            className={style.searchInputHamburguer}
+            value={searchInput}
+            onChange={(event) => handleChange(event)}
+            onSubmit={(event) => handleSubmit(event)}
+          />
+        </div>
+        {searchInput && autocomplete.length ? (
+          <div className={style.autocomplete}>
+            {autocomplete?.map(({ title }) => {
+              return (
+                <input
+                  readOnly
+                  value={title}
+                  onClick={(event) => handleAutocomplete(event)}
+                />
+              );
+            })}
+          </div>
+        ) : null}
+      </form>
+    </div>
+    <div className={style.buttonsHamburguer}>
+      <Link to="/search" className={style.button}>
+        Ofertas
+      </Link>
+      <Link to="/categories" className={style.button}>
+        Categorías
+      </Link>
+      <Link to="/post" className={style.button}>
+        Vender
+      </Link>
+    </div>
+  </div>;
+  if (showMenu) {
+    menu = <div className={style.menuhamburguesa}>
+      {
+        !isAuth
+          ? <div className={style.buttonsRightEnter}>
+            <button className={style.buttonEnter} onClick={toogleEnter}>
+              Entrar
+            </button>
+            <button className={style.buttonEnter} onClick={toogleRegister}>
+              Registrarme
+            </button>
+            {searchBar}
+          </div>
+          : <div className={style.buttonsRightEnter}>
+            <span className={style.welcome} >
+              Bienvenido {stateWelcome.nombre}
+            </span>
+            <Link className={style.textDecoration} to="/panel">
+              <button className={style.buttonEnter}>Panel</button>
+            </Link>
+            {searchBar}
+            <button className={style.closeSesion} onClick={close}>
+              Cerrar sesión
+            </button>
+          </div>
+      }
+    </div>;
+    menuMask = <div className={style.menuMask} onClick={() => setShowMenu(!showMenu)}></div>
+  }
 
   return (
     <div className={style.NavBar}>
-
       <div className={style.LogoContainer}>
         <Link to="/">
           <img src={logo} className={style.logo}></img>
@@ -186,7 +260,6 @@ export default function Nav() {
           <Modal isOpen={isRegisterOpen} handleClose={toogleRegister}>
             <Register closeModal={toogleRegister} toogleEnter={toogleEnter} toogleRegister={toogleRegister} />
           </Modal>
-
           {
             !isAuth
               ? <div className={style.buttonsRightEnter}>
@@ -198,7 +271,6 @@ export default function Nav() {
                 </button>
               </div>
               : <div style={{ display: "flex" }}>
-                {/* <div className={style.fourColumn}> */}
                 <span className={style.welcome} >
                   Bienvenido {stateWelcome.nombre}
                 </span>
@@ -208,20 +280,23 @@ export default function Nav() {
                 <button className={style.closeSesion} onClick={close}>
                   Cerrar sesión
                 </button>
-                {/* </div> */}
               </div>
           }
         </div>
 
-        <div className={style.mobileIcons}>
-          <div className={style.searchFa}>
-            <FaSearch />
-          </div>
-          <div className={style.hamburger}>
-            <FaBars />
-          </div>
-        </div>
       </div >
+      <div className={style.mobileIcons}>
+        <div className={style.searchFa}>
+          {/* <FaSearch /> */}
+        </div>
+        <FontAwesomeIcon
+          className={style.hamburguesa}
+          icon={faBars}
+          onClick={() => setShowMenu(!showMenu)}
+        />
+      </div>
+      {menu}
+      {menuMask}
     </div >
   );
 }
