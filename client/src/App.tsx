@@ -24,7 +24,9 @@ import NoAuthorized from "./components/NoAuthorized/NoAuthorized";
 
 function App() {
 
-  var token = Object.keys(localStorage).join().includes('token');
+  function autorizeComponent(Component) {
+    return Object.keys(localStorage).join().includes('token') ? Component : NoAuthorized
+  }
 
   return (
     <div className="App">
@@ -33,22 +35,23 @@ function App() {
       <Route exact path="/" component={Home} />
       <Route exact path="/search" component={Search} />
 
-      <Route exact path="/post" component={token ? Post : NoAuthorized} />
-      <Route exact path="/editpost/:id" component={token ? EditPost : NoAuthorized} />
+      <Route exact path="/post" component={autorizeComponent(Post)} />
+      <Route exact path="/editpost/:id" component={autorizeComponent(EditPost)} />
       <Route exact path="/detailBeer/:id" component={DetailBeer} />
-      <Route exact path="/categories" component={token ? Categories : NoAuthorized} />
+      <Route exact path="/categories" component={autorizeComponent(Categories)} />
       <Route exact path="/cart/:id" component={Cart} />
 
-      <Route exact path="/compra/:id" component={Compra} />
-      <Route path="/panel" component={User} />
-      <Route exact path="/calificar/:id" component={Rate} />
-      <Route exact path="/vendiendo" component={Selling} />
-      <Route exact path="/E_Unauthorized" component={E_Unauthorized} />
-      <Route exact path="/verificarUsuario/:user" component={VerifyAccount} />
+      <Route exact path="/compra/:id" component={autorizeComponent(Compra)} />
+
+      <Route exact path="/panel" component={autorizeComponent(User)} />
+
+      <Route exact path="/calificar/:id" component={autorizeComponent(Rate)} />
+      <Route exact path="/vendiendo" component={autorizeComponent(Selling)} />
+      <Route exact path="/verificarUsuario/:user" component={autorizeComponent(VerifyAccount)} />
 
       <Route exact path="/noAutorizado" component={NoAuthorized} />
 
-      <Route path="/admin" component={token ? Admin : NoAuthorized} />
+      <Route path="/admin" component={autorizeComponent(Admin)} />
 
       <Route exact path="/" component={Footer} />
     </div>

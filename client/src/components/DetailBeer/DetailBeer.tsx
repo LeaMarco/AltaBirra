@@ -30,7 +30,6 @@ export default function DetailBeer() {
 	const info: any = useSelector((state: RootState) => state.detailPosts);
 	const favorites: Favorites[] = useSelector((state: RootState) => state.favoritePosts);
 	const [isFavorite, setIsFavorite] = useState<boolean>(favorites.some(post => post.post.id === Number(id)));
-	const [cantidad, setCantidad] = useState(1);
 	const [modalIsOpen, setModalIsOpen] = useState(false);
 	const history = useHistory();
 	const MySwal = withReactContent(Swal);
@@ -42,7 +41,7 @@ export default function DetailBeer() {
 	}, [dispatch]);
 
 	const addToCart = async () => {
-		const response = await axios.put(`${process.env.REACT_APP_HOST_BACKEND}/addToCart`, { params: { "username": "TestUser", "postId": parseInt(id), "quantity": cantidad } }, { headers: validationHeadersGenerator() })
+		const response = await axios.put(`${process.env.REACT_APP_HOST_BACKEND}/addToCart`, { params: { "username": "TestUser", "postId": parseInt(id) } }, { headers: validationHeadersGenerator() })
 		dispatch(getCart(1)); ////////////TIENE QUE TRAER EL ID DEL USUARIO QUE ESTÁ CONECTADO
 		return (response.data)
 	}

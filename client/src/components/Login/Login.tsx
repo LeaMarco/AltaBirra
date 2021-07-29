@@ -18,6 +18,7 @@ import swal from 'sweetalert';
 function validate(dataState: iData, errors: iError, e): iError {
   let name = e.target.name;
 
+
   //AL PRINCIPIO SIN ERRORES A MENOS QUE ALGUIEN DIGA LO CONTRARIO
   errors[name].error = false;
   errors[name].edit = true;
@@ -90,7 +91,7 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
 
     axios
       .post(`${process.env.REACT_APP_HOST_BACKEND}/auth/signin/`, { params: postObj })
-      .then((e: any) => {
+      .then(async (e: any) => {
         localStorage.clear()
         if (!e.data.token) return messages(e);
         localStorage.setItem('tokenLocal', e.data.token)
@@ -100,6 +101,9 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
         console.log('LOGUEADO CON PLANILLA!!!');
         toogleAuth()
         closeModal()
+        await setTimeout(() => window.location.reload(), 1000) //le da tiempo a que se vea el mensaje
+
+
       }).catch((error) => console.log('No te pudiste loguear local!'))
   };
 
@@ -151,7 +155,6 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
 
 
   //////////////////////////////FACEBOOK///////////////////////////////////////////////////////
-
   const componentClicked = () => {
     console.log("me pulsaste")
   }
@@ -169,7 +172,7 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
         guestsItemsInCart
       }
     })
-      .then((e) => {
+      .then(async (e) => {
         localStorage.clear()
         localStorage.setItem('tokenFacebook', tokenId)
         welcome();
@@ -180,12 +183,17 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
         closeModal()
         toogleAuth()
         closeModal()
+        await setTimeout(() => window.location.reload(), 1000) //le da tiempo a que se vea el mensaje
         if (!e.data.token) return messages(e);
+
+
+
 
       })
       .catch((error) => console.log('No te pudiste loguear con theFacebook!'))
   }
   //////////////////////////////fin facebook///////////////////////////////////////////////////////
+
 
 
   //////////////////////////////LOGICA DE GOOGLE///////////////////////////////////////////////////
@@ -202,7 +210,7 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
           guestsItemsInCart
         }
       })
-      .then((e) => {
+      .then(async (e) => {
         localStorage.clear()
         if (!tokenId) return messages(e);
         localStorage.setItem('tokenGoogle', tokenId)
@@ -210,8 +218,10 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
         dispatch(getUserData(e.data))
         dispatch(login(true));
         console.log('LOGUEADO CON GOOGLE!!!');
-        toogleAuth()
-        closeModal()
+        toogleAuth()//Si se recarga y queda asi, estos estan deprecados
+        closeModal()//Si se recarga y queda asi, estos estan deprecados
+        await setTimeout(() => window.location.reload(), 1000) //le da tiempo a que se vea el mensaje
+
 
       })
       .catch((error) => console.log('No te pudiste loguear con Google!'))
@@ -220,6 +230,8 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
     console.log("Fallo el login!", response,);
   };
   //////////////////////////////fin de logica de google///////////////////////////////////////////////////
+
+
 
   let btnFacebookSize = 1
   return (
