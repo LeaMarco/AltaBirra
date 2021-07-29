@@ -166,7 +166,7 @@ export default function EditPost() {
               <div className={styles.genericType}>
                 <label>Generic Type:  </label>
                 <select {...register("beer.genericType")} required >
-                <option hidden></option>
+                {/* <option hidden></option> */}
                   {generic && generic.map(value => (
                     <option key={value} value={value}>
                       {value}
@@ -177,7 +177,7 @@ export default function EditPost() {
               <div className={styles.specificType}>
                 <label>Specific Type:  </label>
                 <select {...register("beer.specificType")} required>
-                <option hidden></option>
+                {/* <option hidden></option> */}
                   {specific && specific.map(value => (
                     <option key={value} value={value}>
                       {value}
@@ -240,7 +240,7 @@ export default function EditPost() {
             {estado.discount ?
               <div>
                 <div className={styles.container}>
-                  <input {...register("countable.discount")} type="number" min="0" autoComplete="off" className={styles.input} />
+                  <input {...register("countable.discount")} type="number" min="0" max="100" autoComplete="off" className={styles.input} />
                   <label>Discount *</label>
                   <span className={styles.focusBorder}></span>
                 </div>
@@ -263,7 +263,7 @@ export default function EditPost() {
           </div>
         </form>
       </div>
-      <div><Preview image={image} info={watch()} /></div>
+      <div ><Preview image={image} info={watch()} /></div>
     </div>
   ) : (
     <div>

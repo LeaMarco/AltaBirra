@@ -13,8 +13,8 @@ const db = knex(
         connection: {
             host: '127.0.0.1',
             user: 'postgres',
-            password: '1234',
-            database: 'beers', //crear tabla en beers y cambiar abajito
+            password: '193728',
+            database: 'image_upload', //crear tabla en beers y cambiar abajito
         },
     }
 );

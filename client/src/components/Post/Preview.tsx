@@ -24,17 +24,17 @@ export default function Preview({ info, image }) {
 
 	let dataPrevie = {
 		beer: {
-		  abv: "99",
+		  abv: "abv?",
 		  dryHop: false,
-		  genericType: "TIPO GENÉRICO?",
-		  ibu: "88",
-		  volume: "777",
-		  og: "66",
-		  specificType: "TIPO ESPECIFICO?",
-		  calories: "555",
+		  genericType: "Tipo genérico?",
+		  ibu: "ibu?",
+		  volume: "volume?",
+		  og: "og?",
+		  specificType: "Tipo específico?",
+		  calories: "cal?",
 		},
 		infoPost: {
-		  title: "NOMBRE DE TU CERVEZA",
+		  title: "Nombre de tú cerveza",
 		  description: "Acá irá tu descripción",
 		  image: image ? image : "https://i.imgur.com/FsGTu6Q.png",
 		  stock: 1,
@@ -43,8 +43,8 @@ export default function Preview({ info, image }) {
 		  username: "testUser",
 		},
 		countable: {
-		  price: "999",
-		  discount: "5",
+		  price: "???",
+		  discount: "?",
 		  expireDate: Date.now(),
 		}
 	  }
@@ -81,7 +81,7 @@ export default function Preview({ info, image }) {
 								<div className={Style.buyInfo}>
 									<div className={Style.buttonsPago}>
 										{ info.countable.discount !== 0 && info.countable.discount!== undefined?
-											<p className={Style.originalPrice}> ${(info.countable.price - info.countable.price * (info.countable.discount / 100)).toFixed(2)} </p> : <p className={Style.originalPrice} > ${info.countable.price}</p>}
+											<p className={Style.originalPrice}> ${(info.countable.price - info.countable.price * (info.countable.discount / 100)).toFixed(2)} </p> : <p className={Style.originalPrice} > ${info.countable.price?info.countable.price:dataPrevie.countable.price}</p>}
 										{info.countable.discount !== 0 && info.countable.discount!== undefined?
 											<div className={Style.SecondPrices}>
 												<p className={Style.priceWODiscount}>${info.countable.price}</p>
