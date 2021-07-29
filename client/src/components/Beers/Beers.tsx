@@ -33,11 +33,10 @@ const Beers = () => {
   return (
     <div className="containerBeersPremium">
       <h1 id="titulo">Las recomendadas de Alta Birra</h1>
-      <div className="beers">
+      <div id="recomendadas" className="beers">
       {
         typeof usersPremium === "object" 
         ? usersPremium.slice(firstRandomBeer, firstRandomBeer+5).map((userPremium) => (
-          
 
           <Beer
             key={userPremium.id}

@@ -66,7 +66,6 @@ router.get('/premium', async (req:Request, res:Response) => {
       countable: true,
       beer: true
     }
-
   });
   
   if(premiumUsers.length === 0) return res.send('VACIO');
