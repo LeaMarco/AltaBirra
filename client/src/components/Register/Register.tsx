@@ -12,6 +12,7 @@ import { validate } from "./validate";
 import { SocialIcon } from 'react-social-icons'
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 import swal from 'sweetalert';
+import { getUserData, login } from "../../actions";
 
 ///leand, facu  
 const onlyLettersMge = "Solo debe tener letras mayusculas o minusculas";
@@ -31,8 +32,12 @@ const patternEmailMge = "Error en el formato del mail ingresado";
 
 
 ////////////////////////////////////////
-const Register: React.FunctionComponent<{ closeModal, toogleEnter, toogleRegister, }> = ({ closeModal, toogleEnter,
-  toogleRegister, }) => {
+const Register: React.FunctionComponent<{ toogleAuth, closeModal, toogleEnter, toogleRegister, }> = ({ closeModal, toogleEnter,
+  toogleRegister, toogleAuth }) => {
+
+  const dispatch = useDispatch();
+
+
   //////////Variable para manejar carrito de guest//////////
   let guestsItemsInCart = localStorage.guestsItemsInCart
   if (!guestsItemsInCart) guestsItemsInCart = "{}"
@@ -87,6 +92,43 @@ const Register: React.FunctionComponent<{ closeModal, toogleEnter, toogleRegiste
     },
   });
 
+
+  ////MENSAJE DE REGISTER_AUTOLOG//
+
+  const welcome = () => {
+    swal({
+      title: 'Bienvenido a AltaBirra!',
+      text: 'Disfrutá de las mejores cervezas...',
+      icon: 'success',
+      timer: 3000
+    })
+  }
+
+  const messages = (e) => {
+    if (e.data === 'NoUsuario') {
+      swal({
+        title: 'Usuario no registrado',
+        text: 'Debes registrarte para poder ingresar',
+        icon: 'error'
+      })
+    }
+    else if (e.data === 'IncorrectPassword') {
+      swal({
+        title: 'Contraseña Incorrecta!',
+        text: '',
+        icon: 'warning'
+      })
+    }
+    else if (e.data === 'NoVerificado') {
+      swal({
+        title: 'Cuenta no verificada',
+        text: 'Debes verificar tu cuenta para poder ingresar',
+        icon: 'warning'
+      })
+    }
+  }
+  /////////////////////////////////////////////////////////////
+
   const handleOnChange = (e) => {
     let newState: iData = {
       ...data,
@@ -109,7 +151,7 @@ const Register: React.FunctionComponent<{ closeModal, toogleEnter, toogleRegiste
   const responseGoogleRegister = (response: any) => {
 
     console.log(response, 'RESPONSE');
-
+    const tokenId = response.tokenId
     const name = response.Ts.RT;
     const googleId = response.googleId;
     const username = response.Ts.RT + "_" + googleId;
@@ -126,11 +168,22 @@ const Register: React.FunctionComponent<{ closeModal, toogleEnter, toogleRegiste
         },
       })
       .then((e: any) => {
-        console.log("Bienvenido!")
-        renderLogin()
+
+        // Logica de autologueo luego de register//
+        localStorage.clear()
+        if (!tokenId) return messages(e);
+        localStorage.setItem('tokenGoogle', tokenId)
+        welcome();
+        dispatch(getUserData(e.data))
+        dispatch(login(true));
+        console.log('LOGUEADO CON GOOGLE!!!');
+        toogleAuth()
+        //////////////sacar renderLogin!, agregar esto y poner arriba el token correspondiente segun donde estes parado//////////
+
         closeModal()
+
       }).catch((e) => {
-        console.log("Ya tenés usuario, logueate!")
+        console.log("Error al registrarte: faq tuvo la culpa")
         setAlreadyRegister(true)
       })
 
@@ -151,6 +204,7 @@ const Register: React.FunctionComponent<{ closeModal, toogleEnter, toogleRegiste
     const facebookId = response.id;
     const username = name.replaceAll(" ", "_") + "_" + facebookId;
     const email = response.email;
+    const tokenId = response.accessToken
     console.log(guestsItemsInCart, "guestsItemsInCart")
     axios.post(`${process.env.REACT_APP_HOST_BACKEND}/auth/signup`, {
       params: {
@@ -162,8 +216,16 @@ const Register: React.FunctionComponent<{ closeModal, toogleEnter, toogleRegiste
     })
 
       .then((e: any) => {
-        console.log("Bienvenido !")
-        renderLogin()
+        // Logica de autologueo luego de register//
+        localStorage.clear()
+        if (!tokenId) return messages(e);
+        localStorage.setItem('tokenGoogle', tokenId)
+        welcome();
+        dispatch(getUserData(e.data))
+        dispatch(login(true));
+        console.log('LOGUEADO CON GOOGLE!!!');
+        toogleAuth()
+        //////////////sacar renderLogin!, agregar esto y poner arriba el token correspondiente segun donde estes parado//////////
         closeModal()
       })
       .catch((e) => {
@@ -184,7 +246,6 @@ const Register: React.FunctionComponent<{ closeModal, toogleEnter, toogleRegiste
   ////////////////////LOGICA DE REGISTRO LOCAL ///////////////////////////////////////
 
   const handleOnSubmit = async (e) => {
-
 
     e.preventDefault();
     let postObj = {
@@ -215,22 +276,21 @@ const Register: React.FunctionComponent<{ closeModal, toogleEnter, toogleRegiste
       text: 'Por favor verifica tu cuenta con el correo que te hemos enviado...',
       icon: 'success',
       buttons: {
-        confirm:{
-          text:'OK'
+        confirm: {
+          text: 'OK'
           // value: null,
           // visible: true,
           // className: 'btn btn-confirm',
           // closeModal: true
-        // },
-        // cancel: {
-        //   text: 'Cancelar'
-        // }
+          // },
+          // cancel: {
+          //   text: 'Cancelar'
+          // }
         }
-      }      
+      }
     })
   }
   ////////////////////FIN DE LOGICA DE REGISTRO LOCAL///////////////////////////////////////
-
 
   return (
     <div id={Style.register}>
@@ -347,9 +407,7 @@ const Register: React.FunctionComponent<{ closeModal, toogleEnter, toogleRegiste
             <button id={Style.btnRegister} onClick={renderLogin} style={{ backgroundColor: "rgb(248, 245, 245)" }}>Ya estás registrado! <span style={{ fontWeight: "bold" }}> Ir a Loguin</span>{'>>'} </button>
             :
             <button id={Style.btnRegister}> Listo! </button>
-
         }
-
 
       </form>
       <div

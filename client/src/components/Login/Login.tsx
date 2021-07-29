@@ -188,6 +188,7 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
   //////////////////////////////fin facebook///////////////////////////////////////////////////////
 
 
+
   //////////////////////////////LOGICA DE GOOGLE///////////////////////////////////////////////////
   const responseGoogleLogin = (response: any) => {
 
@@ -211,6 +212,7 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
         dispatch(login(true));
         console.log('LOGUEADO CON GOOGLE!!!');
         toogleAuth()
+
         closeModal()
 
       })
@@ -220,6 +222,8 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
     console.log("Fallo el login!", response,);
   };
   //////////////////////////////fin de logica de google///////////////////////////////////////////////////
+
+
 
   let btnFacebookSize = 1
   return (

@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs"
 import { PrismaClient } from "@prisma/client";
 import { NextFunction, Request, Response, Router } from "express";
 import { transporter, emailRegistracion } from './mailing';
+import axios from 'axios';
 
 
 const router = Router();
@@ -29,6 +30,7 @@ export function validatePassword(password: string, user: User): boolean {
 
 
 export const signup = async (req: Request, res: Response) => {
+
 	let usuarioHash;
 	let user;
 
@@ -129,7 +131,23 @@ export const signup = async (req: Request, res: Response) => {
 		emailRegistracion(email, titulo, usuarioHash, username);
 	}
 
-	return res.json(user)
+	let userData;
+
+	await prisma.user.findUnique({ where: { username: username }, include: { role: true } })
+		.then(r => {
+			userData = {
+				id: r?.id,
+				nombre: r?.name,
+				premium: r?.premium,
+				favoritos: r?.favoriteId,
+				userRol: r?.role.name
+			}
+		})
+		.catch(e => res.status(500).json({ msge: "Error inesperado: no se encontro al user luego de updatearlo o crearlo", error: e }))
+
+
+
+	return res.json(userData ? userData : { error: "Error inesperado: no entro en catch pero tampoco inicializo a user data" })
 	// res.status(500).send("Error inesperado: llame a batman")
 
 };
@@ -140,8 +158,10 @@ export const signin = async (req: Request, res: Response) => {
 	const user = await prisma.user.findUnique({
 		where: {
 			username: req.body.params.nameMail
-		}
+		},
+		include: { role: true }
 	})
+
 
 	if (!user || user.activeCount === false) return res.status(400).send('NoUsuario');
 
@@ -166,7 +186,8 @@ export const signin = async (req: Request, res: Response) => {
 			id: user.id,
 			nombre: user.name,
 			premium: user.premium,
-			favoritos: user.favoriteId
+			favoritos: user.favoriteId,
+			userRol: user.role.name
 		}
 
 		if (req.body.params.password) {//Si es registrado local
