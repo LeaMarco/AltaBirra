@@ -167,56 +167,54 @@ export default function Nav() {
       
       {/* TERCER HIJO */}
       <div className={style.ButtonsNavBar}>
-        <div className={style.buttonsRight}>
-          <ModalFavorites isOpen={showFavorites} handleClose={toogleFavorites}>
-            <FavoritesTab closeModal={toogleFavorites} />
-          </ModalFavorites>
-          {
-            isAuth
-              ? <button onClick={toogleFavorites} className={style.buttonFavorites}>
-                <img className={style.buttonImg} src="https://image.flaticon.com/icons/png/512/1077/1077035.png" alt="Favorites" height="1vh" />
-              </button>
-              : null
-          }
-          <Link
-            to="/cart/1" ////////FALTA METER EL ID DE USER
-            className={style.buttonCart}
-          ><img className={style.buttonImg} src="https://image.flaticon.com/icons/png/512/3144/3144456.png" alt="Cart" />
-            <span>{carts && carts.length}</span>
-          </Link>
-          <Modal isOpen={isEnterOpen} handleClose={toogleEnter}>
-            <Login closeModal={toogleEnter} toogleAuth={toogleAuth} />
-          </Modal>
+        {register ? (
+          <div className={style.buttonsRight}>
+            <Link
+              to="/"
+              className={style.buttonEnter}
+              onClick={() => setRegister(!register)}
+            >
+              Favoritos
+            </Link>
+            <Link
+              to="/"
+              className={style.buttonEnter}
+              onClick={() => setRegister(!register)}
+            >
+              Mis Compras
+            </Link>
+            <Link
+              to="/"
+              className={style.buttonEnter}
+              onClick={() => setRegister(!register)}
+            >
+              Salir
+            </Link>
+          </div>
+        ) : (
+          <div className={style.buttonsRight}>
+            <ModalFavorites isOpen={showFavorites} handleClose={toogleFavorites}>
+              <FavoritesTab closeModal={toogleFavorites} />
+            </ModalFavorites>
+            {
+              isAuth
+                ? <button onClick={toogleFavorites} className={style.buttonFavorites}>
+                  <img className={style.buttonImg} src="https://image.flaticon.com/icons/png/512/1077/1077035.png" alt="Favorites" height="1vh" />
+                </button>
+                : null
+            }
+            <Link
+              to="/cart/1" ////////FALTA METER EL ID DE USER
+              className={style.buttonCart}
+            ><img className={style.buttonImg} src="https://image.flaticon.com/icons/png/512/3144/3144456.png" alt="Cart" />
+              <span>{carts && carts.length}</span></Link>
+            <Modal isOpen={isEnterOpen} handleClose={toogleEnter}>
+              <Login closeModal={toogleEnter} toogleAuth={toogleAuth} />
+            </Modal>
 
-          <Modal isOpen={isRegisterOpen} handleClose={toogleRegister}>
+            <Modal isOpen={isRegisterOpen} handleClose={toogleRegister}>
             <Register toogleAuth={toogleAuth} closeModal={toogleRegister} toogleEnter={toogleEnter} toogleRegister={toogleRegister} />
-          </Modal>
-
-          {
-            !isAuth
-              ? <div className={style.buttonsRightEnter}>
-                <button className={style.buttonEnter} onClick={toogleEnter}>
-                  Entrar
-                </button>
-                <button className={style.buttonEnter} onClick={toogleRegister}>
-                  Registrarme
-                </button>
-              </div>
-              : <div style={{ display: "flex" }}>
-                {/* <div className={style.fourColumn}> */}
-                <span className={style.welcome} >
-                  Bienvenido {stateWelcome.nombre}
-                </span>
-                <Link className={style.textDecoration} to="/panel">
-                  <button className={style.buttonEnter}>Panel</button>
-                </Link>
-                <button className={style.closeSesion} onClick={close}>
-                  Cerrar sesión
-                </button>
-                {/* </div> */}
-              </div>
-          }
-        </div>
+            </Modal>
 
             {/* <div className={style.buttonsRight}> */}
             {
@@ -231,23 +229,25 @@ export default function Nav() {
                 </div>
                 : <div className={style.thirdColumn}>
                   {/* <div className={style.fourColumn}> */}                  
-                    <Link className={style.textDecoration} to="/panel">
-                      <button className={style.buttonEnter}>Panel</button>
-                    </Link>
-                    <div className={style.userData}>
-                      <span className={style.welcome} >
-                        Bienvenido {stateWelcome.nombre}
-                      </span>
-                      <button className={style.closeSesion} onClick={close}>
-                        Cerrar sesión
-                      </button>
-                    </div>
+                  <Link className={style.textDecoration} to="/panel">
+                    <button className={style.buttonEnter}>Panel</button>
+                  </Link>
+                  <div className={style.userData}>
+                    <span className={style.welcome} >
+                      Bienvenido {stateWelcome.nombre}
+                    </span>
+                    <button className={style.closeSesion} onClick={close}>
+                      Cerrar sesión
+                    </button>
+                  </div>
                   {/* </div> */}
                 </div>
             }
-          
-               
-        
+          </div>
+          // </div>
+          // </div>
+        )
+        }
         <div className={style.mobileIcons}>
           <div className={style.searchFa}>
             <FaSearch />
@@ -257,7 +257,6 @@ export default function Nav() {
           </div>
         </div>
       </div >
-      
       {/* FIN TERCER HIJO */}
     </div >
   );
