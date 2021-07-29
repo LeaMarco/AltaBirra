@@ -17,7 +17,7 @@ const Beer = ({ id, image, title, ibu, abv, discount, price, rating }) => {
 
 
 	return (
-		<div className={Style.containerBack}>
+		<div id={id} className={Style.containerBack}>
 			<div className={Style.container}>
 				<button
 					onClick={fetchDetail}

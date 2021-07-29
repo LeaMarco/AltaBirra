@@ -123,7 +123,6 @@ router.get('/premium', async (req:Request, res:Response) => {
       countable: true,
       beer: true
     }
-
   });
 
   
