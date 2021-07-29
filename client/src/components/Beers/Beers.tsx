@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect } from "react";
 import { loadUsersPremium } from "../../actions";
 import './beers.css';
-import Carousel from 'react-multi-carousel';
+// import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import { Carousel } from 'react-responsive-carousel';
 
 const Beers = () => {
 
@@ -36,7 +37,7 @@ const Beers = () => {
   return (
     <div className="containerBeersPremium">
       <h1 id="titulo">Las recomendadas de Alta Birra</h1>
-      <Carousel responsive={responsive} removeArrowOnDeviceType={["tablet", "mobile", "smallMobile"]} className="beers">
+      <Carousel className="beers">
         {
           typeof usersPremium === "object"
             ? usersPremium.map((userPremium) => (

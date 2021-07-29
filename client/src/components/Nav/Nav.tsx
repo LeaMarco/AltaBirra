@@ -47,14 +47,14 @@ export default function Nav() {
   const toogleAuth = () => setAuth(!isAuth);
 
   const stateWelcome = useSelector((state) => state["welcome"]);
-  console.log(stateWelcome, 'ACA ESTOY');
+  // console.log(stateWelcome, 'ACA ESTOY');
   ////////////////////AUTENTICACION AUTOMATICA//////////////////////////////////////////////////
   useLayoutEffect(() => {
     if (Object.keys(localStorage).join().includes("token")) {
       axios.get(`${process.env.REACT_APP_HOST_BACKEND}/auth/autoLogin`, {
         headers: validationHeadersGenerator()
       }).then(e => {
-        console.log('ESTO QUIERO VER', e.data);
+        // console.log('ESTO QUIERO VER', e.data);
         dispatch(getUserData(e.data))
 
         dispatch(login(true));
