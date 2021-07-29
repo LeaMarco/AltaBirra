@@ -80,7 +80,7 @@ router.use("/buyHistory", tokenValidation, buyHistory);///**@Ruta sin front */
 router.use("/editUsers", /* tokenValidation, */ editUsers);//
 router.use("/moderatePost", /* tokenValidation, */ moderatePost);//
 
-router.use("/viewHistory", /* tokenValidation, */ viewHistory);//
+router.use("/viewHistory", tokenValidation, viewHistory);//
 router.use("/transactionState", /* tokenValidation, */ transactionState);//
 router.use("/sellingPosts", tokenValidation, sellingPosts);
 

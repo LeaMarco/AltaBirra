@@ -8,20 +8,19 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 export default function SellHistory() {
-	const userId = 1;
 	const dispatch = useDispatch();
 	const history = useSelector((state: RootState) => state.history);
 	const [filter, setFilter] = useState<string | undefined>(undefined);
 	const [newState, setNewState] = useState<string>("Cancelada");
 
 	useEffect(() => {
-		dispatch(getHistory("sell", filter, userId));
+		dispatch(getHistory("sell", filter));
 	}, [dispatch, filter])
 
-	async function handleSubmit(event, post) {
+	async function handleSubmit(event, id) {
 		event.preventDefault();
-		await axios.put(`${process.env.REACT_APP_HOST_BACKEND}/transactionState`, { transactionId: post.id, newState });
-		dispatch(getHistory("sell", filter, userId));
+		axios.put(`${process.env.REACT_APP_HOST_BACKEND}/transactionState`, { transactionId: id, newState })
+			.then(() => dispatch(getHistory("sell", filter)));
 	}
 
 	return (
@@ -42,7 +41,7 @@ export default function SellHistory() {
 							<div key={post.post.id} style={{ border: "1px solid black" }} className={Style.subcontainer}>
 								{
 									post.state === "Procesando"
-										? <form onSubmit={event => handleSubmit(event, post)}>
+										? <form onSubmit={event => handleSubmit(event, post.id)}>
 											<select onChange={event => setNewState(event.target.value)}>
 												<option> Cancelada </option>
 												<option> Completa </option>
@@ -58,8 +57,8 @@ export default function SellHistory() {
 										<div>
 											<h4> Precio: ${post.price} </h4>
 											<h4> Estado: {post.state} </h4>
-											<h4> Cantidad compradas: {post.quantity} </h4>
-											<h4> Fecha: {post.createdAt} </h4>
+											<h4> Cantidad vendidas: {post.quantity} </h4>
+											<h4> Fecha: {`${post.createdAt.slice(8, 10)}/${post.createdAt.slice(5, 7)}/${post.createdAt.slice(0, 4)}`} </h4>
 										</div>
 									</div>
 								</div></Link>

@@ -6,14 +6,14 @@ import { RootState } from "../../reducers";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import axios from "axios";
+import { validationHeadersGenerator } from "../../validationHeadersGenerator";
 
 export default function ViewHistory() {
-	const userId = 1;
 	const dispatch = useDispatch();
 	const history = useSelector((state: RootState) => state.history);
 
 	useEffect(() => {
-		dispatch(getHistory("view", undefined, userId));
+		dispatch(getHistory("view", undefined));
 	}, [dispatch])
 
 	function deleteConfirm() {
@@ -27,13 +27,13 @@ export default function ViewHistory() {
 			confirmButtonText: 'Borrar Todo'
 		}).then(async (result) => {
 			if (result.isConfirmed) {
-				await axios.delete(`${process.env.REACT_APP_HOST_BACKEND}/viewHistory`, { data: { userId } });
+				await axios.delete(`${process.env.REACT_APP_HOST_BACKEND}/viewHistory`, { headers: validationHeadersGenerator() });
 				Swal.fire(
 					'¡Borrado!',
 					'¡Se limpió tu historial!',
 					'success'
 				)
-				dispatch(getHistory("view", undefined, userId));
+				dispatch(getHistory("view", undefined));
 			}
 		})
 	}
