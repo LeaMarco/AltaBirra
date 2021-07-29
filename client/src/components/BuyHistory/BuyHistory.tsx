@@ -14,20 +14,26 @@ export default function BuyHistory() {
 	const history = useSelector((state: RootState) => state.history);
 	const search = useLocation().search;
 	const redirect = useHistory();
-	let status = new URLSearchParams(search).get("status");
+
+	let status = new URLSearchParams(search).get("status")
+
+	useEffect(() => {
+		if (status === "approved") {
+			console.log("ACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+			status = null
+
+			axios.post(`${process.env.REACT_APP_HOST_BACKEND}/transaction`, null, { headers: validationHeadersGenerator() })
+				.then(() => {
+					redirect.push(`/historialCompras`)
+				})
+				.catch(() => (console.log("no se pudo crear la transaccion")))
+		}
+	}, [])
 
 	useEffect(() => {
 		dispatch(getHistory("buy", filter));
 	}, [dispatch, filter])
 
-	if (status === "approved") {
-		status = null
-		axios.post(`${process.env.REACT_APP_HOST_BACKEND}/transaction`, null, { headers: validationHeadersGenerator() })
-			.then(() => {
-				redirect.push(`/historialCompras`)
-			})
-			.catch(() => (console.log("no se pudo crear la transaccion")))
-	}
 
 	return (
 		<div className={Style.container}>
