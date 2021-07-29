@@ -4,6 +4,7 @@
     justify-content: center;
     align-items: center;
 }
+
 .postForm{
     display: flex;
     flex-direction: column;
@@ -44,7 +45,7 @@ input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width
 }
 .postFormBeer input{
     height: 2em;
-    width:15em;
+    width:6em;
 }
 .postFormInfoPost{
     margin-top: 1em;
@@ -58,6 +59,7 @@ input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: space-around;
     width:32em;
 }
 .InfoPostCheckboxes{
@@ -137,7 +139,7 @@ input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width
     flex-direction: row;
     flex-wrap: wrap;
     align-self: center;
-    width:29em;
+
 }
 
 .postFormSubmitButton{
@@ -163,4 +165,27 @@ input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width
 
 .uploadGroup{
     padding-bottom: 5%;
+}
+
+@media only screen and (max-width:1024px){
+    .previewComponent{
+        display:none;
+    }
+    .mainContainer{
+        height:100%;
+    }
+    .formContainer{
+        /* height:100%; */
+    }
+    .postForm{
+        height:100%;
+        width:fit-content;
+        margin-top: 10rem;
+        border:none;
+        overflow-y: unset;
+    }
+    .InfoPostCheckboxes{
+        max-width: 500px;
+
+    }
 }
