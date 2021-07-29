@@ -81,7 +81,7 @@ async function main() {
     },
   });
 
- 
+
 
   //TIPOS GENERICOS
   const rubia = await prisma.genericType.create({
@@ -271,7 +271,6 @@ términos cerveza blanca (Weissbier) y cerveza de trigo (Weizenbier).`,
     });
   }////////////////////////////////////////////////////////////////////////////////////////////
 
-
   {// LAGER O FERMENTACION INFERIOR ///////////////////////////////////////////////////////////
     await prisma.specificType.create({
       data: {
@@ -402,16 +401,7 @@ enorme, como manzanas, plátanos y moras. Los sabores son muy variados. `,
 
 
 
-  //   /////////////COSAS DE PRODUCCION////////////////////
-  //   //POSTS
-
-  //   //ADD TO CART
-
-  //   //SIGN-UP OF USER
-
   //   //TRANSACTION
-  
-  //   //NO HACE FALTA ADD BEER, SE CREA SIEMPRE DESDE POST
   const amount = 300;
   ////////AUTOPOST para faqqqquu////////////////
   await (async () => {
