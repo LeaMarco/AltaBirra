@@ -19,37 +19,37 @@
   display: flex;
   align-items: center;
 }
-
-.welcome{
-  display: flex;
-  width: 200px;
+.welcome{  
+  width: fit-content;
   justify-content: center;
   border-radius: 30px;
   background-color: black;
   color: white;  
   font-weight: bold;
-  padding: 10px;
+  font-size: 12px;
+  padding: 5px;
+  padding-left: 8px;
+  padding-right: 8px;
   border: 2px solid white;
   box-shadow: 0px 0px 6px white;
-  height: fit-content;
 }
 
 .closeSesion{
-  border: 1px solid red;
-    background-color: red;
-    border-radius: 30px;
-    border: 1px solid white;
-    width: 80px;
-    justify-content: center;
-    align-self: center;
-    padding: 10px;
-    font-size: 10px;
-    font-weight: bold;
+  background-color: #f08120;
+  border-radius: 30px;
+  border: 1px solid white;
+  width: fit-content; 
+  padding: 5px;
+  padding-left: 8px;
+  padding-right: 8px;
+  font-size: 11px;
+  margin-top: 10px;
+  color: white;
 }
 
 .closeSesion:hover{
   cursor: pointer;
-  color: white;
+  color: black;
   box-shadow: 0px 0px 3px white;
 }
 
