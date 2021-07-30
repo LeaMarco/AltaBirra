@@ -402,7 +402,7 @@ enorme, como manzanas, plátanos y moras. Los sabores son muy variados. `,
 
 
   ////TRANSACTION
-  const amount = 300;
+  const amount = 50;
   ////////AUTOPOST para faqqqquu////////////////
   await (async () => {
     let CERVEZAS_ROJAS = [
