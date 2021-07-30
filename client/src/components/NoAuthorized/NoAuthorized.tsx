@@ -7,8 +7,8 @@ import logoNoAuthorized from '../../img/NoAuthorized.jpg';
 
 const NoAuthorized = () => {
 	
-	if(window.location.href !== 'https://localhost:3000/noAutorizado') {
-		window.location.href = 'https://localhost:3000/noAutorizado'
+	if(window.location.href !== `${process.env.REACT_APP_HOST_FRONTEND}/noAutorizado`) {
+		window.location.href = `${process.env.REACT_APP_HOST_FRONTEND}/noAutorizado`
 	}
 
 	return (
@@ -20,7 +20,7 @@ const NoAuthorized = () => {
 					Debes estar logueado para<br/>
 					acceder a esta sección!
 				</span><br/><br/><br/>
-				<a href="https://localhost:3000">Volver a la página principal</a>
+				<a href={`${process.env.REACT_APP_HOST_FRONTEND}`}>Volver a la página principal</a>
 				
 			</div>
 		</div>
