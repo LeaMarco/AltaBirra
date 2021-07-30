@@ -8,7 +8,7 @@ import { RootState } from "../../reducers";
 import { useState } from "react";
 import axios from 'axios';
 import { validationHeadersGenerator } from "../../validationHeadersGenerator";
-
+import Swal from "sweetalert2";
 
 interface User {
 	nombre: string;
@@ -18,7 +18,8 @@ interface User {
 }
 
 function AdminPanel() {
-    
+
+
 	const [seeModal, setSeeModal] = useState<boolean>(false)
 	const [showYeahNewPassword, setShowYeahNewPassword] = useState<boolean>(false)
 	const history = useHistory();
@@ -29,36 +30,54 @@ function AdminPanel() {
 	}
 
 	function handleDesactivarCuenta(e) {
+
 		e.preventDefault()
-		axios.patch(`${process.env.REACT_APP_HOST_BACKEND}/desactivateAccount`, null, { headers: validationHeadersGenerator() }).then(res => {
-			localStorage.clear()
-			console.log(res)
-			history.push("")
+
+		Swal.fire({
+			title: '¿Seguro de borrar todo tu historial?',
+			text: "No se puede revertir...",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Borrar Todo'
+		}).then(async (result) => {
+
+			if (result.isConfirmed) {
+				await axios.patch(`${process.env.REACT_APP_HOST_BACKEND}/desactivateAccount`, null, { headers: validationHeadersGenerator() }).then(res => {
+					localStorage.clear()
+					console.log(res)
+					history.push("")
+					window.location.reload()
+				})
+			}
+
+
 		})
 	}
 
-  
-  return(
-    <div className={styles.mainContainer}>
-        <div className={styles.panelTitle}>Panel de usuario</div>
-        <Link to="/panel/historialVistos" className={styles.menuButton}>
-					Vistos recientemente
+
+	return (
+		<div className={styles.mainContainer}>
+			<div className={styles.panelTitle}>Panel de usuario</div>
+			<Link to="/panel/historialVistos" className={styles.menuButton}>
+				Vistos recientemente
 			</Link>
 			<Link to="/panel/vendiendo" className={styles.menuButton}>
-					Posts en venta
+				Posts en venta
 			</Link>
 			<Link to="/panel/historialCompras" className={styles.menuButton}>
-					Historial de compras
+				Historial de compras
 			</Link>
 			<Link to="/panel/historialVentas" className={styles.menuButton}>
-					Historial de ventas
+				Historial de ventas
 			</Link>
 			<Link to="/post" className={styles.menuButton}>
-					Crear nuevo post
+				Crear nuevo post
 			</Link>
 			{
 				localStorage.tokenLocal
-					? <button onClick={toggleSeeModal} className={styles.menuButton} > Cambiar contraseña </button>
+					? <button style={{ cursor: "pointer" }} onClick={toggleSeeModal} className={styles.menuButton} > Cambiar contraseña </button>
 					: null
 			}
 			<ModalChangePassword isOpen={seeModal} handleClose={toggleSeeModal} >
@@ -68,12 +87,14 @@ function AdminPanel() {
 						: <ChangePassword setYeahNewPassword={setShowYeahNewPassword} toggleSeeModal={toggleSeeModal} />
 				}
 			</ModalChangePassword>
-			<button className={styles.menuButton} onClick={handleDesactivarCuenta}> Desactivar cuenta </button>
+
+			<button style={{ cursor: "pointer" }} className={styles.menuButton} onClick={handleDesactivarCuenta}> Desactivar cuenta </button>
+
 			<Link to="/admin" className={styles.menuButton}>
-					Panel de administrador
+				Panel de administrador
 			</Link>
-    </div>
-  )
+		</div>
+	)
 };
 
 export default AdminPanel
