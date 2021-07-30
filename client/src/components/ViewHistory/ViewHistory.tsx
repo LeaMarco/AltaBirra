@@ -61,7 +61,7 @@ export default function ViewHistory() {
 													</div>
 												</div>
 												<div>
-													<h4> ${post.post.countable.price} </h4>
+													<h4> ${post.post.countable?.price ? post.post.countable.price : null} </h4>
 												</div>
 											</div>
 										</div>
