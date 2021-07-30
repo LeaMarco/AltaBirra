@@ -35,7 +35,7 @@ const Beers = () => {
   const usersPremium = useSelector((state) => state["usersPremium"]);
   return (
     <div className="containerBeersPremium">
-      <h1 id="titulo">En promoción</h1>
+      <h1 id="titulo">Grandes ofertas</h1>
       <Carousel responsive={responsive} removeArrowOnDeviceType={["tablet", "mobile", "smallMobile"]} className="beers">
         {
           typeof usersPremium === "object"

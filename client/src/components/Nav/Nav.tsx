@@ -44,9 +44,11 @@ export default function Nav() {
   const hasToken = Object.keys(localStorage).join().includes("token")
 
   let cartGuestItems;
-  if (localStorage.cartGuestItems) {
+
+  if (localStorage.guestsItemsInCart) {
     cartGuestItems = Object.keys(JSON.parse(localStorage.guestsItemsInCart)).length
   }
+
   const haveGuestCart = () => {
     return localStorage.guestsItemsInCart
   }
@@ -64,6 +66,7 @@ export default function Nav() {
 
   const stateWelcome = useSelector((state) => state["welcome"]);
   // console.log(stateWelcome, 'ACA ESTOY');
+
   ////////////////////AUTENTICACION AUTOMATICA//////////////////////////////////////////////////
   useLayoutEffect(() => {
     if (Object.keys(localStorage).join().includes("token")) {
@@ -80,8 +83,7 @@ export default function Nav() {
 
   }
     , [])
-
-
+  ////////////////////////////////////////////////////
 
   function handleSubmit(event) {
     event.preventDefault();

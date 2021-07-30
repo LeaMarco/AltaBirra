@@ -369,17 +369,37 @@ export const autoLogin = async function (req: Request, res: Response) {
 			}
 	}) */
 
+	/* await prisma.user
+	
+	
+		if (!user) return res.sendStatus(400)
+		else {
+			const userData = {
+				id: user.id,
+				nombre: user.name,
+				premium: user.premium,
+				favoritos: user.favoriteId,
+				userRol: user.roleId
+			}
+			return res.json(userData);
+		} */
+	let userData;
+	await prisma.user.findUnique({ where: { username: user?.username }, include: { role: true } })
+		.then(r => {
+			userData = {
+				id: r?.id,
+				nombre: r?.name,
+				premium: r?.premium,
+				favoritos: r?.favoriteId,
+				userRol: r?.role.name
+			}
+		})
+		.catch(e => res.status(500).json({ msge: "Error inesperado: no se encontro al user luego de updatearlo o crearlo", error: e }))
 
-	if (!user) return res.sendStatus(400)
-	else {
-		const userData = {
-			id: user.id,
-			nombre: user.name,
-			premium: user.premium,
-			favoritos: user.favoriteId
-		}
-		return res.json(userData);
-	}
+	return res.json(userData ? userData : { error: "Error inesperado: no entro en catch pero tampoco inicializo a user data" })
+
+
+
 }
 
 

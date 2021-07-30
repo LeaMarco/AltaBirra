@@ -28,9 +28,9 @@ router.post("/", async (req: Request, res: Response) => { //☢La hice async par
     let preference: CreatePreferencePayload = {
         items: data.data,
         back_urls: { ////////urls donde te redirige en base a lo que respondio mp, puede
-            "success": "http://localhost:3000/historialCompras",
-            "failure": "http://localhost:8080/feedback",
-            "pending": "http://localhost:8080/feedback"
+            "success": `${process.env.HOST_FRONT}/panel/historialCompras`,
+            "failure": "https://localhost:8080/feedback",
+            "pending": "https://localhost:8080/feedback"
         },
         auto_return: "approved",
     };

@@ -405,7 +405,8 @@ export interface iuserData {
 	id: number,
 	nombre: string,
 	premium: boolean,
-	favoritos: number
+	favoritos: number,
+	userRol?: string
 }
 
 export interface ActionUserData {
@@ -414,6 +415,7 @@ export interface ActionUserData {
 }
 
 export const getUserData = (user: iuserData) => {
+	console.log(user, "getuserdata")
 	return <ActionUserData>{
 		type: ActionTypes.ActionUserDataType,
 		payload: user

@@ -1,4 +1,4 @@
-import {ActionTypes, UserPremium, ActionUsersPremium, iuserData, ActionUserData, ActionLoginTypes } from '../actions';
+import { ActionTypes, UserPremium, ActionUsersPremium, iuserData, ActionUserData, ActionLoginTypes } from '../actions';
 
 // export const usersReducer = (state: User[] = [], action: Action) => {
 

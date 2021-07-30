@@ -89,8 +89,8 @@ export function PostinCart({
 				<button onClick={(e) => {
 					if (quantity <= 1) alert("Del piso no paso")
 					else {
-						guestCartHandleQuantity(-1)
 						setQuantity(quantity - 1)
+						guestCartHandleQuantity(-1)
 					}
 
 				}

@@ -24,6 +24,7 @@ function AdminPanel() {
 	const [showYeahNewPassword, setShowYeahNewPassword] = useState<boolean>(false)
 	const history = useHistory();
 	const user: User = useSelector((state: RootState) => state.welcome);
+	const userRole = useSelector((state: RootState) => state.welcome["userRol"]);
 	const [seeAdmin, setSeeAdmin] = useState<boolean>(false);
 	function toggleSeeModal() {
 		setSeeModal(!seeModal)
@@ -90,9 +91,14 @@ function AdminPanel() {
 
 			<button style={{ cursor: "pointer" }} className={styles.menuButton} onClick={handleDesactivarCuenta}> Desactivar cuenta </button>
 
-			<Link to="/admin" className={styles.menuButton}>
-				Panel de administrador
-			</Link>
+			{
+				userRole === "ADMIN" ?
+					<Link to="/admin" className={styles.menuButton}>
+						Panel de administrador
+					</Link>
+					:
+					null
+			}
 		</div>
 	)
 };

@@ -174,6 +174,7 @@ const Register: React.FunctionComponent<{ toogleAuth, closeModal, toogleEnter, t
         if (!tokenId) return messages(e);
         localStorage.setItem('tokenGoogle', tokenId)
         welcome();
+        console.log(e.data, "asdasd")
         dispatch(getUserData(e.data))
         dispatch(login(true));
         console.log('LOGUEADO CON GOOGLE!!!');
