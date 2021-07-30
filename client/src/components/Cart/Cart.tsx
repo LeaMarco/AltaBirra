@@ -37,11 +37,13 @@ function Cart() {
     //Solo si tiene un token de validacion realiza la llamada, sino, no hace nada
     if (haveToken) dispatch(getCart(id));
     // else getGuestCartPosts()
+
     else axios
       .get(`${process.env.REACT_APP_HOST_BACKEND}/getMultiplePostByIds`, { params: { guestsItemsInCart: localStorage.guestsItemsInCart } })
       .then(response => {
         setCartsGuestUser(response.data)
       })
+
     //O tiene un token, o tiene el carrito, el carrito se elimina al loguearse o registrare, ya que se carga a la base de datos
 
   }, []);

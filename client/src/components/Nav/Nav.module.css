@@ -37,7 +37,7 @@
 .closeSesion {
   background-color: #f08120;
   border-radius: 30px;
-  border: 1px solid white;
+  border: none;
   width: fit-content;
   padding: 5px;
   padding-left: 8px;
@@ -118,15 +118,12 @@
 
 .buttonEnter {
   background-color: #f49e51;
-  border-radius: 5px;
+  border-radius: 30px;
   color: white;
   text-decoration: none;
   border: none;
   padding: 3px 15px 3px 15px;
   font-size: 2vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   cursor: pointer;
 }
 

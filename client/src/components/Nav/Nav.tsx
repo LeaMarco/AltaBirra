@@ -185,9 +185,6 @@ export default function Nav() {
             {searchBar}
           </div>
           : <div className={style.buttonsRightEnter}>
-            <span className={style.welcome} >
-              Bienvenido {stateWelcome.nombre}
-            </span>
             <Link className={style.textDecoration} to="/panel">
               <button className={style.buttonEnter}>Panel</button>
             </Link>
@@ -195,6 +192,9 @@ export default function Nav() {
             <button className={style.closeSesion} onClick={close}>
               Cerrar sesión
             </button>
+            <span className={style.welcome} >
+              Bienvenido {stateWelcome.nombre}
+            </span>
           </div>
       }
     </div>;
@@ -295,9 +295,9 @@ export default function Nav() {
               <span className={style.welcome} >
                 Bienvenido {stateWelcome.nombre}
               </span>
-              <div>
+              <Link to="/panel">
                 <button className={style.buttonEnter}>Panel</button>
-              </div>
+              </Link>
               <button className={style.closeSesion} onClick={close}>
                 Cerrar sesión
               </button>

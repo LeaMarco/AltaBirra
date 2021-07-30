@@ -37,9 +37,11 @@ const Card = ({
   };
 
   async function addToFavorite() {
+
     await axios.post(`${process.env.REACT_APP_HOST_BACKEND}/addFavorite`, { postId: id }, { headers: validationHeadersGenerator() });
     dispatch(getFavoritePosts());
     setIsFavorite(true);
+
   }
 
   async function removeFavorite() {
