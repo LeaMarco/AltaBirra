@@ -20,6 +20,7 @@
     border-radius: 20px;
     overflow-y: scroll;
     scroll-behavior:smooth;
+    background-color: white;
 }
 
 .container{display: flex; align-items:center;flex-direction: column; float: left; width: 10.75rem; margin: 20px 3%; position: relative;}

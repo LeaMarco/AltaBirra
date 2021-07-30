@@ -3,6 +3,7 @@
   flex-direction: column;
   text-align: center;
   height: 100vh;
+  background-color: grey;
 }
 
 #title{
