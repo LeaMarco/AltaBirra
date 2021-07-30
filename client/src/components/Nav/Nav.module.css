@@ -15,16 +15,16 @@
   grid-auto-rows: minmax(100px, auto);
 }
 
-.fourColumn{
+.fourColumn {
   display: flex;
   align-items: center;
 }
-.welcome{  
+.welcome {
   width: fit-content;
   justify-content: center;
   border-radius: 30px;
   background-color: black;
-  color: white;  
+  color: white;
   font-weight: bold;
   font-size: 12px;
   padding: 5px;
@@ -34,20 +34,19 @@
   box-shadow: 0px 0px 6px white;
 }
 
-.closeSesion{
+.closeSesion {
   background-color: #f08120;
   border-radius: 30px;
   border: 1px solid white;
-  width: fit-content; 
+  width: fit-content;
   padding: 5px;
   padding-left: 8px;
   padding-right: 8px;
   font-size: 11px;
-  margin-top: 10px;
   color: white;
 }
 
-.closeSesion:hover{
+.closeSesion:hover {
   cursor: pointer;
   color: black;
   box-shadow: 0px 0px 3px white;
@@ -118,8 +117,7 @@
 }
 
 .buttonEnter {
-  margin-left: 2vw;
-  background-color: #F49E51;
+  background-color: #f49e51;
   border-radius: 5px;
   color: white;
   text-decoration: none;
@@ -132,40 +130,39 @@
   cursor: pointer;
 }
 
-.buttonCart{
+.buttonCart {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 3rem;
   width: 3rem;
-  background-color: #F49E51;
+  background-color: #f49e51;
   border-radius: 5rem;
-  border:none;
+  border: none;
 }
 
-.buttonFavorites{
+.buttonFavorites {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 3rem;
   height: 3rem;
-  background-color: #F49E51;
+  background-color: #f49e51;
   border-radius: 5rem;
-  border:none;
-  margin-right: 1.5rem;
+  border: none;
   cursor: pointer;
 }
 
-.buttonCart:hover{
+.buttonCart:hover {
   filter: brightness(130%);
   transition: 400ms;
 }
 
-.buttonFavorites:hover{
+.buttonFavorites:hover {
   filter: brightness(130%);
   transition: 400ms;
 }
-.buttonImg{
+.buttonImg {
   width: 25px;
   height: 25px;
   filter: invert(100%);
@@ -184,7 +181,7 @@
   align-items: center;
 }
 
-.textDecoration{
+.textDecoration {
   text-decoration: none;
 }
 
@@ -239,37 +236,37 @@
   color: grey;
 }
 
-.buttonsRightEnter{
+.buttonsRightEnter {
   display: flex;
   justify-content: space-around;
 }
 
-.SearchBarContainer{
-  display:flex;
+.SearchBarContainer {
+  display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: space-evenly;
   min-width: 21.375rem;
 }
-.searchFa{
-  display:none;
+.searchFa {
+  display: none;
 }
-.mobileIcons{
-  display:flex;
+.mobileIcons {
+  display: flex;
 }
-.menuMask{
-  display:none;
+.menuMask {
+  display: none;
 }
-.hamburguesa{
-  display:none;
+.hamburguesa {
+  display: none;
 }
-.menuhamburguesa{
-  display:none;
+.menuhamburguesa {
+  display: none;
 }
-.SearchBarContainerHamgurguer{
-  display:none;
+.SearchBarContainerHamgurguer {
+  display: none;
 }
-.ButtonsNavBar{
+.ButtonsNavBar {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -277,19 +274,19 @@
   justify-content: space-evenly;
 }
 
-@media only screen and (max-width:768px){
-  .searchFa{
+@media only screen and (max-width: 768px) {
+  .searchFa {
     display: block;
     position: absolute;
-    transform:translate(-100%,60%);
-    font-size:1.8rem;
-    cursor:pointer;
-    color:#fff;
+    transform: translate(-100%, 60%);
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: #fff;
   }
-  .SearchBarContainer{
+  .SearchBarContainer {
     display: none;
   }
-  .SearchBarContainerHamgurguer{
+  .SearchBarContainerHamgurguer {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -299,91 +296,87 @@
     margin-top: 10px;
     margin-left: unset;
   }
-  .searchBarHamburguer{
+  .searchBarHamburguer {
     width: 70%;
     background-color: black;
-    color:black;
+    color: black;
   }
-  .buttonsHamburguer a{
-    color:black;
+  .buttonsHamburguer a {
+    color: black;
   }
-  .inputContainerHamburguer{
-    height:fit-content;
+  .inputContainerHamburguer {
+    height: fit-content;
     background-color: white;
-    border:none;
-    height:unset;
+    border: none;
+    height: unset;
   }
-  .searchInputHamburguer{
+  .searchInputHamburguer {
     max-width: 10rem;
     background-color: antiquewhite;
     border: none;
     height: 30px;
     border-radius: 10px;
   }
-
 }
 
-@media only screen and (max-width:1024px){
-  .ButtonsNavBar{
+@media only screen and (max-width: 1024px) {
+  .ButtonsNavBar {
     display: none;
-    color:black
+    color: black;
   }
-  .hamburguesa{
+  .hamburguesa {
     /* z-index: 200; */
-      display: block;
-      position: absolute;
-      top: 0;
-      right:0;
-      transform:translate(-100%,60%);
-      font-size:1.8rem;
-      cursor:pointer;
-      color:#fff;
-  }
-  .menuMask{
-    display:flex;
+    display: block;
     position: absolute;
-    z-index:101;
+    top: 0;
+    right: 0;
+    transform: translate(-100%, 60%);
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: #fff;
+  }
+  .menuMask {
+    display: flex;
+    position: absolute;
+    z-index: 101;
     height: 40%;
-    bottom:10;
-    right:0;
+    bottom: 10;
+    right: 0;
     width: 8%;
     background-color: black;
   }
-  .menuhamburguesa{
-    display:flex;
+  .menuhamburguesa {
+    display: flex;
     flex-direction: column;
-    justify-content:center;
-    box-shadow:
-    0 2.8px 2.2px rgba(0, 0, 0, 0.02),
-    0 6.7px 5.3px rgba(0, 0, 0, 0.028),
-    0 12.5px 10px rgba(0, 0, 0, 0.035),
-    0 22.3px 17.9px rgba(0, 0, 0, 0.042),
-    0 41.8px 33.4px rgba(0, 0, 0, 0.05),
-    0 100px 80px rgba(0, 0, 0, 0.07);
+    justify-content: center;
+    box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.02),
+      0 6.7px 5.3px rgba(0, 0, 0, 0.028), 0 12.5px 10px rgba(0, 0, 0, 0.035),
+      0 22.3px 17.9px rgba(0, 0, 0, 0.042), 0 41.8px 33.4px rgba(0, 0, 0, 0.05),
+      0 100px 80px rgba(0, 0, 0, 0.07);
     position: absolute;
     z-index: 100;
-    bottom:10;
+    bottom: 10;
     right: 0;
     height: 40%;
-    width:60%;
+    width: 60%;
     background-color: white;
   }
-  .buttonsRightEnter{
-    display:flex;
+  .buttonsRightEnter {
+    display: flex;
     flex-direction: column;
-    align-items:center;
-    justify-content:start;
+    align-items: center;
+    justify-content: start;
     margin-top: 1rem;
     margin-left: -2rem;
   }
-  .textDecoration{
-    align-self:center;
+  .textDecoration {
+    align-self: center;
   }
-  .closeSesion{
-    align-self:center;
+  .closeSesion {
+    align-self: center;
   }
-  .buttonEnter{
-    margin:0;
+  .buttonEnter {
+    margin: 0;
     margin-top: 10px;
     margin-bottom: 10px;
   }

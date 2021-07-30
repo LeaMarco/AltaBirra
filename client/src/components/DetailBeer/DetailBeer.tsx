@@ -61,14 +61,14 @@ export default function DetailBeer() {
 	const loguearse = (e) => {
 		e.preventDefault();
 		let token = Object.keys(localStorage).join().includes('token');
-		if(!token) {
+		if (!token) {
 			swal({
 				title: "Logueate! 🍻",
 				text: "Debes estar logueado para poder comprar!",
 				icon: "warning",
 				buttons: ["VOLVER A PAGINA PRINCIPAL", "OK"]
 				// timer: 2000,
-			  }).then(response => {
+			}).then(response => {
 				if (!response) {
 					history.push(`/`);
 
@@ -79,12 +79,12 @@ export default function DetailBeer() {
 					// 	timer: 3000,
 					// 	buttons: ['']
 					// })
-				//   setTimeout(() => {
-				// 	localStorage.clear();
-				// 	window.location.href = process.env.REACT_APP_HOST_FRONTEND || window.location.href;
-				//   }, 2900);
+					//   setTimeout(() => {
+					// 	localStorage.clear();
+					// 	window.location.href = process.env.REACT_APP_HOST_FRONTEND || window.location.href;
+					//   }, 2900);
 				}
-			  })
+			})
 		}
 	}
 
@@ -185,7 +185,9 @@ export default function DetailBeer() {
 															title: "Agregada a carrito de invitad@ 🛒",
 															showConfirmButton: false,
 															timer: 1500,
-														})
+														}).then(() => window.location.reload())
+
+
 													}
 												}}>AGREGAR AL CARRITO</button>
 											</div>

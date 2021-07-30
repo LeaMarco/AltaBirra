@@ -42,16 +42,16 @@ export default function Nav() {
   const history = useHistory();
 
   const hasToken = Object.keys(localStorage).join().includes("token")
-  const guestsItemsInCart = localStorage.guestsItemsInCart
 
-  const itemsInGuestCart = () => {
-    if (localStorage.guestsItemsInCart)
-      return Object.keys(JSON.parse(localStorage.guestsItemsInCart)).length
-    else return ""
+  let cartGuestItems;
+  if (localStorage.cartGuestItems) {
+    cartGuestItems = Object.keys(JSON.parse(localStorage.guestsItemsInCart)).length
+  }
+  const haveGuestCart = () => {
+    return localStorage.guestsItemsInCart
   }
 
   useEffect(() => {
-
   }, [localStorage.guestsItemsInCart])
 
 
@@ -258,52 +258,51 @@ export default function Nav() {
 
       {/* TERCER HIJO */}
       <div className={style.ButtonsNavBar}>
-        <div className={style.buttonsRight}>
-          <ModalFavorites isOpen={showFavorites} handleClose={toogleFavorites}>
-            <FavoritesTab closeModal={toogleFavorites} />
-          </ModalFavorites>
-          {
-            isAuth
-              ? <button onClick={toogleFavorites} className={style.buttonFavorites}>
-                <img className={style.buttonImg} src="https://image.flaticon.com/icons/png/512/1077/1077035.png" alt="Favorites" height="1vh" />
-              </button>
-              : null
-          }
-          <Link
-            to="/cart/1" ////////FALTA METER EL ID DE USER
-            className={style.buttonCart}
-          ><img className={style.buttonImg} src="https://image.flaticon.com/icons/png/512/3144/3144456.png" alt="Cart" />
-            <span>{carts && carts.length}</span></Link>
-          <Modal isOpen={isEnterOpen} handleClose={toogleEnter}>
-            <Login closeModal={toogleEnter} toogleAuth={toogleAuth} />
-          </Modal>
+        <ModalFavorites isOpen={showFavorites} handleClose={toogleFavorites}>
+          <FavoritesTab closeModal={toogleFavorites} />
+        </ModalFavorites>
+        {
+          isAuth
+            ? <button onClick={toogleFavorites} className={style.buttonFavorites}>
+              <img className={style.buttonImg} src="https://image.flaticon.com/icons/png/512/1077/1077035.png" alt="Favorites" height="1vh" />
+            </button>
+            : null
+        }
+        <Link
+          to="/cart/1" ////////FALTA METER EL ID DE USER
+          className={style.buttonCart}
+        ><img className={style.buttonImg} src="https://image.flaticon.com/icons/png/512/3144/3144456.png" alt="Cart" />
+          <span>{haveGuestCart() ? cartGuestItems : carts && carts.length}</span></Link>
 
-          <Modal isOpen={isRegisterOpen} handleClose={toogleRegister}>
-            <Register toogleAuth={toogleAuth} closeModal={toogleRegister} toogleEnter={toogleEnter} toogleRegister={toogleRegister} />
-          </Modal>
-          {
-            !isAuth
-              ? <div className={style.buttonsRightEnter}>
-                <button className={style.buttonEnter} onClick={toogleEnter}>
-                  Entrar
-                </button>
-                <button className={style.buttonEnter} onClick={toogleRegister}>
-                  Registrarme
-                </button>
+        <Modal isOpen={isEnterOpen} handleClose={toogleEnter}>
+          <Login closeModal={toogleEnter} toogleAuth={toogleAuth} />
+        </Modal>
+
+        <Modal isOpen={isRegisterOpen} handleClose={toogleRegister}>
+          <Register toogleAuth={toogleAuth} closeModal={toogleRegister} toogleEnter={toogleEnter} toogleRegister={toogleRegister} />
+        </Modal>
+        {
+          !isAuth
+            ? <>
+              <button className={style.buttonEnter} onClick={toogleEnter}>
+                Entrar
+              </button>
+              <button className={style.buttonEnter} onClick={toogleRegister}>
+                Registrarme
+              </button>
+            </>
+            : <>
+              <span className={style.welcome} >
+                Bienvenido {stateWelcome.nombre}
+              </span>
+              <div>
+                <button className={style.buttonEnter}>Panel</button>
               </div>
-              : <div style={{ display: "flex" }}>
-                <span className={style.welcome} >
-                  Bienvenido {stateWelcome.nombre}
-                </span>
-                <Link className={style.textDecoration} to="/panel">
-                  <button className={style.buttonEnter}>Panel</button>
-                </Link>
-                <button className={style.closeSesion} onClick={close}>
-                  Cerrar sesión
-                </button>
-              </div>
-          }
-        </div>
+              <button className={style.closeSesion} onClick={close}>
+                Cerrar sesión
+              </button>
+            </>
+        }
 
       </div >
       <div className={style.mobileIcons}>

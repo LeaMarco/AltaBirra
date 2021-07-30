@@ -15,8 +15,8 @@ body {
 .variables {
   --color: #000000;
 }
-/* *:hover {
-  border: 1px solid green;
+/* * {
+  border: 3px solid green;
 } */
 
 /* width */

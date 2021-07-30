@@ -104,7 +104,10 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
         await setTimeout(() => window.location.reload(), 1000) //le da tiempo a que se vea el mensaje
 
 
-      }).catch((error) => console.log('No te pudiste loguear local!'))
+      }).catch((error) => swal({
+        title: 'Usuario o contraseña inválidos',
+        icon: 'warning',
+      }))
   };
 
   const welcome = () => {
@@ -185,12 +188,11 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
         closeModal()
         await setTimeout(() => window.location.reload(), 1000) //le da tiempo a que se vea el mensaje
         if (!e.data.token) return messages(e);
-
-
-
-
       })
-      .catch((error) => console.log('No te pudiste loguear con theFacebook!'))
+      .catch((error) => swal({
+        title: 'Usuario o contraseña inválidos',
+        icon: 'warning',
+      }))
   }
   //////////////////////////////fin facebook///////////////////////////////////////////////////////
 
@@ -224,7 +226,10 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
 
 
       })
-      .catch((error) => console.log('No te pudiste loguear con Google!'))
+      .catch((error) => swal({
+        title: 'Usuario o contraseña inválidos',
+        icon: 'warning',
+      }))
   }
   const onFailureLogin = (response: any) => {
     console.log("Fallo el login!", response,);
