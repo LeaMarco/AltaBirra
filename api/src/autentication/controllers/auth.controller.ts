@@ -81,13 +81,12 @@ export const signup = async (req: Request, res: Response) => {
 		//busco el rol 
 		const userRol = await prisma.role.findUnique({ where: { name: "USER" } })
 
-
 		//Creo el usuario (porque paso el else sin entrar en el return)
 
 		user = await prisma.user.create({
 			data: {
 				username,
-				email,
+				email: email.toLowerCase(),
 				name,
 				password: password ? encryptPassword(password) : "socialPassword",
 				role: {
@@ -145,8 +144,6 @@ export const signup = async (req: Request, res: Response) => {
 		})
 		.catch(e => res.status(500).json({ msge: "Error inesperado: no se encontro al user luego de updatearlo o crearlo", error: e }))
 
-
-
 	return res.json(userData ? userData : { error: "Error inesperado: no entro en catch pero tampoco inicializo a user data" })
 	// res.status(500).send("Error inesperado: llame a batman")
 
@@ -155,13 +152,12 @@ export const signup = async (req: Request, res: Response) => {
 
 export const signin = async (req: Request, res: Response) => {
 
-	const user = await prisma.user.findUnique({
+	const user = await prisma.user.findFirst({
 		where: {
-			username: req.body.params.nameMail
+			OR: [{ username: req.body.params.nameMail }, { email: req.body.params.nameMail.toLowerCase() }]
 		},
 		include: { role: true }
 	})
-
 
 	if (!user || user.activeCount === false) return res.status(400).send('NoUsuario');
 

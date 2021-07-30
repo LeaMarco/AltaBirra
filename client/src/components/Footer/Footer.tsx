@@ -7,7 +7,7 @@ import { ImWhatsapp } from 'react-icons/im';
 import { SiGmail } from 'react-icons/si';
 
 const Footer = () => {
-	
+
 
 	return (
 		<div className={Style.containerFooter}>
@@ -25,20 +25,20 @@ const Footer = () => {
 					<div className={Style.redes}>
 						<span>REDES SOCIALES:</span>
 						<div>
-							<h4 className={Style.ig}><IoLogoInstagram className={Style.iconIg}/></h4>
-							<h4 className={Style.fb}><AiOutlineFacebook className={Style.iconFb}/></h4>
+							<a href="https://www.instagram.com/altabirra.2021/" target="_blank" > <h4 style={{ color: "white" }} className={Style.ig}><IoLogoInstagram className={Style.iconIg} /></h4> </a>
+							<a href="https://www.facebook.com/Altabirra-107684411594718" target="_blank" > <h4 style={{ color: "white" }} className={Style.fb}><AiOutlineFacebook className={Style.iconFb} /></h4></a>
 						</div>
 					</div>
 					<div className={Style.contactanos}>
 						<span>CONTACTANOS:</span>
 						<div className={Style.contactInfo}>
 							<div className={Style.infoWp}>
-								<h4 className={Style.wp}><ImWhatsapp className={Style.iconWp}/></h4>
-								<span>+548476859838</span>
+								<h4 className={Style.wp}><ImWhatsapp className={Style.iconWp} /></h4>
+								<span>+541176859838</span>
 							</div>
 							<div className={Style.infoGm}>
-								<h4 className={Style.gm}><SiGmail className={Style.iconGm}/></h4>
-								<span>altabirra@gmail.com</span>
+								<a href="mailto:altabirra.2021gmail.com" ><h4 className={Style.gm}><SiGmail style={{ color: "white" }} className={Style.iconGm} /></h4></a>
+								<span>altabirra.2021@gmail.com</span>
 							</div>
 						</div>
 					</div>

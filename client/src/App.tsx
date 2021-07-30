@@ -24,6 +24,7 @@ import NoAuthorized from "./components/NoAuthorized/NoAuthorized";
 
 function App() {
 
+
   function autorizeComponent(Component) {
     return Object.keys(localStorage).join().includes('token') ? Component : NoAuthorized
   }
@@ -47,7 +48,7 @@ function App() {
 
       <Route exact path="/calificar/:id" component={autorizeComponent(Rate)} />
       <Route exact path="/vendiendo" component={autorizeComponent(Selling)} />
-      <Route exact path="/verificarUsuario/:user" component={autorizeComponent(VerifyAccount)} />
+      <Route exact path="/verificarUsuario/:user" component={VerifyAccount} />
 
       <Route exact path="/noAutorizado" component={NoAuthorized} />
 
