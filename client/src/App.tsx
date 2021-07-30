@@ -24,6 +24,7 @@ import NoAuthorized from "./components/NoAuthorized/NoAuthorized";
 
 function App() {
 
+
   function autorizeComponent(Component) {
     return Object.keys(localStorage).join().includes('token') ? Component : NoAuthorized
   }

@@ -39,6 +39,20 @@ export default function Nav() {
   const dispatch = useDispatch();
   const history = useHistory();
 
+  const hasToken = Object.keys(localStorage).join().includes("token")
+  const guestsItemsInCart = localStorage.guestsItemsInCart
+
+  const itemsInGuestCart = () => {
+    if (localStorage.guestsItemsInCart)
+      return Object.keys(JSON.parse(localStorage.guestsItemsInCart)).length
+    else return ""
+  }
+
+  useEffect(() => {
+
+  }, [localStorage.guestsItemsInCart])
+
+
   useEffect(() => {
     dispatch(getCart(1)); //hardcore
   }, []);
@@ -63,6 +77,8 @@ export default function Nav() {
 
   }
     , [])
+
+
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -112,7 +128,7 @@ export default function Nav() {
   return (
     <div className={style.NavBar}>
       {/* PRIMER HIJO */}
-      <div className={style.LogoContainer}> 
+      <div className={style.LogoContainer}>
         <Link to="/">
           <img src={logo} className={style.logo}></img>
         </Link>
@@ -164,7 +180,7 @@ export default function Nav() {
         </div>
       </div>
       {/* FIN SEGUNDO HIJO */}
-      
+
       {/* TERCER HIJO */}
       <div className={style.ButtonsNavBar}>
         {register ? (
@@ -196,6 +212,7 @@ export default function Nav() {
             <ModalFavorites isOpen={showFavorites} handleClose={toogleFavorites}>
               <FavoritesTab closeModal={toogleFavorites} />
             </ModalFavorites>
+
             {
               isAuth
                 ? <button onClick={toogleFavorites} className={style.buttonFavorites}>
@@ -203,20 +220,26 @@ export default function Nav() {
                 </button>
                 : null
             }
+
             <Link
               to="/cart/1" ////////FALTA METER EL ID DE USER
               className={style.buttonCart}
             ><img className={style.buttonImg} src="https://image.flaticon.com/icons/png/512/3144/3144456.png" alt="Cart" />
-              <span>{carts && carts.length}</span></Link>
+
+
+              {<span>{hasToken ? carts && carts.length : itemsInGuestCart()}</span>}
+
+
+            </Link>
+
             <Modal isOpen={isEnterOpen} handleClose={toogleEnter}>
               <Login closeModal={toogleEnter} toogleAuth={toogleAuth} />
             </Modal>
 
             <Modal isOpen={isRegisterOpen} handleClose={toogleRegister}>
-            <Register toogleAuth={toogleAuth} closeModal={toogleRegister} toogleEnter={toogleEnter} toogleRegister={toogleRegister} />
+              <Register toogleAuth={toogleAuth} closeModal={toogleRegister} toogleEnter={toogleEnter} toogleRegister={toogleRegister} />
             </Modal>
 
-            {/* <div className={style.buttonsRight}> */}
             {
               !isAuth
                 ? <div className={style.buttonsRightEnter}>
@@ -228,7 +251,7 @@ export default function Nav() {
                   </button>
                 </div>
                 : <div className={style.thirdColumn}>
-                  {/* <div className={style.fourColumn}> */}                  
+                  {/* <div className={style.fourColumn}> */}
                   <Link className={style.textDecoration} to="/panel">
                     <button className={style.buttonEnter}>Panel</button>
                   </Link>
@@ -243,6 +266,7 @@ export default function Nav() {
                   {/* </div> */}
                 </div>
             }
+
           </div>
           // </div>
           // </div>
@@ -258,6 +282,10 @@ export default function Nav() {
         </div>
       </div >
       {/* FIN TERCER HIJO */}
+
+      {/* SEPTIMO HIJO 🐺 */}
     </div >
+
+
   );
 }
