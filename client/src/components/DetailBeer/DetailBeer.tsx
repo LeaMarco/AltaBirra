@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers/index";
-// import ReactModal from 'react-modal';
 import { Modal } from "./DetailModal.component";
 import {
 	getCart,
@@ -18,6 +17,8 @@ import Beer from "../Beer/Beer";
 import { card } from "mercadopago";
 import { validationHeadersGenerator } from "../../validationHeadersGenerator";
 import { response } from "express";
+import { getTokenSourceMapRange } from "typescript";
+import swal from 'sweetalert';
 
 interface Favorites {
 	post: Post;
@@ -25,23 +26,27 @@ interface Favorites {
 
 export default function DetailBeer() {
 	const hasToken = Object.keys(localStorage).join().includes("token")
+	const carts: any = useSelector((state: RootState) => state.cart);
 	const dispatch = useDispatch();
 	const { id }: any = useParams();
 	const info: any = useSelector((state: RootState) => state.detailPosts);
 	const favorites: Favorites[] = useSelector((state: RootState) => state.favoritePosts);
 	const [isFavorite, setIsFavorite] = useState<boolean>(favorites.some(post => post.post.id === Number(id)));
-	const [cantidad, setCantidad] = useState(1);
 	const [modalIsOpen, setModalIsOpen] = useState(false);
 	const history = useHistory();
 	const MySwal = withReactContent(Swal);
+	const isUser = useSelector((state: RootState) => state.loginState);
 
 	useEffect(() => {
 		dispatch(getDetail(id));
-		axios.post(`${process.env.REACT_APP_HOST_BACKEND}/viewHistory`, { data: { username: "TestUser", postId: id } });
+		if (isUser) axios.post(`${process.env.REACT_APP_HOST_BACKEND}/viewHistory`, { data: { postId: id } }, { headers: validationHeadersGenerator() });
 	}, [dispatch]);
 
+
+
 	const addToCart = async () => {
-		const response = await axios.put(`${process.env.REACT_APP_HOST_BACKEND}/addToCart`, { params: { "username": "TestUser", "postId": parseInt(id), "quantity": cantidad } }, { headers: validationHeadersGenerator() })
+		const response = await axios.put(`${process.env.REACT_APP_HOST_BACKEND}/addToCart`, { params: { "username": "TestUser", "postId": parseInt(id) } }, { headers: validationHeadersGenerator() })
+		dispatch(getCart(1)); ////////////TIENE QUE TRAER EL ID DEL USUARIO QUE ESTÁ CONECTADO
 		return (response.data)
 	}
 
@@ -53,8 +58,38 @@ export default function DetailBeer() {
 		history.push(`/compra/1`);
 	};
 
-	async function addFavoriteInLocalStorage() {
+	const loguearse = (e) => {
+		e.preventDefault();
+		let token = Object.keys(localStorage).join().includes('token');
+		if(!token) {
+			swal({
+				title: "Logueate! 🍻",
+				text: "Debes estar logueado para poder comprar!",
+				icon: "warning",
+				buttons: ["VOLVER A PAGINA PRINCIPAL", "OK"]
+				// timer: 2000,
+			  }).then(response => {
+				if (!response) {
+					history.push(`/`);
 
+					// swal({ 
+					// 	title: 'Adiós, vuelve pronto!',
+					// 	text: 'Suerte!',
+					// 	icon: "success",
+					// 	timer: 3000,
+					// 	buttons: ['']
+					// })
+				//   setTimeout(() => {
+				// 	localStorage.clear();
+				// 	window.location.href = process.env.REACT_APP_HOST_FRONTEND || window.location.href;
+				//   }, 2900);
+				}
+			  })
+		}
+	}
+
+
+	async function addFavoriteInLocalStorage() {
 		if (localStorage.guestsItemsInCart) {
 			const localStorageParse = JSON.parse(localStorage.guestsItemsInCart)
 			/* if (localStorage.guestsItemsInCart[id]) ☢ Si le subis en el carrito, y despues tocas en agregar. Le volves a asignar 1 !!
@@ -74,6 +109,12 @@ export default function DetailBeer() {
 	return info?.beer ? (
 		<div className={Style.detailContainer}>
 			<div className={Style.detailViewContainer}>
+				<div className={Style.Head}>
+					<h1>{info.title}</h1>
+					<div className={Style.types}>
+						<p>{info.beer.genericType.type} / </p><p>&nbsp;{info.beer.specificType.type}</p>
+					</div>
+				</div>
 				<div className={Style.detailView}>
 
 					<div className={Style.imageSection}>
@@ -103,12 +144,6 @@ export default function DetailBeer() {
 					</div>
 					<div className={Style.beerDescription}>
 						<div id="post">
-							<div className={Style.Head}>
-								<h1>{info.title}</h1>
-								<div className={Style.types}>
-									<p>{info.beer.genericType.type} / </p><p>&nbsp;{info.beer.specificType.type}</p>
-								</div>
-							</div>
 							<div className={Style.textContent}>
 								<h3>Información de la Cerveza</h3>
 								<div className={Style.specs}>
@@ -122,38 +157,49 @@ export default function DetailBeer() {
 								</div>
 								<div className={Style.infoCompra}>
 									<h3>Información De Compra</h3>
-									
-									{info.stock===0? <div className={Style.soldout}>NO HAY STOCK</div>:
-									<div className={Style.buyInfo}>
-										<div className={Style.buyButtons}>
-											<form onSubmit={handleSubmit} >
-												<button className={Style.buttonComprar} type="submit">¡COMPRAR AHORA!</button>
-											</form>
-											<button className={Style.addtoCartButton} onClick={async () => {
 
-												if (hasToken) {
-													MySwal.fire({
-														position: 'center',
-														icon: 'success',
-														title: await addToCart(),
-														showConfirmButton: false,
-														timer: 1500,
-													})
-												}
-												else addFavoriteInLocalStorage()
-											}}>AGREGAR AL CARRITO</button>
-										</div>
-										<div className={Style.buttonsPago}>
-											{info.countable.discount !== 0 ?
-												<p className={Style.originalPrice}> ${(info.countable.price - info.countable.price * (info.countable.discount / 100)).toFixed(2)} </p> : <p className={Style.originalPrice}> ${info.countable.price}</p>}
-											{info.countable.discount !== 0 ?
-												<div className={Style.SecondPrices}>
-													<p className={Style.priceWODiscount}>${info.countable.price}</p>
-													<p className={Style.discount}>{info.countable.discount}%OFF</p>
-												</div>
-												: null}
-										</div>
-									</div>}
+									{info.stock === 0 ? <div className={Style.soldout}>NO HAY STOCK</div> :
+										<div className={Style.buyInfo}>
+											<div className={Style.buyButtons}>
+												<form onSubmit={hasToken ? handleSubmit : loguearse} >
+
+													<button className={Style.buttonComprar} type="submit">¡COMPRAR AHORA!</button>
+
+												</form>
+												<button className={Style.addtoCartButton} onClick={async () => {
+
+													if (hasToken) {
+														MySwal.fire({
+															position: 'center',
+															icon: 'success',
+															title: await addToCart(),
+															showConfirmButton: false,
+															timer: 1500,
+														})
+													}
+													else {
+														addFavoriteInLocalStorage()
+														MySwal.fire({
+															position: 'center',
+															icon: 'success',
+															title: "Agregada a carrito de invitad@ 🛒",
+															showConfirmButton: false,
+															timer: 1500,
+														})
+													}
+												}}>AGREGAR AL CARRITO</button>
+											</div>
+											<div className={Style.buttonsPago}>
+												{info.countable.discount !== 0 ?
+													<p className={Style.originalPrice}> ${(info.countable.price - info.countable.price * (info.countable.discount / 100)).toFixed(2)} </p> : <p className={Style.originalPrice}> ${info.countable.price}</p>}
+												{info.countable.discount !== 0 ?
+													<div className={Style.SecondPrices}>
+														<p className={Style.priceWODiscount}>${info.countable.price}</p>
+														<p className={Style.discount}>{info.countable.discount}%OFF</p>
+													</div>
+													: null}
+											</div>
+										</div>}
 								</div>
 								<div className={Style.share}>
 									Compartir
@@ -164,6 +210,7 @@ export default function DetailBeer() {
 										<a target="_blank" href={`http://www.facebook.com/sharer.php?u=${window.location.href}`}>
 											<img src="https://img1.freepng.es/20171221/wgw/facebook-picture-5a3c060eccfa84.1675788915138831508396.jpg" width="25px" />
 										</a>
+
 										<a target="_blank" href={`https://wa.me/?text=${window.location.href}`}>
 											<img src="http://assets.stickpng.com/images/580b57fcd9996e24bc43c543.png" width="30px" />
 										</a>

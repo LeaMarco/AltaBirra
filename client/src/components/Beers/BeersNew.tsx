@@ -45,8 +45,8 @@ const Beers = () => {
 
   return (
     <div className="containerBeersPremium">
-      <h1 id="titulo">Las nuevas!</h1>
-      <Carousel responsive={responsive} className="beers">
+      <h1 id="titulo">Las nuevas</h1>
+      <Carousel responsive={responsive} removeArrowOnDeviceType={["tablet", "mobile", "smallMobile"]} className="beers">
         {
           Array.isArray(news) ?
             news.map((userPremium) => (

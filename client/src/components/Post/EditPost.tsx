@@ -21,7 +21,7 @@ export default function EditPost() {
   const [specific, setSpecific] = useState([]);
   const [image, setImage] = useState("");
   const info: any = useSelector((state: RootState) => state.detailPosts);
-  const [estado, setEstado] = useState({ "checked": true });
+  const [estado, setEstado] = useState({ "pickup": false, "discount": false });
 
   let checkboxClick = (e) => {
     let { name, checked } = e.target;
@@ -165,7 +165,7 @@ export default function EditPost() {
             <div className={styles.row4}>
               <div className={styles.genericType}>
                 <label>Generic Type:  </label>
-                <select {...register("beer.genericType")} >
+                <select {...register("beer.genericType")} required >
                   {generic && generic.map(value => (
                     <option key={value} value={value}>
                       {value}
@@ -175,7 +175,7 @@ export default function EditPost() {
               </div>
               <div className={styles.specificType}>
                 <label>Specific Type:  </label>
-                <select {...register("beer.specificType")}>
+                <select {...register("beer.specificType")} required>
                   {specific && specific.map(value => (
                     <option key={value} value={value}>
                       {value}
@@ -200,6 +200,18 @@ export default function EditPost() {
               <div className={styles.InfoPostCheckboxes}>
                 <label>Shipping</label>
                 <input {...register("infoPost.shipping")} type="checkbox" className={styles.checkbox} />
+                <label>Take Away</label>
+                <input name="pickup" checked={estado.pickup} onChange={checkboxClick} type="checkbox" className={styles.checkbox} />
+                <div>
+                  {estado.pickup ?
+                    <div>
+                      <div className={styles.container}>
+                        <input {...register("infoPost.pickupdir")} type="text" autoComplete="off" className={styles.input} />
+                        <label>Direccion y Horarios</label>
+                        <span className={styles.focusBorder}></span>
+                      </div>
+                    </div> : null}
+                </div>
                 <label>Visibility</label>
                 <input {...register("infoPost.visibility")} type="checkbox" className={styles.checkbox} />
               </div>
@@ -221,12 +233,12 @@ export default function EditPost() {
             </div>
           </section>
           Decuento?
-          <input name="checked" type="checkbox" checked={estado.checked} onChange={checkboxClick} className={styles.checkboxDiscount} />
+          <input name="discount" type="checkbox" checked={estado.discount} onChange={checkboxClick} className={styles.checkboxDiscount} />
           <div>
-            {estado.checked ?
+            {estado.discount ?
               <div>
                 <div className={styles.container}>
-                  <input {...register("countable.discount")} type="number" min="0" autoComplete="off" className={styles.input} />
+                  <input {...register("countable.discount")} type="number" min="0" max="100" autoComplete="off" className={styles.input} />
                   <label>Discount *</label>
                   <span className={styles.focusBorder}></span>
                 </div>
@@ -234,7 +246,7 @@ export default function EditPost() {
                 <input {...register("countable.expireDate")} type="date" />
               </div> : <p>Sin oferta? ratón</p>}
           </div>
-          <div >
+          <div>
             <label htmlFor="file">Upload File:</label>
             <input
               className={styles.imageInput}
@@ -249,7 +261,7 @@ export default function EditPost() {
           </div>
         </form>
       </div>
-      <div><Preview image={image} info={watch()} /></div>
+      <div className={styles.previewComponent}><Preview image={image} info={watch()} /></div>
     </div>
   ) : (
     <div>

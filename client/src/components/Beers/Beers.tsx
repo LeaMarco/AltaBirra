@@ -33,11 +33,10 @@ const Beers = () => {
   }, [dispatch]);
 
   const usersPremium = useSelector((state) => state["usersPremium"]);
-
   return (
     <div className="containerBeersPremium">
-      <h1 id="titulo">Las recomendadas de Alta Birra</h1>
-      <Carousel responsive={responsive} className="beers">
+      <h1 id="titulo">En promoción</h1>
+      <Carousel responsive={responsive} removeArrowOnDeviceType={["tablet", "mobile", "smallMobile"]} className="beers">
         {
           typeof usersPremium === "object"
             ? usersPremium.map((userPremium) => (

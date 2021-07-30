@@ -6,12 +6,7 @@ const router = Router();
 const prisma = new PrismaClient();
 
 router.post("/", async (req: Request, res: Response, next: NextFunction) => {
-
-
-
-
-	// const username: string = String(req.body.data.username);
-	const postId: number = Number(req.body.data.postId);
+	const postId: number = Number(req.body.postId);
 	const user = await findUserWithAnyTokenBabe(req, prisma)
 	const favorite = await prisma.favorite.findFirst({ where: { userId: user } });
 	try {

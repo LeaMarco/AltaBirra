@@ -35,6 +35,7 @@ router.get('/', async (req: Request, res: Response, next: NextFunction) => {
 		orderBy
 	}: PostQuery = req.query;
 
+	const page: number = 0 | Number(req.query.page);
 	const rating: number | undefined = !req.query.rating ? undefined : Number(req.query.rating);
 	const minIbu: number | undefined = !req.query.minIbu ? undefined : Number(req.query.minIbu);
 	const maxIbu: number | undefined = !req.query.maxIbu ? undefined : Number(req.query.maxIbu);
@@ -90,6 +91,7 @@ router.get('/', async (req: Request, res: Response, next: NextFunction) => {
 				mode: "insensitive"
 			},
 			shipping: hasShipping,
+			visibility: true,
 			rating: { gte: rating },
 			countable: {
 				AND: [
@@ -118,10 +120,12 @@ router.get('/', async (req: Request, res: Response, next: NextFunction) => {
 			countable: true,
 			beer: true
 		},
+		take: 12,
+		skip: page * 12,
 		orderBy: orderTemp
 	})
-    let dateNow= Date.now()
-	posts.map(post=> post && post.countable.expireDate.getTime()> dateNow? post?.countable.expireDate : post? post.countable.discount=0:null)
+	let dateNow = Date.now()
+	posts.map(post => post && post.countable.expireDate.getTime() > dateNow ? post?.countable.expireDate : post ? post.countable.discount = 0 : null)
 	res.json(posts);
 })
 

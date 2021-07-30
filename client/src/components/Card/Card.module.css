@@ -120,11 +120,13 @@ white-space: nowrap;
 }
 
 .unfav {
+  position: absolute;
+  margin-left: 1rem;
+  margin-top: 1rem;
   border: none;
   background-color: transparent;
   cursor: pointer;
   width: fit-content;
-  margin: 1vh auto;
   color: red;
   transform: scale(1.5);
   transition: 1000ms;

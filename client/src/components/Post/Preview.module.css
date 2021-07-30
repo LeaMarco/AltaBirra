@@ -1,292 +1,295 @@
-.detailContainer{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-    background-color: #A9A9A9;
-    width: 100%;
-    height: 100vh;
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap%27");
+
+.detailContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #a9a9a9;
+  width: 100%;
+  height: 100%;
 }
-.detailViewContainer{
-    width:100%;
-    height:100%;
-    background-color:white;
-    margin:0.5rem;
-    color:white;
-    border-radius: 66px;
-    padding:3px;
+.detailViewContainer {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  margin: 0.5rem;
+  color: white;
+  border-radius: 66px;
+  padding: 3px;
 }
-.detailView{
-    height:100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-    color:white;
-    border-radius: 66px;
-    box-shadow: 0.5px 0.5px 30px 21px rgba(0,0,0,0.1) inset;
-    -webkit-box-shadow: 0.5px 0.5px 30px 21px rgba(0,0,0,0.1) inset;
-    -moz-box-shadow: 0.5px 0.5px 30px 21px rgba(0,0,0,0.1) inset;
+.detailView {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  color: white;
+  border-radius: 66px;
+  box-shadow: 0.5px 0.5px 30px 21px rgba(0, 0, 0, 0.1) inset;
+  -webkit-box-shadow: 0.5px 0.5px 30px 21px rgba(0, 0, 0, 0.1) inset;
+  -moz-box-shadow: 0.5px 0.5px 30px 21px rgba(0, 0, 0, 0.1) inset;
 }
 
-.priceWODiscount{
-    text-decoration:line-through;
-    color:#8C8C8C;
+.priceWODiscount {
+  text-decoration: line-through;
+  color: #8c8c8c;
 }
-.discount{
-    color:#01E26D;
+.discount {
+  color: #01e26d;
 }
-.imageSection{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-content: space-around;
-    justify-content: space-between;
-    margin:0.5rem 0 0.5rem 0.5rem;
-    border-top-left-radius: 66px;
-    border-bottom-left-radius: 66px;
-    width:35%;
-    height:20rem;
+.imageSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: space-around;
+  justify-content: space-between;
+  margin: 0.5rem 0 0.5rem 0.5rem;
+  border-top-left-radius: 66px;
+  border-bottom-left-radius: 66px;
+  width: 35%;
+  height: 20rem;
 }
-.imageSection img{
-    max-width: 20rem;
-    max-height: 20rem;
+.imageSection img {
+  max-width: 20rem;
+  max-height: 20rem;
 }
-.ratingComment p{
-    color:black;
-    text-align: center;
-    width: 300px;
-    margin:5px;
+.ratingComment p {
+  color: black;
+  text-align: center;
+  width: 300px;
+  margin: 5px;
 }
-.reviewsTitle{
-    width: 100px;
-    margin-top:1rem;
-    margin-bottom: 1rem;
-    color: #F49E51;
-    font-size: 30px;
-    font-weight: 500;
-    border-radius: 10px;
+.reviewsTitle {
+  width: 100px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  color: #f49e51;
+  font-size: 30px;
+  font-weight: 500;
+  border-radius: 10px;
 }
 /* .reviews{
     margin-top: 0;
     display:flex;
     flex-direction: column;
 } */
-.reviews{
-    margin-top: 20px;
-    display:flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+.reviews {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
-.ratingTotal{
-    padding-top: 5px;
-    font-size: 20px;
-    font-weight: bold;
-    color: black;
+.ratingTotal {
+  padding-top: 5px;
+  font-size: 20px;
+  font-weight: bold;
+  color: black;
 }
-.ratingTotal p{
-    margin-bottom:3px;
-    margin-top: 1;
+.ratingTotal p {
+  margin-bottom: 3px;
+  margin-top: 1;
 }
-.ratingStars{
-    border-radius: 10px;
-    margin-top: -10px;
-    min-width: 150px;
-    text-align: center;
+.ratingStars {
+  border-radius: 10px;
+  margin-top: -10px;
+  min-width: 150px;
+  text-align: center;
 }
-.beerDescription{
-    margin:0.5rem 0.5rem 0.5rem 0rem;
-    background-color:black;
-    width:65%;
-    height: 20%;
-    max-height: 50rem;
-    background: radial-gradient(50% 50% at 50% 50%, #404143 0%, #242021 100%);
-    border-top-right-radius: 66px;
-    border-bottom-right-radius: 66px;
+.beerDescription {
+  margin: 0.5rem 0.5rem 0.5rem 0rem;
+  background-color: black;
+  width: 100%;
+  height: 20%;
+  max-height: 50rem;
+  background: radial-gradient(50% 50% at 50% 50%, #404143 0%, #242021 100%);
+  border-top-right-radius: 66px;
+  border-bottom-right-radius: 66px;
 }
-
 
 .fav {
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-    width: fit-content;
-    margin: 1vh auto;
-    color: black;
-    transform: scale(1.5);
-    transition: 1000ms;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  width: fit-content;
+  margin: 1vh auto;
+  color: black;
+  transform: scale(1.5);
+  transition: 1000ms;
 }
-.buttonComprar{
-    background-color:#F49E51;
-    border:none;
-    width:15rem;
-    height:3rem;
-    color:white;
-    font-size: 20px;
-    font-weight:400;
-    border-top-right-radius: 10px;
-    cursor: pointer;
+.buttonComprar {
+  background-color: #f49e51;
+  border: none;
+  width: 15rem;
+  height: 3rem;
+  color: white;
+  font-size: 20px;
+  font-weight: 400;
+  border-top-right-radius: 10px;
+  cursor: pointer;
 }
-.addtoCartButton{
-    background-color:#69C3C4;
-    border:none;
-    width:15rem;
-    height:3rem;
-    color:white;
-    font-size: 20px;
-    font-weight:400;
-    border-bottom-right-radius: 10px;
-    cursor: pointer;
+.addtoCartButton {
+  background-color: #69c3c4;
+  border: none;
+  width: 15rem;
+  height: 3rem;
+  color: white;
+  font-size: 20px;
+  font-weight: 400;
+  border-bottom-right-radius: 10px;
+  cursor: pointer;
 }
 
-.buyButtons{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.buyButtons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .fav:hover {
-    transform: scale(2);
-    color: red;
+  transform: scale(2);
+  color: red;
 }
 
 .unfav {
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-    width: fit-content;
-    margin: 1vh auto;
-    color: red;
-    transform: scale(1.5);
-    transition: 1000ms;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  width: fit-content;
+  margin: 1vh auto;
+  color: red;
+  transform: scale(1.5);
+  transition: 1000ms;
 }
 
 .unfav:hover {
-    transform: scale(2);
-    color: black;
+  transform: scale(2);
+  color: black;
 }
 
-.types{
-    display: flex;
-    font-size: 25px;
-    font-weight: bold;
-    margin-left:2rem;
-    color:#C6C2C2;
+.types {
+  display: flex;
+  font-size: 25px;
+  font-weight: bold;
+  margin-left: 2rem;
+  color: #c6c2c2;
 }
 .types p {
-    margin:0;
+  margin: 0;
 }
 
-.Head{
-    display:flex;
-    flex-direction: column;
-    align-items:start;
-    text-align:start;
-    margin-top: 20px;
+.Head {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  text-align: start;
+  margin-top: 20px;
 }
 .Head h1 {
-    font-family: Roboto;
-    font-style: italic;
-    font-weight: 900;
-    font-size: 40px;
-    line-height: 88px;
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    margin:0;
-    margin-bottom: 10px;
-    max-width:45rem;
-    padding-right: 20px;
-    padding-left: 10px;
-    background-color:#F49E51;
+  font-family: Roboto;
+  font-style: italic;
+  font-weight: 900;
+  font-size: 40px;
+  line-height: 88px;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  margin: 0;
+  margin-bottom: 10px;
+  max-width: 45rem;
+  padding-right: 20px;
+  padding-left: 10px;
+  background-color: #f49e51;
 }
-.specs{
-    display:flex;
-    align-items:center;
-    justify-content:space-evenly;
-    width: 400px;
-    font-size:20px;
+.specs {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 400px;
+  font-size: 20px;
 }
-.textContent{
-    padding:20px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    align-items:center;
-}
-
-.buyInfo{
-    display:flex;
-    flex-direction: row;
-    align-content: center;
-    width: 37rem;
-    justify-content:center;
-    margin-top:1rem;
+.textContent {
+  width: 45rem;
+  min-width: 100%;
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
 }
 
-.socialLinks{
-    display: flex;
-    align-Items: center;
-    justify-Content: space-between;
-}
-.socialLinks a{
-    margin:1rem;
-}
-
-.buttonsPago{
-    display:flex;
-    align-content: center;
-    background-color: #515050;
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-}
-.buttonsPago p{
-    margin:0;
-}
-.originalPrice{
-    padding-top: 12px;
-    font-size:4rem;
-    font-weight: bold;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-}
-.SecondPrices{
-    display:flex;
-    flex-direction: column;
-    align-items:center;
-    justify-content:space-evenly;
-    margin-right: 1rem;
-    margin-left: 1rem;
-    font-size: 30px;
+.buyInfo {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  width: 37rem;
+  justify-content: center;
+  margin-top: 1rem;
 }
 
-.share{
-    margin-top:3rem;
-    margin-bottom:-2rem;
+.socialLinks {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-.infoCompra{
-    margin-top: 2rem;
+.socialLinks a {
+  margin: 1rem;
 }
-.infoCompra h3{
-    margin:0;
+
+.buttonsPago {
+  display: flex;
+  align-content: center;
+  background-color: #515050;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+.buttonsPago p {
+  margin: 0;
+}
+.originalPrice {
+  padding-top: 12px;
+  font-size: 4rem;
+  font-weight: bold;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+.SecondPrices {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-right: 1rem;
+  margin-left: 1rem;
+  font-size: 30px;
+}
+
+.share {
+  margin-top: 3rem;
+  margin-bottom: -2rem;
+}
+.infoCompra {
+  margin-top: 2rem;
+}
+.infoCompra h3 {
+  margin: 0;
 }
 .infoBeer {
-    text-align: justify;
+  text-align: justify;
 }
 .infoBeer p {
-    min-height:4.2rem;
-    max-height:4.2rem;
-    height:4.2rem;
+  min-height: 4.2rem;
+  max-height: 4.2rem;
+  height: 4.2rem;
 }
-.ratingComment{
-    display:flex;
-    flex-wrap:wrap;
-    text-decoration: none;
-    color:black;
-    height:100px;
-    width:620px;
+.ratingComment {
+  display: flex;
+  flex-wrap: wrap;
+  text-decoration: none;
+  color: black;
+  height: 100px;
+  width: 620px;
 }
-.ratingStars{
-    color:black;
+.ratingStars {
+  color: black;
 }

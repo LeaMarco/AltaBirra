@@ -211,6 +211,7 @@ export interface QueryTypes {
 	hasShipping?: boolean;
 	hasDiscount?: boolean;
 	orderBy?: string;
+	page?: number;
 }
 
 export interface SetQuerySearchAction {
@@ -379,9 +380,9 @@ const urladdtocart = `${process.env.REACT_APP_HOST_BACKEND}/addToCart`;
 //     };
 // };
 
-export function getFavoritePosts(username) {
+export function getFavoritePosts() {
 	return async function (dispatch: Dispatch) {
-		const response = await axios.get<Post[]>(`${process.env.REACT_APP_HOST_BACKEND}/getFavorites`, { params: { username }, headers: validationHeadersGenerator() });
+		const response = await axios.get<Post[]>(`${process.env.REACT_APP_HOST_BACKEND}/getFavorites`, { headers: validationHeadersGenerator() });
 		dispatch<getPostsAction>({
 			type: "GET_FAVORITE_POSTS",
 			payload: response.data
@@ -389,9 +390,9 @@ export function getFavoritePosts(username) {
 	}
 }
 
-export function getHistory(type, filter, userId) {
+export function getHistory(type, filter) {
 	return async function (dispatch: Dispatch) {
-		const response = await axios.get(`${process.env.REACT_APP_HOST_BACKEND}/${type}History`, { headers: validationHeadersGenerator(), params: { userId, filter } });
+		const response = await axios.get(`${process.env.REACT_APP_HOST_BACKEND}/${type}History`, { headers: validationHeadersGenerator(), params: { filter } });
 		dispatch({
 			type: "GET_HISTORY",
 			payload: response.data
@@ -413,7 +414,7 @@ export interface ActionUserData {
 }
 
 export const getUserData = (user: iuserData) => {
-	return <ActionUserData> {
+	return <ActionUserData>{
 		type: ActionTypes.ActionUserDataType,
 		payload: user
 	}
@@ -426,7 +427,7 @@ export interface ActionLoginType {
 }
 
 export const login = (login: boolean) => {
-	return <ActionLoginType> {
+	return <ActionLoginType>{
 		type: ActionTypes.ActionLoginTypes,
 		payload: login
 	}
@@ -471,3 +472,13 @@ export type ActionLoginTypes = ActionLoginType;
 // 	premium: user.premium,
 // 	favoritos: user.favoriteId
 // }
+
+export function getSellingPosts() {
+	return async function (dispatch: Dispatch) {
+		const response = await axios.get(`${process.env.REACT_APP_HOST_BACKEND}/sellingPosts`, { headers: validationHeadersGenerator() });
+		dispatch({
+			type: "GET_SELLING_POSTS",
+			payload: response.data
+		})
+	}
+}

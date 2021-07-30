@@ -4,6 +4,7 @@ import React from "react";
 import { RootState } from "../../reducers";
 import { Post } from "../../actions/index";
 import Style from "./Cards.module.css";
+import BeerLoading from "../BeerLoading/BeerLoading";
 
 const Posts = () => {
   const searchedPosts: Post[] = useSelector((state: RootState) => state.searchedPosts);
@@ -24,7 +25,7 @@ const Posts = () => {
               abv={post.beer.abv}
               description={post.description}
             />))
-          : <h3 style={{ margin: "auto" }}> No hay resultados para esa busqueda </h3>
+          : <BeerLoading />
       }
     </div>
   );

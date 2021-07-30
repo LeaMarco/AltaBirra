@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { Post } from '../actions/index';
-import { getHistoryReducer, postsFavoritesReducer, postsSearchQueryReducer, postsSearchReducer } from './posts';
+import { getHistoryReducer, postsFavoritesReducer, postsSearchQueryReducer, postsSearchReducer, sellingPostsReducer } from './posts';
 import { usersPremium, userData, login } from './users';
 import { UserPremium } from '../actions/index';
 import { detailReducer } from './detail';
@@ -23,7 +23,8 @@ export const rootReducer = combineReducers({
 	favoritePosts: postsFavoritesReducer,
 	history: getHistoryReducer,
 	welcome: userData,
-	loginState: login
+	loginState: login,
+	sellingPosts: sellingPostsReducer
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

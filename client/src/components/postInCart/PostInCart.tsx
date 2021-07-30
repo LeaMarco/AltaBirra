@@ -12,6 +12,7 @@ export function PostinCart({
 	postTitle,
 	description,
 	amount,
+	pickupdir,
 	countable,
 	cartId,
 	username,
@@ -73,6 +74,7 @@ export function PostinCart({
 				<div className={style.titleContainer}>
 					<h1 className={style.title}>{postTitle}</h1>
 					<span>{description.slice(0, 50)}...</span>
+					<p>{pickupdir}</p>
 				</div>
 			</Link>
 			<div className={style.modifyContainer}>
@@ -98,7 +100,7 @@ export function PostinCart({
 				</button>
 			</div>
 			<div className={style.priceAndDelete}>
-				<p className={style.amount}>${countable.price * quantity}</p>
+				<p className={style.amount}>${(countable.price * quantity).toFixed(2)}</p>
 				<button className={style.deletebutton}
 					onClick={(e) => {
 						despachadora();

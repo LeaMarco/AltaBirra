@@ -1,18 +1,23 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { searchedPosts, setQuerySearch, setTitleSearch } from "../../actions";
+import { QueryTypes, searchedPosts, setQuerySearch } from "../../actions";
+import { RootState } from "../../reducers";
 import Style from "./Categories.module.css";
 
 export default function Categories() {
+  const searchQuery: QueryTypes = useSelector((state: RootState) => state.postsSearchQuery);
+
   const dispatch = useDispatch();
   const history = useHistory();
 
   async function handleSearch(event) {
-    await dispatch(setQuerySearch({ genericType: event.target.value }));
-    await dispatch(searchedPosts({ title: event.target.value }));
+    await dispatch(setQuerySearch({ genericType: event.target.value, title: undefined }));
+    await dispatch(searchedPosts(searchQuery));
     history.push(`/search`);
   }
+
+  var token = Object.keys(localStorage).join().includes('token');
 
   return (
     <div className={Style.container}>

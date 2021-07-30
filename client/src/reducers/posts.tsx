@@ -5,6 +5,7 @@ const searchInitialState: Post[] = [];
 const initialQuery: QueryTypes = {};
 const initialFavoritePosts: Post[] = [];
 const initialHistory = [];
+const initialSellingPosts: Post[] = [];
 
 export const postsSearchReducer = (state: Post[] = searchInitialState, action: Action) => {
 	switch (action.type) {
@@ -38,6 +39,15 @@ export const postsFavoritesReducer = (state: Post[] = initialFavoritePosts, acti
 export const getHistoryReducer = (state = initialHistory, action) => {
 	switch (action.type) {
 		case "GET_HISTORY":
+			return action.payload;
+		default:
+			return state;
+	}
+}
+
+export const sellingPostsReducer = (state: Post[] = initialSellingPosts, action) => {
+	switch (action.type) {
+		case "GET_SELLING_POSTS":
 			return action.payload;
 		default:
 			return state;

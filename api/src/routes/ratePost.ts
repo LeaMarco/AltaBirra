@@ -25,16 +25,14 @@ async function getAverageRating(postId: number) {
 }
 
 router.put("/", async (req: Request, res: Response, next: NextFunction) => {
-	//☢ Dejo el userId hecho con el token, pero veo que no se usa todavia. -Eze
 	const user = await findUserWithAnyTokenBabe(req, prisma)
-	const { /* userId,  */postId, rating, comment }: Rating = req.body.data;
-	const userId = user?.id
-	const allRating = await prisma.review.create({
+	const { postId, rating, comment }: Rating = req.body;
+	await prisma.review.create({
 		data: {
 			rating,
 			comment,
 			user: {
-				connect: { id: userId }
+				connect: { id: user?.id }
 			},
 			post: {
 				connect: { id: postId }

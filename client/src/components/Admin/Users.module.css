@@ -1,0 +1,326 @@
+.mainContainer{
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 2%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    color: black;
+}
+
+.adminContainer{
+    align-self: center;
+    margin-top: 2%;
+    display: flex;
+    height: 80%;
+    width: 80%;
+    justify-content: space-evenly;
+}
+.listContainer{
+    margin-top: 2%;
+    height: 80%;
+    width: 100%;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+   
+}
+.postForm{
+    display: flex;
+    margin-left: 5%;
+    flex-direction: column;
+    width: 90%;
+    align-items: center;
+    justify-content:center;
+    text-align: center;
+    border: 1px solid #F49E51;
+    border-radius: 20px;
+    background-color: white;
+}
+
+.container{display: flex; align-items:center;flex-direction: column; float: left; width: 80%; margin: 20px 3%; position: relative;}
+:focus{outline: none;}
+.input{border: 0; border-bottom: 1px solid #ccc; background-color: transparent;}
+.input ~ .focusBorder{position: absolute; bottom: 0; left: 50%; width: 0; height: 2px; background-color: tomato; transition: 0.4s;}
+.input:focus ~ .focusBorder,
+.input:valid ~ .focusBorder{width: 100%; transition: 0.4s; left: 0;} .input ~ label{position: absolute; left: 0; width: 100%; top: -15px; color: rgb(61, 61, 61); transition: 0.3s; z-index: -1; letter-spacing: 0.5px;}
+.input ~ label{position: absolute; left: 0; width: 100%; top: -15px; color: rgb(61, 61, 61); transition: 0.3s; z-index: -1; letter-spacing: 0.5px;}
+.input:focus ~ label, .input:valid ~ label{top: -18px; font-size: 12px; color: tomato; transition: 0.3s;}
+
+
+input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width: 100%; box-sizing: border-box; letter-spacing: 1px;}
+
+
+
+.textarea{
+    width: 100%;
+    align-content: center;
+    font-size: 16px
+}
+
+
+
+.postFormBeer{
+    margin-top: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.postFormBeer input{
+    height: 2em;
+    width:100%;
+}
+.postFormInfoPost{
+    margin-top: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+}
+.postrow1{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width:32em;
+}
+.InfoPostCheckboxes{
+    display: flex;
+    flex-direction: row;
+    margin-top: 5px;
+}
+
+.postFormInfoPost input{
+    height: 2em;
+    width:5em;
+}
+.postFormInfoPost textarea{
+    margin-top: 5px;
+    height: 5em;
+    width:40em;
+}
+
+.postFormCountable{
+    margin-top: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.postFormCountable input{
+    height: 2em;
+    width:15em;
+}
+
+.beerCheckbox{
+    display:flex;
+    justify-content:space-around;
+    align-items: center;
+}
+
+.checkbox{
+    transform: scale(0.8);
+}
+
+.checkboxDiscount{
+    margin-top: 2%;
+    transform: scale(1.8);
+}
+
+.row1{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width:29em;
+}
+.row2{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width:29em;
+}
+.row3{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width:29em;
+}
+.row4{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width:29em;
+    margin-bottom: 5%;
+}
+
+.countablerow{
+    margin-top: 5px;
+    display: flex;
+    align-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-self: center;
+    width:29em;
+}
+
+.postEditButton{
+    margin-left: 2%;
+    background-color:#F49E51;
+    height: 2rem;
+    border-radius: 8px;
+    border:none;
+    transition:0.3s;
+    font-size: 13px;
+    font-weight: 900;
+    color:white;  
+    cursor: pointer;
+}
+
+.postFormSubmitButton{
+    margin-bottom:2%;
+    width: 60%;
+    background-color:#F49E51;
+    height: 40%;
+    border-radius: 8px;
+    border:none;
+    transition:0.3s;
+    font-size: 15px;
+    font-weight: 500;
+    color:white;
+}
+
+.postDeleteButton{
+    margin-bottom:2%;
+    margin-left: 10%;
+    width: 15%;
+    background-color:tomato;
+    height: 100%;
+    border-radius: 8px;
+    border:none;
+    transition:0.3s;
+    font-size: 15px;
+    font-weight: 500;
+    color:white;
+}
+
+.postDeleteButton:hover{
+    cursor: pointer;
+    font-size: 18px;
+    background-color:rgb(253, 51, 15);
+}
+
+.postFormSubmitButton:hover{
+    background-color:rgb(142, 216, 142);
+    cursor: pointer;
+}
+.submitButtonsContainer{
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+}
+.imageInput{
+    margin-top: 10%;
+    margin-bottom: 5%;
+}
+
+
+
+.specificType{
+    margin-top: 1%;
+    width: 100%;
+    overflow-y: scroll;
+    scroll-behavior:smooth;
+}
+
+.topFilters{
+    display: flex;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+.UserCard{
+    display: flex;
+    gap: 0%;
+    align-items: center;
+    align-content: center;
+    background-color: white;
+    font-size: 12px;
+    margin-top: 1%;
+    border-radius: 20px;
+    width: 100%;
+    height: 10%;
+}
+
+.TopCard{
+    display: flex;
+    gap: 0%;
+    align-items: center;
+    align-content: center;
+    background-color: #F49E51;
+    font-size: 13px;
+    color: white;
+    font-weight: 800;
+    margin-top: 1%;
+    border-radius: 10px;
+    width: 100%;
+    height: 10%;
+}
+
+.componentTitle{
+    color: white;
+    font-size: 18px;
+}
+
+.prop{
+    /* border-left: 2px solid #000000; */
+    min-width: 1%;
+    min-height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-right: 2px solid #ececec; 
+}
+
+#id{
+width: 5%;
+}
+#name{
+width: 10%;
+}
+
+#username{
+    width: 25%;
+}
+#email {
+    width: 30%;
+}
+
+#active{
+    width: 10%;
+}
+#Select{
+    width: 100%;
+    background-color: white;
+}
+#role{
+    width: 10%;
+}
+
+.userForm{
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+}
+
+.searchInput{
+    background-color: rgba(255, 255, 255, 0.863);
+    border: none
+}
+
+.moderatePostButtons{
+    margin-top: 0.5%;
+    display: flex;
+}

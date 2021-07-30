@@ -10,7 +10,7 @@
   width: 100%;
   height: 15vh;
   display: grid;
-  grid-template-columns: repeat(3, 1fr) 0.1fr;
+  grid-template-columns: repeat(3, 1fr);
   grid-gap: 10px;
   grid-auto-rows: minmax(100px, auto);
 }
@@ -81,6 +81,7 @@
   border: none;
   background-color: rgb(122, 122, 122);
   color: black;
+  text-indent: 0.5rem;
 }
 
 .searchInput::placeholder {
@@ -192,15 +193,24 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  background-color: lightgray;
+  left: 2vw;
+  background-color: transparent;
 }
 
 .autocomplete > input {
   cursor: pointer;
-  border: none;
+  background-color: lightgray;
+  border: 1px solid black;
+  border-radius: 0;
+  width: 84%;
+  padding: 0.5rem 0.5rem;
 }
 
-.searchInput:hover > .autocomplete {
+.autocomplete > input:hover {
+  filter: brightness(1.1);
+}
+
+.searchInput:focus-within > .autocomplete {
   visibility: visible;
   cursor: pointer;
 }
@@ -246,22 +256,19 @@
 }
 .mobileIcons{
   display:flex;
-
 }
-@media only screen and (max-width:768px){
-  .searchFa{
-    /* display: block; */
-    /* position: absolute; */
-    /* transform:translate(-100%,60%); */
-    font-size:1.8rem;
-    cursor:pointer;
-    color:#fff;
-  }
-  .SearchBarContainer{
-    display: none;
-  }
+.menuMask{
+  display:none;
 }
-
+.hamburguesa{
+  display:none;
+}
+.menuhamburguesa{
+  display:none;
+}
+.SearchBarContainerHamgurguer{
+  display:none;
+}
 .ButtonsNavBar{
   display: flex;
   flex-direction: row;
@@ -269,15 +276,60 @@
   /* flex-wrap: wrap; */
   justify-content: space-evenly;
 }
-.hamburger{
-  display:none;
+
+@media only screen and (max-width:768px){
+  .searchFa{
+    display: block;
+    position: absolute;
+    transform:translate(-100%,60%);
+    font-size:1.8rem;
+    cursor:pointer;
+    color:#fff;
+  }
+  .SearchBarContainer{
+    display: none;
+  }
+  .SearchBarContainerHamgurguer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: -2rem;
+    justify-content: space-evenly;
+    height: 5rem;
+    margin-top: 10px;
+    margin-left: unset;
+  }
+  .searchBarHamburguer{
+    width: 70%;
+    background-color: black;
+    color:black;
+  }
+  .buttonsHamburguer a{
+    color:black;
+  }
+  .inputContainerHamburguer{
+    height:fit-content;
+    background-color: white;
+    border:none;
+    height:unset;
+  }
+  .searchInputHamburguer{
+    max-width: 10rem;
+    background-color: antiquewhite;
+    border: none;
+    height: 30px;
+    border-radius: 10px;
+  }
+
 }
 
 @media only screen and (max-width:1024px){
   .ButtonsNavBar{
     display: none;
+    color:black
   }
-  .hamburger{
+  .hamburguesa{
+    /* z-index: 200; */
       display: block;
       position: absolute;
       top: 0;
@@ -287,13 +339,66 @@
       cursor:pointer;
       color:#fff;
   }
+  .menuMask{
+    display:flex;
+    position: absolute;
+    z-index:101;
+    height: 40%;
+    bottom:10;
+    right:0;
+    width: 8%;
+    background-color: black;
+  }
+  .menuhamburguesa{
+    display:flex;
+    flex-direction: column;
+    justify-content:center;
+    box-shadow:
+    0 2.8px 2.2px rgba(0, 0, 0, 0.02),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.028),
+    0 12.5px 10px rgba(0, 0, 0, 0.035),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.042),
+    0 41.8px 33.4px rgba(0, 0, 0, 0.05),
+    0 100px 80px rgba(0, 0, 0, 0.07);
+    position: absolute;
+    z-index: 100;
+    bottom:10;
+    right: 0;
+    height: 40%;
+    width:60%;
+    background-color: white;
+  }
+  .buttonsRightEnter{
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content:start;
+    margin-top: 1rem;
+    margin-left: -2rem;
+  }
+  .textDecoration{
+    align-self:center;
+  }
+  .closeSesion{
+    align-self:center;
+  }
+  .buttonEnter{
+    margin:0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
 }
 
-.buttonsRight {
+/* .buttonsRight {
   display: flex;
   justify-content: flex-start;
   align-content: center;
   flex-wrap: wrap;
   height: 3rem;
-}
+} */
 
+/* @media only screen and (max-width:800px){
+  .NavBar {
+    /* position:fixed;
+    overflow-y: auto;
+    z-index: 1000; }}*/
