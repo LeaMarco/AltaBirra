@@ -91,6 +91,7 @@ router.get('/', async (req: Request, res: Response, next: NextFunction) => {
 				mode: "insensitive"
 			},
 			shipping: hasShipping,
+			visibility: true,
 			rating: { gte: rating },
 			countable: {
 				AND: [

@@ -41,6 +41,7 @@ export default function ViewHistory() {
 	return (
 		<div className={Style.mainContainer}>
 			<h2>Vistos recientemente</h2>
+<<<<<<< HEAD
 			{
 				history.length
 					? <>
@@ -49,6 +50,16 @@ export default function ViewHistory() {
 								return (
 									<div key={post.post.id} style={{ border: "1px solid black" }} className={Style.subcontainer}>
 										<Link to={`/detailBeer/${post.post.id}`} key={post.post.id} style={{ textDecoration: "none", color: "black" }}><div className={Style.detail}>
+=======
+			<div className={Style.cardsContainer}>
+				{
+					history.length
+						? history?.map(post => {
+							return (
+								<div key={post.post.id} style={{ border: "1px solid black" }} className={Style.subcontainer}>
+									<Link to={`/detailBeer/${post.post.id}`} key={post.post.id} style={{ textDecoration: "none", color: "black" }}>
+										<div className={Style.detail}>
+>>>>>>> d4464cc0dcaca6611ed676673c9605e4edcbc416
 											<div className={Style.subdetail}>
 												<div className={Style.imgContainer}>
 													<img src={post.post.image} alt='' className={Style.imgHistory} />
@@ -56,6 +67,7 @@ export default function ViewHistory() {
 												<div className={Style.dataContainer}>
 													<h3 className={Style.title}> {post.post.title} </h3>
 													<div className={Style.propsContainer}>
+<<<<<<< HEAD
 														<h5 className={Style.props}> IBU: ${post.post.beer.ibu} </h5>
 														<h5 className={Style.props}> ABV: ${post.post.beer.abv} </h5>
 													</div>
@@ -73,6 +85,25 @@ export default function ViewHistory() {
 					</>
 					: <h2> El historial esta vacio </h2>
 			}
+=======
+														<h5 className={Style.props}> IBU: {post.post.beer.ibu} </h5>
+														<h5 className={Style.props}> ABV: {post.post.beer.abv} </h5>
+													</div>
+												</div>
+												<div>
+													<h4> ${post.post.countable?.price ? post.post.countable.price : null} </h4>
+												</div>
+											</div>
+										</div>
+									</Link>
+								</div>
+							)
+						}).reverse()
+						: <h2> El historial esta vacio </h2>
+				}
+			</div>
+			<button onClick={deleteConfirm} className={Style.Button}> Borrar historial de busqueda </button>
+>>>>>>> d4464cc0dcaca6611ed676673c9605e4edcbc416
 		</div >
 	)
 }
