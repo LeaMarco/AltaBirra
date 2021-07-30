@@ -48,6 +48,7 @@ const imageUpload = multer({
     ),
 });
 router.post('/', imageUpload.single('image'), (req: any, res: Response) => {
+    console.log( process.env.HOST, process.env.USER, process.env.PASSWORD, process.env.DATABASE, "DOT ENV")
     console.log(req.file,"fileeeeeee")
     const { filename, mimetype, size } = req.file;
     const filepath = req.file?.path;
