@@ -14,7 +14,7 @@ async function main() {
   await prisma.user.create({
     data: {
       username: "TestUser",
-      email: "TestUser@email.com",
+      email: "TestUser@email.com".toLowerCase(),
       name: "Test User",
       password: encryptPassword("password"),
       role: {
@@ -37,7 +37,7 @@ async function main() {
   await prisma.user.create({
     data: {
       username: "TestAdmin",
-      email: "TestAdmin@email.com",
+      email: "TestAdmin@email.com".toLowerCase(),
       name: "Test Admin",
       password: encryptPassword("password"),
       role: {
@@ -60,7 +60,7 @@ async function main() {
   await prisma.user.create({
     data: {
       username: "TestPremium",
-      email: "TestPremium@email.com",
+      email: "TestPremium@email.com".toLowerCase(),
       name: "Test Premium",
       password: encryptPassword("password"),
       role: {
@@ -582,7 +582,7 @@ enorme, como manzanas, plátanos y moras. Los sabores son muy variados. `,
         price: 150,
         quantity: 3,
         buyerId: 1,
-        postId: 1,
+        postId: Math.ceil(Math.random() * amount)
       }
     });
 

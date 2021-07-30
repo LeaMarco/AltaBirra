@@ -41,6 +41,20 @@ export default function Nav() {
   const dispatch = useDispatch();
   const history = useHistory();
 
+  const hasToken = Object.keys(localStorage).join().includes("token")
+  const guestsItemsInCart = localStorage.guestsItemsInCart
+
+  const itemsInGuestCart = () => {
+    if (localStorage.guestsItemsInCart)
+      return Object.keys(JSON.parse(localStorage.guestsItemsInCart)).length
+    else return ""
+  }
+
+  useEffect(() => {
+
+  }, [localStorage.guestsItemsInCart])
+
+
   useEffect(() => {
     dispatch(getCart(1)); //hardcore
   }, []);
@@ -66,6 +80,8 @@ export default function Nav() {
 
   }
     , [])
+
+
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -192,7 +208,9 @@ export default function Nav() {
           <img src={logo} className={style.logo}></img>
         </Link>
       </div>
+      {/* FIN PRIMER HIJO */}
 
+      {/* SEGUNDO HIJO */}
       <div className={style.SearchBarContainer}>
         <div className={style.searchBar}>
           <form
@@ -236,6 +254,9 @@ export default function Nav() {
           </Link>
         </div>
       </div>
+      {/* FIN SEGUNDO HIJO */}
+
+      {/* TERCER HIJO */}
       <div className={style.ButtonsNavBar}>
         <div className={style.buttonsRight}>
           <ModalFavorites isOpen={showFavorites} handleClose={toogleFavorites}>
@@ -298,5 +319,7 @@ export default function Nav() {
       {menu}
       {menuMask}
     </div >
+
+
   );
 }

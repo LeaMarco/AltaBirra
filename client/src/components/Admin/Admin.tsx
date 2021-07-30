@@ -29,7 +29,7 @@ import moderatePost from './ModeratePost';
 
         </div>
     </div>
-    //</div>
+    </div>
     
   )
 };

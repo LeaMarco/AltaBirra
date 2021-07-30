@@ -16,7 +16,7 @@ export default function Rate() {
 
 	async function handleSubmit(event) {
 		event.preventDefault();
-		await axios.put(`${process.env.REACT_APP_HOST_BACKEND}/ratePost`, { data: { postId: 252, userId: 2, rating: beer, comment: mensaje } }, { headers: validationHeadersGenerator() });
+		await axios.put(`${process.env.REACT_APP_HOST_BACKEND}/ratePost`, { postId: id, rating: beer, comment: mensaje }, { headers: validationHeadersGenerator() });
 		let button = document.getElementById(`${event.target.name}Button`);
 		if (button) button.style.visibility = "hidden";
 	}

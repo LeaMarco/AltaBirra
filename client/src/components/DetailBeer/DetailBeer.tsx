@@ -17,6 +17,8 @@ import Beer from "../Beer/Beer";
 import { card } from "mercadopago";
 import { validationHeadersGenerator } from "../../validationHeadersGenerator";
 import { response } from "express";
+import { getTokenSourceMapRange } from "typescript";
+import swal from 'sweetalert';
 
 interface Favorites {
 	post: Post;
@@ -40,6 +42,8 @@ export default function DetailBeer() {
 		if (isUser) axios.post(`${process.env.REACT_APP_HOST_BACKEND}/viewHistory`, { data: { postId: id } }, { headers: validationHeadersGenerator() });
 	}, [dispatch]);
 
+
+
 	const addToCart = async () => {
 		const response = await axios.put(`${process.env.REACT_APP_HOST_BACKEND}/addToCart`, { params: { "username": "TestUser", "postId": parseInt(id) } }, { headers: validationHeadersGenerator() })
 		dispatch(getCart(1)); ////////////TIENE QUE TRAER EL ID DEL USUARIO QUE ESTÁ CONECTADO
@@ -54,8 +58,38 @@ export default function DetailBeer() {
 		history.push(`/compra/1`);
 	};
 
-	async function addFavoriteInLocalStorage() {
+	const loguearse = (e) => {
+		e.preventDefault();
+		let token = Object.keys(localStorage).join().includes('token');
+		if(!token) {
+			swal({
+				title: "Logueate! 🍻",
+				text: "Debes estar logueado para poder comprar!",
+				icon: "warning",
+				buttons: ["VOLVER A PAGINA PRINCIPAL", "OK"]
+				// timer: 2000,
+			  }).then(response => {
+				if (!response) {
+					history.push(`/`);
 
+					// swal({ 
+					// 	title: 'Adiós, vuelve pronto!',
+					// 	text: 'Suerte!',
+					// 	icon: "success",
+					// 	timer: 3000,
+					// 	buttons: ['']
+					// })
+				//   setTimeout(() => {
+				// 	localStorage.clear();
+				// 	window.location.href = process.env.REACT_APP_HOST_FRONTEND || window.location.href;
+				//   }, 2900);
+				}
+			  })
+		}
+	}
+
+
+	async function addFavoriteInLocalStorage() {
 		if (localStorage.guestsItemsInCart) {
 			const localStorageParse = JSON.parse(localStorage.guestsItemsInCart)
 			/* if (localStorage.guestsItemsInCart[id]) ☢ Si le subis en el carrito, y despues tocas en agregar. Le volves a asignar 1 !!
@@ -127,8 +161,10 @@ export default function DetailBeer() {
 									{info.stock === 0 ? <div className={Style.soldout}>NO HAY STOCK</div> :
 										<div className={Style.buyInfo}>
 											<div className={Style.buyButtons}>
-												<form onSubmit={handleSubmit} >
+												<form onSubmit={hasToken ? handleSubmit : loguearse} >
+
 													<button className={Style.buttonComprar} type="submit">¡COMPRAR AHORA!</button>
+
 												</form>
 												<button className={Style.addtoCartButton} onClick={async () => {
 
@@ -141,7 +177,16 @@ export default function DetailBeer() {
 															timer: 1500,
 														})
 													}
-													else addFavoriteInLocalStorage()
+													else {
+														addFavoriteInLocalStorage()
+														MySwal.fire({
+															position: 'center',
+															icon: 'success',
+															title: "Agregada a carrito de invitad@ 🛒",
+															showConfirmButton: false,
+															timer: 1500,
+														})
+													}
 												}}>AGREGAR AL CARRITO</button>
 											</div>
 											<div className={Style.buttonsPago}>
@@ -165,6 +210,7 @@ export default function DetailBeer() {
 										<a target="_blank" href={`http://www.facebook.com/sharer.php?u=${window.location.href}`}>
 											<img src="https://img1.freepng.es/20171221/wgw/facebook-picture-5a3c060eccfa84.1675788915138831508396.jpg" width="25px" />
 										</a>
+
 										<a target="_blank" href={`https://wa.me/?text=${window.location.href}`}>
 											<img src="http://assets.stickpng.com/images/580b57fcd9996e24bc43c543.png" width="30px" />
 										</a>
