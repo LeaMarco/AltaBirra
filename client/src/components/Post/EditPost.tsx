@@ -119,7 +119,6 @@ export default function EditPost() {
   const { register, handleSubmit, reset, watch } = useForm({ defaultValues: dataPrevia });
   const onSubmit: SubmitHandler<PostValues> = (data) => { despachadora(data, id, image); reset() };
 
-
   return dataPrevia?.beer ? (
     <div className={styles.mainContainer}>
       <div>
