@@ -15,10 +15,10 @@ const db = knex(
             // user: 'postgres',
             // password: 'Wycrd123',
             // database: 'beers', //crear tabla en beers y cambiar abajito
-            host: 'ec2-52-0-67-144.compute-1.amazonaws.com',
-            user: 'kbtkcaykkepdot',
-            password: 'cb5d9106fb333421b4e0cab09693f5d9fcb378d53e7b606286e0d3c57081a598',
-            database: 'dd5nk5u7f9hepv', //crear tabla en beers y cambiar abajito
+            host: process.env.HOST,
+            user: process.env.USER,
+            password: process.env.PASSWORD,
+            database: process.env.DATABASE, //crear tabla en beers y cambiar abajito
         },
     }
 );
