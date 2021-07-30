@@ -582,7 +582,7 @@ enorme, como manzanas, plátanos y moras. Los sabores son muy variados. `,
         price: 150,
         quantity: 3,
         buyerId: 1,
-        postId: 1,
+        postId: Math.ceil(Math.random() * amount)
       }
     });
 
