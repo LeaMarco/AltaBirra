@@ -20,37 +20,35 @@
   align-items: center;
 }
 .welcome {
-  width: fit-content;
+    /* width: fit-content; */
+    /* justify-content: center; */
+    /* align-content: center; */
+    /* border-radius: 30px; */
+    /* background-color: black; */
+    color: white;
+    /* border: 2px solid white; */
+    /* box-shadow: 0px 0px 6px white; */
+    font-weight: bold;
+    font-size: 13;
+    padding: 5px;
+    padding-left: 8px;
+    padding-right: 8px;
+    /* align-self: center; */
+    /* height: 3rem; */
+    margin-bottom: 0.5rem;
+}
+
+.welcomeSpace{
+  height: 3rem;
+}
+
+.topRight{
+  display: flex;
+  flex-direction: column;
+  align-content: center;
   justify-content: center;
-  border-radius: 30px;
-  background-color: black;
-  color: white;
-  font-weight: bold;
-  font-size: 12px;
-  padding: 5px;
-  padding-left: 8px;
-  padding-right: 8px;
-  border: 2px solid white;
-  box-shadow: 0px 0px 6px white;
 }
 
-.closeSesion {
-  background-color: #f08120;
-  border-radius: 30px;
-  border: none;
-  width: fit-content;
-  padding: 5px;
-  padding-left: 8px;
-  padding-right: 8px;
-  font-size: 11px;
-  color: white;
-}
-
-.closeSesion:hover {
-  cursor: pointer;
-  color: black;
-  box-shadow: 0px 0px 3px white;
-}
 
 .searchBar {
   width: 80%;
@@ -118,13 +116,42 @@
 
 .buttonEnter {
   background-color: #f49e51;
-  border-radius: 30px;
   color: white;
-  text-decoration: none;
+  border-radius: 30px;
   border: none;
+  text-decoration: none;
   padding: 3px 15px 3px 15px;
-  font-size: 2vh;
+  font-size: 17px;
   cursor: pointer;
+}
+
+.closeSesion:hover {
+  cursor: pointer;
+  color: rgb(61, 61, 61);
+  box-shadow: 0px 0px 3px white;
+  filter: brightness(130%);
+
+}
+
+.cartAmount{
+  position: absolute;
+  margin-top: -1%;
+  text-decoration: none;
+  color: white;
+  margin-left: 3px;
+  transition: ease-in-out 400ms;
+}
+
+
+.closeSesion {
+  background-color: #f08120;
+  color: white;
+  border-radius: 30px;
+  border: none;
+  width: fit-content;
+  padding: 3px 15px 3px 15px;
+  font-size: 17px;
+  transition: ease-in-out 400ms;
 }
 
 .buttonCart {
@@ -152,7 +179,6 @@
 
 .buttonCart:hover {
   filter: brightness(130%);
-  transition: 400ms;
 }
 
 .buttonFavorites:hover {
@@ -269,6 +295,10 @@
   align-items: center;
   /* flex-wrap: wrap; */
   justify-content: space-evenly;
+}
+
+.topWelcome{
+  height:50rem;
 }
 
 @media only screen and (max-width: 768px) {

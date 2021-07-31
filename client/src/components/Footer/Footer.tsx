@@ -8,7 +8,6 @@ import { SiGmail } from 'react-icons/si';
 
 const Footer = () => {
 
-
 	return (
 		<div className={Style.containerFooter}>
 			<div className={Style.footer}>
@@ -16,7 +15,6 @@ const Footer = () => {
 					<img src={logo} className={Style.logo}></img>
 					<span>Centralizamos la oferta y demanda de cervezas artesanales</span>
 				</div>
-
 				<div className={Style.descriptionFooter}>
 					<div className={Style.quienesSomos}>
 						<span>¿QUIÉNES SOMOS?</span>
@@ -43,9 +41,8 @@ const Footer = () => {
 						</div>
 					</div>
 				</div>
-
 				<div className={Style.desarrollado}>
-					<h3>Desarrollado por el quipo de AltaBirra &copy;</h3>
+					<h3>Desarrollado por el equipo de AltaBirra &copy;</h3>
 				</div>
 			</div>
 		</div>

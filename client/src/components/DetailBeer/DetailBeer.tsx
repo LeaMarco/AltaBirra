@@ -30,6 +30,7 @@ export default function DetailBeer() {
 	const dispatch = useDispatch();
 	const { id }: any = useParams();
 	const info: any = useSelector((state: RootState) => state.detailPosts);
+	console.log(info, "infoo")
 	const favorites: Favorites[] = useSelector((state: RootState) => state.favoritePosts);
 	const [isFavorite, setIsFavorite] = useState<boolean>(favorites.some(post => post.post.id === Number(id)));
 	const [modalIsOpen, setModalIsOpen] = useState(false);

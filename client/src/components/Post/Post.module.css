@@ -20,7 +20,7 @@
     border-radius: 20px;
     overflow-y: scroll;
     scroll-behavior:smooth;
-    background-color: white;
+    /* background-color: white; */
 }
 
 .container{display: flex; align-items:center;flex-direction: column; float: left; width: 10.75rem; margin: 20px 3%; position: relative;}
@@ -28,8 +28,8 @@
 .input{border: 0; border-bottom: 1px solid #ccc; background-color: transparent;}
 .input ~ .focusBorder{position: absolute; bottom: 0; left: 50%; width: 0; height: 2px; background-color: #69C3C4; transition: 0.4s;}
 .input:focus ~ .focusBorder,
-.input:valid ~ .focusBorder{width: 100%; transition: 0.4s; left: 0;} .input ~ label{position: absolute; left: 0; width: 100%; top: -15px; color: rgb(61, 61, 61); transition: 0.3s; z-index: -1; letter-spacing: 0.5px;}
-.input ~ label{position: absolute; left: 0; width: 100%; top: -15px; color: rgb(61, 61, 61); transition: 0.3s; z-index: -1; letter-spacing: 0.5px;}
+.input:valid ~ .focusBorder{width: 100%; transition: 0.4s; left: 0;} .input ~ label{position: relative; left: 0; width: 100%; top: -15px; color: rgb(0, 0, 0); transition: 0.3s; z-index: 1000; letter-spacing: 0.5px;}
+.input ~ label{position: absolute; left: 0; width: 100%; top: -15px; color: rgb(61, 61, 61); transition: 0.3s; z-index: 1000; letter-spacing: 0.5px;}
 .input:focus ~ label, .input:valid ~ label{top: -18px; font-size: 12px; color: #69C3C4; transition: 0.3s;}
 
 

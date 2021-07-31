@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { useForm, SubmitHandler} from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { PostValues } from "../../actions";
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { Dispatch } from "redux";
-import { createPost, searchTypes} from "../../actions";
+import { createPost, searchTypes } from "../../actions";
 import transformer from "./FormatData";
 import styles from './Post.module.css';
 import Swal from 'sweetalert2';
@@ -146,7 +146,7 @@ export default function EditPost() {
               <div className={styles.specificType}>
                 <label>Specific Type:  </label>
                 <select {...register("beer.specificType")} required>
-                <option hidden></option>
+                  <option hidden></option>
                   {specific && specific.map(value => (
                     <option key={value} value={value}>
                       {value}

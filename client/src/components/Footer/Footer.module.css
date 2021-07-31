@@ -17,26 +17,26 @@
   box-shadow: 0px 0px 20px black inset;
 }
 
-.containerFooter .containerLogo{
+.containerLogo{
   display: flex;
   flex-direction: column;
   margin-top: 30px;
   filter: invert(100%);
 }
 
-.containerFooter .containerLogo img{
+.containerLogo img{
   color: white;
   width: 250px;
   align-self: center;
 }
 
-.containerFooter .containerLogo span{
+.containerLogo span{
   color: black;
   width: 400px;
   align-self: center;
 }
 
-.containerFooter .descriptionFooter{
+.descriptionFooter{
   display: flex;
   justify-content: space-evenly;
   margin-top: 60px;
@@ -44,69 +44,64 @@
 }
 
 
-.containerFooter .descriptionFooter div{
+.descriptionFooter div{
   width: 23%;
   margin-left: 10px;
   margin-right: 10px;
 }
 
-.containerFooter .descriptionFooter .quienesSomos{
+.quienesSomos{
   display: flex;
   flex-direction: column;
-  text-align: justify;  
+  text-align: justify;
 }
 
-.containerFooter .descriptionFooter .quienesSomos span{
+.quienesSomos span{
   align-self: center;
 }
 
 
-.containerFooter .descriptionFooter .redes{
+.redes{
   display: flex;
   flex-direction: column;
   text-align: center;
 }
 
-.containerFooter .descriptionFooter .redes div{
+.redes div{
   display: flex;
   align-self: center;
   margin-left: 0px;
   width: 100%;
   justify-content: center;
 }
-
-.containerFooter .descriptionFooter .redes span{
+.redes span{
   align-self: center;
 }
 
-.containerFooter .descriptionFooter .redes h4{
+.redes h4{
   margin: 0px;
   font-size: 30px;
 }
 
-.containerFooter .descriptionFooter .redes h4 .iconIg,
-.containerFooter .descriptionFooter .redes h4 .iconFb {
+.iconIg , .iconFb {
   transition: all 300ms;
 }
 
-.containerFooter .descriptionFooter .redes h4 .iconIg:hover,
-.containerFooter .descriptionFooter .redes h4 .iconFb:hover {
+.iconIg:hover,
+.iconFb:hover {
   cursor: pointer;
   transform: scale(1.1, 1.1);
 }
 
-.containerFooter .descriptionFooter .redes .ig,
-.containerFooter .descriptionFooter .redes .fb{
+.ig,
+.fb{
   margin-top: 20px;
-  margin-left: 5px;  
+  margin-left: 5px;
 }
 
-.containerFooter .descriptionFooter .desarrollado{
+.desarrollado{
   align-self: end;
   justify-items: end;
-}
-
-.containerFooter .desarrollado{
   margin-top: 50px;
   background-color: black;
   color: white;
@@ -114,102 +109,87 @@
   padding: 3px;
 }
 
-.containerFooter .desarrollado h3{
+.desarrollado h3{
   font-size: 15px;
   margin: 0px;
 }
 
-.containerFooter .descriptionFooter .contactanos{
+.contactanos{
   display: flex;
   flex-direction: column;
 }
 
-.containerFooter .descriptionFooter .contactanos span{
+.contactanos span{
   align-self: flex-start;
   margin-left: 18px;
 }
 
-.containerFooter .descriptionFooter .contactanos .contactInfo{
+.contactInfo{
   display: flex;
   align-self: flex-start;
   flex-direction: column;
   width: 100%;
 }
 
-
-
-.containerFooter .descriptionFooter .contactanos .contactInfo .infoWp,
-.containerFooter .descriptionFooter .contactanos .contactInfo .infoGm{
+.infoWp,
+.infoGm{
   display: flex;
   width: 100%;
   height: 50px;
   margin: 0px;
 }
 
-.containerFooter .descriptionFooter .contactanos .contactInfo .infoWp{
+.infoWp{
   margin-bottom: 5px;
 }
 
-.containerFooter .descriptionFooter .contactanos .contactInfo .infoGm{
+.infoGm{
   align-items: flex-end;
 }
 
-.containerFooter .descriptionFooter .contactanos .contactInfo .infoWp span,
-.containerFooter .descriptionFooter .contactanos .contactInfo .infoGm span{
+.infoGm span{
   margin-top: 6px;
   margin-left: 10px;
 }
 
-.containerFooter .descriptionFooter .contactanos .contactInfo .infoWp span{
+.infoWp span{
+  margin-top: 6px;
+  margin-left: 10px;
   margin-top: 25px;
 }
 
-
-
-.containerFooter .descriptionFooter .contactanos .contactInfo .infoWp .wp .iconWp,
-.containerFooter .descriptionFooter .contactanos .contactInfo .infoGm .gm .iconGm{
+.iconWp,
+.iconGm{
   font-size: 23px;
 }
 
-.containerFooter .descriptionFooter .contactanos .contactInfo .infoWp .wp,
-.containerFooter .descriptionFooter .contactanos .contactInfo .infoGm .gm{
+.wp,
+.gm{
   cursor: pointer;
   height: 20px;
   transition: all 300ms;
   padding: 3px;
 }
 
-
-.containerFooter .descriptionFooter .contactanos .contactInfo .infoWp .wp:hover,
-.containerFooter .descriptionFooter .contactanos .contactInfo .infoGm .gm:hover{  
+.wp:hover,
+.gm:hover{
   transform: scale(1.1, 1.1);
 }
 
-/* 
-.containerFooter .descriptionFooter .contactanos .contactInfo .infoWp .wp,
-.containerFooter .descriptionFooter .contactanos .contactInfo .infoGm .gm{
-  height: 20px;
-  border: 1px solid white;
+@media only screen and (max-width: 1024px) {
+  .descriptionFooter{
+    flex-direction: column;
+    align-items: center;
+    margin-left: 0;
+  }
+  .descriptionFooter div{
+    width: unset;
+    margin:10px;
+  }
+  .containerLogo span {
+    width: unset;
+  }
+  .desarrollado{
+    align-self: unset;
+  }
 }
-
-.containerFooter .descriptionFooter .contactanos .contactInfo .infoWp .wp .iconWp:hover,
-.containerFooter .descriptionFooter .contactanos .contactInfo .infoGm .gm .iconGm:hover{
-  cursor: pointer;
-  border: 1px solid orange;
-  transform: scale(1.1, 1.1);
-}
-
-.containerFooter .descriptionFooter .contactanos h4{
-  font-size: 20px;
-}
-
-.containerFooter .descriptionFooter .contactanos .contactInfo .infoWp span,
-.containerFooter .descriptionFooter .contactanos .contactInfo .infoGm span{
-  line-height: 72px;
-  margin-left: 8px;
-}
-
-/* .containerFooter .descriptionFooter .contactanos .contactInfo .infoWp h4,
-.containerFooter .descriptionFooter .contactanos .contactInfo .infoGm h4{
-  font-size: 30px;
-} */ 

@@ -2,9 +2,6 @@
     background-color: rgb(255, 255, 255);
     display: flex;
     flex-direction: column;
-     /* min-width:20rem; */
-    /* max-width: 260px; */
-    /* height: 350px; */
     min-height: 17rem;
     font-weight: bold;
     text-decoration: none;
@@ -16,12 +13,8 @@
   }
 
   .info{
-    /* display: flex;
-    flex-direction: column;
-    align-content:center; */
     border-bottom-left-radius: 1rem;
     border-bottom-right-radius: 1rem;
-    /* height: 1%; */
     min-height: 16vh;
     background-image: radial-gradient(circle at center center, rgb(64,65,67),rgb(36,32,33));
     margin-bottom: 5px;
@@ -49,7 +42,6 @@
 
   .imageContainer{
     min-width: 100%;
-    height: 23vh;
     min-height: 14vh;
   }
 
@@ -128,7 +120,6 @@
 
   .countable{
     display: flex;
-    /* margin-top: 3rem; */
     align-self:center;
     background-color: #515050;
     border-radius: 0.2rem;
@@ -144,7 +135,6 @@
   .stars{
     align-self: center;
     position: relative;
-    /* margin-top: 2.3rem; */
 
   }
 
