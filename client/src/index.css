@@ -12,6 +12,9 @@ body {
   overflow-x: hidden;
   background-color: grey;
 }
+html {
+  border: 10px solid burlywood;
+}
 
 .variables {
   --color: #000000;

@@ -45,7 +45,7 @@ export default function FiltersList() {
   }, [searchQuery.genericType, searchQuery.specificType, searchQuery.rating, searchQuery.hasDryHop, searchQuery.hasShipping, searchQuery.hasDiscount])
 
   return (
-    <div className={Style.container}>
+    <div className={Style.container} style={{ border: "3px solid green" }}>
       <h2> Filtros </h2>
       <form className={Style.subcontainer}>
         <div>

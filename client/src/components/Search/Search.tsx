@@ -7,7 +7,9 @@ import Style from "./Search.module.css";
 export default function Search() {
   const [showFilters, setShowFilters] = useState<boolean>(true);
   return (
-    <div className={Style.container}>
+    <div className={Style.container} style={{ border: "10px solid yellow" }}>
+
+
       <div className={Style.filtersTab}>
         {showFilters ? <FiltersList /> : null}
         <button onClick={() => setShowFilters(!showFilters)}>
@@ -16,12 +18,15 @@ export default function Search() {
         </button>
       </div>
 
+
       <div className={Style.subcontainer}>
         <div className={Style.orderBar}>
           <OrderBar />
         </div>
         <Cards />
       </div>
+
+
     </div>
   );
 }

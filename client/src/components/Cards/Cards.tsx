@@ -9,7 +9,7 @@ import BeerLoading from "../BeerLoading/BeerLoading";
 const Posts = () => {
   const searchedPosts: Post[] = useSelector((state: RootState) => state.searchedPosts);
   return (
-    <div className={Style.container}>
+    <div className={Style.container} style={{ border: "4px solid white" }}>
       {
         searchedPosts.length
           ? searchedPosts?.map(post => (
