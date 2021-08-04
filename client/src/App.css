@@ -2,16 +2,15 @@
   display: flex;
   flex-direction: column;
   text-align: center;
-  height: 100vh;
   background-color: grey;
 }
 
-#title{
- background-color: #ccc;
- margin: 0px;
- padding-top: 20px;
- padding-bottom: 20px;
- text-shadow: 3px 3px gray;
+#title {
+  background-color: #ccc;
+  margin: 0px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  text-shadow: 3px 3px gray;
 }
 
 .App-logo {

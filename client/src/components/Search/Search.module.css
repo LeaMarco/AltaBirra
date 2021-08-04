@@ -1,6 +1,6 @@
 .container {
   display: flex;
-  min-height: 85%;
+  height: 85vh;
 }
 
 .subcontainer {
@@ -8,7 +8,8 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: fit-content;
+  overflow: scroll;
+  overflow-x: hidden;
 }
 
 .orderBar {
@@ -21,19 +22,28 @@
 .filtersTab {
   display: flex;
   align-items: flex-start;
+  height: 85vh;
+  background: radial-gradient(50% 50% at 50% 50%, #404143 0%, #242021 100%);
+  color: aliceblue;
+  font-size: 0.7em;
+  box-shadow: 0rem 0rem 1rem rgba(0, 0, 0, 0.699);
+  z-index: 1;
 }
 
 .filtersTab > button {
   height: 100%;
   width: 3vw;
-  border: none;
+  height: 85vh;
   transition: 250ms;
-  border-left: 1px solid lightgray;
   font-size: large;
+  background-color: lightgray;
 }
 
 .filtersTab > button:hover {
-  background-color: lightgray;
-  box-shadow: 0.3rem 0rem 1rem rgba(0, 0, 0, 0.699);
+  background-color: #f49e51;
   font-size: x-large;
+}
+
+#cards {
+  /*  height: 10px; */
 }

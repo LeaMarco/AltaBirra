@@ -30,7 +30,7 @@ export default function OrderBar() {
 	}, [genericType, specificType, rating, hasDiscount, hasShipping, maxAbv, maxIbu, maxOg, minAbv, minOg, minIbu, minCalories, maxCalories, maxPrice, minPrice, hasDryHop, title])
 
 	return (
-		<div className={Style.container} style={{ border: "3px solid blue" }}>
+		<div className={Style.container} /* style={{ border: "3px solid blue" }} */>
 			<button onClick={page ? () => setPage(page - 1) : undefined} style={{ marginRight: "0.25vw", backgroundColor: page ? "inherit" : "grey" }}> ⬅ </button>
 			<button onClick={posts?.length === 12 ? () => setPage(page + 1) : undefined} style={{ marginLeft: "0.25vw", backgroundColor: posts?.length === 12 ? "inherit" : "grey" }}> ➡ </button>
 			<div>

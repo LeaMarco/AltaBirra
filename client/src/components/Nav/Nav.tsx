@@ -259,10 +259,11 @@ export default function Nav() {
       {/* FIN SEGUNDO HIJO */}
 
       {/* TERCER HIJO */}
-      <div className={style.topRight}>
-        {isAuth ? <div className={style.welcome}>
-          Bienvenido {stateWelcome.nombre}
-        </div> : <div className={style.welcomeSpace}></div>}
+      <div className={style.topRight} >
+        {isAuth ?
+          <div className={style.welcome} style={{ textAlign: "right", marginRight: "1em" }}>
+            Bienvenido {stateWelcome.nombre}
+          </div> : <div className={style.welcomeSpace}></div>}
         <div className={style.ButtonsNavBar}>
           <ModalFavorites isOpen={showFavorites} handleClose={toogleFavorites}>
             <FavoritesTab closeModal={toogleFavorites} />

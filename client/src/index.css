@@ -12,17 +12,12 @@ body {
   overflow-x: hidden;
   background-color: grey;
 }
+/* bborder */
 html {
-  border: 10px solid burlywood;
 }
-
 .variables {
   --color: #000000;
 }
-
-/* * {
-  border: 2px solid green;
-} */
 
 /* width */
 ::-webkit-scrollbar {

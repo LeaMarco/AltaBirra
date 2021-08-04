@@ -45,12 +45,12 @@ export default function FiltersList() {
   }, [searchQuery.genericType, searchQuery.specificType, searchQuery.rating, searchQuery.hasDryHop, searchQuery.hasShipping, searchQuery.hasDiscount])
 
   return (
-    <div className={Style.container} style={{ border: "3px solid green" }}>
-      <h2> Filtros </h2>
+    <div className={Style.container} >
       <form className={Style.subcontainer}>
+        <h2 > Filtros </h2>
         <div>
           <label> Tipo generico </label>
-          <select
+          <select className={Style.selects}
             value={searchQuery.genericType}
             name="genericType"
             onChange={(event) => handleChange(event)}
@@ -65,7 +65,7 @@ export default function FiltersList() {
         </div>
         <div>
           <label> Tipo especifico </label>
-          <select
+          <select className={Style.selects}
             name="specificType"
             value={searchQuery.specificType}
             onChange={(event) => handleChange(event)}
@@ -80,7 +80,7 @@ export default function FiltersList() {
         </div>
         <div>
           <label> Rating </label>
-          <select
+          <select className={Style.selects}
             name="rating"
             value={"⭐".repeat(searchQuery.rating || 0)}
             onChange={(event) => handleChange(event)}
@@ -110,15 +110,13 @@ export default function FiltersList() {
               value={searchQuery.maxPrice}
               onChange={(event) => handleChange(event)}
             />
+            <button className={Style.miniSubmit} onClick={(event) => handleSubmit(event)} > ▶ </button>
           </div>
-          {searchQuery.minPrice || searchQuery.maxPrice ? (
-            <button onClick={(event) => handleSubmit(event)}> + </button>
-          ) : null}
         </div>
         <div className={Style.inputDiv}>
           <label> IBU </label>
           <div>
-            <label> Min: </label>
+            <label> Min:</label>
             <input
               className={Style.smallInput}
               name="minIbu"
@@ -132,10 +130,8 @@ export default function FiltersList() {
               value={searchQuery.maxIbu}
               onChange={(event) => handleChange(event)}
             />
+            <button className={Style.miniSubmit} onClick={(event) => handleSubmit(event)}> ▶ </button>
           </div>
-          {searchQuery.minIbu || searchQuery.maxIbu ? (
-            <button onClick={(event) => handleSubmit(event)}> + </button>
-          ) : null}
         </div>
         <div className={Style.inputDiv}>
           <label> ABV </label>
@@ -154,10 +150,8 @@ export default function FiltersList() {
               value={searchQuery.maxAbv}
               onChange={(event) => handleChange(event)}
             />
+            <button className={Style.miniSubmit} onClick={(event) => handleSubmit(event)}> ▶ </button>
           </div>
-          {searchQuery.minAbv || searchQuery.maxAbv ? (
-            <button onClick={(event) => handleSubmit(event)}> + </button>
-          ) : null}
         </div>
         <div className={Style.inputDiv}>
           <label> OG </label>
@@ -176,10 +170,8 @@ export default function FiltersList() {
               value={searchQuery.maxOg}
               onChange={(event) => handleChange(event)}
             />
+            <button className={Style.miniSubmit} onClick={(event) => handleSubmit(event)}> ▶ </button>
           </div>
-          {searchQuery.minOg || searchQuery.maxOg ? (
-            <button onClick={(event) => handleSubmit(event)}> + </button>
-          ) : null}
         </div>
         <div className={Style.inputDiv}>
           <label> Calorias </label>
@@ -198,10 +190,8 @@ export default function FiltersList() {
               value={searchQuery.maxCalories}
               onChange={(event) => handleChange(event)}
             />
+            <button className={Style.miniSubmit} onClick={(event) => handleSubmit(event)}> ▶ </button>
           </div>
-          {searchQuery.minCalories || searchQuery.maxCalories ? (
-            <button onClick={(event) => handleSubmit(event)}> + </button>
-          ) : null}
         </div>
         <div>
           <label> DRY HOP </label>
@@ -229,7 +219,7 @@ export default function FiltersList() {
             onChange={(event) => dispatch(setQuerySearch({ hasDiscount: event.target.checked ? true : undefined }))}
           />
         </div>
-        <input style={{ margin: "2vh auto", width: "5vw", borderRadius: "0.3rem" }} type="reset" onClick={resetFilterValues} />
+        <input id={Style.reset} type="reset" onClick={resetFilterValues} value="Restablecer" />
       </form>
     </div>
   );
