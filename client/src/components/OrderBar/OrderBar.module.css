@@ -1,12 +1,33 @@
 .container {
-	display: flex;
-	align-items: center;
-	background-color: lightgray;
-	padding: 0.5rem;
-	border: 1px solid black;
-	border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  background-color: lightgray;
+  padding: 0.5rem;
+  border: 1px solid black;
+  border-radius: 0.5rem;
+  background: radial-gradient(50% 50% at 50% 50%, #404143 0%, #242021 100%);
+  color: white;
 }
 
 .container div {
-	margin-left: 3vw;
+  color: white;
+  margin-left: 3vw;
+  border-radius: 1em;
+  padding: 0.1em 0.3em;
+}
+
+.option {
+  background-color: rgb(233, 233, 233);
+}
+
+.goToLeftOrRightButtons {
+  border-radius: 1em;
+  background: #f49e51;
+  color: rgb(41, 40, 40);
+  cursor: pointer;
+}
+
+#select {
+  background-color: rgb(233, 233, 233);
+  border-radius: 1em;
 }

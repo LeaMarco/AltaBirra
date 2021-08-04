@@ -52,17 +52,39 @@
 
 .searchBar {
   width: 80%;
-  height: 3vh;
+  max-height: 3vh;
   background-color: rgb(122, 122, 122);
   font-size: 16px;
-  border-radius: 2px;
+  border-radius: 1em;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 6px 6px 6px 6px;
+  padding: 0.2em 0.3em;
   margin-top: 3vh;
+  border: 2px solid rgb(0, 0, 0);
+  padding: 0.4em 0em;
+}
+/* 
+* {
+  border: 1px solid green;
+}
+ */
+.searchInput {
+  border-radius: 1em;
+  max-height: 2vh;
+  width: 100%;
+  border: none;
+  background-color: rgb(122, 122, 122);
+  color: black;
+  text-indent: 0.5rem;
+  font-size: 1.1em;
 }
 
+.searchInput::placeholder {
+  font-size: 15px;
+  color: black;
+  font-size: 0.5em;
+}
 .form {
   height: 1.5rem;
   display: flex;
@@ -70,20 +92,6 @@
   justify-content: flex-start;
   align-items: center;
   width: 100%;
-}
-
-.searchInput {
-  width: 100%;
-  height: 1.5rem;
-  border: none;
-  background-color: rgb(122, 122, 122);
-  color: black;
-  text-indent: 0.5rem;
-}
-
-.searchInput::placeholder {
-  font-size: 15px;
-  color: black;
 }
 
 .searchInput:focus {
@@ -237,6 +245,7 @@
   background-color: inherit;
   border: none;
   cursor: pointer;
+  border-radius: 1em;
 }
 
 .inputContainer {

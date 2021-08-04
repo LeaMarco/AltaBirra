@@ -222,7 +222,7 @@ export default function Nav() {
             <div className={style.inputContainer}>
               <input type="submit" readOnly value="🔎" className={style.lupa} />
               <input
-                placeholder="Buscar"
+                placeholder="Se me rompio buscar y es tarde, para arreglarlo ir a Nav.module.css. -Eze"
                 className={style.searchInput}
                 value={searchInput}
                 onChange={(event) => handleChange(event)}
