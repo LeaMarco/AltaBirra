@@ -1,85 +1,85 @@
-.mainContainer{
-	margin-top: 3%;
-	height: 100%;
+.mainContainer {
+  margin-top: 3%;
+  height: 100%;
 }
 
 .cardsContainer {
-	display: flex;
-	flex-direction: column;
-	width: 90%;
-	margin-left: 5%;
-	margin-top: 3%;
-	height: 77%;
-	overflow-y: scroll;
-    scroll-behavior:smooth;
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin-left: 5%;
+  margin-top: 3%;
+  height: 77%;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
 }
 
 .subcontainer {
-	background-color: white;
-	width: 90%;
-	padding: 2rem;
-	margin-top: 2%;
-	border-radius: 0.7rem;
+  background-color: white;
+  width: 90%;
+  padding: 2rem;
+  margin-top: 2%;
+  border-radius: 0.7rem;
 }
 
 .detail {
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .subdetail {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.imgHistory{
-	max-width: 6rem;
-	max-height: 6rem;
-	border-radius: 10%;
+.imgHistory {
+  max-width: 6rem;
+  max-height: 6rem;
+  border-radius: 10%;
 }
 
-.title{
-	margin: 0;
-	font-weight: 800;
+.title {
+  margin: 0;
+  font-weight: 800;
 }
 
-.props{
-	margin-left: 4%;
+.props {
+  margin-left: 4%;
 }
 
-.imgContainer{
-	width: 6rem;
+.imgContainer {
+  width: 6rem;
 }
 
-.dataContainer{
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	width: 15rem;
+.dataContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 15rem;
 }
 
-.propsContainer{
-	display: flex;
-	justify-content: space-evenly;
-	width: 15rem;
+.propsContainer {
+  display: flex;
+  justify-content: space-evenly;
+  width: 15rem;
 }
 
-.Button{
-	width: 25%;
-	margin-top: 20px;
-	background-color:tomato;
-	height: 2rem;
-	border-radius: 8px;
-	border:none;
-	transition:0.3s;
-	font-size: 18px;
-	font-weight: 900;
-	color:white;
-	margin: 1vh auto;
+.Button {
+  width: fit-content;
+  margin-top: 20px;
+  background-color: tomato;
+  height: 2rem;
+  border-radius: 8px;
+  border: none;
+  transition: 0.3s;
+  font-size: 18px;
+  font-weight: 900;
+  color: white;
+  margin: 1vh auto;
 }
 
-.Button:hover{
-	cursor: pointer;
-	filter: brightness(1.15);
+.Button:hover {
+  cursor: pointer;
+  filter: brightness(1.15);
 }

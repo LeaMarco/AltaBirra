@@ -222,6 +222,9 @@ export interface SetQuerySearchAction {
 export function searchedPosts(query) {
 	return async function (dispatch: Dispatch) {
 		const response = await axios.get<Post[]>(`${process.env.REACT_APP_HOST_BACKEND}/post`, { params: query })
+
+		console.log("response", response)
+
 		dispatch<getPostsAction>({
 			type: "GET_SEARCHED_POST",
 			payload: response.data

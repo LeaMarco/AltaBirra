@@ -1,5 +1,4 @@
 .NavBar {
-  z-index: 2;
   background-image: repeating-linear-gradient(
       45deg,
       rgba(97, 97, 97, 0.1) 0px,
@@ -52,7 +51,6 @@
 
 .searchBar {
   width: 80%;
-  max-height: 3vh;
   background-color: rgb(122, 122, 122);
   font-size: 16px;
   border-radius: 1em;
@@ -60,31 +58,27 @@
   align-items: center;
   justify-content: center;
   padding: 0.2em 0.3em;
-  margin-top: 3vh;
+  margin-top: 2vh;
   border: 2px solid rgb(0, 0, 0);
   padding: 0.4em 0em;
 }
-/* 
-* {
-  border: 1px solid green;
-}
- */
 .searchInput {
   border-radius: 1em;
-  max-height: 2vh;
-  width: 100%;
+  max-height: 3vh;
+  width: 95%;
   border: none;
   background-color: rgb(122, 122, 122);
   color: black;
   text-indent: 0.5rem;
-  font-size: 1.1em;
+  font-size: 0.9em;
 }
 
 .searchInput::placeholder {
   font-size: 15px;
   color: black;
-  font-size: 0.5em;
+  font-size: 0.9em;
 }
+
 .form {
   height: 1.5rem;
   display: flex;

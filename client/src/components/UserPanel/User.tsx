@@ -21,7 +21,7 @@ function User() {
           <Route path="/panel" component={autorizeComponent(UserPanel)} />
         </div>
         <div className={styles.contentContainer}>
-          <Route exact path="/panel/historialVistos" component={autorizeComponent(ViewsHistory)} />
+          <Route exact path="/panel" component={autorizeComponent(ViewsHistory)} />
           <Route exact path="/panel/vendiendo" component={autorizeComponent(Selling)} />
 
           <Route exact path="/panel/historialCompras" component={autorizeComponent(BuyHistory)} />
