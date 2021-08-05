@@ -5,6 +5,7 @@
   align-items: flex-start;
   width: fit-content;
   margin-left: 1rem;
+  font-size: small;
 }
 .subcontainer > h2 {
   margin: 0;
