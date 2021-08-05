@@ -187,14 +187,15 @@ input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width
         /* height:100%; */
     }
     .postFormBeer{
-        margin-top: 40rem;
+        margin-top: 0;
     }
     .postForm{
         height:100%;
-        width:fit-content;
+        width:100vw;
         margin-top: 10rem;
         border:none;
         overflow-y: unset;
+        margin-top: 0;
     }
     .InfoPostCheckboxes{
         max-width: 500px;
