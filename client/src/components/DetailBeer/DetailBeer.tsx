@@ -64,8 +64,7 @@ export default function DetailBeer() {
 		let token = Object.keys(localStorage).join().includes('token');
 		if (!token) {
 			swal({
-				title: "Logueate! 🍻",
-				text: "Debes estar logueado para poder comprar!",
+				title: "Debes ingresar para comprar 🍻",
 				icon: "warning",
 				buttons: ["VOLVER A PAGINA PRINCIPAL", "OK"]
 				// timer: 2000,
