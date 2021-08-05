@@ -39,7 +39,7 @@ function App() {
       <Route exact path="/post" component={autorizeComponent(Post)} />
       <Route exact path="/editpost/:id" component={autorizeComponent(EditPost)} />
       <Route exact path="/detailBeer/:id" component={DetailBeer} />
-      <Route exact path="/categories" component={autorizeComponent(Categories)} />
+      <Route exact path="/categories" component={Categories} />
       <Route exact path="/cart/:id" component={Cart} />
 
       <Route exact path="/compra/:id" component={autorizeComponent(Compra)} />
