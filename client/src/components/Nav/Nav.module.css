@@ -175,10 +175,12 @@
   border-radius: 5rem;
   border: none;
   cursor: pointer;
+  transition: all 400ms;
 }
 
 .buttonCart:hover {
-  filter: brightness(130%);
+  transition: all 400ms;
+  background-color: #ffcd69;
 }
 
 .buttonFavorites:hover {
