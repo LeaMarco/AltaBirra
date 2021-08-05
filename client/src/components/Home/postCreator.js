@@ -77,7 +77,8 @@ export default async (amount) => {
         }
         let countable = {
             "price": (+(Math.random() * 200 + 75).toFixed(2)),
-            "discount": Math.random() > 0.5 ? 0 : Math.floor(Math.random() * 25)
+            "discount": Math.random() > 0.5 ? 0 : Math.floor(Math.random() * 25),
+            "expireDate" : "2021-07-29 12:52:01.428"
         }
 
         let infoToPost = { beer, infoPost, countable }

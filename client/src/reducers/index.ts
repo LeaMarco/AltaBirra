@@ -9,7 +9,6 @@ import { cart } from '../actions/index';
 
 
 export interface StoreState {
-
 	usersPremium: UserPremium[];
 	cart: cart[];
 }

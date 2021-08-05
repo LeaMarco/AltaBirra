@@ -480,7 +480,7 @@ enorme, como manzanas, plátanos y moras. Los sabores son muy variados. `,
       }
       let countable = {
         "price": +(Math.random() * 200 + 75).toFixed(2),
-        "discount": Math.random() > 0.5 ? 0 : Math.floor(Math.random() * 25)
+        "discount": Math.random() > 0.5 ? 0 : Math.floor(Math.random() * 25),
       }
 
       let infoToPost = { beer, infoPost, countable }
