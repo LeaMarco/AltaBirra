@@ -3,53 +3,59 @@
   display: flex;
   flex-direction: column;
   width: 18vw;
-  height: 26vw;
+  height: 54.4vh;
   margin: 1.5vw;
   font-weight: bold;
   text-decoration: none;
   color: black;
   box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.192);
-    transition: transform 500ms, filter 1000ms;
+  transition: transform 500ms, filter 1000ms;
   border-radius: 1rem;
 }
 
-
-
-.info{
+.info {
+  /* border: 2px solid blue; */
   border-bottom-left-radius: 1rem;
   border-bottom-right-radius: 1rem;
-  height: 12vw;
-  background-image: radial-gradient(circle at center center, rgb(64,65,67),rgb(36,32,33));
+  transform: translateY(32%);
+  height: 21vh;
+  background-image: radial-gradient(
+    circle at center center,
+    rgb(64, 65, 67),
+    rgb(36, 32, 33)
+  );
 }
 
-
-
-.numberColum{
-  margin-top: 3rem;
+.numberColum {
   color: white;
   font-weight: 600;
+  transform: translateY(-60%);
 }
 
-.description{
+.description {
   color: white;
   font-weight: 400;
 
   height: 10rem;
+  transform: translateY(-30%);
 }
 
-.originalPrice{
-  color: #8C8C8C;
+.originalPrice {
+  color: #8c8c8c;
   font-size: 1.3rem;
   position: absolute;
+  font-weight: 400;
   margin-top: -5.2rem;
-  text-decoration:line-through
+  text-decoration: line-through;
 }
 
-.discount{
-  color: #01E26D;
-  font-size: 1.3rem;
+.discount {
+  color: #01e26d;
+  font-size: 1rem;
+  font-weight: 400;
   position: absolute;
-  margin-top: -4rem;
+  z-index: 10;
+  margin-top: -6.2rem;
 }
 
 .container:hover {
@@ -59,42 +65,48 @@
   transition: 600ms;
 }
 
+/* * {
+  border: 0.1px solid green;
+} */
+
 .image {
-  margin-top: 0.5rem;
   height: 12.8vw;
   max-width: 100%;
 }
-.stars{
-  position: absolute;
-  margin-top: -11rem;
+.stars {
+  position: relative;
+  margin-top: -25%;
   margin-left: 0.3rem;
+  transform: translateY(-150%);
 }
 
-.title{
-  position: absolute;
+.title {
+  position: relative;
   margin-top: -0.5rem;
   color: white;
-  background-color: #F49E51;
+  background-color: #f49e51;
   width: fit-content;
   padding: 0.3rem;
   font-size: 1.5rem;
   max-width: 16vw;
   overflow: hidden;
-white-space: nowrap;
+  white-space: nowrap;
   text-overflow: ellipsis;
+  transform: translateY(-200%);
 }
 .props {
   display: flex;
   justify-content: center;
   flex-direction: column;
 }
-.price{
+.price {
   color: white;
-  position: absolute;
+  position: relative;
   font-size: 1.8rem;
   margin-top: -2.5rem;
   background-color: #515050;
   width: fit-content;
+  transform: translateY(-165%);
 }
 .props > div {
   display: flex;
@@ -102,7 +114,7 @@ white-space: nowrap;
 }
 
 .fav {
-  position: absolute;
+  position: relative;
   margin-left: 1rem;
   margin-top: 1rem;
   border: none;
@@ -120,7 +132,7 @@ white-space: nowrap;
 }
 
 .unfav {
-  position: absolute;
+  position: relative;
   margin-left: 1rem;
   margin-top: 1rem;
   border: none;

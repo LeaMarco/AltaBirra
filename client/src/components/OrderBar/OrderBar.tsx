@@ -30,20 +30,24 @@ export default function OrderBar() {
 	}, [genericType, specificType, rating, hasDiscount, hasShipping, maxAbv, maxIbu, maxOg, minAbv, minOg, minIbu, minCalories, maxCalories, maxPrice, minPrice, hasDryHop, title])
 
 	return (
-		<div className={Style.container}>
-			<button onClick={page ? () => setPage(page - 1) : undefined} style={{ marginRight: "0.25vw", backgroundColor: page ? "inherit" : "grey" }}> ⬅ </button>
-			<button onClick={posts?.length === 12 ? () => setPage(page + 1) : undefined} style={{ marginLeft: "0.25vw", backgroundColor: posts?.length === 12 ? "inherit" : "grey" }}> ➡ </button>
+		<div className={Style.container} >
+			<button className={Style.goToLeftOrRightButtons} onClick={page ? () => setPage(page - 1) : undefined}
+				style={{ marginRight: "0.25vw", backgroundColor: page ? "#f49e51" : "grey" }}>
+				◀
+			</button>
+
+			<button className={Style.goToLeftOrRightButtons} onClick={posts?.length === 12 ? () => setPage(page + 1) : undefined} style={{ marginLeft: "0.25vw", backgroundColor: posts?.length === 12 ? "#f49e51" : "grey" }}> ▶ </button>
 			<div>
 				<label> Ordenar por </label>
-				<select onChange={event => handleChange(event)} value={searchQuery.orderBy}>
-					<option> Mejor resultado </option>
-					<option> Menor precio </option>
-					<option> Mayor precio </option>
-					<option> Menor IBU </option>
-					<option> Mayor IBU </option>
-					<option> Menor ABV </option>
-					<option> Mayor ABV </option>
-					<option> Mejor rating </option>
+				<select id={Style.select} onChange={event => handleChange(event)} value={searchQuery.orderBy}>
+					<option className={Style.option}> Mejor resultado </option>
+					<option className={Style.option}> Menor precio </option>
+					<option className={Style.option}> Mayor precio </option>
+					<option className={Style.option}> Menor IBU </option>
+					<option className={Style.option}> Mayor IBU </option>
+					<option className={Style.option}> Menor ABV </option>
+					<option className={Style.option}> Mayor ABV </option>
+					<option className={Style.option}> Mejor rating </option>
 				</select>
 			</div>
 		</div>

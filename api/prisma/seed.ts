@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { encryptPassword } from "../src/autentication/controllers/auth.controller";
+import { add } from 'date-fns'
 
 const prisma = new PrismaClient();
 
@@ -404,6 +405,7 @@ enorme, como manzanas, plátanos y moras. Los sabores son muy variados. `,
   ////TRANSACTION
   const amount = 300;
   ////////AUTOPOST para faqqqquu////////////////
+
   await (async () => {
     let CERVEZAS_ROJAS = [
 
@@ -453,6 +455,7 @@ enorme, como manzanas, plátanos y moras. Los sabores son muy variados. `,
     let usernames = ["TestUser", "TestPremium"]
     let comments = ["Horrible", "Mala", "Decente", "Muy buena", "Excelente"]
 
+    const weekFromNow = add(new Date(), { days: 7 })
     for (let i = 0; i < amount; i++) {
 
       let randomRating = Math.ceil(Math.random() * 5);
@@ -478,9 +481,11 @@ enorme, como manzanas, plátanos y moras. Los sabores son muy variados. `,
         "visibility": true,
         "username": usernames[Math.floor(Math.random() * usernames.length)]
       }
+
       let countable = {
         "price": +(Math.random() * 200 + 75).toFixed(2),
         "discount": Math.random() > 0.5 ? 0 : Math.floor(Math.random() * 25),
+        // "expireDate":
       }
 
       let infoToPost = { beer, infoPost, countable }

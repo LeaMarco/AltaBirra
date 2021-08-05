@@ -222,7 +222,7 @@ export default function Nav() {
             <div className={style.inputContainer}>
               <input type="submit" readOnly value="🔎" className={style.lupa} />
               <input
-                placeholder="Buscar"
+                placeholder="Buscar birren"
                 className={style.searchInput}
                 value={searchInput}
                 onChange={(event) => handleChange(event)}
@@ -259,10 +259,11 @@ export default function Nav() {
       {/* FIN SEGUNDO HIJO */}
 
       {/* TERCER HIJO */}
-      <div className={style.topRight}>
-        {isAuth ? <div className={style.welcome}>
-          Bienvenido {stateWelcome.nombre}
-        </div> : <div className={style.welcomeSpace}></div>}
+      <div className={style.topRight} >
+        {isAuth ?
+          <div className={style.welcome} style={{ textAlign: "right", marginRight: "1em" }}>
+            Bienvenido {stateWelcome.nombre}
+          </div> : <div className={style.welcomeSpace}></div>}
         <div className={style.ButtonsNavBar}>
           <ModalFavorites isOpen={showFavorites} handleClose={toogleFavorites}>
             <FavoritesTab closeModal={toogleFavorites} />

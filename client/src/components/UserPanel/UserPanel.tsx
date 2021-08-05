@@ -61,7 +61,7 @@ function AdminPanel() {
 	return (
 		<div className={styles.mainContainer}>
 			<div className={styles.panelTitle}>Panel de usuario</div>
-			<Link to="/panel/historialVistos" className={styles.menuButton}>
+			<Link to="/panel" className={styles.menuButton}>
 				Vistos recientemente
 			</Link>
 			<Link to="/panel/vendiendo" className={styles.menuButton}>
