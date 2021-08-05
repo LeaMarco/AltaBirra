@@ -181,7 +181,7 @@ const Register: React.FunctionComponent<{ toogleAuth, closeModal, toogleEnter, t
         toogleAuth()
 
         //////////////sacar renderLogin!, agregar esto y poner arriba el token correspondiente segun donde estes parado//////////
-        await setTimeout(() => window.location.reload(), 2000) //le da tiempo a que se vea el mensaje
+        await setTimeout(() => window.location.reload(), 1000) //le da tiempo a que se vea el mensaje
 
         closeModal()
 
