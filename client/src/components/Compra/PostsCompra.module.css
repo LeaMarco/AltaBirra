@@ -1,16 +1,16 @@
 .itemCarrito{
-    display:flex;
-    justify-content:space-between;
-    padding:10px;
-    align-items:center;
-    /* background: linear-gradient(180deg, #69C3C4 0%, rgba(105, 195, 196, 0.51) 100%); */
-    background:black;
-    color:white;
+    display: flex;
+    justify-content: space-between;
+    padding: 30px;
+    align-items: center;
+    background: radial-gradient(50% 50% at 50% 50%, #404143 0%, #242021 100%);
+    color: white;
     font-weight: bold;
     text-decoration: none;
-    width: 100%;
-    border-radius: 10px;
-    margin:10px;
+    width: 75rem;
+    height: 10rem;
+    border-radius: 30px;
+    margin: 20px;
 }
 .itemCarrito a h1 {
     margin:0;

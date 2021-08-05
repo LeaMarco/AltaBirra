@@ -4,8 +4,8 @@
     align-self: center;
     flex-direction:column;
     align-content: center;
-    justify-content: center;
-    background:white;
+    /* justify-content: center; */
+    /* background:white; */
     height:80vh;
     width:80vw;
     border-radius:30px;
