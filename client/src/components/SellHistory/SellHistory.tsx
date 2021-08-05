@@ -26,8 +26,6 @@ export default function SellHistory() {
 			});
 	}
 
-	console.log(history);
-
 	return (
 		<div className={Style.mainContainer}>
 			<h2>Historial de Ventas</h2>
@@ -72,7 +70,7 @@ export default function SellHistory() {
 
 												</div>
 												<div className={Style.CountableContainer}>
-													<h5 className={Style.props}> Fecha: {`${post.createdAt.slice(8, 10)}/${post.createdAt.slice(5, 7)}/${post.createdAt.slice(0, 4)}`} </h5>
+													<h5 className={Style.props}> Fecha: {`${post.createdAt?.slice(8, 10)}/${post.createdAt?.slice(5, 7)}/${post.createdAt?.slice(0, 4)}`} </h5>
 													<h5 className={Style.props}> Estado: {post.state} </h5>
 													<h5 className={Style.props}> Cantidad: {post.quantity} </h5>
 													<div>
