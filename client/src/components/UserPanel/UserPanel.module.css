@@ -1,16 +1,16 @@
-.mainContainer{
-    display:flex;
-    flex-direction: column;
+.mainContainer {
+  display: flex;
+  flex-direction: column;
 }
-.panelTitle{
-    font-weight: 800;
-    font-size: 18px;
-    width: 50%;
-    margin-top: 15%;
-    margin-left: 1%;
-    margin-bottom: 10%;
-    transform: skew(-11deg, 0deg);
-    background: linear-gradient(
+.panelTitle {
+  font-weight: 800;
+  font-size: 18px;
+  width: 50%;
+  margin-top: 15%;
+  margin-left: 1%;
+  margin-bottom: 10%;
+  transform: skew(-11deg, 0deg);
+  background: linear-gradient(
     90deg,
     rgb(250, 170, 65) 0%,
     rgb(250, 170, 65) 44%,
@@ -19,11 +19,11 @@
   );
 }
 
-.menuButton{
-    font-size: 15px;
-    font-weight: 800;
-    color: gray;
-    margin-top: 10%;
-    text-decoration: none;
-    border: none;
+.menuButton {
+  font-size: 1em;
+  font-weight: 800;
+  color: gray;
+  margin-top: 10%;
+  text-decoration: none;
+  border: none;
 }

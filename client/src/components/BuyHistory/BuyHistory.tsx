@@ -3,7 +3,7 @@ import Style from "./BuyHistory.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getHistory } from "../../actions";
 import { RootState } from "../../reducers";
-import { Link, useParams, useLocation, useHistory } from "react-router-dom";
+import { Link, useLocation, useHistory } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import { validationHeadersGenerator } from "../../validationHeadersGenerator";
@@ -14,14 +14,11 @@ export default function BuyHistory() {
 	const history = useSelector((state: RootState) => state.history);
 	const search = useLocation().search;
 	const redirect = useHistory();
-
 	let status = new URLSearchParams(search).get("status")
 
 	useEffect(() => {
 		if (status === "approved") {
-			console.log("ACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
 			status = null
-
 			axios.post(`${process.env.REACT_APP_HOST_BACKEND}/transaction`, null, { headers: validationHeadersGenerator() })
 				.then(() => {
 					redirect.push(`/historialCompras`)
@@ -33,7 +30,6 @@ export default function BuyHistory() {
 	useEffect(() => {
 		dispatch(getHistory("buy", filter));
 	}, [dispatch, filter])
-
 
 	return (
 		<div className={Style.mainContainer}>
@@ -67,7 +63,7 @@ export default function BuyHistory() {
 													</div>
 												</div>
 												<div className={Style.CountableContainer}>
-													<h5 className={Style.props}> Fecha: {`${post.createdAt.slice(8, 10)}/${post.createdAt.slice(5, 7)}/${post.createdAt.slice(0, 4)}`} </h5>
+													<h5 className={Style.props}> Fecha: {`${post.createdAt?.slice(8, 10)}/${post.createdAt?.slice(5, 7)}/${post.createdAt?.slice(0, 4)}`} </h5>
 													<h5 className={Style.props}> Estado: {post.state} </h5>
 													<h5 className={Style.props}> Cantidad: {post.quantity} </h5>
 													<div>

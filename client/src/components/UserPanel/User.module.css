@@ -2,7 +2,8 @@
   align-self: center;
   display: flex;
   width: 80%;
-  height: 90%;
+  height: 76vh;
+
   background-color: white;
   margin: 2%;
   color: white;
@@ -16,7 +17,7 @@
   display: flex;
   flex-direction: column;
   width: 24.5%;
-  height: 60vh;
+  height: 76vh;
   background-color: rgb(255, 255, 255);
   box-shadow: 6px -2px 64px 0px rgba(0, 0, 0, 0.205) inset;
   border-bottom-left-radius: 66px;

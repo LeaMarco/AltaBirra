@@ -74,7 +74,7 @@ export function PostinCart({
 				<div className={style.titleContainer}>
 					<h1 className={style.title}>{postTitle}</h1>
 					<span>{description.slice(0, 50)}...</span>
-					<p>{pickupdir}</p>
+					{/* <p>{pickupdir}</p> */}
 				</div>
 			</Link>
 			<div className={style.modifyContainer}>

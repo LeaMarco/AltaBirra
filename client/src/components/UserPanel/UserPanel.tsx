@@ -23,19 +23,17 @@ function AdminPanel() {
 	const [seeModal, setSeeModal] = useState<boolean>(false)
 	const [showYeahNewPassword, setShowYeahNewPassword] = useState<boolean>(false)
 	const history = useHistory();
-	const user: User = useSelector((state: RootState) => state.welcome);
+	// const user: User = useSelector((state: RootState) => state.welcome);
 	const userRole = useSelector((state: RootState) => state.welcome["userRol"]);
-	const [seeAdmin, setSeeAdmin] = useState<boolean>(false);
+	// const [seeAdmin, setSeeAdmin] = useState<boolean>(false);
 	function toggleSeeModal() {
 		setSeeModal(!seeModal)
 	}
 
 	function handleDesactivarCuenta(e) {
-
 		e.preventDefault()
-
 		Swal.fire({
-			title: '¿Seguro de borrar todo tu historial?',
+			title: '¿Estas seguro de desactivar tu cuenta?',
 			text: "No se puede revertir...",
 			icon: 'warning',
 			showCancelButton: true,
@@ -43,7 +41,6 @@ function AdminPanel() {
 			cancelButtonColor: '#d33',
 			confirmButtonText: 'Borrar Todo'
 		}).then(async (result) => {
-
 			if (result.isConfirmed) {
 				await axios.patch(`${process.env.REACT_APP_HOST_BACKEND}/desactivateAccount`, null, { headers: validationHeadersGenerator() }).then(res => {
 					localStorage.clear()
@@ -52,11 +49,8 @@ function AdminPanel() {
 					window.location.reload()
 				})
 			}
-
-
 		})
 	}
-
 
 	return (
 		<div className={styles.mainContainer}>
@@ -88,9 +82,7 @@ function AdminPanel() {
 						: <ChangePassword setYeahNewPassword={setShowYeahNewPassword} toggleSeeModal={toggleSeeModal} />
 				}
 			</ModalChangePassword>
-
 			<button style={{ cursor: "pointer" }} className={styles.menuButton} onClick={handleDesactivarCuenta}> Desactivar cuenta </button>
-
 			{
 				userRole === "ADMIN" ?
 					<Link to="/admin" className={styles.menuButton}>
