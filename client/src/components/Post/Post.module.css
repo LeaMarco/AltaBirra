@@ -1,5 +1,5 @@
 .mainContainer{
-    height: 70%;
+    height: 80vh;
     width: 90%;
     margin-left: 5%;
     display: flex;
@@ -20,7 +20,7 @@
     border-radius: 20px;
     overflow-y: scroll;
     scroll-behavior:smooth;
-    /* background-color: white; */
+    background-color: white;
 }
 
 .container{display: flex; align-items:center;flex-direction: column; float: left; width: 10.75rem; margin: 20px 3%; position: relative;}
@@ -114,22 +114,22 @@ input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width
     text-align: center;
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-    width:29em;
+    /* flex-wrap: wrap; */
+    width:fit-content;
 }
 .row2{
     text-align: center;
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-    width:29em;
+    /* flex-wrap: wrap; */
+    width:fit-content;
 }
 .row3{
     text-align: center;
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-    width:29em;
+    /* flex-wrap: wrap; */
+    width:fit-content;
 }
 .row4{
     text-align: center;
