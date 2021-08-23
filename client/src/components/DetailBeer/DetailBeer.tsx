@@ -30,7 +30,6 @@ export default function DetailBeer() {
 	const dispatch = useDispatch();
 	const { id }: any = useParams();
 	const info: any = useSelector((state: RootState) => state.detailPosts);
-	console.log(info, "infoo")
 	const favorites: Favorites[] = useSelector((state: RootState) => state.favoritePosts);
 	const [isFavorite, setIsFavorite] = useState<boolean>(favorites.some(post => post.post.id === Number(id)));
 	const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -101,9 +100,6 @@ export default function DetailBeer() {
 
 		// localStorage.setItem("guestsItemsInCart", "{'1':2,'3':3}")
 
-		/* e.preventDefault()
-		await axios.get(`${process.env.REACT_APP_HOST_BACKEND}/getMultiplePostByIds`, { params: { guestsItemsInCart: localStorage.guestsItemsInCart } }).then(response => console.log(response.data))
-		console.log(localStorage.guestsItemsInCart) */
 	}
 
 	return info?.beer ? (

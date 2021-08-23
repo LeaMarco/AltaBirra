@@ -16,11 +16,10 @@ export function PostinCart({
 	countable,
 	cartId,
 	username,
-	deleteGuestItem = (postIdDelete: number) => console.log("deleteGuestItem no pasada, porque no hace falta")
+	deleteGuestItem = (postIdDelete: number) => {}
 }) {
 	const hasToken = Object.keys(localStorage).join().includes("token")
 	const [quantity, setQuantity] = useState(amount);
-	const [guestCartQuantity, setGuestCartQuantity] = useState()
 
 	const dispatch = useDispatch();
 	let cartIdparsed = parseInt(cartId, 10);
@@ -41,7 +40,6 @@ export function PostinCart({
 			dispatch(getCart(cartIdparsed))
 		}
 		else {
-			console.log("entre", postId)
 			deleteGuestItem(postId)
 		}
 	}

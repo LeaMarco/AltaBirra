@@ -95,7 +95,6 @@ function Cart() {
     })
 
   }
-  // console.log(cartsGuestUser, !haveToken && Array.isArray(cartsGuestUser) && cartsGuestUser?.length > 0)
   return (
     <div className={styles.cartContainer}>
       {/* <div id="button-checkout"></div> */}
@@ -144,7 +143,6 @@ function Cart() {
 const urldeleteallcart = `${process.env.REACT_APP_HOST_BACKEND}/deleteAllCart`;
 async function deleteAllCart(data) {
   //☢ Posible error aca, documentacion ambigua sobre pasaje de headers por axios.delete -Ezequiel, Raccon City 1997.
-  console.log("delete")
   const response = await axios.delete<cart[]>(urldeleteallcart, { headers: validationHeadersGenerator(), data: { data } });
   return response;
 }

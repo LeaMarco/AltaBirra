@@ -16,7 +16,6 @@ export function Compra() {
     let carts: any = useSelector((state: RootState) => state.cart);
     const [merpastate, setMerpa] = useState("");
     useScript(merpastate)
-    console.log(carts, "CARRRTSSSSSS")
     useEffect(() => {
         carts = null;
         dispatch(getCart(id));
@@ -58,9 +57,7 @@ export function Compra() {
             let merparesponse = await merpa(items);
             setMerpa(merparesponse)
         }
-        else {
-            console.log("sin carts");
-        }
+        
     }
 
     async function merpa(data) {

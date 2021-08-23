@@ -17,7 +17,6 @@ export function PostsCompra({
 }) {
   const [estado, setEstado] = useState({ "pickup": false, "envio": false });
   const [buyerdir, setBuyerdir] = useState({ dir: "" });
-  console.log(buyerdir, "estado PostsCompra")
 
   let checkboxClick = (e) => {
     let { name, checked } = e.target;

@@ -223,7 +223,6 @@ export function searchedPosts(query) {
 	return async function (dispatch: Dispatch) {
 		const response = await axios.get<Post[]>(`${process.env.REACT_APP_HOST_BACKEND}/post`, { params: query })
 
-		console.log("response", response)
 
 		dispatch<getPostsAction>({
 			type: "GET_SEARCHED_POST",
@@ -366,7 +365,7 @@ export interface delPostInCartAction {
 
 export const getCart = (id) => {
 	return async (dispatch: Dispatch) => {
-		const response = await axios.get<cart[]>(`${process.env.REACT_APP_HOST_BACKEND}/cart/${id}`, { headers: validationHeadersGenerator() })
+		const response = await axios.get<cart[]>(`${process.env.REACT_APP_HOST_BACKEND}/cart`, { headers: validationHeadersGenerator() })
 		dispatch<getCartAction>({
 			type: ActionTypes.getCart,
 			payload: response.data,
@@ -418,7 +417,6 @@ export interface ActionUserData {
 }
 
 export const getUserData = (user: iuserData) => {
-	console.log(user, "getuserdata")
 	return <ActionUserData>{
 		type: ActionTypes.ActionUserDataType,
 		payload: user

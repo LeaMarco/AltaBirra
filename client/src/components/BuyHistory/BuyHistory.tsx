@@ -23,7 +23,7 @@ export default function BuyHistory() {
 				.then(() => {
 					redirect.push(`/historialCompras`)
 				})
-				.catch(() => (console.log("no se pudo crear la transaccion")))
+				.catch(() => null)
 		}
 	}, [])
 

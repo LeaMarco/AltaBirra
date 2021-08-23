@@ -1,16 +1,6 @@
 var nodemailer = require('nodemailer');
 var fs = require('fs');
 
-// var logo = fs.readdir('./src/img/', (err:any, files:any) => {
-//     if(err){
-//         throw err;
-//     }else{
-//         console.log(files[0]);
-//     }
-
-// });
-
-
 export const transporter = nodemailer.createTransport({
 
     host: "smtp.gmail.com",

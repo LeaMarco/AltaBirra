@@ -7,19 +7,16 @@ import swal from 'sweetalert';
 export default function VerifyAccount() {
 
 	const { user }: any = useParams();
-	console.log('ACA ESTA USER', user);
 
 	const verify = async () => {
 		
 		await axios.get(`${process.env.REACT_APP_HOST_BACKEND}/verify/verifyUser`, { headers: {user} })
 		.then((e) =>{
-			console.log(e);
-			if(e.data) console.log('Cuenta verificada!')
+			if(e.data) 
 			showAlert(e.data.match.verify);
 			
 		})
 		.catch((error) => {
-			console.log('Error al obtener la data')
 		})
 	}
 

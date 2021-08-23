@@ -150,7 +150,6 @@ const Register: React.FunctionComponent<{ toogleAuth, closeModal, toogleEnter, t
   ///////////////LOGICA DE GOOGLE//////////////////////////
   const responseGoogleRegister = (response: any) => {
 
-    console.log(response, 'RESPONSE');
     const tokenId = response.tokenId
     const name = response.Ts.RT;
     const googleId = response.googleId;
@@ -174,10 +173,8 @@ const Register: React.FunctionComponent<{ toogleAuth, closeModal, toogleEnter, t
         if (!tokenId) return messages(e);
         localStorage.setItem('tokenGoogle', tokenId)
         welcome();
-        console.log(e.data, "asdasd")
         dispatch(getUserData(e.data))
         dispatch(login(true));
-        console.log('LOGUEADO CON GOOGLE!!!');
         toogleAuth()
 
         //////////////sacar renderLogin!, agregar esto y poner arriba el token correspondiente segun donde estes parado//////////
@@ -187,14 +184,12 @@ const Register: React.FunctionComponent<{ toogleAuth, closeModal, toogleEnter, t
 
 
       }).catch((e) => {
-        console.log("Error al registrarte: fa q tuvo la culpa")
         setAlreadyRegister(true)
       })
 
   };
 
   const onFailureRegister = (response: any) => {
-    console.log(response, "Fallo el registro!");
   };
   ////////////FIN DE LOGICA DE GOOGLE///////////////////
 
@@ -209,7 +204,6 @@ const Register: React.FunctionComponent<{ toogleAuth, closeModal, toogleEnter, t
     const username = name.replaceAll(" ", "_") + "_" + facebookId;
     const email = response.email;
     const tokenId = response.accessToken
-    console.log(guestsItemsInCart, "guestsItemsInCart")
     axios.post(`${process.env.REACT_APP_HOST_BACKEND}/auth/signup`, {
       params: {
         username,
@@ -227,23 +221,19 @@ const Register: React.FunctionComponent<{ toogleAuth, closeModal, toogleEnter, t
         welcome()
         dispatch(getUserData(e.data))
         dispatch(login(true));
-        console.log('LOGUEADO CON FACEBOOK!!!');
         toogleAuth()
         //////////////sacar renderLogin!, agregar esto y poner arriba el token correspondiente segun donde estes parado//////////
         await setTimeout(() => window.location.reload(), 2000) //le da tiempo a que se vea el mensaje
         closeModal()
       })
       .catch((e) => {
-        console.log(e, "Error!")
         setAlreadyRegister(true)
       })
 
 
   };
 
-  const componentClicked = (response: any) => {
-    console.log(response);
-  };
+  
   ///////////////FIN DE LOGICA DE FACEBOOK/////////////////
 
 
@@ -264,13 +254,11 @@ const Register: React.FunctionComponent<{ toogleAuth, closeModal, toogleEnter, t
     axios
       .post(`${process.env.REACT_APP_HOST_BACKEND}/auth/signup/`, { params: postObj })
       .then(async (e: any) => {
-        console.log("Bienvenido !")
         verifyAccount();
         renderLogin()
         closeModal()
 
       }).catch((e) => {
-        console.log("Ya tenés usuario, logueate!")
         setAlreadyRegister(true)
       })
 
@@ -430,7 +418,7 @@ const Register: React.FunctionComponent<{ toogleAuth, closeModal, toogleEnter, t
         appId="866652260898974"
         autoLoad={false}
         fields="name,email,picture"
-        onClick={componentClicked}
+        onClick={()=>{}}
         callback={responseFacebook}
         textButton="Continuar con Google"
         render={renderProps => (
@@ -446,7 +434,7 @@ const Register: React.FunctionComponent<{ toogleAuth, closeModal, toogleEnter, t
         buttonText="Continuar con Google"
         theme="dark"
         onSuccess={responseGoogleRegister}
-        onFailure={onFailureRegister}
+        onFailure={()=>{}}
         cookiePolicy={"single_host_origin"}
         className="googleLogin"
         style={{ width: "1000px" }}

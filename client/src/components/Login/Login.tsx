@@ -41,8 +41,6 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
   const stateLogin = useSelector((state) => state["loginState"]);
 
   useEffect(() => {
-    // console.log('REDUX', stateWelcome.nombre);
-    // console.log('REDUX login', stateLogin);
   }, [stateWelcome, stateLogin]);
   //Agregar un estado nuevox
   //////////////////
@@ -98,7 +96,6 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
         welcome();
         dispatch(getUserData(e.data.userData))
         dispatch(login(true));
-        console.log('LOGUEADO CON PLANILLA!!!');
         toogleAuth()
         closeModal()
         await setTimeout(() => window.location.reload(), 1000) //le da tiempo a que se vea el mensaje
@@ -158,9 +155,7 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
 
 
   //////////////////////////////FACEBOOK///////////////////////////////////////////////////////
-  const componentClicked = () => {
-    console.log("me pulsaste")
-  }
+  
 
   const responseFacebookLogin = (response: any) => {
 
@@ -181,7 +176,6 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
         welcome();
         dispatch(getUserData(e.data))
         dispatch(login(true));
-        console.log('LOGUEADO CON FACEBOOK!!!');
         toogleAuth()
         closeModal()
         toogleAuth()
@@ -293,7 +287,6 @@ const Login: React.FunctionComponent<{ toogleAuth, closeModal }> = ({ toogleAuth
         appId="866652260898974"
         autoLoad={false}
         fields="name,email,picture"
-        onClick={componentClicked}
         callback={responseFacebookLogin}
         textButton="Continuar con Google"
         render={renderProps => (

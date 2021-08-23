@@ -45,7 +45,6 @@ export const signup = async (req: Request, res: Response) => {
 
 	let guestsItemsInCart = JSON.parse(req.body.params.guestsItemsInCart)
 	// let guestsItemsInCart = req.body.params.guestsItemsInCart
-	//console.log("guestsItemsInCart", guestsItemsInCart, "guestsItemsInCart")
 
 	//Conversor obj a array, formateado para crear filas de postsOnCart
 	let postsOnCartArray = []
@@ -169,8 +168,6 @@ export const signin = async (req: Request, res: Response) => {
 		for (let i in guestsItemsInCart) {
 			const newPostOnCart = { postId: parseInt(i), amount: guestsItemsInCart[i], cartId: user.cartId }
 			/////////////////////////////////////////
-
-			console.log(guestsItemsInCart, newPostOnCart)
 
 			await prisma.postsOnCart.upsert({
 				create: {
@@ -359,30 +356,6 @@ export const autoLogin = async function (req: Request, res: Response) {
 
 	const user = await findUserWithAnyTokenBabe(req, prisma)
 
-	/* const tokenPackage = req.body.tokenPackage //todo lo que tenga el  token
-	const uniqueSearchLabel = tokenPackage.uniqueSearchLabel //Puede ser username, email o id, dependiendo si viene de facebook, google o local respectivamente.
-	const uniqueSearchValue = tokenPackage[uniqueSearchLabel] //el valor que esta en el dato unique
-
-	const user = await prisma.user.findUnique({
-			where: {
-					[uniqueSearchLabel]: uniqueSearchValue //siempre envia un solo dato unique, y poniendolo asi lo busca de forma correcta sea lo que sea
-			}
-	}) */
-
-	/* await prisma.user
-	
-	
-		if (!user) return res.sendStatus(400)
-		else {
-			const userData = {
-				id: user.id,
-				nombre: user.name,
-				premium: user.premium,
-				favoritos: user.favoriteId,
-				userRol: user.roleId
-			}
-			return res.json(userData);
-		} */
 	let userData;
 	await prisma.user.findUnique({ where: { username: user?.username }, include: { role: true } })
 		.then(r => {

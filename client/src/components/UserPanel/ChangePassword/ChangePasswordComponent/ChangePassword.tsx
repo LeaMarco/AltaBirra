@@ -36,7 +36,6 @@ export const ChangePassword: React.FunctionComponent<{ toggleSeeModal, setYeahNe
         let errorsObject: IformData = { oldPassword: "", newPassword: "" }
         if (newState[name].length < 5) setError({ ...errors, [name]: "error!" })
         else setError({ ...errors, [name]: "" })
-        console.log(errors)
 
     }
 
@@ -51,13 +50,11 @@ export const ChangePassword: React.FunctionComponent<{ toggleSeeModal, setYeahNe
             }, 2100);
 
         }).catch(error => {
-            console.log(error)
             setIncorrectPassword(true)
         })
 
     }
 
-    console.log(payload)
     return (
         <form id={Style.form}>
             <div id={Style.tittle}  >Cambiar contraseña 🔏</div>

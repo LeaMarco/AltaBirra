@@ -44,7 +44,6 @@ function AdminPanel() {
 			if (result.isConfirmed) {
 				await axios.patch(`${process.env.REACT_APP_HOST_BACKEND}/desactivateAccount`, null, { headers: validationHeadersGenerator() }).then(res => {
 					localStorage.clear()
-					console.log(res)
 					history.push("")
 					window.location.reload()
 				})

@@ -10,8 +10,6 @@ router.patch("/", async (req: Request, res: Response) => {
         res.status(500).send("Error inesperado: el usuario paso su token, pero se produjo un error que rompio la busqueda del mismo en base de datos ")
     })
 
-    console.log(user)
-
     if (!user) return res.status(500).send("Error inesperado: al buscar el usuario encontramos un null, a pesar de que paso su token.")
 
     const { oldPassword, newPassword } = req.body.payload

@@ -6,7 +6,6 @@ const router = Router();
 const prisma = new PrismaClient();
 
 router.patch("/", async (req: Request, res: Response) => {
-    console.log('HOLAAAA');
     const user = await findUserWithAnyTokenBabe(req, prisma)
 
     if (!user) return res.status(500).send("Error inesperado: fallo la busqueda del usuario en base de datos.")

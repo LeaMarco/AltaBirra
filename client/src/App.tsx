@@ -11,9 +11,6 @@ import Categories from "./components/Categories/Categories";
 import Cart from "./components/Cart/Cart";
 import Compra from "./components/Compra/Compra";
 import Rate from "./components/Rate/Rate";
-// import { developerTools } from "./developerTools";
-// import { BeeryButton } from "./components/styled_components";
-// developerTools({ consoleInfo: true });
 import User from "./components/UserPanel/User";
 import E_Unauthorized from "./components/E_Unauthorized/E_Unauthorized";
 import Admin from "./components/Admin/Admin";
@@ -40,7 +37,7 @@ function App() {
       <Route exact path="/editpost/:id" component={autorizeComponent(EditPost)} />
       <Route exact path="/detailBeer/:id" component={DetailBeer} />
       <Route exact path="/categories" component={Categories} />
-      <Route exact path="/cart/:id" component={Cart} />
+      <Route exact path="/cart" component={Cart} />
 
       <Route exact path="/compra/:id" component={autorizeComponent(Compra)} />
 

@@ -5,8 +5,7 @@ import { findUserWithAnyTokenBabe } from "../autentication/controllers/auth.cont
 const router = Router();
 const prisma = new PrismaClient();
 
-router.get("/:id", async (req: Request, res: Response) => {
-    // let id = parseInt(req.params.id)
+router.get("/", async (req: Request, res: Response) => {
     const user = await findUserWithAnyTokenBabe(req, prisma)
     let id = user?.id
 

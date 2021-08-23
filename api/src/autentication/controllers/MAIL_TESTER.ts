@@ -12,10 +12,7 @@ export const transporter = nodemailer.createTransport({
     },
 });
 
-/* transporter.verify()
-    .then(() => {
-        console.log('Ready for send emails')
-    }) */
+
 // send mail with defined transport object
 let info = transporter.sendMail({
     from: '"AltaBirra Administración 🍻" <ezequielaguilera1993@gmail.com>', // sender address
