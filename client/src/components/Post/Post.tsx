@@ -10,12 +10,14 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import Preview from "./Preview"
 import axios from 'axios';
+import { useHistory } from "react-router-dom";
+
 
 //TIENE QUE TOMAR COMO PARAMETRO EL ID DEL POST QUE SE SELECCIONA Y RENDERIZAR EL COMPONENTE DETALLE PASANDOLE ESE ID.
 export default function EditPost() {
 
   var token = Object.keys(localStorage).join().includes('token');
-
+  const redirect = useHistory();
   const [generic, setGeneric] = useState([]);
   const [specific, setSpecific] = useState([]);
   const [estado, setEstado] = useState({ "pickup": false, "discount": false });
@@ -59,6 +61,8 @@ export default function EditPost() {
         showConfirmButton: false,
         timer: 1500,
       })
+      redirect.push('/')
+
     } else {
       MySwal.fire({
         position: 'center',

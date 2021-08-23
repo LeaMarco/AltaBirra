@@ -14,6 +14,10 @@ export default function transformer(Info, image) {
 
   //countables
   datacopy.countable.price = parseFloat(datacopy.countable.price)
+  datacopy.countable.discount = parseFloat(datacopy.countable.discount)
+  datacopy.countable.expireDate = new Date(datacopy.countable.expireDate)
+
+
   return datacopy
 }
 
