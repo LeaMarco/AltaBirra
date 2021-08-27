@@ -1,4 +1,4 @@
-# AltaBirra
+# AltaBirra 🍻
 Single Page Application dedicada al comercio de cervezas artesanales 🍺<br>
 Single Page Application dedicated to the craft beer trade 🍺
 
