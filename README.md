@@ -1,4 +1,6 @@
   
+
+<div align="center">
 # AltaBirra 🍻
 Single Page Application dedicada al comercio de cervezas artesanales 🍺<br>
 Single Page Application dedicated to the craft beer trade 🍺
@@ -13,7 +15,6 @@ Single Page Application dedicated to the craft beer trade 🍺
 
 
 
-<div align="center">
   
 ![videAceleradoLatino](https://user-images.githubusercontent.com/75750236/131105579-ae408d09-bfaa-4b32-843c-2bfcff079b48.gif)  
     Gif de muestra
