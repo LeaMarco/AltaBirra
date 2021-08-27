@@ -15,7 +15,7 @@ Single Page Application dedicated to the craft beer trade 🍺
 • Agustín Kowalczuk: https://www.linkedin.com/in/agustinkowalczuk/<br>
 
 
-
+ 
   
 ![videAceleradoLatino](https://user-images.githubusercontent.com/75750236/131105579-ae408d09-bfaa-4b32-843c-2bfcff079b48.gif)  
     Gif de muestra
