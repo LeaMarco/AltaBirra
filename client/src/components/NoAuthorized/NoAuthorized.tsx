@@ -5,11 +5,11 @@ import logoNoAuthorized from '../../img/NoAuthorized.jpg';
 
 const NoAuthorized = () => {
 
-	if (window.location.href !== `${process.env.REACT_APP_HOST_FRONTEND}/noAutorizado`) {
-		window.location.href = `${process.env.REACT_APP_HOST_FRONTEND}/noAutorizado`
-	}
+	// if (window.location.href !== `${process.env.REACT_APP_HOST_FRONTEND}/noAutorizado`) {
+	// 	window.location.href = `${process.env.REACT_APP_HOST_FRONTEND}/noAutorizado`
+	// }
 
-	
+
 	return (
 		<div className={Style.containerNoAuthorized}>
 
