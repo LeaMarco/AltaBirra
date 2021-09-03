@@ -9,6 +9,7 @@ const NoAuthorized = () => {
 		window.location.href = `${process.env.REACT_APP_HOST_FRONTEND}/noAutorizado`
 	}
 
+	
 	return (
 		<div className={Style.containerNoAuthorized}>
 
